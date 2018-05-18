@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=marketplace
+POSTGRES_USER=SFypEqRhlNYMVFYVgFPZMqFnENcxtupy
+POSTGRES_PASSWORD=8Gm1xDj1QCJSnI9LShxApSoLoROyNp7s1yfeuXx63fIV0KTfWI7IxFm7TdqjrIXV
