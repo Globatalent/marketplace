@@ -67,6 +67,8 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'url_filter',
+    'easy_thumbnails',
 ]
 LOCAL_APPS = [
     'marketplace.users.apps.UsersConfig',
@@ -193,8 +195,6 @@ TEMPLATES = [
         },
     },
 ]
-# http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # FIXTURES
 # ------------------------------------------------------------------------------
@@ -207,6 +207,11 @@ FIXTURE_DIRS = (
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+# https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
+DEFAULT_FROM_EMAIL = env(
+    'DJANGO_DEFAULT_FROM_EMAIL',
+    default='market@globatalent.com'
+)
 
 # ADMIN
 # ------------------------------------------------------------------------------
@@ -214,7 +219,7 @@ EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.s
 ADMIN_URL = 'admin/'
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
 ADMINS = [
-    ("""Globatalent""", 'market@globatalent.com'),
+    ("""Globatalent""", 'backend@dekalabs.com'),
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
@@ -235,6 +240,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 # http://docs.celeryproject.org/en/latest/userguide/configuration.html#std:setting-result_serializer
 CELERY_RESULT_SERIALIZER = 'json'
+
 # django-allauth
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
@@ -252,3 +258,36 @@ SOCIALACCOUNT_ADAPTER = 'marketplace.users.adapters.SocialAccountAdapter'
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+# DJANGO REST FRAMEWORK
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer'
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'marketplace.core.api.filters.DjangoFilterDocs',
+        'rest_framework.filters.OrderingFilter',
+        'url_filter.integrations.drf.DjangoFilterBackend',
+    ),
+    'DEFAULT_SEARCH_BACKEND': ('django_filters.rest_framework.SearchFilter',),
+    'DEFAULT_ORDERING_BACKEND': ('django_filters.rest_framework.OrderingFilter',),
+    'DEFAULT_PAGINATION_CLASS': 'marketplace.core.api.utils.StandardPagination',
+    'TEST_REQUEST_DEFAULT_FORMAT': 'json',
+}
+# END DJANGO REST FRAMEWORK
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
+}
+
+SENTRY_DSN = env('DJANGO_SENTRY_DSN', default=None)
+
