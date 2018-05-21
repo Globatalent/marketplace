@@ -70,6 +70,8 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'marketplace.users.apps.UsersConfig',
+    'marketplace.supporters.apps.SupportersConfig',
+    'marketplace.athletes.apps.AthletesConfig',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
