@@ -12,10 +12,12 @@ class Supporter(models.Model):
         verbose_name=_('user')
     )
     following = models.ForeignKey(Athlete, verbose_name=_('following'),
-                                  related_name='supporters', on_delete=models.CASCADE)
+                                  related_name='supporters',
+                                  limit_choices_to={'state': 'APPROVED'},
+                                  on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.user.name
+        return str(self.id)
 
     class Meta:
         verbose_name = _('supporter')
@@ -35,3 +37,10 @@ class Alert(models.Model):
                                   related_name='alerts', on_delete=models.CASCADE)
     athlete = models.ForeignKey(Athlete, verbose_name=_('athlete'),
                                 related_name='alerts', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id)
+
+    class Meta:
+        verbose_name = _('alert')
+        verbose_name_plural = _('alerts')
