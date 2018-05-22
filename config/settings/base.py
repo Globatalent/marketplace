@@ -67,11 +67,13 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'easy_thumbnails',
 ]
 LOCAL_APPS = [
     'marketplace.users.apps.UsersConfig',
     'marketplace.supporters.apps.SupportersConfig',
     'marketplace.athletes.apps.AthletesConfig',
+    'marketplace.actions.apps.ActionsConfig',
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
