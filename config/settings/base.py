@@ -1,7 +1,7 @@
 """
 Base settings to build other settings files upon.
 """
-
+import datetime
 import environ
 
 ROOT_DIR = environ.Path(__file__) - 3  # (marketplace/config/settings/base.py - 3 = marketplace/)
@@ -68,6 +68,7 @@ THIRD_PARTY_APPS = [
     'allauth.socialaccount',
     'rest_framework',
     'easy_thumbnails',
+    'rest_framework.authtoken',
 ]
 LOCAL_APPS = [
     'marketplace.users.apps.UsersConfig',
@@ -211,6 +212,11 @@ FIXTURE_DIRS = (
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+# https://docs.djangoproject.com/en/dev/ref/settings/#default-from-email
+DEFAULT_FROM_EMAIL = env(
+    'DJANGO_DEFAULT_FROM_EMAIL',
+    default='Marketplace <noreply@marketplace.com>'
+)
 
 # ADMIN
 # ------------------------------------------------------------------------------
@@ -243,7 +249,7 @@ CELERY_RESULT_SERIALIZER = 'json'
 # ------------------------------------------------------------------------------
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
-ACCOUNT_AUTHENTICATION_METHOD = 'username'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 ACCOUNT_EMAIL_REQUIRED = True
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
@@ -254,5 +260,20 @@ ACCOUNT_ADAPTER = 'marketplace.users.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'marketplace.users.adapters.SocialAccountAdapter'
 
 
-# Your stuff...
+# django Rest Framework
 # ------------------------------------------------------------------------------
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+}
+
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
+}
