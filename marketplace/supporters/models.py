@@ -11,6 +11,8 @@ class Supporter(models.Model):
         on_delete=models.CASCADE,
         verbose_name=_('user')
     )
+    # TODO: Change to ManyToMany
+    # TODO: Change 'APPROVED' to Athlete.APPROVED
     following = models.ForeignKey(Athlete, verbose_name=_('following'),
                                   related_name='supporters',
                                   limit_choices_to={'state': 'APPROVED'},
