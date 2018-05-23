@@ -4,8 +4,15 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.views import defaults as default_views
+from rest_framework_jwt.views import obtain_jwt_token
+from django.conf.urls import include, url
 
 urlpatterns = [
+    #url(r'^api-token-auth/', obtain_jwt_token),
+    # url(r'^api-token-refresh/', refresh_jwt_token),
+    # url(r'^api-token-verify/', verify_jwt_token),
+    url(r'^api/', include('marketplace.core.api.urls', namespace='api')),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
         "about/",
