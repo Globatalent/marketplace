@@ -36,7 +36,7 @@ services:
   mailhog:
     image: mailhog/mailhog:v1.0.0
     ports:
-      - "8025:8025"
+      - "8038:8025"
 
   redis:
     image: redis:3.2
@@ -66,3 +66,11 @@ services:
       - ./.envs/.local/.postgres
     ports: []
     command: /start-celerybeat.sh
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./compose/local/frontend/Dockerfile
+    image: marketplace_local_frontend
+    ports:
+      - "8080:80"
