@@ -32,7 +32,6 @@ class AthleteRegistrationSerializer(serializers.Serializer):
     sex = serializers.CharField()
     date_of_birthday = serializers.DateField()
     sport = serializers.CharField()
-    state = serializers.CharField()
     email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all(),
                                                                message=_('There is another user with this email'))])
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
