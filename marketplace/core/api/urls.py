@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
 from django.conf.urls import include, url
@@ -11,7 +12,6 @@ router_v1.register('athletes', AthleteViewSet, 'athletes')
 
 app_name = 'api'
 urlpatterns = [
-    #url(r'^v1/register/$', InvestorRegistrationView.as_view(), name='register'),
     # Obtaining a token. Security
     url(r'^v1/login/', obtain_jwt_token),
     url(r'^v1/refresh/', refresh_jwt_token),

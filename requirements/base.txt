@@ -19,7 +19,13 @@ django-redis==4.9.0  # https://github.com/niwinz/django-redis
 djangorestframework==3.8.2  # https://github.com/encode/django-rest-framework
 djangorestframework-jwt==1.11.0
 coreapi==2.3.3  # https://github.com/core-api/python-client
+djangorestframework-jwt==1.11.0
+coreapi==2.3.3  # https://github.com/core-api/python-client
+django-url-filter==0.3.5
+pygments==2.2.0
+markdown==2.6.11
 
 # Project specific
 # -------------------------------------------------------------------------------
 easy-thumbnails==2.5
+django-extensions==2.0.7  # https://github.com/django-extensions/django-extensions
