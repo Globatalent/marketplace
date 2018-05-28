@@ -102,7 +102,7 @@ class Review(models.Model):
 
     def __str__(self):
         # TODO: Change to f string
-        return self.athlete.first_name + ", " + self.state
+        return f'{self.athlete.first_name} - {self.state}'
 
     class Meta:
         verbose_name = _('review')

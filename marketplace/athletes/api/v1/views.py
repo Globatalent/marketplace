@@ -17,8 +17,7 @@ class AthleteRegistrationView(APIView):
 
         with transaction.atomic():
             user = User.objects.create_user(email=serializer.validated_data['email'],
-                                            password=serializer.validated_data['password'],
-                                            username=serializer.initial_data['username'])
+                                            password=serializer.validated_data['password'])
 
             jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
             jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
