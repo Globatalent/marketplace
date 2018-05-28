@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from marketplace.supporters.models import Supporter, Alert
 from marketplace.athletes.api.v1.serializers import AthleteSerializer
 from marketplace.users.models import User
+from marketplace.athletes.models import Athlete
 
 
 class AlertSerializer(serializers.ModelSerializer):

@@ -13,13 +13,11 @@ class Supporter(models.Model):
     )
     # TODO: Change to ManyToMany
     # TODO: Change 'APPROVED' to Athlete.APPROVED
-    following = models.ForeignKey(Athlete, verbose_name=_('following'),
-                                  related_name='supporters',
-                                  limit_choices_to={'state': 'APPROVED'},
-                                  on_delete=models.CASCADE)
+    following = models.ManyToManyField(Athlete, blank=True, related_name='suppoters',
+                                       verbose_name=_('following'))
 
     def __str__(self):
-        return str(self.id)
+        return f'{str(self.id)} - {self.user.email}'
 
     class Meta:
         verbose_name = _('supporter')
