@@ -15,14 +15,17 @@ class PictureSerializer(serializers.ModelSerializer):
 class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
-        fields = ('name', 'url',)
+        fields = ('name', 'url', 'athlete')
 
 
 class AthleteSerializer(serializers.ModelSerializer):
+    pictures = PictureSerializer(many=True, read_only=True)
+    links = LinkSerializer(many=True, read_only=True)
+
     class Meta:
         model = Athlete
         fields = ('id', 'first_name', 'last_name', 'country', 'sex', 'date_of_birthday',
-                  'sport', 'state')
+                  'sport', 'state', 'pictures', 'links')
 
 
 class AthleteRegistrationSerializer(serializers.Serializer):

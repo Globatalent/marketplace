@@ -1,3 +1,4 @@
+from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from marketplace.athletes.api.v1.serializers import PictureSerializer, LinkSerializer, AthleteSerializer
@@ -13,9 +14,17 @@ class PictureViewSet(ReadOnlyModelViewSet):
     queryset = Picture.objects.all()
 
 
-class LinkViewSet(ReadOnlyModelViewSet):
+class LinkViewSet(CreateModelMixin,
+                  ReadOnlyModelViewSet):
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        if not (hasattr(request.user, 'athlete')):
+            raise PermissionDenied
+        self.request.data['athlete'] = request.user.athlete.id
+
+        return super().create(request=request)
 
 
 class AthleteViewSet(ReadOnlyModelViewSet):
