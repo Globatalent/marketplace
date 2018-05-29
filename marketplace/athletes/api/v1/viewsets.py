@@ -9,9 +9,17 @@ from rest_framework.decorators import action
 from marketplace.supporters.models import Supporter
 
 
-class PictureViewSet(ReadOnlyModelViewSet):
+class PictureViewSet(CreateModelMixin,
+                     ReadOnlyModelViewSet):
     serializer_class = PictureSerializer
     queryset = Picture.objects.all()
+
+    def create(self, request, *args, **kwargs):
+        if not (hasattr(request.user, 'athlete')):
+            raise PermissionDenied
+        self.request.data['athlete'] = request.user.athlete.id
+
+        return super().create(request=request)
 
 
 class LinkViewSet(CreateModelMixin,

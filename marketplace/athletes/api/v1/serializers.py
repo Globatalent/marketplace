@@ -9,7 +9,7 @@ from marketplace.users.models import User
 class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
-        fields = ('image',)
+        fields = ('image', 'athlete')
 
 
 class LinkSerializer(serializers.ModelSerializer):

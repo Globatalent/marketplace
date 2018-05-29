@@ -6,7 +6,7 @@ from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from marketplace.athletes.api.v1.views import AthleteRegistrationView
-from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet
+from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet, PictureViewSet
 from marketplace.supporters.api.v1.views import SupporterRegistrationView
 from marketplace.users.api.v1.viewsets import UserViewSet
 
@@ -15,6 +15,7 @@ router_v1 = routers.DefaultRouter()
 router_v1.register('athletes', AthleteViewSet, 'athletes')
 router_v1.register('users', UserViewSet, 'users')
 router_v1.register('links', LinkViewSet, 'links')
+router_v1.register('pictures', PictureViewSet, 'pictures')
 
 app_name = 'api'
 urlpatterns = [
