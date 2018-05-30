@@ -18,4 +18,5 @@ class AlertViewSet(CreateModelMixin,
 
         return super().create(request=request)
 
-
+    def get_queryset(self):
+        return Alert.objects.filter(supporter__exact=self.request.user.supporter.id)
