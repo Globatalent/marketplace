@@ -1,15 +1,15 @@
 from django.views.generic import DetailView
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.mixins import CreateModelMixin, UpdateModelMixin
-from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet, ViewSet, GenericViewSet
+from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin
+from rest_framework.viewsets import ReadOnlyModelViewSet
 from marketplace.supporters.models import Alert
 from marketplace.supporters.api.v1.serializers import AlertSerializer
 
 
 class AlertViewSet(CreateModelMixin,
                    UpdateModelMixin,
-                   ReadOnlyModelViewSet,
-                   DetailView):
+                   DestroyModelMixin,
+                   ReadOnlyModelViewSet):
     serializer_class = AlertSerializer
     queryset = Alert.objects.all()
 
