@@ -1,4 +1,3 @@
-from django.views.generic import DetailView
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin
 from rest_framework.viewsets import ReadOnlyModelViewSet
@@ -27,11 +26,7 @@ class AlertViewSet(CreateModelMixin,
     def update(self, request, *args, **kwargs):
         if not (hasattr(request.user, 'supporter')):
             raise PermissionDenied
-        instance = self.get_object()
-        serializer = self.get_serializer(instance, data=request.data, partial=False)
-        serializer.is_valid(raise_exception=True)
 
-        instance.rule = serializer.validated_data['rule']
-        instance.amount = serializer.validated_data['amount']
+        kwargs['partial'] = True
+        return super().update(request=request, *args, **kwargs)
 
-        return super().update(request=request)
