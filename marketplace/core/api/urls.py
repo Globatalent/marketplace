@@ -10,6 +10,7 @@ from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet, Pi
 from marketplace.supporters.api.v1.views import SupporterRegistrationView
 from marketplace.supporters.api.v1.viewsets import AlertViewSet
 from marketplace.users.api.v1.viewsets import UserViewSet
+from marketplace.actions.api.v1.viewsets import NotificationViewSet
 
 router_v1 = routers.DefaultRouter()
 
@@ -18,6 +19,7 @@ router_v1.register('users', UserViewSet, 'users')
 router_v1.register('links', LinkViewSet, 'links')
 router_v1.register('pictures', PictureViewSet, 'pictures')
 router_v1.register('alerts', AlertViewSet, 'alerts')
+router_v1.register('notifications', NotificationViewSet, 'notifications')
 
 app_name = 'api'
 urlpatterns = [
