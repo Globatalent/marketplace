@@ -3,13 +3,37 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import { store } from './store/index'
+import VueMoment from 'vue-moment'
 
 Vue.config.productionTip = false
+
+Vue.use(VueMoment)
+
+/** Theme & UI **/
+import ElementUI from 'element-ui'
+
+Vue.use(ElementUI)
+
+/** Axios **/
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+
+Vue.use(VueAxios, axios)
+// csrf settings
+Vue.axios.defaults.baseURL = process.env.BASE_URL
+Vue.axios.defaults.xsrfCookieName = 'csrftoken'
+Vue.axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+Vue.axios.defaults.headers.common['Content-Type'] = 'application/json'
+Vue.axios.defaults.headers.post['Content-Type'] = 'application/json'
+Vue.axios.defaults.headers.put['Content-Type'] = 'application/json'
+Vue.axios.defaults.headers.patch['Content-Type'] = 'application/json'
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
-  components: { App },
+  store,
+  components: {App},
   template: '<App/>'
 })
