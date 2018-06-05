@@ -5,8 +5,7 @@ from marketplace.actions.api.v1.serializers import NotificationSerializer
 from marketplace.actions.models import Notification
 
 
-class NotificationViewSet(UpdateModelMixin,
-                          ReadOnlyModelViewSet):
+class NotificationViewSet(UpdateModelMixin, ReadOnlyModelViewSet):
     serializer_class = NotificationSerializer
     queryset = Notification.objects.all()
 
