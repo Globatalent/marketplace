@@ -14,7 +14,8 @@ class Supporter(models.Model):
     # TODO: Change to ManyToMany
     # TODO: Change 'APPROVED' to Athlete.APPROVED
     following = models.ManyToManyField(Athlete, blank=True, related_name='suppoters',
-                                       verbose_name=_('following'))
+                                       verbose_name=_('following'),
+                                       limit_choices_to={'state': Athlete.APPROVED})
 
     def __str__(self):
         return f'{str(self.id)} - {self.user.email}'
