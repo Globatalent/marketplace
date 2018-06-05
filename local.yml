@@ -71,6 +71,9 @@ services:
     build:
       context: .
       dockerfile: ./compose/local/frontend/Dockerfile
+    command: /start.sh
+    volumes:
+      - ./frontend:/app
     image: marketplace_local_frontend
     ports:
-      - "8080:80"
+      - "8080:8080"

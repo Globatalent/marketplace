@@ -17,9 +17,6 @@
   import Footer from '@/components/Footer.vue'
 
   export default {
-    /**
-     * The name of the layout.
-     */
     name: 'base-layout',
 
     data () {
