@@ -9,8 +9,7 @@ from rest_framework.decorators import action
 from marketplace.supporters.models import Supporter
 
 
-class PictureViewSet(CreateModelMixin,
-                     ReadOnlyModelViewSet):
+class PictureViewSet(CreateModelMixin, ReadOnlyModelViewSet):
     serializer_class = PictureSerializer
     queryset = Picture.objects.all()
 
@@ -22,8 +21,7 @@ class PictureViewSet(CreateModelMixin,
         return super().create(request=request)
 
 
-class LinkViewSet(CreateModelMixin,
-                  ReadOnlyModelViewSet):
+class LinkViewSet(CreateModelMixin, ReadOnlyModelViewSet):
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
 
@@ -40,7 +38,7 @@ class AthleteViewSet(ReadOnlyModelViewSet):
     serializer_class = AthleteSerializer
 
     @action(methods=['post'], detail=True)
-    def following(self, request, pk):
+    def follow(self, request, pk):
         if not (hasattr(request.user, 'supporter')):
             raise PermissionDenied
 

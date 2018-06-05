@@ -101,7 +101,6 @@ class Review(models.Model):
                                 related_name='reviews', on_delete=models.CASCADE)
 
     def __str__(self):
-        # TODO: Change to f string
         return f'{self.athlete.first_name} - {self.state}'
 
     class Meta:

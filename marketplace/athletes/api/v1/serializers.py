@@ -48,4 +48,3 @@ class AthleteRegistrationSerializer(serializers.Serializer):
         if data['password'] != data['repeat_password']:
             raise serializers.ValidationError("Password does not match the confirm password.")
         return data
-

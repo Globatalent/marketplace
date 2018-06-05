@@ -11,7 +11,6 @@ class Supporter(models.Model):
         on_delete=models.CASCADE,
         verbose_name=_('user')
     )
-    # TODO: Change to ManyToMany
     # TODO: Change 'APPROVED' to Athlete.APPROVED
     following = models.ManyToManyField(Athlete, blank=True, related_name='suppoters',
                                        verbose_name=_('following'))
