@@ -1,6 +1,5 @@
 <template>
   <gb-minimal-layout>
-    Athlete Registration Page
     <!--
       TODO @kike: Ask user if they are an athlete or a supporter, then show the appropriate form. Show the supporter one by default
     -->
