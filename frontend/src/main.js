@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import { store } from './store/index'
 import VueMoment from 'vue-moment'
+import './scss/reset.css'
 
 Vue.config.productionTip = false
 

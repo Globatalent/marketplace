@@ -1,0 +1,15 @@
+
+$--blue-dark: #335aa1;
+$--blue: #4e87b1;
+$--blue-light: #6aa5dc;
+$--blue-lighter: #9fd0f4;
+
+$--color-primary: #64DBA3;
+
+$--color-text-primary: #4e4e4d;
+
+/* Ubicación de la fuente, obligatoria */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
+@import '~element-ui/lib/theme-chalk/display.css';
