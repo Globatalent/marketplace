@@ -74,6 +74,7 @@ services:
     command: /start.sh
     volumes:
       - ./frontend:/app
+      - /app/node_modules/
     image: marketplace_local_frontend
     ports:
       - "8080:8080"
