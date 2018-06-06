@@ -1,6 +1,5 @@
-import Vue from 'vue'
-import Router from 'vue-router'
 import Login from '@/auth/components/Login.vue'
+import Registration from '@/auth/components/Registration.vue'
 
 export default [
   {
@@ -8,7 +7,11 @@ export default [
     name: 'Login',
     component: Login
   },
-
+  {
+    path: '/register',
+    name: 'Registration',
+    component: Registration
+  },
   // 404
   {
     path: '/404',
