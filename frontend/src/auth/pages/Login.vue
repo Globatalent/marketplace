@@ -13,10 +13,10 @@
       <el-col :span="12" :offset="6">
         <h2>Sign In</h2>
         <el-form ref="form">
-          <el-form-item prop="email">
+          <el-form-item prop="email" required>
             <el-input placeholder="Email" type="email"></el-input>
           </el-form-item>
-          <el-form-item prop="password">
+          <el-form-item prop="password" required>
             <el-input placeholder="Password" type="password" auto-complete="off"></el-input>
           </el-form-item>
         </el-form>
@@ -26,14 +26,14 @@
 </template>
 
 <script>
-import MinimalLayout from '@/layouts/MinimalLayout.vue'
+  import MinimalLayout from '@/layout/MinimalLayout.vue'
 
-export default {
-  name: 'Login',
-  components: {
-    'gb-minimal-layout': MinimalLayout
+  export default {
+    name: 'Login',
+    components: {
+      'gb-minimal-layout': MinimalLayout
+    }
   }
-}
 </script>
 
 <style scoped>
