@@ -23,7 +23,7 @@
           athlete: 'gb-athlete-registration',
           supporter: 'gb-supporter-registration',
         },
-        userType: 'athlete'
+        userType: 'supporter'
       }
     },
     components: {
