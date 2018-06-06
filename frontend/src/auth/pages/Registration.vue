@@ -11,9 +11,9 @@
 </template>
 
 <script>
-  import MinimalLayout from '@/layouts/MinimalLayout.vue'
-  import AthleteRegistrationForm from './AthleteRegistrationForm.vue'
-  import SupporterRegistrationForm from './SupporterRegistrationForm.vue'
+  import MinimalLayout from '@/layout/MinimalLayout.vue'
+  import AthleteRegistrationForm from '../components/AthleteRegistrationForm.vue'
+  import SupporterRegistrationForm from '../components/SupporterRegistrationForm.vue'
 
   export default {
     name: 'Registration',

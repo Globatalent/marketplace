@@ -6,7 +6,7 @@
     </gb-layout>
 </template>
 <script>
-  import baseLayout from '@/layouts/BaseLayout.vue'
+  import baseLayout from '@/layout/BaseLayout.vue'
 
   export default {
     name: 'not-found',

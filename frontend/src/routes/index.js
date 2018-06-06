@@ -1,5 +1,5 @@
-import Login from '@/auth/components/Login.vue'
-import Registration from '@/auth/components/Registration.vue'
+import Login from '@/auth/pages/Login.vue'
+import Registration from '@/auth/pages/Registration.vue'
 
 export default [
   {
@@ -16,7 +16,7 @@ export default [
   {
     path: '/404',
     name: 'not-found',
-    component: resolve => require(['@/pages/not-found/index.vue'], resolve),
+    component: resolve => require(['@/pages/NotFound.vue'], resolve),
   },
   // Redirects
   {

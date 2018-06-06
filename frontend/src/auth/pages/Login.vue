@@ -13,7 +13,7 @@
 </template>
 
 <script>
-  import MinimalLayout from '@/layouts/MinimalLayout.vue'
+  import MinimalLayout from '@/layout/MinimalLayout.vue'
 
   export default {
     name: 'Login',
