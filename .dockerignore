@@ -2,3 +2,6 @@
 !.coveragerc
 !.env
 !.pylintrc
+
+npm-debug.log
+node_modules
