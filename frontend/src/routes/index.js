@@ -2,16 +2,12 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/auth/components/Login.vue'
 
-Vue.use(Router)
-
-export default new Router({
-  routes: [
-    {
-      path: '/login',
-      name: 'Login',
-      component: Login
-    },
-
+export default [
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
 
   // 404
   {
@@ -22,11 +18,10 @@ export default new Router({
   // Redirects
   {
     path: '/',
-    redirect: '/projects',
+    redirect: '/login',
   },
   {
     path: '/*',
     redirect: '/404',
   },
-  ]
-})
+]
