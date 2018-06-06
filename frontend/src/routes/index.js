@@ -1,6 +1,7 @@
 import Login from '@/auth/pages/Login.vue'
 import Registration from '@/auth/pages/Registration.vue'
 import AthleteProfile from '@/athletes/pages/AthleteProfile.vue'
+import AthleteList from '@/athletes/pages/AthleteList.vue'
 
 export default [
   {
@@ -19,6 +20,11 @@ export default [
     path: '/athlete-profile',
     name: 'athlete.profile',
     component: AthleteProfile
+  },
+  {
+    path: '/athletes',
+    name: 'athlete.list',
+    component: AthleteList
   },
 
   // 404
