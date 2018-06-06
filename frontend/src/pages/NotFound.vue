@@ -1,18 +1,18 @@
 <template>
-    <gb-layout>
+    <gb-minimal-layout>
         <div class="container">
             <h1>NOT FOUND</h1>
         </div>
-    </gb-layout>
+    </gb-minimal-layout>
 </template>
 <script>
-  import baseLayout from '@/layout/BaseLayout.vue'
+  import MinimalLayout from '@/layout/MinimalLayout.vue'
 
   export default {
     name: 'not-found',
 
     components: {
-      'gb-layout': baseLayout,
+      'gb-minimal-layout': MinimalLayout,
     },
   }
 </script>
