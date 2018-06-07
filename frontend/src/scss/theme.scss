@@ -1,3 +1,18 @@
 @import 'reset.css';
 @import 'variables.scss';
 @import 'main.scss';
+
+img{
+  display: block;
+  width: 100%;
+}
+
+.is-uppercase{
+  text-transform: uppercase;
+}
+
+.is-vertical-center{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
