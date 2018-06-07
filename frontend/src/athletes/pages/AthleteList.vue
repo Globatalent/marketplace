@@ -14,6 +14,9 @@
 
       The name and the image must be a link to the athlete details page (TBD)
       There must be a button for the follow/unfollow functionality
+
+      - Use Masonry
+      - Use Element cards
       -->
     </gb-base-layout>
 </template>
