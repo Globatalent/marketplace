@@ -9,9 +9,9 @@
 
      It should be centered (horizontally and vertically) and not be too wide
     -->
-    <div class="is-vertical-center">
+    <div class="">
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="12" :md="12" class="loginBox text-center">
+      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="loginBox text-center">
         <img class="logo" src="~@/assets/img/Globatalent-logo-vert.png" />
         <h2>Sign In</h2>
         <el-form ref="form">
@@ -53,7 +53,7 @@
   .logo {
     display: block;
     margin: 0 auto 20px auto;
+    max-width: 400px;
   }
-  .loginBox{
-  }
+
 </style>

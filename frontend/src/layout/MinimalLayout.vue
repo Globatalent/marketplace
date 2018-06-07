@@ -1,6 +1,6 @@
 <template>
     <el-container class="main-container">
-        <el-main>
+        <el-main class="is-vertical-center">
             <slot></slot>
         </el-main>
     </el-container>

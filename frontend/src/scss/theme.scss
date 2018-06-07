@@ -2,6 +2,11 @@
 @import 'variables.scss';
 @import 'main.scss';
 
+body, html {
+  height: 100%;
+  display: grid;
+}
+
 img{
   display: block;
   width: 100%;
