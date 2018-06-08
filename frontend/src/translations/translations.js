@@ -23,6 +23,8 @@ export const messages = {
       Sex: 'Sex',
       Male: 'Male',
       Female: 'Female',
+      AthleteProfileEditPage: 'Athlete Profile Edit Page',
+      Save: 'Save',
     }
   },
   es: {
