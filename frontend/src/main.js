@@ -6,6 +6,8 @@ import router from './router'
 import { store } from './store/index'
 import VueMoment from 'vue-moment'
 import VueI18n from 'vue-i18n'
+// or import all icons if you don't care about bundle size
+import 'vue-awesome/icons'
 import './scss/theme.scss'
 
 Vue.config.productionTip = false
@@ -21,6 +23,10 @@ Vue.use(ElementUI)
 /** Axios **/
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import Icon from 'vue-awesome/components/Icon'
+
+// globally (in your main .js file)
+Vue.component('icon', Icon)
 
 Vue.use(VueAxios, axios)
 // csrf settings
