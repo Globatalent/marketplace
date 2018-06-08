@@ -16,6 +16,13 @@ export const messages = {
       FirstName: 'First name',
       LastName: 'Last name',
       Register: 'Register',
+      Country: 'Country',
+      Date: 'Date',
+      PickADate: 'Pick a date',
+      Sport: 'Sport',
+      Sex: 'Sex',
+      Male: 'Male',
+      Female: 'Female',
     }
   },
   es: {
