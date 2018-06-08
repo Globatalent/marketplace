@@ -15,7 +15,7 @@
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="loginBox text-center">
         <img class="logo" src="~@/assets/img/Globatalent-logo-vert.png" />
-        <h2>Sign In</h2>
+        <h2>{{ $t("message.signIn") }}</h2>
         <el-form ref="form">
           <el-form-item required>
             <el-input placeholder="Email" type="email" v-model="form.email"></el-input>
