@@ -36,12 +36,21 @@ Vue.axios.defaults.headers.patch['Content-Type'] = 'application/json'
 const messages = {
   en: {
     message: {
-      signIn: 'Sign In'
+      SignIn: 'Sign In',
+      Email: 'Email',
+      Password: 'Password',
+      RememberMe: 'Remember me',
+      LogIn: 'Log in',
+      ForgotYourPassword: 'Forgot your password?',
+      DontHaveAccount: 'Don\'t have an account?',
+      SignUp: 'Sign Up'
     }
   },
   es: {
     message: {
-      signIn: 'Registro'
+      SignIn: 'Registro',
+      Email: 'Email',
+      Password: 'Contraseña'
     }
   }
 }
@@ -49,6 +58,7 @@ const messages = {
 // Create VueI18n instance with options
 const i18n = new VueI18n({
   locale: 'en', // set locale
+  fallbackLocale: 'en',
   messages, // set locale messages
 })
 
