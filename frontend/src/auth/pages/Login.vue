@@ -1,9 +1,6 @@
 <template>
   <gb-minimal-layout>
     <!--
-      TODO @kike:
-     - Add font-awesome
-
       TODO @victor:
       - Submit form.
     -->
@@ -24,9 +21,9 @@
           <el-form-item>
             <el-button type="primary" class="is-uppercase" @click="onSubmit">{{ $t("message.LogIn") }}</el-button>
           </el-form-item>
-          <el-form-item>
+          <el-form-item class="forgotPassword">
             <a href="">
-              <i class="el-icon-setting"></i> {{ $t("message.ForgotYourPassword") }}</a>
+              <icon name="lock"></icon> {{ $t("message.ForgotYourPassword") }}</a>
           </el-form-item>
         </el-form>
         <div>{{ $t("message.DontHaveAccount") }}

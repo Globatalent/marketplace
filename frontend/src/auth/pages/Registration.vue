@@ -1,13 +1,12 @@
 <template>
   <gb-minimal-layout>
-    <!--
-      TODO @kike: Ask user if they are an athlete or a supporter, then show the appropriate form. Show the supporter one by default
-    -->
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="loginBox text-center">
-        <span>Select your user type:</span>
-        <el-button @click="userType = 'athlete'">Athlete</el-button>
-        <el-button @click="userType = 'supporter'">Supporter</el-button>
+      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="registrationBox text-center">
+        <div>{{ $t("message.SelectYourUserType") }}</div>
+        <el-button-group>
+          <el-button type="primary" @click="userType = 'athlete'">{{ $t("message.Athlete") }}</el-button>
+          <el-button type="primary" @click="userType = 'supporter'">{{ $t("message.Supporter") }}</el-button>
+        </el-button-group>
       </el-col>
     </el-row>
     <el-row type="flex" justify="center">
@@ -41,4 +40,7 @@
 </script>
 
 <style type="scss" scoped>
+.registrationBox{
+  margin-bottom: 20px;
+}
 </style>

@@ -9,6 +9,7 @@ import VueI18n from 'vue-i18n'
 // or import all icons if you don't care about bundle size
 import 'vue-awesome/icons'
 import './scss/theme.scss'
+import { messages } from './translations/translations'
 
 Vue.config.productionTip = false
 
@@ -37,29 +38,6 @@ Vue.axios.defaults.headers.common['Content-Type'] = 'application/json'
 Vue.axios.defaults.headers.post['Content-Type'] = 'application/json'
 Vue.axios.defaults.headers.put['Content-Type'] = 'application/json'
 Vue.axios.defaults.headers.patch['Content-Type'] = 'application/json'
-
-// Ready translated locale messages
-const messages = {
-  en: {
-    message: {
-      SignIn: 'Sign In',
-      Email: 'Email',
-      Password: 'Password',
-      RememberMe: 'Remember me',
-      LogIn: 'Log in',
-      ForgotYourPassword: 'Forgot your password?',
-      DontHaveAccount: 'Don\'t have an account?',
-      SignUp: 'Sign Up'
-    }
-  },
-  es: {
-    message: {
-      SignIn: 'Registro',
-      Email: 'Email',
-      Password: 'Contraseña'
-    }
-  }
-}
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
