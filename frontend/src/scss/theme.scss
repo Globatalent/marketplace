@@ -1,3 +1,52 @@
 @import 'reset.css';
 @import 'variables.scss';
 @import 'main.scss';
+body,
+html {
+  height: 100%;
+  display: grid;
+}
+
+img {
+  display: block;
+  width: 100%;
+}
+
+.is-uppercase {
+  text-transform: uppercase;
+}
+
+.is-vertical-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+// Forms
+.el-form {
+  &.el-form--label-top {
+    .el-form-item__label {
+      padding-bottom: 0;
+    }
+  }
+}
+
+// Login Page
+.forgotPassword {
+  .fa-icon {
+    vertical-align: text-bottom;
+  }
+}
+
+// Athlete Form
+.sexFormElement {
+  .el-form-item__label {
+    float: left;
+    margin-right: 20px;
+  }
+  .el-form-item__content{
+    .el-radio-group{
+      margin-top: 10px;
+    }
+  }
+}
