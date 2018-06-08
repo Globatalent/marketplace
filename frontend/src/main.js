@@ -13,8 +13,10 @@ Vue.use(VueMoment)
 
 /** Theme & UI **/
 import ElementUI from 'element-ui'
+import VueMasonry from 'vue-masonry-css'
 
 Vue.use(ElementUI)
+Vue.use(VueMasonry)
 
 /** Axios **/
 import axios from 'axios'
