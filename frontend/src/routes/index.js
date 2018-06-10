@@ -2,6 +2,7 @@ import Login from '@/auth/pages/Login.vue'
 import Registration from '@/auth/pages/Registration.vue'
 import AthleteProfile from '@/athletes/pages/AthleteProfile.vue'
 import AthleteList from '@/athletes/pages/AthleteList.vue'
+import SupporterProfile from '@/supporters/pages/SupporterProfile.vue'
 
 export default [
   {
@@ -25,6 +26,13 @@ export default [
     path: '/athletes',
     name: 'athlete.list',
     component: AthleteList
+  },
+
+  // Supporters
+  {
+    path: '/supporter-profile',
+    name: 'supporter.profile',
+    component: SupporterProfile
   },
 
   // 404
