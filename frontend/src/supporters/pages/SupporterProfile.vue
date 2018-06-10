@@ -10,7 +10,7 @@
   import BaseLayout from '@/layout/BaseLayout.vue'
 
   export default {
-    name: 'AthleteProfile',
+    name: 'SupporterProfile',
     components: {
       'gb-base-layout': BaseLayout
     },

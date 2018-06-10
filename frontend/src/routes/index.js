@@ -1,38 +1,37 @@
-import Login from '@/auth/pages/Login.vue'
-import Registration from '@/auth/pages/Registration.vue'
-import AthleteProfile from '@/athletes/pages/AthleteProfile.vue'
-import AthleteList from '@/athletes/pages/AthleteList.vue'
-import SupporterProfile from '@/supporters/pages/SupporterProfile.vue'
-
 export default [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: resolve => require(['@/auth/pages/Login.vue'], resolve),
   },
   {
     path: '/register',
     name: 'registration',
-    component: Registration
+    component: resolve => require(['@/auth/pages/Registration.vue'], resolve),
   },
 
   // Athletes
   {
     path: '/athlete-profile',
     name: 'athlete.profile',
-    component: AthleteProfile
+    component: resolve => require(['@/athletes/pages/AthleteProfile.vue'], resolve),
   },
   {
     path: '/athletes',
     name: 'athlete.list',
-    component: AthleteList
+    component: resolve => require(['@/athletes/pages/AthleteList.vue'], resolve),
+  },
+  {
+    path: '/athletes/:athleteId',
+    name: 'athlete.details',
+    component: resolve => require(['@/athletes/pages/AthleteDetails.vue'], resolve),
   },
 
   // Supporters
   {
     path: '/supporter-profile',
     name: 'supporter.profile',
-    component: SupporterProfile
+    component: resolve => require(['@/supporters/pages/SupporterProfile.vue'], resolve),
   },
 
   // 404
