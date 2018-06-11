@@ -121,7 +121,6 @@ export default {
       })
     },
     deleteRow(index) {
-      console.log('deleteRow');
       this.links.splice(index,1)
     }
   }
