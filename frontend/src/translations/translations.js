@@ -25,6 +25,9 @@ export const messages = {
       Female: 'Female',
       AthleteProfileEditPage: 'Athlete Profile Edit Page',
       Save: 'Save',
+      LinkTitle: 'Título del enlace',
+      Link: 'Enlace',
+      addLink: 'Añadir enlace',
     }
   },
   es: {

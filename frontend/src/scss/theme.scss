@@ -22,6 +22,11 @@ img {
   justify-content: center;
 }
 
+// Buttons
+.circleButton{
+  cursor: pointer;
+}
+
 // Forms
 .el-form {
   &.el-form--label-top {
@@ -58,5 +63,13 @@ img {
       float: none;
       margin-right: 0px;
     }
+  }
+}
+
+.removeButtonCol{
+  display: flex;
+  align-items: flex-end;
+  .circleButton{
+    margin-bottom: 20px;
   }
 }

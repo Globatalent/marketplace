@@ -14,7 +14,7 @@
         </el-col>
       </el-row>
       <el-form ref="form">
-        <el-row type="flex" justify="center" :gutter="20">
+        <el-row justify="center" :gutter="20">
           <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
             <el-form-item required v-bind:label="$t('message.Password')">
               <el-input v-bind:placeholder="$t('message.Password')" type="password" v-model="form.password"></el-input>
@@ -45,6 +45,28 @@
                 <el-radio label="female" v-model="form.sex">{{ $t("message.Female") }}</el-radio>
               </el-radio-group>
             </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="left" :gutter="20" v-for="(link, index) in links" :key="index">
+          <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
+          <el-form-item required v-bind:label="$t('message.LinkTitle')+' '+(index+1)">
+            <el-input v-bind:placeholder="$t('message.LinkTitle')" type="text" v-model="link.linkTitle"></el-input>
+          </el-form-item>
+          </el-col>
+          <el-col :xs="24" :sm="11" :md="11" :lg="6" :xl="4" class="text-center">
+          <el-form-item required v-bind:label="$t('message.Link')+' '+(index+1)">
+            <el-input v-bind:placeholder="$t('message.Link')" type="text" v-model="link.link"></el-input>
+          </el-form-item>
+          </el-col>
+          <el-col :xs="24" :sm="1" :md="1" :lg="6" :xl="4" class="text-center removeButtonCol">
+            <div @click="deleteRow(index)" class="circleButton">
+              <icon name="minus-circle" class="addButtonCircle" scale="2" ></icon>
+            </div>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="center" :gutter="20">
+          <el-col :xs="24" class="text-center">
+            <el-button type="primary" class="is-uppercase" @click="addRow">{{ $t("message.addLink") }}</el-button>
           </el-col>
         </el-row>
         <el-row type="flex" justify="center" :gutter="20">
@@ -79,7 +101,8 @@ export default {
         date: '01/01/2000',
         sport: 'destroy white walkers',
         sex: 'male'
-      }
+      },
+      links: [{}]
     }
   },
   methods: {
@@ -90,6 +113,16 @@ export default {
     },
     saveUserProfile(data) {
       console.log('TODO @victor: Save athlete profile ...', this.form)
+    },
+    addRow() {
+      this.links.push({
+        linkTitle: '',
+        link: ''
+      })
+    },
+    deleteRow(index) {
+      console.log('deleteRow');
+      this.links.splice(index,1)
     }
   }
 }
