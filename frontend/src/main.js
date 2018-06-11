@@ -19,9 +19,11 @@ Vue.use(VueI18n)
 /** Theme & UI **/
 import ElementUI from 'element-ui'
 import VueMasonry from 'vue-masonry-css'
+import vue2Dropzone from 'vue2-dropzone'
 
 Vue.use(ElementUI)
 Vue.use(VueMasonry)
+Vue.use(vue2Dropzone)
 
 /** Axios **/
 import axios from 'axios'

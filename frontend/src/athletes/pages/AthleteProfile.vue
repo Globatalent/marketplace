@@ -1,11 +1,8 @@
 <template>
   <gb-base-layout>
     <!--
-      TODO @kike: Here the athlete must be able to upload their data and add pictures and links (to videos, social networks, etc)
-      A picture has only the image. We can send them one by one or in bulk
-      A link has a name and a url, and they can add as much as they want
-
-      They must also be able to edit the data they submitted in the registration form (except the email for now)
+      TODO @victor:
+      - Handle form data and send it to the backend
       -->
     <div class="athleteProfileEdit">
       <el-row type="flex" justify="center">
@@ -15,7 +12,7 @@
       </el-row>
       <el-form ref="form">
         <el-row justify="center" :gutter="20">
-          <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
+          <el-col :xs="24" :sm="12" :md="12" class="text-center">
             <el-form-item required v-bind:label="$t('message.Password')">
               <el-input v-bind:placeholder="$t('message.Password')" type="password" v-model="form.password"></el-input>
             </el-form-item>
@@ -29,7 +26,7 @@
               <el-input v-bind:placeholder="$t('message.LastName')" type="text" v-model="form.lastName"></el-input>
             </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
+          <el-col :xs="24" :sm="12" :md="12" class="text-center">
             <el-form-item required v-bind:label="$t('message.Country')">
               <el-input v-bind:placeholder="$t('message.Country')" type="text" v-model="form.country"></el-input>
             </el-form-item>
@@ -48,17 +45,17 @@
           </el-col>
         </el-row>
         <el-row type="flex" justify="left" :gutter="20" v-for="(link, index) in links" :key="index">
-          <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
+          <el-col :xs="24" :sm="12" :md="12" class="text-center">
           <el-form-item required v-bind:label="$t('message.LinkTitle')+' '+(index+1)">
             <el-input v-bind:placeholder="$t('message.LinkTitle')" type="text" v-model="link.linkTitle"></el-input>
           </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="11" :md="11" :lg="6" :xl="4" class="text-center">
+          <el-col :xs="24" :sm="11" :md="11" class="text-center">
           <el-form-item required v-bind:label="$t('message.Link')+' '+(index+1)">
             <el-input v-bind:placeholder="$t('message.Link')" type="text" v-model="link.link"></el-input>
           </el-form-item>
           </el-col>
-          <el-col :xs="24" :sm="1" :md="1" :lg="6" :xl="4" class="text-center removeButtonCol">
+          <el-col :xs="24" :sm="1" :md="1" class="text-center removeButtonCol">
             <div @click="deleteRow(index)" class="circleButton">
               <icon name="minus-circle" class="addButtonCircle" scale="2" ></icon>
             </div>
@@ -70,7 +67,12 @@
           </el-col>
         </el-row>
         <el-row type="flex" justify="center" :gutter="20">
-          <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
+          <el-col :xs="24" :sm="18" :md="18" class="text-center">
+            <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+          </el-col>
+        </el-row>
+        <el-row type="flex" justify="center" :gutter="20">
+          <el-col :xs="24" :sm="12" :md="12" class="text-center">
             <el-form-item class="text-center">
               <el-button type="primary" class="is-uppercase" @click="onSubmit">{{ $t("message.Save") }}</el-button>
             </el-form-item>
@@ -83,11 +85,14 @@
 
 <script>
 import BaseLayout from '@/layout/BaseLayout.vue'
+import vue2Dropzone from 'vue2-dropzone'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 export default {
   name: 'AthleteProfile',
   components: {
-    'gb-base-layout': BaseLayout
+    'gb-base-layout': BaseLayout,
+    'vueDropzone': vue2Dropzone
   },
   data() {
     return {
@@ -102,7 +107,19 @@ export default {
         sport: 'destroy white walkers',
         sex: 'male'
       },
-      links: [{}]
+      links: [{}],
+      /*
+      TODO @victor:
+      vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
+      - Send images to the backend
+      - Remove images action
+      */
+      dropzoneOptions: {
+          url: 'https://httpbin.org/post',
+          thumbnailWidth: 150,
+          maxFilesize: 0.5,
+          headers: { "My-Awesome-Header": "header value" }
+      }
     }
   },
   methods: {
