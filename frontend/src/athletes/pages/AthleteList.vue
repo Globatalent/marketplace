@@ -19,13 +19,16 @@
       -->
     <masonry :cols="{default: 3, 750: 2, 500: 1}" :gutter="{default: '15px', 750: '15px'}">
       <el-card :body-style="{ padding: '0px' }" v-for="(athlete, index) in athletes" :key="index" style="margin-bottom:15px;">
-        <img v-bind:src="athlete.image" class="image">
+        <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}"><img v-bind:src="athlete.image" class="image"></router-link>
         <div style="padding: 14px;">
           <div class="top clearfix">
-            <span>{{athlete.firstName}} {{athlete.lastName}}</span>
-            <div class="likeButton" @click="unfollowAthlete(index)">
+            <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
+              <span>{{athlete.firstName}} {{athlete.lastName}}</span>
+            </router-link>
+            <div class="likeButton" @click="setFollowingAthlete(index,athlete)">
               <icon name="heart" class="likeIcon is-following" scale="2" v-if="athlete.following"></icon>
               <icon name="thumbs-up" class="likeIcon" scale="2" v-if="!athlete.following"></icon>
+              <!-- <icon v-bind:name="likeIconClass(athlete.following)" class="likeIcon" scale="2"></icon> -->
               <div>Following: {{athlete.following}}</div>
             </div>
 
@@ -52,6 +55,7 @@ export default {
       errorMessage: '',
       athletes: [
         {
+          id: '1',
           firstName: 'Jon',
           lastName: 'Snow',
           image: 'https://cde.laprensa.e3.pe/ima/0/0/1/3/9/139652.jpg',
@@ -60,6 +64,7 @@ export default {
           following: false
         },
         {
+          id: '2',
           firstName: 'Daenerys',
           lastName: 'Targaryen',
           image: 'https://i.ytimg.com/vi/PC-Z2ZU66jc/maxresdefault.jpg',
@@ -68,6 +73,7 @@ export default {
           following: true
         },
         {
+          id: '3',
           firstName: 'Tyrion',
           lastName: 'Lannister',
           image: 'https://media.giphy.com/media/idhHzlOqNA7Sw/giphy.gif',
@@ -76,6 +82,7 @@ export default {
           following: true
         },
         {
+          id: '4',
           firstName: 'Daenerys',
           lastName: 'Targaryen',
           image: 'https://i.ytimg.com/vi/PC-Z2ZU66jc/maxresdefault.jpg',
@@ -84,6 +91,7 @@ export default {
           following: true
         },
         {
+          id: '5',
           firstName: 'Tyrion',
           lastName: 'Lannister',
           image: 'https://media.giphy.com/media/idhHzlOqNA7Sw/giphy.gif',
@@ -92,6 +100,7 @@ export default {
           following: true
         },
         {
+          id: '6',
           firstName: 'Jon',
           lastName: 'Snow',
           image: 'https://cde.laprensa.e3.pe/ima/0/0/1/3/9/139652.jpg',
@@ -102,12 +111,18 @@ export default {
       ]
     }
   },
-  methods:{
-    unfollowAthlete(index) {
-      console.log('unfollow',index);
-      var old_value = this.athletes[index];
-      old_value.following = false;
-      this.$set(this.athletes,index, old_value)
+  methods: {
+    setFollowingAthlete(index,athlete) {
+      athlete.following = !athlete.following;
+      this.$set(this.athletes, index, athlete)
+    },
+    likeIconClass(following) {
+      console.log(`This following: ${following}`)
+      if (following) {
+        return 'heart'
+      } else {
+        return 'thumbs-up'
+      }
     }
   }
 }
@@ -119,7 +134,7 @@ export default {
   float: right;
   cursor: pointer;
 }
-.is-following{
+.is-following {
   font-style: regular;
 }
 </style>
