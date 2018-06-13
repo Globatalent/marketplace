@@ -1,21 +1,8 @@
 <template>
   <gb-base-layout>
     <!--
-      TODO @kike: Show a list of athletes. You can use the card component (el-card).
-
-      The data you'll get from an athlete is:
-        - firstName - string
-        - lastName - string
-        - image - string (url to the athlete image)
-        - sport - string
-        - country - string
-        - following: boolean
-
-      The name and the image must be a link to the athlete details page (TBD)
-      There must be a button for the follow/unfollow functionality
-
-      - Use Masonry
-      - Use Element cards
+      TODO @victor:
+      - Connect data to the backend
       -->
     <masonry :cols="{default: 3, 750: 2, 500: 1}" :gutter="{default: '15px', 750: '15px'}">
       <el-card :body-style="{ padding: '0px' }" v-for="(athlete, index) in athletes" :key="index" style="margin-bottom:15px;">
@@ -26,10 +13,8 @@
               <span>{{athlete.firstName}} {{athlete.lastName}}</span>
             </router-link>
             <div class="likeButton" @click="setFollowingAthlete(index,athlete)">
-              <icon name="heart" class="likeIcon is-following" scale="2" v-if="athlete.following"></icon>
-              <icon name="thumbs-up" class="likeIcon" scale="2" v-else></icon>
-              <!-- <icon v-bind:name="likeIconClass(athlete.following)" class="likeIcon" scale="2"></icon> -->
-              <div>Following: {{athlete.following}}</div>
+              <i class="fas fa-heart likeIcon is-following" v-if="athlete.following"></i>
+              <i class="far fa-heart likeIcon" v-else></i>
             </div>
 
           </div>
@@ -79,7 +64,7 @@ export default {
           image: 'https://media.giphy.com/media/idhHzlOqNA7Sw/giphy.gif',
           sport: 'drink',
           country: 'The Crownlands',
-          following: true
+          following: false
         },
         {
           id: '4',
@@ -88,7 +73,7 @@ export default {
           image: 'https://i.ytimg.com/vi/PC-Z2ZU66jc/maxresdefault.jpg',
           sport: 'play with fire',
           country: 'The Crownlands',
-          following: true
+          following: false
         },
         {
           id: '5',
@@ -97,7 +82,7 @@ export default {
           image: 'https://media.giphy.com/media/idhHzlOqNA7Sw/giphy.gif',
           sport: 'drink',
           country: 'The Crownlands',
-          following: true
+          following: false
         },
         {
           id: '6',
@@ -112,8 +97,8 @@ export default {
     }
   },
   methods: {
-    setFollowingAthlete(index,athlete) {
-      athlete.following = !athlete.following;
+    setFollowingAthlete(index, athlete) {
+      athlete.following = !athlete.following
       this.$set(this.athletes, index, athlete)
     },
     likeIconClass(following) {
@@ -128,13 +113,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .likeButton {
   margin-left: 15px;
   float: right;
   cursor: pointer;
 }
-.is-following {
-  font-style: regular;
+.likeIcon {
+  font-size: 20px;
+  transition: all 0.2s ease-in;
+  &.is-following {
+    transform: scale(1.2);
+    color: red;
+  }
 }
 </style>

@@ -23,7 +23,7 @@
           </el-form-item>
           <el-form-item class="forgotPassword">
             <a href="">
-              <icon name="lock"></icon> {{ $t("message.ForgotYourPassword") }}</a>
+              <i class="fa fa-lock"></i> {{ $t("message.ForgotYourPassword") }}</a>
           </el-form-item>
         </el-form>
         <div>{{ $t("message.DontHaveAccount") }}

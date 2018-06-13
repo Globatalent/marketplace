@@ -6,34 +6,27 @@ import router from './router'
 import { store } from './store/index'
 import VueMoment from 'vue-moment'
 import VueI18n from 'vue-i18n'
-// or import all icons if you don't care about bundle size
-import 'vue-awesome/icons'
 import './scss/theme.scss'
 import { messages } from './translations/translations'
+/** Theme & UI **/
+import ElementUI from 'element-ui'
+import VueMasonry from 'vue-masonry-css'
+import vue2Dropzone from 'vue2-dropzone'
+/** Axios **/
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import Datatable from 'vue2-datatable-component'
 
 Vue.config.productionTip = false
 
 Vue.use(VueMoment)
 Vue.use(VueI18n)
-
-/** Theme & UI **/
-import ElementUI from 'element-ui'
-import VueMasonry from 'vue-masonry-css'
-import vue2Dropzone from 'vue2-dropzone'
-
 Vue.use(ElementUI)
 Vue.use(VueMasonry)
 Vue.use(vue2Dropzone)
-
-/** Axios **/
-import axios from 'axios'
-import VueAxios from 'vue-axios'
-import Icon from 'vue-awesome/components/Icon'
-
-// globally (in your main .js file)
-Vue.component('icon', Icon)
-
 Vue.use(VueAxios, axios)
+Vue.use(Datatable)
+
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL
 Vue.axios.defaults.xsrfCookieName = 'csrftoken'
@@ -47,7 +40,7 @@ Vue.axios.defaults.headers.patch['Content-Type'] = 'application/json'
 const i18n = new VueI18n({
   locale: 'en', // set locale
   fallbackLocale: 'en',
-  messages, // set locale messages
+  messages // set locale messages
 })
 
 /* eslint-disable no-new */

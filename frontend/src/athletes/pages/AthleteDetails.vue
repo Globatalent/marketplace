@@ -1,11 +1,8 @@
 <template>
   <gb-base-layout>
     <!--
-      TODO @kike: Show athlete details with the following order:
-        - Carousel with the images of the athlete
-        - Name of the athlete with an edit button (will add hide/show logic)
-        - Other athlete data: Country, age and sport
-        - List of links: name and url
+      TODO @victor:
+      - Connect data with the backend
       -->
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="12" :md="24" class="text-center">
