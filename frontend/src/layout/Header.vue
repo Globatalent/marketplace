@@ -16,12 +16,12 @@
       </el-col>
       <el-col :xs="24" :sm="12" :md="16" :lg="18" :xl="20" class="menuContainer">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="1">Home</el-menu-item>
-          <el-menu-item index="2">Athletes</el-menu-item>
+          <el-menu-item index="1">{{ $t("message.Home") }}</el-menu-item>
+          <el-menu-item index="2">{{ $tc("message.Athlete",2) }}</el-menu-item>
           <el-submenu index="3">
             <template slot="title">xxx@xxx.com</template>
-            <el-menu-item index="3-1">Profile</el-menu-item>
-            <el-menu-item index="3-2">Logout</el-menu-item>
+            <el-menu-item index="3-1">{{ $t("message.Profile") }}</el-menu-item>
+            <el-menu-item index="3-2">{{ $t("message.Logout") }}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>
@@ -33,9 +33,17 @@
 export default {
   name: 'gb-header',
   data() {
-    return {}
+    return {
+      activeIndex: '1',
+      activeIndex2: '1'
+    }
   },
-  components: {}
+  components: {},
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath)
+    }
+  }
 }
 </script>
 
