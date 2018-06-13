@@ -1,10 +1,5 @@
 <template>
   <div class="footer">
-    <!--
-          TODO @kike
-          Borde para delimitar
-          Copyright 2018 Globatalent
-        -->
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center">
         <div class="copy">Copyright Ⓒ 2018 Globatalent</div>
