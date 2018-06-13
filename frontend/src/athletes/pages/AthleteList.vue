@@ -27,7 +27,7 @@
             </router-link>
             <div class="likeButton" @click="setFollowingAthlete(index,athlete)">
               <icon name="heart" class="likeIcon is-following" scale="2" v-if="athlete.following"></icon>
-              <icon name="thumbs-up" class="likeIcon" scale="2" v-if="!athlete.following"></icon>
+              <icon name="thumbs-up" class="likeIcon" scale="2" v-else></icon>
               <!-- <icon v-bind:name="likeIconClass(athlete.following)" class="likeIcon" scale="2"></icon> -->
               <div>Following: {{athlete.following}}</div>
             </div>
