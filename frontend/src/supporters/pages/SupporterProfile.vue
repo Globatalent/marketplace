@@ -4,8 +4,34 @@
       TODO @kike: Supporters must see a list of the athletes they are following and the alerts they have set up
       - We will have 2 tables, one of the following athletes and one with all
       -->
-
-    </gb-base-layout>
+    <el-col :xs="24" class="">
+      <el-tabs type="border-card">
+        <el-tab-pane label="Following">
+          <h3>Following</h3>
+          <el-table :data="athletes" style="width: 100%">
+            <el-table-column prop="id" label="id"></el-table-column>
+            <el-table-column prop="firstName" label="firstName"></el-table-column>
+            <el-table-column prop="lastName" label="lastName"></el-table-column>
+            <el-table-column prop="sport" label="sport"></el-table-column>
+            <el-table-column prop="country" label="country"></el-table-column>
+            <el-table-column fixed="right" label="Operaciones">
+              <template slot-scope="scope">
+                <el-button @click="handleClick" type="text" size="small">Unfollow</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+        </el-tab-pane>
+        <el-tab-pane label="Alerts">
+          <h3>Alerts</h3>
+          <el-table :data="athletes" style="width: 100%">
+            <el-table-column prop="id" label="id"></el-table-column>
+            <el-table-column prop="firstName" label="firstName"></el-table-column>
+            <el-table-column prop="lastName" label="lastName"></el-table-column>
+          </el-table>
+        </el-tab-pane>
+      </el-tabs>
+    </el-col>
+  </gb-base-layout>
 </template>
 
 <script>
@@ -76,6 +102,11 @@ export default {
       ]
     }
   },
+  methods: {
+    handleClick() {
+      console.log('click')
+    }
+  }
 }
 </script>
 
