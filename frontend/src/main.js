@@ -15,7 +15,6 @@ import vue2Dropzone from 'vue2-dropzone'
 /** Axios **/
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import Datatable from 'vue2-datatable-component'
 
 Vue.config.productionTip = false
 
@@ -25,7 +24,6 @@ Vue.use(ElementUI)
 Vue.use(VueMasonry)
 Vue.use(vue2Dropzone)
 Vue.use(VueAxios, axios)
-Vue.use(Datatable)
 
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL

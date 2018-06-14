@@ -15,13 +15,13 @@
         <img class="logoHeader" src="~@/assets/img/Globatalent-logo-vert.png" />
       </el-col>
       <el-col :xs="24" :sm="12" :md="16" :lg="18" :xl="20" class="menuContainer">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="1">{{ $t("message.Home") }}</el-menu-item>
-          <el-menu-item index="2">{{ $tc("message.Athlete",2) }}</el-menu-item>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" route>
+          <el-menu-item index="1" route="/">{{ $t("message.Home") }}</el-menu-item>
+          <el-menu-item index="2" route="/athletes">{{ $tc("message.Athlete",2) }}</el-menu-item>
           <el-submenu index="3">
             <template slot="title">xxx@xxx.com</template>
-            <el-menu-item index="3-1">{{ $t("message.Profile") }}</el-menu-item>
-            <el-menu-item index="3-2">{{ $t("message.Logout") }}</el-menu-item>
+            <el-menu-item index="3-1" route="/athlete-profile">{{ $t("message.Profile") }}</el-menu-item>
+            <el-menu-item index="3-2" @click="logout()">{{ $t("message.Logout") }}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>
@@ -41,7 +41,25 @@ export default {
   components: {},
   methods: {
     handleSelect(key, keyPath) {
-      console.log(key, keyPath)
+      console.log('key', key)
+      console.log('keyPath', keyPath)
+    },
+    logout(){
+      this.$confirm('Are you sure you want to log out?', 'Warning', {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: 'Logout completed'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: 'Logout canceled'
+          });
+        });
     }
   }
 }

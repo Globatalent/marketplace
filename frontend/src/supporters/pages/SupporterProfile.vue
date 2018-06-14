@@ -4,14 +4,12 @@
       TODO @kike: Supporters must see a list of the athletes they are following and the alerts they have set up
       - We will have 2 tables, one of the following athletes and one with all
       -->
-    <!-- <code>query: {{ query }}</code> -->
-    <datatable v-bind:columns="columns" v-bind:data="athletes" v-bind:total="total" v-bind:query="query" />
-  </gb-base-layout>
+
+    </gb-base-layout>
 </template>
 
 <script>
 import BaseLayout from '@/layout/BaseLayout.vue'
-// import mockData from '@/_mockData'
 
 export default {
   name: 'SupporterProfile',
@@ -20,16 +18,6 @@ export default {
   },
   data() {
     return {
-      columns: [
-        { title: 'User ID', field: 'id', sortable: true },
-        { title: 'First Name', field: 'firstName' },
-        { title: 'Last Name', field: 'lastName', sortable: true },
-        { title: 'Sport', field: 'sport' },
-        { title: 'Country', field: 'country' }
-      ],
-      data: [],
-      total: 6,
-      query: { limit: 10, offset: 0, sort: 'id', order: 'asc' },
       athletes: [
         {
           id: '1',
@@ -88,17 +76,6 @@ export default {
       ]
     }
   },
-  watch: {
-    query: {
-      handler(query) {
-        // mockData(query).then(({ rows, total }) => {
-        //   this.data = rows
-        //   this.total = total
-        // })
-      },
-      deep: true
-    }
-  }
 }
 </script>
 
