@@ -4,6 +4,7 @@
       TODO @kike: Supporters must see a list of the athletes they are following and the alerts they have set up
       - We will have 2 tables, one of the following athletes and one with all
       -->
+    <!-- <code>query: {{ query }}</code> -->
     <datatable v-bind:columns="columns" v-bind:data="athletes" v-bind:total="total" v-bind:query="query" />
   </gb-base-layout>
 </template>
@@ -28,7 +29,7 @@ export default {
       ],
       data: [],
       total: 6,
-      query: { "limit": 10, "offset": 0, "sort": "id", "order": "asc" },
+      query: { limit: 10, offset: 0, sort: 'id', order: 'asc' },
       athletes: [
         {
           id: '1',
@@ -89,7 +90,7 @@ export default {
   },
   watch: {
     query: {
-      handler (query) {
+      handler(query) {
         // mockData(query).then(({ rows, total }) => {
         //   this.data = rows
         //   this.total = total
