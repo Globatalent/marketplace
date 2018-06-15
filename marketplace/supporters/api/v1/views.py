@@ -3,6 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_jwt.settings import api_settings
+from rest_framework.permissions import AllowAny
 
 from marketplace.supporters.api.v1.serializers import SupporterRegistrationSerializer
 from marketplace.supporters.models import Supporter
@@ -10,6 +11,7 @@ from marketplace.users.models import User
 
 
 class SupporterRegistrationView(APIView):
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         serializer = SupporterRegistrationSerializer(data=request.data)
