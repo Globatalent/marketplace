@@ -28,7 +28,7 @@ class Athlete(models.Model):
     last_name = models.CharField(max_length=100, verbose_name=_('last name'))
     country = models.CharField(max_length=100, verbose_name=_('country'))
     sex = models.CharField(choices=SEX_CHOICES, null=True, blank=True, max_length=20, verbose_name=_('sex'))
-    date_of_birthday = models.DateField(verbose_name=_('date of birthday'))
+    date_of_birth = models.DateField(verbose_name=_('date of birth'))
     sport = models.CharField(max_length=200, verbose_name=_('sport'))
     state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
     user = models.OneToOneField(

@@ -24,7 +24,7 @@ class AthleteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Athlete
-        fields = ('id', 'first_name', 'last_name', 'country', 'sex', 'date_of_birthday',
+        fields = ('id', 'first_name', 'last_name', 'country', 'sex', 'date_of_birth',
                   'sport', 'state', 'pictures', 'links')
 
 
@@ -33,7 +33,7 @@ class AthleteRegistrationSerializer(serializers.Serializer):
     last_name = serializers.CharField()
     country = serializers.CharField()
     sex = serializers.CharField()
-    date_of_birthday = serializers.DateField()
+    date_of_birth = serializers.DateField()
     sport = serializers.CharField()
     email = serializers.EmailField(validators=[UniqueValidator(queryset=User.objects.all(),
                                                                message=_('There is another user with this email'))])

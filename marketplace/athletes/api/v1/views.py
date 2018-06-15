@@ -28,7 +28,7 @@ class AthleteRegistrationView(APIView):
                                              last_name=serializer.validated_data['last_name'],
                                              country=serializer.validated_data['country'],
                                              sex=serializer.validated_data['sex'],
-                                             date_of_birthday=serializer.validated_data['date_of_birthday'],
+                                             date_of_birth=serializer.validated_data['date_of_birth'],
                                              sport=serializer.validated_data['sport'])
 
         return Response(data={'token': token}, status=status.HTTP_201_CREATED)
