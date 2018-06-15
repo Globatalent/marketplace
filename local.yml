@@ -72,6 +72,8 @@ services:
       context: .
       dockerfile: ./compose/local/frontend/Dockerfile
     command: /start.sh
+    env_file:
+      - ./.envs/.local/.frontend
     volumes:
       - ./frontend:/app
       - /app/node_modules/
