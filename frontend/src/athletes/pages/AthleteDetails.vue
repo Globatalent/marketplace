@@ -5,7 +5,7 @@
       - Connect data with the backend
       -->
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="12" :md="24" class="text-center">
+      <el-col :xs="24" class="text-center">
         <h2>Athlete Id:{{athlete.id}} Details</h2>
         <el-carousel :interval="4000" type="card" height="200px">
           <el-carousel-item v-for="item in 6" :key="item">
@@ -13,11 +13,11 @@
           </el-carousel-item>
         </el-carousel>
         <h3>{{athlete.firstName}} {{athlete.lastName}}</h3>
-        <el-button type="primary">Edit</el-button>
-        <div>Country: {{athlete.country}}</div>
-        <div>Age: {{athlete.age}}</div>
-        <div>Sport: {{athlete.sport}}</div>
-        <h4>Links</h4>
+        <el-button type="primary">{{$tc('message.Edit')}}</el-button>
+        <div>{{$tc('message.Country')}}: {{athlete.country}}</div>
+        <div>{{$tc('message.Age')}}: {{athlete.age}}</div>
+        <div>{{$tc('message.Sport')}}: {{athlete.sport}}</div>
+        <h4>{{$tc('message.Link',2)}}</h4>
         <ul>
           <li v-for="(link, index) in athlete.links" :key="index">
             <a :href="link.link" :title="link.linkTitle" target="_blank">{{link.linkTitle}}</a>

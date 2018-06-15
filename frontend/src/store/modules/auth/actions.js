@@ -47,8 +47,6 @@ export default {
         full_name: userData.fullName,
         email: userData.email,
         password: userData.password,
-        repeat_password: userData.repeatPassword,
-        wallet_address: userData.walletAddress,
       }
       Vue.axios.post(state.endpoints.signUp, payload).then((response) => {
         commit('updateToken', response.data.token)

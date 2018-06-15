@@ -2,10 +2,10 @@
   <gb-minimal-layout>
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="registrationBox text-center">
-        <div>{{ $t("message.SelectYourUserType") }}</div>
+        <div>{{ $tc("message.SelectYourUserType") }}</div>
         <el-button-group>
           <el-button type="primary" @click="userType = 'athlete'">{{ $tc("message.Athlete",1) }}</el-button>
-          <el-button type="primary" @click="userType = 'supporter'">{{ $t("message.Supporter") }}</el-button>
+          <el-button type="primary" @click="userType = 'supporter'">{{ $tc("message.Supporter") }}</el-button>
         </el-button-group>
       </el-col>
     </el-row>

@@ -30,10 +30,21 @@
 <script>
 import BaseLayout from '@/layout/BaseLayout.vue'
 
+
 export default {
   name: 'AthleteProfile',
   components: {
     'gb-base-layout': BaseLayout
+  },
+  created() {
+    this.axios.get('http://localhost:8000/api/v1/athletes/').then((response) => {
+      console.log('users',response.data);
+        // commit('setUser', UserTransformer.fetch(response.data))
+        // resolve(response)
+      }).catch((error) => {
+        // reject(error)
+        console.log(error)
+      })
   },
   data() {
     return {

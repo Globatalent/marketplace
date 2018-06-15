@@ -26,11 +26,16 @@ export const messages = {
       AthleteProfileEditPage: 'Athlete Profile Edit Page',
       Save: 'Save',
       LinkTitle: 'Link title',
-      Link: 'Link',
+      Link: 'Link | Links',
       addLink: 'Add link',
       Home: 'Home',
       Profile: 'Profile',
       Logout: 'Logout',
+      Following: 'Following',
+      Unfollow: 'Unfollow',
+      Alert: 'Alert | Alerts',
+      Edit: 'Edit',
+      Age: 'Age',
     }
   },
   es: {

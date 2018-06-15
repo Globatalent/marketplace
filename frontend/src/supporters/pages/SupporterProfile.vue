@@ -6,8 +6,8 @@
       -->
     <el-col :xs="24" class="">
       <el-tabs type="border-card">
-        <el-tab-pane label="Following">
-          <h3>Following</h3>
+        <el-tab-pane :label="$tc('message.Following')">
+          <h3>{{$tc('message.Following')}}</h3>
           <el-table :data="athletes" style="width: 100%">
             <el-table-column prop="id" label="id"></el-table-column>
             <el-table-column prop="firstName" label="firstName"></el-table-column>
@@ -16,13 +16,13 @@
             <el-table-column prop="country" label="country"></el-table-column>
             <el-table-column fixed="right" label="Operaciones">
               <template slot-scope="scope">
-                <el-button @click="handleClick" type="text" size="small">Unfollow</el-button>
+                <el-button @click="handleClick" type="text" size="small">{{$tc('message.Unfollow')}}</el-button>
               </template>
             </el-table-column>
           </el-table>
         </el-tab-pane>
-        <el-tab-pane label="Alerts">
-          <h3>Alerts</h3>
+        <el-tab-pane :label="$tc('message.Alert',2)">
+          <h3>{{$tc('message.Alert',1)}}</h3>
           <el-table :data="athletes" style="width: 100%">
             <el-table-column prop="id" label="id"></el-table-column>
             <el-table-column prop="firstName" label="firstName"></el-table-column>
