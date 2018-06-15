@@ -1,5 +1,5 @@
 export default {
-  jwt: localStorage.getItem('gb-token'),
+  jwt: localStorage.getItem('eh-token'),
   endpoints: {
     obtainJWT: '/api/v1/login/',
     refreshJWT: '/api/v1/refresh/',

@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode'
-import axios from 'axios'
+import Vue from 'vue'
 import router from '@/router.js'
 import { Message } from 'element-ui'
 
@@ -13,7 +13,7 @@ export default {
         email: userData.email,
         password: userData.password,
       }
-      axios.post(state.endpoints.obtainJWT, payload).then((response) => {
+      Vue.axios.post(state.endpoints.obtainJWT, payload).then((response) => {
         commit('updateToken', response.data.token)
         Message.success('Login successful')
         resolve()
@@ -50,7 +50,7 @@ export default {
         repeat_password: userData.repeatPassword,
         wallet_address: userData.walletAddress,
       }
-      axios.post(state.endpoints.signUp, payload).then((response) => {
+      Vue.axios.post(state.endpoints.signUp, payload).then((response) => {
         commit('updateToken', response.data.token)
         Message.success('Sign up successful')
         resolve(response)
@@ -69,7 +69,7 @@ export default {
       const payload = {
         token: state.jwt,
       }
-      axios.post(state.endpoints.refreshJWT, payload).then((response) => {
+      Vue.axios.post(state.endpoints.refreshJWT, payload).then((response) => {
         commit('updateToken', response.data.token)
         resolve()
       }).catch((error) => {

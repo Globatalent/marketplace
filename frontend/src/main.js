@@ -27,12 +27,19 @@ Vue.use(VueAxios, axios)
 
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL
-Vue.axios.defaults.xsrfCookieName = 'csrftoken'
-Vue.axios.defaults.xsrfHeaderName = 'X-CSRFToken'
 Vue.axios.defaults.headers.common['Content-Type'] = 'application/json'
 Vue.axios.defaults.headers.post['Content-Type'] = 'application/json'
 Vue.axios.defaults.headers.put['Content-Type'] = 'application/json'
 Vue.axios.defaults.headers.patch['Content-Type'] = 'application/json'
+
+Vue.axios.interceptors.request.use(request => {
+  const header = store.getters['auth/header']
+
+  if (header) {
+    request.headers.common['Authorization'] = header
+  }
+  return request
+})
 
 // Create VueI18n instance with options
 const i18n = new VueI18n({
