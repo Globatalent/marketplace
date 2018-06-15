@@ -6,6 +6,7 @@ export default {
     return state.jwt
   },
   header(state) {
-    return `jwt ${state.jwt}`
+    const token = state.jwt
+    return token ? `jwt ${token}` : null
   }
 }

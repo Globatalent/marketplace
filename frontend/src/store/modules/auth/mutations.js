@@ -2,11 +2,11 @@
 export default {
 
   updateToken (state, newToken) {
-    localStorage.setItem('gb-token', newToken)
+    localStorage.setItem('eh-token', newToken)
     state.jwt = newToken
   },
   cleanToken (state) {
-    localStorage.removeItem('gb-token')
+    localStorage.removeItem('eh-token')
     state.jwt = null
   },
 }
