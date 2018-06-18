@@ -70,6 +70,7 @@ THIRD_PARTY_APPS = [
     'url_filter',
     'easy_thumbnails',
     'rest_framework.authtoken',
+    'corsheaders',
 ]
 LOCAL_APPS = [
     'marketplace.users.apps.UsersConfig',
@@ -135,6 +136,7 @@ AUTH_PASSWORD_VALIDATORS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -259,7 +261,6 @@ ACCOUNT_ADAPTER = 'marketplace.users.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = 'marketplace.users.adapters.SocialAccountAdapter'
 
-
 # django Rest Framework
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
@@ -294,3 +295,7 @@ JWT_AUTH = {
 
 SENTRY_DSN = env('DJANGO_SENTRY_DSN', default=None)
 
+CORS_ORIGIN_WHITELIST = (
+    'localhost:8000',
+    'localhost:8080'
+)
