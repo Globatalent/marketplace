@@ -45,6 +45,7 @@ class AthleteViewSet(ReadOnlyModelViewSet):
         athlete = Athlete.objects.get(id=pk)
         supporter = Supporter.objects.get(id=request.user.supporter.id)
 
+        # TODO: Use .exists()
         if Supporter.objects.filter(following__id=pk).count() == 1:
             supporter.following.remove(athlete)
             return Response(data={'following': False})

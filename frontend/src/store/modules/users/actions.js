@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import UserTransformer from '../../../users/transformers/UserTransformer'
 import { store } from '../../index'
-import InvestorTransformer from '../../../investors/transformers/InvestorTransformer'
 
 export default {
   fetchUser ({commit, state}) {
