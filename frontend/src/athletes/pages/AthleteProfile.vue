@@ -20,10 +20,10 @@
               <el-input v-bind:placeholder="$tc('message.RepeatPassword')" type="password" v-model="form.repeatPassword"></el-input>
             </el-form-item>
             <el-form-item required v-bind:label="$tc('message.FirstName')">
-              <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.firstName"></el-input>
+              <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.first_name"></el-input>
             </el-form-item>
             <el-form-item required v-bind:label="$tc('message.LastName')">
-              <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.lastName"></el-input>
+              <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.last_name"></el-input>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" class="text-center">
@@ -38,8 +38,8 @@
             </el-form-item>
             <el-form-item v-bind:label="$tc('message.Sex')" class="text-left sexFormElement">
               <el-radio-group>
-                <el-radio label="male" v-model="form.sex">{{ $tc("message.Male") }}</el-radio>
-                <el-radio label="female" v-model="form.sex">{{ $tc("message.Female") }}</el-radio>
+                <el-radio label="MALE" v-model="form.sex">{{ $tc("message.Male") }}</el-radio>
+                <el-radio label="FEMALE" v-model="form.sex">{{ $tc("message.Female") }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -47,12 +47,12 @@
         <el-row type="flex" justify="left" :gutter="20" v-for="(link, index) in links" :key="index">
           <el-col :xs="24" :sm="12" :md="12" class="text-center">
             <el-form-item required v-bind:label="$tc('message.LinkTitle')+' '+(index+1)">
-              <el-input v-bind:placeholder="$tc('message.LinkTitle')" type="text" v-model="link.linkTitle"></el-input>
+              <el-input v-bind:placeholder="$tc('message.LinkTitle')" type="text" v-model="link.name"></el-input>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="11" :md="11" class="text-center">
             <el-form-item required v-bind:label="$tc('message.Link')+' '+(index+1)">
-              <el-input v-bind:placeholder="$tc('message.Link')" type="text" v-model="link.link"></el-input>
+              <el-input v-bind:placeholder="$tc('message.Link')" type="text" v-model="link.url"></el-input>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="1" :md="1" class="text-center removeButtonCol">
@@ -94,20 +94,39 @@ export default {
     'gb-base-layout': BaseLayout,
     vueDropzone: vue2Dropzone
   },
+  created() {
+    this.axios
+      .get('http://localhost:8000/api/v1/users/me/')
+      .then(response => {
+        console.log(response)
+        this.form.first_name = response.data.athlete.first_name
+        this.form.last_name = response.data.athlete.last_name
+        this.form.country = response.data.athlete.country
+        this.form.date = response.data.athlete.date_of_birth
+        this.form.sport = response.data.athlete.sport
+        this.form.sex = response.data.athlete.sex
+        this.links = response.data.athlete.links
+        this.pictures = response.data.athlete.pictures
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  },
   data() {
     return {
       errorMessage: '',
       form: {
-        password: '123456',
-        repeatPassword: '123456',
-        firstName: 'Jon',
-        lastName: 'Snow',
-        country: 'Winterfell',
-        date: '01/01/2000',
-        sport: 'destroy white walkers',
-        sex: 'male'
+        // password: '123456',
+        // repeatPassword: '123456',
+        // first_name: 'Jon',
+        // last_name: 'Snow',
+        // country: 'Winterfell',
+        // date: '01/01/2000',
+        // sport: 'destroy white walkers',
+        // sex: 'male'
       },
       links: [{}],
+      pictures: [{}],
       /*
       TODO @victor:
       vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
@@ -115,10 +134,10 @@ export default {
       - Remove images action
       */
       dropzoneOptions: {
-        url: 'https://httpbin.org/post',
+        url: 'http://localhost:8000/api/v1/pictures/',
         thumbnailWidth: 150,
         maxFilesize: 0.5,
-        headers: { 'My-Awesome-Header': 'header value' }
+        headers: { 'Content-Type': 'multipart/form-data' }
       }
     }
   },
@@ -130,11 +149,23 @@ export default {
     },
     saveUserProfile(data) {
       console.log('TODO @victor: Save athlete profile ...', this.form)
+      var testLink = {
+        name: 'Twitter',
+        url: 'http://twitter.com'
+      }
+      this.axios
+        .post('http://localhost:8000/api/v1/link/', { body: testLink })
+        .then(response => {
+          console.log('Added link',response)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     addRow() {
       this.links.push({
-        linkTitle: '',
-        link: ''
+        name: '',
+        url: ''
       })
     },
     deleteRow(index) {

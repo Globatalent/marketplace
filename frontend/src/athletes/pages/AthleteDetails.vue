@@ -8,7 +8,7 @@
       <el-col :xs="24" class="text-center">
         <!-- <h2>Athlete Id:{{athlete.id}} Details</h2> -->
         <el-carousel :interval="4000" type="card" height="200px">
-          <el-carousel-item v-for="item in athlete.pictures" :key="item">
+          <el-carousel-item v-for="(item, itemIndex) in athlete.pictures" :key="itemIndex">
             <img :src="item.image" alt="">
           </el-carousel-item>
         </el-carousel>
@@ -19,7 +19,7 @@
         <div>{{$tc('message.Sport')}}: {{athlete.sport}}</div>
         <h4>{{$tc('message.Link',2)}}</h4>
         <ul>
-          <li v-for="(link, index) in athlete.links" :key="index">
+          <li v-for="(link, linkIndex) in athlete.links" :key="linkIndex">
             <a :href="link.url" :title="link.name" target="_blank">{{link.name}}</a>
           </li>
         </ul>
