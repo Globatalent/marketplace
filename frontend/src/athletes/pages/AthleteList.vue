@@ -10,7 +10,7 @@
         <div style="padding: 14px;">
           <div class="top clearfix">
             <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
-              <span>{{athlete.firstName}} {{athlete.lastName}}</span>
+              <span>{{athlete.first_name}} {{athlete.last_name}}</span>
             </router-link>
             <div class="likeButton" @click="setFollowingAthlete(index,athlete)">
               <i class="fas fa-heart likeIcon is-following" v-if="athlete.following"></i>
@@ -38,7 +38,7 @@ export default {
   },
   created() {
     this.axios.get('http://localhost:8000/api/v1/athletes/').then((response) => {
-      console.log('users',response.data);
+      this.athletes = response.data.results
         // commit('setUser', UserTransformer.fetch(response.data))
         // resolve(response)
       }).catch((error) => {
@@ -49,62 +49,7 @@ export default {
   data() {
     return {
       errorMessage: '',
-      athletes: [
-        {
-          id: '1',
-          firstName: 'Jon',
-          lastName: 'Snow',
-          image: 'https://cde.laprensa.e3.pe/ima/0/0/1/3/9/139652.jpg',
-          sport: 'destroy white walkers',
-          country: 'Winterfell',
-          following: false
-        },
-        {
-          id: '2',
-          firstName: 'Daenerys',
-          lastName: 'Targaryen',
-          image: 'https://i.ytimg.com/vi/PC-Z2ZU66jc/maxresdefault.jpg',
-          sport: 'play with fire',
-          country: 'The Crownlands',
-          following: true
-        },
-        {
-          id: '3',
-          firstName: 'Tyrion',
-          lastName: 'Lannister',
-          image: 'https://media.giphy.com/media/idhHzlOqNA7Sw/giphy.gif',
-          sport: 'drink',
-          country: 'The Crownlands',
-          following: false
-        },
-        {
-          id: '4',
-          firstName: 'Daenerys',
-          lastName: 'Targaryen',
-          image: 'https://i.ytimg.com/vi/PC-Z2ZU66jc/maxresdefault.jpg',
-          sport: 'play with fire',
-          country: 'The Crownlands',
-          following: false
-        },
-        {
-          id: '5',
-          firstName: 'Tyrion',
-          lastName: 'Lannister',
-          image: 'https://media.giphy.com/media/idhHzlOqNA7Sw/giphy.gif',
-          sport: 'drink',
-          country: 'The Crownlands',
-          following: false
-        },
-        {
-          id: '6',
-          firstName: 'Jon',
-          lastName: 'Snow',
-          image: 'https://cde.laprensa.e3.pe/ima/0/0/1/3/9/139652.jpg',
-          sport: 'destroy white walkers',
-          country: 'Winterfell',
-          following: false
-        }
-      ]
+      athletes: []
     }
   },
   methods: {
