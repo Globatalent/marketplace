@@ -13,25 +13,19 @@
       <el-form ref="form">
         <el-row justify="center" :gutter="20">
           <el-col :xs="24" :sm="12" :md="12" class="text-center">
-            <el-form-item required v-bind:label="$tc('message.Password')">
-              <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
-            </el-form-item>
-            <el-form-item required v-bind:label="$tc('message.RepeatPassword')">
-              <el-input v-bind:placeholder="$tc('message.RepeatPassword')" type="password" v-model="form.repeatPassword"></el-input>
-            </el-form-item>
             <el-form-item required v-bind:label="$tc('message.FirstName')">
               <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.first_name"></el-input>
             </el-form-item>
             <el-form-item required v-bind:label="$tc('message.LastName')">
               <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.last_name"></el-input>
             </el-form-item>
+            <el-form-item required v-bind:label="$tc('message.Date')">
+              <el-date-picker type="date" v-bind:placeholder="$tc('message.PickADate')" style="width: 100%;" v-model="form.date"></el-date-picker>
+            </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" class="text-center">
             <el-form-item required v-bind:label="$tc('message.Country')">
               <el-input v-bind:placeholder="$tc('message.Country')" type="text" v-model="form.country"></el-input>
-            </el-form-item>
-            <el-form-item required v-bind:label="$tc('message.Date')">
-              <el-date-picker type="date" v-bind:placeholder="$tc('message.PickADate')" style="width: 100%;" v-model="form.date"></el-date-picker>
             </el-form-item>
             <el-form-item required v-bind:label="$tc('message.Sport')">
               <el-input v-bind:placeholder="$tc('message.Sport')" type="text" v-model="form.sport"></el-input>
