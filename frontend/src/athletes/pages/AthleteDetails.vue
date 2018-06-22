@@ -39,32 +39,6 @@ export default {
   data() {
     return {
       athlete: {
-        // id: '',
-        // first_name: 'Jon',
-        // last_name: 'Snow',
-        // country: 'Winterfell',
-        // date: '01/01/2000',
-        // sport: 'destroy white walkers',
-        // sex: 'male',
-        // age: '33',
-        // links: [
-        //   {
-        //     linkTitle: 'YouTube',
-        //     link: 'https://www.youtube.com/?gl=ES&hl=es'
-        //   },
-        //   {
-        //     linkTitle: 'Facebook',
-        //     link: 'https://www.facebook.com/'
-        //   },
-        //   {
-        //     linkTitle: 'Twitter',
-        //     link: 'http://twitter.com/'
-        //   },
-        //   {
-        //     linkTitle: 'Instagram',
-        //     link: 'https://www.instagram.com/?hl=es'
-        //   }
-        // ]
       }
     }
   },
