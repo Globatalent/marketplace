@@ -55,7 +55,15 @@ export default {
   methods: {
     setFollowingAthlete(index, athlete) {
       athlete.following = !athlete.following
-      this.$set(this.athletes, index, athlete)
+      this.axios
+        .post('http://localhost:8000/api/v1/athlete/'+athlete.id+'/following/')
+        .then(response => {
+          console.log('Favorited athlete',response)
+          // this.$set(this.athletes, index, athlete)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     },
     likeIconClass(following) {
       console.log(`This following: ${following}`)
