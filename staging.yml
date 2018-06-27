@@ -1,0 +1,99 @@
+version: '2'
+
+volumes:
+  postgres_data: {}
+  postgres_backup: {}
+  media: {}
+  static: {}
+
+services:
+  django: &django
+    build:
+      context: .
+      dockerfile: ./compose/staging/django/Dockerfile
+    image: marketplace_staging_django
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.staging/.django
+      - ./.envs/.staging/.postgres
+    command: /gunicorn.sh
+    volumes:
+      - media:/data/media
+      - static:/data/static
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/staging/postgres/Dockerfile
+    image: marketplace_staging_postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - postgres_backup:/backups
+    env_file:
+      - ./.envs/.staging/.postgres
+
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./compose/staging/nginx/Dockerfile
+    depends_on:
+      - django
+    env_file: .env
+    networks:
+      - nginxproxy_net1
+      - default
+    ports:
+      - "0.0.0.0:8013:80"
+    volumes:
+      - media:/data/media
+      - static:/data/static
+
+  redis:
+    image: redis:3.2
+
+  celeryworker:
+    <<: *django
+    image: marketplace_staging_celeryworker
+    depends_on:
+     - postgres
+     - redis
+    env_file:
+      - ./.envs/.staging/.django
+      - ./.envs/.staging/.postgres
+    command: /start-celeryworker.sh
+
+  celerybeat:
+    <<: *django
+    image: marketplace_production_celerybeat
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.staging/.django
+      - ./.envs/.staging/.postgres
+    command: /start-celerybeat.sh
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./compose/staging/frontend/Dockerfile
+    command: /start.sh
+    env_file:
+      - ./.envs/.staging/.frontend
+    networks:
+      - nginxproxy_net1
+      - default
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules/
+    image: marketplace_local_frontend
+    ports:
+      - "8014:80"
+
+networks:
+  nginxproxy_net1:
+    external:
+      name: nginxproxy_net1
