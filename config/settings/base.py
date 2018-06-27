@@ -297,4 +297,5 @@ SENTRY_DSN = env('DJANGO_SENTRY_DSN', default=None)
 
 CORS_ORIGIN_WHITELIST = (
     'localhost:8000',
+    'market.dekaside.com'
 )
