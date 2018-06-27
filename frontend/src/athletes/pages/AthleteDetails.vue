@@ -44,7 +44,7 @@ export default {
   },
   created() {
     this.athlete.id = this.$route.params.athleteId
-    this.axios.get('http://localhost:8000/api/v1/athletes/'+this.athlete.id).then((response) => {
+    this.axios.get('/api/v1/athletes/'+this.athlete.id).then((response) => {
       this.athlete = response.data
       }).catch((error) => {
         console.log(error)

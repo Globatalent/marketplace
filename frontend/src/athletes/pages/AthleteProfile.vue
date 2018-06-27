@@ -90,7 +90,7 @@ export default {
   },
   created() {
     this.axios
-      .get('http://localhost:8000/api/v1/users/me/')
+      .get('/api/v1/users/me/')
       .then(response => {
         console.log(response)
         this.form.first_name = response.data.athlete.first_name
@@ -128,7 +128,7 @@ export default {
       - Remove images action
       */
       dropzoneOptions: {
-        url: 'http://localhost:8000/api/v1/pictures/',
+        url: '/api/v1/pictures/',
         thumbnailWidth: 150,
         maxFilesize: 0.5,
         headers: { 'Content-Type': 'multipart/form-data' }
@@ -148,7 +148,7 @@ export default {
         url: 'http://twitter.com'
       }
       this.axios
-        .post('http://localhost:8000/api/v1/link/', { body: testLink })
+        .post('/api/v1/link/', { body: testLink })
         .then(response => {
           console.log('Added link',response)
         })

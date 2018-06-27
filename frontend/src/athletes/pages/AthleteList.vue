@@ -37,7 +37,7 @@ export default {
     'gb-base-layout': BaseLayout
   },
   created() {
-    this.axios.get('http://localhost:8000/api/v1/athletes/').then((response) => {
+    this.axios.get('/api/v1/athletes/').then((response) => {
       this.athletes = response.data.results
         // commit('setUser', UserTransformer.fetch(response.data))
         // resolve(response)
@@ -56,7 +56,7 @@ export default {
     setFollowingAthlete(index, athlete) {
       athlete.following = !athlete.following
       this.axios
-        .post('http://localhost:8000/api/v1/athlete/'+athlete.id+'/following/')
+        .post('/api/v1/athlete/'+athlete.id+'/following/')
         .then(response => {
           console.log('Favorited athlete',response)
           // this.$set(this.athletes, index, athlete)
