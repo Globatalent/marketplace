@@ -73,7 +73,7 @@ export default {
         return 'thumbs-up'
       }
     },
-    getPicture(atlete) {
+    getPicture(athlete) {
       const picture = athlete.pictures[0]
       if (picture) {
         return picture.image
