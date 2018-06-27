@@ -81,7 +81,6 @@ services:
     build:
       context: .
       dockerfile: ./compose/staging/frontend/Dockerfile
-    command: /start.sh
     env_file:
       - ./.envs/.staging/.frontend
     networks:
