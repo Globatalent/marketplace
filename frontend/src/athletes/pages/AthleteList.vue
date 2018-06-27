@@ -56,7 +56,7 @@ export default {
     setFollowingAthlete(index, athlete) {
       athlete.following = !athlete.following
       this.axios
-        .post('/api/v1/athlete/'+athlete.id+'/following/')
+        .post('/api/v1/athletes/'+athlete.id+'/follow/')
         .then(response => {
           console.log('Favorited athlete',response)
           // this.$set(this.athletes, index, athlete)
