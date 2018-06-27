@@ -11,7 +11,18 @@ class ReviewInLine(admin.TabularInline):
     fields = ('text', 'state',)
 
 
+class PictureInline(admin.TabularInline):
+    model = Picture
+    fields = ('image',)
+
+
+class LinkInline(admin.TabularInline):
+    model = Link
+    fields = ('name', 'url')
+
+
 @admin.register(Athlete)
 class ProjectAdmin(admin.ModelAdmin):
     model = Athlete
     list_display = ('first_name', 'sport', 'state',)
+    inlines = [PictureInline, LinkInline]
