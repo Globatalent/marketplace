@@ -41,7 +41,8 @@ services:
       dockerfile: ./compose/staging/nginx/Dockerfile
     depends_on:
       - django
-    env_file: .env
+    env_file:
+      - ./.envs/.staging/.nginx
     networks:
       - nginxproxy_net1
       - default
