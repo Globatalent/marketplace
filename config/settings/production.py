@@ -92,7 +92,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # ADMIN
 # ------------------------------------------------------------------------------
 # Django Admin URL regex.
-ADMIN_URL = r'^admin/'
+ADMIN_URL = 'admin/'
 
 # Gunicorn
 # ------------------------------------------------------------------------------
