@@ -6,7 +6,7 @@
       -->
     <masonry :cols="{default: 3, 750: 2, 500: 1}" :gutter="{default: '15px', 750: '15px'}">
       <el-card :body-style="{ padding: '0px' }" v-for="(athlete, index) in athletes" :key="index" style="margin-bottom:15px;">
-        <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}"><img v-bind:src="athlete.image" class="image"></router-link>
+        <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}"><img v-bind:src="getPicture(athlete)" class="image"></router-link>
         <div style="padding: 14px;">
           <div class="top clearfix">
             <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
@@ -71,6 +71,14 @@ export default {
         return 'heart'
       } else {
         return 'thumbs-up'
+      }
+    },
+    getPicture(atlete) {
+      const picture = athlete.pictures[0]
+      if (picture) {
+        return picture.image
+      } else {
+        return null
       }
     }
   }
