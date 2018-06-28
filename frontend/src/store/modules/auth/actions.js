@@ -18,23 +18,26 @@ export default {
         Message.success('Login successful')
         resolve()
       }).catch((error) => {
-        const errors = error.response.data.non_field_errors
-        let message = ''
-        if (errors.length > 1) {
-          message += '<ul>'
-          errors.forEach(error => {
-            message += `<li>${error}</li>`
+        console.log(error)
+        if (error.hasOwnProperty(response)) {
+          const errors = error.response.data.non_field_errors
+          let message = ''
+          if (errors.length > 1) {
+            message += '<ul>'
+            errors.forEach(error => {
+              message += `<li>${error}</li>`
+            })
+            message += '</ul>'
+          } else {
+            message = errors[0]
+          }
+          Message.error({
+            dangerouslyUseHTMLString: true,
+            message: message,
+            center: true,
           })
-          message += '</ul>'
-        } else {
-          message = errors[0]
         }
-        Message.error({
-          dangerouslyUseHTMLString: true,
-          message: message,
-          center: true,
-        })
-        reject()
+        reject(error)
       })
     })
   },
