@@ -91,7 +91,7 @@ services:
       - /app/node_modules/
     image: marketplace_local_frontend
     ports:
-      - "8000:443"
+      - "8000:80"
 
 networks:
   nginxproxy_net1:
