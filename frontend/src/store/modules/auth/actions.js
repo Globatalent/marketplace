@@ -19,7 +19,7 @@ export default {
         resolve()
       }).catch((error) => {
         console.log(error)
-        if (error.hasOwnProperty(response)) {
+        if (error.hasOwnProperty('response')) {
           const errors = error.response.data.non_field_errors
           let message = ''
           if (errors.length > 1) {
