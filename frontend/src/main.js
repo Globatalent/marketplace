@@ -10,6 +10,7 @@ import './scss/theme.scss'
 import { messages } from './translations/translations'
 /** Theme & UI **/
 import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/en'
 import VueMasonry from 'vue-masonry-css'
 import vue2Dropzone from 'vue2-dropzone'
 /** Axios **/
@@ -20,7 +21,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueMoment)
 Vue.use(VueI18n)
-Vue.use(ElementUI)
+Vue.use(ElementUI, { locale })
 Vue.use(VueMasonry)
 Vue.use(vue2Dropzone)
 Vue.use(VueAxios, axios)
