@@ -31,6 +31,7 @@ class Athlete(models.Model):
     date_of_birth = models.DateField(verbose_name=_('date of birth'))
     sport = models.CharField(max_length=200, verbose_name=_('sport'))
     state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
+    biography = models.TextField(null=True, blank=True, verbose_name=_('biography'))
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
