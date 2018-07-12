@@ -9,6 +9,7 @@ export const messages = {
       LogIn: 'Log in',
       ForgotYourPassword: 'Forgot your password?',
       DontHaveAccount: 'Don\'t have an account?',
+      AlreadyAccount: 'Already have an account?',
       SignUp: 'Sign Up',
       SelectYourUserType: 'Select your user type:',
       Athlete: 'Athlete | Athletes',

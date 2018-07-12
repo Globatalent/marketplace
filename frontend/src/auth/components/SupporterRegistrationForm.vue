@@ -1,8 +1,4 @@
 <template>
-  <!--
-      TODO @victor:
-        - submit form
-    -->
   <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
     <h2>{{ $tc("message.Supporter") }}</h2>
     <el-form ref="form" label-position="top" class="text-left">
@@ -29,6 +25,8 @@
 </template>
 
 <script>
+import router from '@/router.js'
+
 export default {
   name: 'SupporterRegistrationForm',
   components: {},
@@ -53,6 +51,14 @@ export default {
     },
     registerUser(data) {
       console.log('TODO @victor: Register supporter user action ...', this.form)
+      this.$store
+        .dispatch('auth/registerSupporter', data)
+        .then(data => {
+          router.push({ name: 'athlete.list' })
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

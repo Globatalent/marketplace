@@ -23,7 +23,7 @@
           </el-form-item>
         </el-form>
         <div>{{ $tc("message.DontHaveAccount") }}
-          <a href="" class="is-main-color">{{ $tc("message.SignUp") }}</a>
+          <router-link :to="{ name: 'registration'}" class="is-main-color">{{ $tc("message.SignUp") }}</router-link>
         </div>
       </el-col>
     </el-row>
@@ -49,7 +49,7 @@ export default {
       loginErrors: {
         non_field_errors: '',
         email: '',
-        password: '',
+        password: ''
       },
       rules: {
         email: [

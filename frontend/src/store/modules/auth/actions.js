@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode'
 import Vue from 'vue'
+import VueMoment from 'vue-moment'
 import router from '@/router.js'
 import { Message } from 'element-ui'
 
@@ -49,9 +50,55 @@ export default {
       const payload = {
         full_name: userData.fullName,
         email: userData.email,
-        password: userData.password,
+        password: userData.password
       }
       Vue.axios.post(state.endpoints.signUp, payload).then((response) => {
+        commit('updateToken', response.data.token)
+        Message.success('Sign up successful')
+        resolve(response)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+  registerAthlete ({commit, state}, userData) {
+    /**
+     * Login to backend and set the token in state
+     */
+    return new Promise((resolve, reject) => {
+      const payload = {
+        first_name: userData.firstName,
+        last_name: userData.lastName,
+        email: userData.email,
+        password: userData.password,
+        repeat_password: userData.repeatPassword,
+        country: userData.country,
+        date_of_birth: Vue.moment(userData.date).format('YYYY-MM-DD'),
+        sex: userData.sex,
+        sport: userData.sport
+      }
+      Vue.axios.post(state.endpoints.registerAthlete, payload).then((response) => {
+        commit('updateToken', response.data.token)
+        Message.success('Sign up successful')
+        resolve(response)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+  registerSupporter ({commit, state}, userData) {
+    /**
+     * Login to backend and set the token in state
+     */
+    return new Promise((resolve, reject) => {
+      const payload = {
+        first_name: userData.firstName,
+        last_name: userData.lastName,
+        email: userData.email,
+        password: userData.password,
+        repeat_password: userData.repeatPassword
+      }
+      Vue.axios.post(state.endpoints.registerSupporter, payload).then((response) => {
         commit('updateToken', response.data.token)
         Message.success('Sign up successful')
         resolve(response)

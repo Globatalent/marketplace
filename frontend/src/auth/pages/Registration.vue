@@ -12,35 +12,40 @@
     <el-row type="flex" justify="center">
       <component :is="forms[userType]"></component>
     </el-row>
+    <el-row>
+      <div class="text-center">{{ $tc("message.AlreadyAccount") }}
+        <router-link :to="{ name: 'login'}" class="is-main-color">{{ $tc("message.LogIn") }}</router-link>
+      </div>
+    </el-row>
   </gb-minimal-layout>
 </template>
 
 <script>
-  import MinimalLayout from '@/layout/MinimalLayout.vue'
-  import AthleteRegistrationForm from '../components/AthleteRegistrationForm.vue'
-  import SupporterRegistrationForm from '../components/SupporterRegistrationForm.vue'
+import MinimalLayout from '@/layout/MinimalLayout.vue'
+import AthleteRegistrationForm from '../components/AthleteRegistrationForm.vue'
+import SupporterRegistrationForm from '../components/SupporterRegistrationForm.vue'
 
-  export default {
-    name: 'Registration',
-    data() {
-      return {
-        forms: {
-          athlete: 'gb-athlete-registration',
-          supporter: 'gb-supporter-registration'
-        },
-        userType: 'supporter'
-      }
-    },
-    components: {
-      'gb-minimal-layout': MinimalLayout,
-      'gb-athlete-registration': AthleteRegistrationForm,
-      'gb-supporter-registration': SupporterRegistrationForm
+export default {
+  name: 'Registration',
+  data() {
+    return {
+      forms: {
+        athlete: 'gb-athlete-registration',
+        supporter: 'gb-supporter-registration'
+      },
+      userType: 'supporter'
     }
+  },
+  components: {
+    'gb-minimal-layout': MinimalLayout,
+    'gb-athlete-registration': AthleteRegistrationForm,
+    'gb-supporter-registration': SupporterRegistrationForm
   }
+}
 </script>
 
 <style type="scss" scoped>
-.registrationBox{
+.registrationBox {
   margin-bottom: 20px;
 }
 </style>

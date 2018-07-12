@@ -2,7 +2,6 @@
   <!--
       TODO @victor:
         - Fix Sex radio option
-        - submit form
     -->
   <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="text-center">
     <h2>{{ $tc("message.Athlete",1) }}</h2>
@@ -45,6 +44,8 @@
 </template>
 
 <script>
+import router from '@/router.js'
+
 export default {
   name: 'AthleteRegistrationForm',
   components: {},
@@ -72,7 +73,14 @@ export default {
       this.registerUser(dataForm)
     },
     registerUser(data) {
-      console.log('TODO @victor: Register athlete user action ...', this.form)
+      this.$store
+        .dispatch('auth/registerAthlete', data)
+        .then(data => {
+          router.push({ name: 'athlete.list' })
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

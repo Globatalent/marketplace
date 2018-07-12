@@ -1,15 +1,5 @@
 <template>
   <div class="header">
-    <!--
-        TODO @kike
-        Logo horizontal a la izquierda. Borde para limitar.
-        A la izquierda del menu icono de notificaciones (Campanita) Muestra un dropdown con un listado. Ej: El atleta x ha publicado un post.
-        - Home
-        - Athletes
-        - user email
-          - Profile (Athlete profile)
-          - Logout (Mostrar dialogo ¿Estás seguro de que quieres cerrar sesión?)
-        -->
     <el-row justify="left">
       <el-col :xs="24" :sm="12" :md="8" :lg="6" :xl="4" class="text-center">
         <img class="logoHeader" src="~@/assets/img/Globatalent-logo-vert.png" />
@@ -19,9 +9,9 @@
           <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item>
           <el-menu-item index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Athlete",2) }}</el-menu-item>
           <el-submenu index="3">
-            <template slot="title">xxx@xxx.com</template>
+            <template slot="title">{{user.email}}</template>
             <el-menu-item index="athlete-profile" :route="{name:'athlete.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
-            <el-menu-item index="logout" @click="logout()">{{ $tc("message.Logout") }}</el-menu-item>
+            <el-menu-item class="el-menu-item" index="logout" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>
@@ -30,6 +20,9 @@
 </template>
 
 <script>
+import router from '@/router.js'
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'gb-header',
   data() {
@@ -38,30 +31,39 @@ export default {
       activeIndex2: '1'
     }
   },
+  computed: {
+    ...mapGetters({
+      user: 'users/user'
+    })
+  },
   components: {},
   methods: {
     handleSelect(key, keyPath) {
       console.log('key', key)
       console.log('keyPath', keyPath)
     },
-    logout(){
-      router.push('/')
-      // this.$confirm('Are you sure you want to log out?', 'Warning', {
-      //     confirmButtonText: 'OK',
-      //     cancelButtonText: 'Cancel',
-      //     type: 'warning'
-      //   }).then(() => {
-      //     this.$message({
-      //       type: 'success',
-      //       message: 'Logout completed'
-      //     });
-      //     router.push({ path: '/' })
-      //   }).catch(() => {
-      //     this.$message({
-      //       type: 'info',
-      //       message: 'Logout canceled'
-      //     });
-      //   });
+    logout() {
+      this.$confirm('Are you sure you want to log out?', 'Warning', {
+        confirmButtonText: 'OK',
+        cancelButtonText: 'Cancel',
+        type: 'warning'
+      })
+        .then(() => {
+          this.$store.dispatch('auth/logout').then(()=>{
+            router.push({ name: 'login' })
+          })
+          this.$message({
+            type: 'success',
+            message: 'Logout completed'
+          })
+        })
+        .catch(error => {
+          debugger
+          this.$message({
+            type: 'info',
+            message: 'Logout canceled'
+          })
+        })
     }
   }
 }
