@@ -6,19 +6,28 @@ from django.views.generic import TemplateView
 from django.views import defaults as default_views
 from django.conf.urls import include, url
 from rest_framework.documentation import include_docs_urls
+from django.utils.translation import ugettext_lazy as _
+
 
 urlpatterns = [
-                  path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
-                  # Django Admin, use {% url 'admin:index' %}
-                  path(settings.ADMIN_URL, admin.site.urls),
-
-                  # Your stuff: custom urls includes go here
-                  path(r'api/docs/', include_docs_urls(title='Globatalent Marketplace API Docs')),
-                  path(r'api/', include('marketplace.core.api.urls', namespace='api')),
-                  path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-              ] + static(
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
+
+# Django Admin, use {% url 'admin:index' %}
+admin.site.site_header = _('Globatalent Admin')
+urlpatterns += [
+    path(settings.ADMIN_URL, admin.site.urls),
+]
+
+# API URLs
+# Create a router and register our resources with it.
+urlpatterns += [
+    path(r'api/docs/', include_docs_urls(title='Globatalent Marketplace API Docs')),
+    path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path(r'api/', include('config.router', namespace='api')),
+]
 
 if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
