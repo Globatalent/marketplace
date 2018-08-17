@@ -2,6 +2,7 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from django.contrib.auth import password_validation
 from django.utils.translation import ugettext_lazy as _
+
 from marketplace.athletes.models import Picture, Link, Athlete
 from marketplace.users.models import User
 
@@ -9,13 +10,26 @@ from marketplace.users.models import User
 class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
-        fields = ('image', 'athlete')
+        fields = [
+            'image',
+            'athlete'
+        ]
+        extra_kwargs = {
+            'athlete': {'read_only': True},
+        }
 
 
 class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
-        fields = ('name', 'url', 'athlete')
+        fields = [
+            'name',
+            'url',
+            'athlete'
+        ]
+        extra_kwargs = {
+            'athlete': {'read_only': True},
+        }
 
 
 class AthleteSerializer(serializers.ModelSerializer):

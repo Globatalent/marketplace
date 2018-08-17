@@ -1,12 +1,11 @@
 from django.contrib.auth import password_validation
+from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
-from django.utils.translation import ugettext_lazy as _
 
-from marketplace.supporters.models import Supporter, Alert
 from marketplace.athletes.api.v1.serializers import AthleteSerializer
+from marketplace.supporters.models import Supporter, Alert
 from marketplace.users.models import User
-from marketplace.athletes.models import Athlete
 
 
 class AlertSerializer(serializers.ModelSerializer):
