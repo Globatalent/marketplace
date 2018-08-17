@@ -12,6 +12,9 @@ class AlertSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alert
         fields = ('rule', 'amount', 'supporter', 'athlete')
+        extra_kwargs = {
+            "supporter": {'read_only': True}
+        }
 
 
 class SupporterSerializer(serializers.ModelSerializer):

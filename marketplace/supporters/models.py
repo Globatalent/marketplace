@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from marketplace.athletes.constants import APPROVED
 from marketplace.users.models import User
+from marketplace.supporters.constants import RULE_CHOICES, UP
 
 
 class Supporter(models.Model):
@@ -39,12 +40,6 @@ class Supporter(models.Model):
 
 
 class Alert(models.Model):
-    UP = 'UP'
-    DOWN = 'DOWN'
-    RULE_CHOICES = (
-        (UP, _('Go up')),
-        (DOWN, _('Go down')),
-    )
     rule = models.CharField(choices=RULE_CHOICES, default=UP, max_length=10, verbose_name=_('rule'))
     amount = models.FloatField(verbose_name=_('amount'))
     supporter = models.ForeignKey(Supporter, verbose_name=_('supporter'),
