@@ -3,27 +3,12 @@ from django.utils.translation import ugettext_lazy as _
 
 from easy_thumbnails.fields import ThumbnailerImageField
 
+from marketplace.athletes.constants import SEX_CHOICES, STATE_CHOICES, PENDING_REVIEW
 from marketplace.core.files import UploadToDir
 from marketplace.users.models import User
 
 
 class Athlete(models.Model):
-    MALE = 'MALE'
-    FEMALE = 'FEMALE'
-    SEX_CHOICES = (
-        (MALE, _('Male')),
-        (FEMALE, _('Female'))
-    )
-    APPROVED = 'APPROVED'
-    REJECTED = 'REJECTED'
-    REVIEWING = 'REVIEWING'
-    PENDING_REVIEW = 'PENDING_REVIEW'
-    STATE_CHOICES = (
-        (APPROVED, _('Approved')),
-        (REJECTED, _('Rejected')),
-        (REVIEWING, _('Reviewing')),
-        (PENDING_REVIEW, _('Pending Review')),
-    )
     first_name = models.CharField(max_length=100, verbose_name=_('first name'))
     last_name = models.CharField(max_length=100, verbose_name=_('last name'))
     country = models.CharField(max_length=100, verbose_name=_('country'))
@@ -38,12 +23,12 @@ class Athlete(models.Model):
         verbose_name=_('user')
     )
 
-    def __str__(self):
-        return self.first_name
-
     class Meta:
         verbose_name = _('athlete')
         verbose_name_plural = _('athletes')
+
+    def __str__(self):
+        return self.first_name
 
 
 class Picture(models.Model):

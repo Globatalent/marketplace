@@ -7,6 +7,8 @@ from marketplace.athletes.models import Athlete
 from marketplace.athletes.tests.factories import AthleteFactory
 from marketplace.users.models import User
 from marketplace.users.tests.factories import UserFactory
+from marketplace.supporters.tests.factories import SupporterFactory
+from marketplace.supporters.models import Supporter
 
 
 class AthletesAPITests(APITestCase):
@@ -103,3 +105,15 @@ class AthletesAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         athlete = Athlete.objects.get(pk=athlete.pk)
         self.assertEqual(1, athlete.pictures.count())
+
+    def test_follow_athlete(self):
+        supporter = SupporterFactory()
+        athlete = AthleteFactory()
+        self.client.force_authenticate(supporter.user)
+        response = self.client.post(
+            "/api/v1/athletes/{}/follow/".format(athlete.pk),
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        supporter = Supporter.objects.get(pk=supporter.pk)
+        self.assertEqual(1, supporter.following.all().count())

@@ -1,13 +1,12 @@
 from rest_framework import permissions
 
-from marketplace.users.helpers import is_athlete
 
-
-class OnlyAthletes(permissions.BasePermission):
+class OnlyOwnerUpdates(permissions.BasePermission):
+    """Only allows updates to the owner (user field) of the model, and not creation."""
 
     def has_permission(self, request, view):
-        if request.method not in permissions.SAFE_METHODS:
-            return is_athlete(request.user)
+        if request.method in ('POST', ) and view.action != 'follow':
+            return False
         return True
 
     def has_object_permission(self, request, view, obj):
