@@ -7,6 +7,7 @@ from marketplace.users.models import User
 from marketplace.users.tests.factories import UserFactory
 from marketplace.supporters.constants import UP
 from marketplace.supporters.tests.factories import SupporterFactory
+from supporters.tests.factories import AlertFactory
 
 
 class SupportersAPITests(APITestCase):
@@ -50,3 +51,14 @@ class SupportersAPITests(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
+    def test_list_alerts(self):
+        supporter = SupporterFactory()
+        alerts = AlertFactory.create_batch(supporter=supporter, size=5)
+        self.client.force_authenticate(supporter.user)
+        response = self.client.get(
+            "/api/v1/alerts/",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(alerts), data['count'])
