@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from model_utils.models import TimeStampedModel
 
+from marketplace.actions.decorators import dispatch_action
 from marketplace.athletes.constants import APPROVED
-from marketplace.users.models import User
 from marketplace.supporters.constants import RULE_CHOICES, UP
+from marketplace.users.models import User
 
 
 class Supporter(models.Model):
@@ -27,6 +29,7 @@ class Supporter(models.Model):
     def __str__(self):
         return f'{str(self.id)} - {self.user.email}'
 
+    @dispatch_action("follows", method=True)
     def follow(self, athlete):
         """The given athlete is followed by the current supporter and returns True.
         If the supporter is following the athlete, then the supporter stop
@@ -39,7 +42,7 @@ class Supporter(models.Model):
         return True
 
 
-class Alert(models.Model):
+class Alert(TimeStampedModel):
     rule = models.CharField(choices=RULE_CHOICES, default=UP, max_length=10, verbose_name=_('rule'))
     amount = models.FloatField(verbose_name=_('amount'))
     supporter = models.ForeignKey(Supporter, verbose_name=_('supporter'),
@@ -53,3 +56,4 @@ class Alert(models.Model):
     class Meta:
         verbose_name = _('alert')
         verbose_name_plural = _('alerts')
+        ordering = ('-created', )

@@ -1,29 +1,39 @@
 from rest_framework import serializers
 
-from marketplace.actions.models import Notification, Action, ActionType
-from marketplace.users.api.v1.serializers import UserSerializer
-
-
-class ActionTypeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ActionType
-        fields = ('id', 'name')
+from marketplace.actions.models import Notification, Action
 
 
 class ActionSerializer(serializers.ModelSerializer):
-    type = ActionTypeSerializer(many=False, read_only=True)
-    user = UserSerializer(many=False, read_only=True)
+
+    text = serializers.CharField(read_only=True)
 
     class Meta:
         model = Action
-        fields = ('id', 'text', 'date', 'link', 'type', 'user')
+        fields = [
+            'id',
+            'actor_content_type',
+            'actor_object_id',
+            'verb',
+            'target_content_type',
+            'target_object_id',
+            'trigger_content_type',
+            'trigger_object_id',
+            'text',
+            'created',
+        ]
 
 
 class NotificationSerializer(serializers.ModelSerializer):
-    actions = ActionSerializer(many=True, read_only=True)
-    user = UserSerializer(many=False, read_only=True)
+
+    action = ActionSerializer(read_only=True)
 
     class Meta:
         model = Notification
-        fields = ('id', 'read', 'actions', 'user')
+        fields = [
+            'id',
+            'read',
+            'read_at',
+            'action',
+            'created',
+        ]
 
