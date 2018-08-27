@@ -77,7 +77,7 @@ LOCAL_APPS = [
     'marketplace.supporters.apps.SupportersConfig',
     'marketplace.athletes.apps.AthletesConfig',
     'marketplace.actions.apps.ActionsConfig',
-    # Your stuff: custom apps go here
+    'marketplace.tokens.apps.TokensConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -277,9 +277,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_FILTER_BACKENDS': (
-        'marketplace.core.api.filters.DjangoFilterDocs',
+        # 'marketplace.core.api.filters.DjangoFilterDocs',
+        # 'url_filter.integrations.drf.DjangoFilterBackend',
         'rest_framework.filters.OrderingFilter',
-        'url_filter.integrations.drf.DjangoFilterBackend',
+        'django_filters.rest_framework.DjangoFilterBackend',
     ),
     'DEFAULT_SEARCH_BACKEND': ('django_filters.rest_framework.SearchFilter',),
     'DEFAULT_ORDERING_BACKEND': ('django_filters.rest_framework.OrderingFilter',),
@@ -287,6 +288,13 @@ REST_FRAMEWORK = {
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 # END DJANGO REST FRAMEWORK
+
+# DJANGO FILTER
+# ------------------------------------------------------------------------------
+# See: https://django-filter.readthedocs.io/en/develop/
+INSTALLED_APPS += (
+    'django_filters',
+)
 
 JWT_AUTH = {
     'JWT_ALLOW_REFRESH': True,

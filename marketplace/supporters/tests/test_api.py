@@ -17,7 +17,7 @@ class SupportersAPITests(APITestCase):
 
     def test_register_supporter(self):
         users = User.objects.all().count()
-        athletes = Supporter.objects.all().count()
+        supporters = Supporter.objects.all().count()
         data = {
             "email": "foo@example.com",
             "password": "pass1234",
@@ -29,7 +29,7 @@ class SupportersAPITests(APITestCase):
             data=data
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(athletes + 1, Supporter.objects.all().count())
+        self.assertEqual(supporters + 1, Supporter.objects.all().count())
         self.assertEqual(users + 1, User.objects.all().count())
         data = response.json()
         self.assertIn("token", data)
