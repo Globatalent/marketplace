@@ -22,7 +22,7 @@ class PurchasesTests(TestCase):
         except IntegrityError:
             raised_exception = True
         self.assertFalse(raised_exception)
-        self.assertAlmostEqual(purchase.total, token.unit_price() * purchase.amount)
+        self.assertAlmostEqual(purchase.total, token.unit_price * purchase.amount)
 
     def test_purchase_amount_limit(self):
         token = TokenFactory(amount=100000, price=100000)

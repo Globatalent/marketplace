@@ -15,10 +15,12 @@ class Token(TimeStampedModel):
     class Meta:
         ordering = ("created", )
 
+    @property
     def unit_price(self):
         """Price for single token."""
         return self.price / self.amount
 
+    @property
     def remaining(self):
         """Remaining amount of tokens."""
         return self.amount - (self.purchases.aggregate(total_amount=Sum('amount')).get('total_amount', 0) or 0)
@@ -41,8 +43,8 @@ class Purchase(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         is_insert = self.pk is None
-        if self.amount > self.token.remaining():
+        if self.amount > self.token.remaining:
             raise IntegrityError("You can't purchase more than the remaining tokens")
         if is_insert and not self.total and self.token:
-            self.total = self.token.unit_price() * self.amount
+            self.total = self.token.unit_price * self.amount
         return super().save(*args, **kwargs)

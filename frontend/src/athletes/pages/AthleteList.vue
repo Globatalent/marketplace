@@ -16,9 +16,9 @@
               <i class="fas fa-heart likeIcon is-following" v-if="athlete.following"></i>
               <i class="far fa-heart likeIcon" v-else></i>
             </div>
-
           </div>
           <div>{{athlete.sport}}</div>
+          <div>{{Math.round(athlete.progression * 100)}}%</div>
           <div class="bottom clearfix">
           </div>
         </div>

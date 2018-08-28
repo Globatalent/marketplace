@@ -39,6 +39,7 @@ class AthleteSerializer(serializers.ModelSerializer):
     pictures = PictureSerializer(many=True, read_only=True)
     links = LinkSerializer(many=True, read_only=True)
     following = serializers.SerializerMethodField(read_only=True)
+    progression = serializers.FloatField(read_only=True)
 
     class Meta:
         model = Athlete
@@ -53,10 +54,12 @@ class AthleteSerializer(serializers.ModelSerializer):
             'state',
             'pictures',
             'links',
-            'following'
+            'progression',
+            'following',
         ]
 
     def get_following(self, obj):
+        """Gets if the user who makes the request is following the athlete."""
         if 'request' in self.context:
             user = self.context['request'].user
             return is_supporter(user) and is_following(user.supporter, obj)

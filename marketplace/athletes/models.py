@@ -29,7 +29,18 @@ class Athlete(models.Model):
         ordering = ("user__date_joined", )
 
     def __str__(self):
-        return self.first_name
+        return " ".join([self.first_name, self.last_name])
+
+    @property
+    def token(self):
+        """Gets the last token created by the athlete."""
+        return self.tokens.last()
+
+    @property
+    def progression(self):
+        if (self.token):
+            return float(self.token.remaining) / float(self.token.amount)
+        return 0.0
 
 
 class Picture(models.Model):
