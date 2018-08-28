@@ -26,6 +26,7 @@ class Athlete(models.Model):
     class Meta:
         verbose_name = _('athlete')
         verbose_name_plural = _('athletes')
+        ordering = ("user__date_joined", )
 
     def __str__(self):
         return self.first_name

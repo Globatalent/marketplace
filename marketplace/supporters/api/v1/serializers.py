@@ -11,7 +11,7 @@ from marketplace.users.models import User
 class AlertSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alert
-        fields = ('rule', 'amount', 'supporter', 'athlete')
+        fields = ('id', 'rule', 'amount', 'supporter', 'athlete')
         extra_kwargs = {
             "supporter": {'read_only': True}
         }

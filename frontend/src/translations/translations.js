@@ -19,6 +19,7 @@ export const messages = {
       Register: 'Register',
       Country: 'Country',
       Date: 'Date',
+      DateOfBirth: 'Date of birth',
       PickADate: 'Pick a date',
       Sport: 'Sport',
       Sex: 'Sex',

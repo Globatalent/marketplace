@@ -117,3 +117,16 @@ class AthletesAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         supporter = Supporter.objects.get(pk=supporter.pk)
         self.assertEqual(1, supporter.following.all().count())
+
+    def test_followed_by_filter(self):
+        AthleteFactory.create_batch(size=10)
+        supporter = SupporterFactory()
+        athlete = AthleteFactory()
+        supporter.follow(athlete)
+        response = self.client.get(
+            "/api/v1/athletes/?followed_by={}".format(supporter.user.pk),
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(1, data['count'])

@@ -10,9 +10,9 @@
         <div style="padding: 14px;">
           <div class="top clearfix">
             <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
-              <span>{{athlete.first_name}} {{athlete.last_name}}</span>
+              <span>{{athlete.firstName}} {{athlete.lastName}}</span>
             </router-link>
-            <div class="likeButton" @click="setFollowingAthlete(index,athlete)">
+            <div class="likeButton" v-if="isSupporter()" @click="setFollowingAthlete(index,athlete)">
               <i class="fas fa-heart likeIcon is-following" v-if="athlete.following"></i>
               <i class="far fa-heart likeIcon" v-else></i>
             </div>
@@ -29,6 +29,7 @@
 
 <script>
 import BaseLayout from '@/layout/BaseLayout.vue'
+import { mapGetters } from 'vuex'
 
 
 export default {
@@ -36,34 +37,43 @@ export default {
   components: {
     'gb-base-layout': BaseLayout
   },
-  created() {
-    this.axios.get('/api/v1/athletes/').then((response) => {
-      this.athletes = response.data.results
-        // commit('setUser', UserTransformer.fetch(response.data))
-        // resolve(response)
-      }).catch((error) => {
-        // reject(error)
-        console.log(error)
-      })
-  },
   data() {
     return {
       errorMessage: '',
-      athletes: []
     }
   },
+  computed: {
+    ...mapGetters({
+      athletes: 'athletes/athletes',
+      pagination: 'athletes/pagination',
+      user: 'users/user',
+    }),
+  },
+  created() {
+    this.initial();
+  },
   methods: {
+    initial() {
+      // Load initial page of athletes
+      this.$store.dispatch('athletes/list');
+    },
+    scroll() {
+      // Gets a new page of athletes and push them to the current list
+      if (!!this.pagination.next) {
+        this.$store.dispatch('athletes/list', {url: this.pagination.next, push: true});
+      }
+    },
+    isSupporter() {
+      return !!this.user && !!this.user.supporter
+    },
     setFollowingAthlete(index, athlete) {
-      athlete.following = !athlete.following
-      this.axios
-        .post('/api/v1/athletes/'+athlete.id+'/follow/')
-        .then(response => {
-          console.log('Favorited athlete',response)
-          // this.$set(this.athletes, index, athlete)
-        })
-        .catch(error => {
-          console.log(error)
-        })
+      if (this.isSupporter()) {
+        athlete.following = !athlete.following
+        this.$store.dispatch('athletes/follow', athlete.id)
+          .catch(error => {
+            console.log(error)
+          })
+      }
     },
     likeIconClass(following) {
       console.log(`This following: ${following}`)

@@ -10,6 +10,7 @@ from marketplace.athletes.api.v1.serializers import PictureSerializer, LinkSeria
 from marketplace.athletes.models import Picture, Link, Athlete
 from marketplace.supporters.models import Supporter
 from marketplace.users.helpers import is_supporter
+from marketplace.athletes.api.v1.filters import AthleteFilter
 
 
 class PictureViewSet(CreateModelMixin, ReadOnlyModelViewSet):
@@ -40,6 +41,7 @@ class AthleteViewSet(ModelViewSet):
     permission_classes = [
         OnlyOwnerUpdates
     ]
+    filter_class = AthleteFilter
 
     @action(methods=['post'], detail=True)
     def follow(self, request, **kwargs):

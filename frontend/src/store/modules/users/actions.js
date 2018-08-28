@@ -6,8 +6,9 @@ export default {
   fetchUser ({commit, state}) {
     return new Promise((resolve, reject) => {
       Vue.axios.get(state.endpoints.getUser).then((response) => {
-        commit('setUser', UserTransformer.fetch(response.data))
-        resolve(response)
+        const user = UserTransformer.fetch(response.data)
+        commit('setUser', user)
+        resolve(user)
       }).catch((error) => {
         reject(error)
       })

@@ -5,6 +5,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from marketplace.athletes.models import Picture, Link, Athlete
 from marketplace.users.models import User
+from marketplace.supporters.helpers import is_following
+from marketplace.users.helpers import is_supporter
 
 
 class PictureSerializer(serializers.ModelSerializer):
@@ -33,13 +35,32 @@ class LinkSerializer(serializers.ModelSerializer):
 
 
 class AthleteSerializer(serializers.ModelSerializer):
+
     pictures = PictureSerializer(many=True, read_only=True)
     links = LinkSerializer(many=True, read_only=True)
+    following = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Athlete
-        fields = ('id', 'first_name', 'last_name', 'country', 'sex', 'date_of_birth',
-                  'sport', 'state', 'pictures', 'links')
+        fields = [
+            'id',
+            'first_name',
+            'last_name',
+            'country',
+            'sex',
+            'date_of_birth',
+            'sport',
+            'state',
+            'pictures',
+            'links',
+            'following'
+        ]
+
+    def get_following(self, obj):
+        if 'request' in self.context:
+            user = self.context['request'].user
+            return is_supporter(user) and is_following(user.supporter, obj)
+        return False
 
 
 class AthleteRegistrationSerializer(serializers.Serializer):

@@ -24,7 +24,7 @@
       <el-form-item required v-bind:label="$tc('message.Country')">
         <el-input v-bind:placeholder="$tc('message.Country')" type="text" v-model="form.country"></el-input>
       </el-form-item>
-      <el-form-item required v-bind:label="$tc('message.Date')">
+      <el-form-item required v-bind:label="$tc('message.DateOfBirth')">
         <el-date-picker type="date" v-bind:placeholder="$tc('message.PickADate')" style="width: 100%;" v-model="form.date"></el-date-picker>
       </el-form-item>
       <el-form-item required v-bind:label="$tc('message.Sport')">

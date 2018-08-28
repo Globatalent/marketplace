@@ -4,6 +4,7 @@ from rest_framework.viewsets import ReadOnlyModelViewSet
 from marketplace.supporters.api.v1.permissions import CreateUpdateOnlySupporters
 from marketplace.supporters.api.v1.serializers import AlertSerializer
 from marketplace.supporters.models import Alert
+from marketplace.users.helpers import is_supporter
 
 
 class AlertViewSet(CreateModelMixin,
@@ -17,7 +18,10 @@ class AlertViewSet(CreateModelMixin,
     ]
 
     def get_queryset(self):
-        return Alert.objects.filter(supporter__exact=self.request.user.supporter.id)
+        queryset = super().get_queryset()
+        if is_supporter(self.request.user):
+            return queryset.filter(supporter__user=self.request.user)
+        return queryset.none()
 
     def perform_create(self, serializer):
         return serializer.save(supporter=self.request.user.supporter)

@@ -5,6 +5,7 @@ from model_utils.models import TimeStampedModel
 from marketplace.actions.decorators import dispatch_action
 from marketplace.athletes.constants import APPROVED
 from marketplace.supporters.constants import RULE_CHOICES, UP
+from marketplace.supporters.helpers import is_following
 from marketplace.users.models import User
 
 
@@ -35,7 +36,7 @@ class Supporter(models.Model):
         If the supporter is following the athlete, then the supporter stop
         following the athlete, and return False.
         """
-        if self.following.filter(pk=athlete.pk).exists():
+        if is_following(self, athlete):
             self.following.remove(athlete)
             return False
         self.following.add(athlete)

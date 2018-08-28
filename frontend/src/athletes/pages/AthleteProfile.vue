@@ -14,13 +14,13 @@
         <el-row justify="center" :gutter="20">
           <el-col :xs="24" :sm="12" :md="12" class="text-center">
             <el-form-item required v-bind:label="$tc('message.FirstName')">
-              <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.first_name"></el-input>
+              <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.firstName"></el-input>
             </el-form-item>
             <el-form-item required v-bind:label="$tc('message.LastName')">
-              <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.last_name"></el-input>
+              <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.lastName"></el-input>
             </el-form-item>
             <el-form-item required v-bind:label="$tc('message.Date')">
-              <el-date-picker type="date" v-bind:placeholder="$tc('message.PickADate')" style="width: 100%;" v-model="form.date"></el-date-picker>
+              <el-date-picker type="date" v-bind:placeholder="$tc('message.PickADate')" style="width: 100%;" v-model="form.birthDate"></el-date-picker>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :sm="12" :md="12" class="text-center">
@@ -32,8 +32,8 @@
             </el-form-item>
             <el-form-item v-bind:label="$tc('message.Sex')" class="text-left sexFormElement">
               <el-radio-group>
-                <el-radio label="MALE" v-model="form.sex">{{ $tc("message.Male") }}</el-radio>
-                <el-radio label="FEMALE" v-model="form.sex">{{ $tc("message.Female") }}</el-radio>
+                <el-radio label="male" v-model="form.sex">{{ $tc("message.Male") }}</el-radio>
+                <el-radio label="female" v-model="form.sex">{{ $tc("message.Female") }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
@@ -81,6 +81,8 @@
 import BaseLayout from '@/layout/BaseLayout.vue'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
+import { mapGetters } from 'vuex'
+
 
 export default {
   name: 'AthleteProfile',
@@ -88,36 +90,15 @@ export default {
     'gb-base-layout': BaseLayout,
     vueDropzone: vue2Dropzone
   },
-  created() {
-    this.axios
-      .get('/api/v1/users/me/')
-      .then(response => {
-        console.log(response)
-        this.form.first_name = response.data.athlete.first_name
-        this.form.last_name = response.data.athlete.last_name
-        this.form.country = response.data.athlete.country
-        this.form.date = response.data.athlete.date_of_birth
-        this.form.sport = response.data.athlete.sport
-        this.form.sex = response.data.athlete.sex
-        this.links = response.data.athlete.links
-        this.pictures = response.data.athlete.pictures
-      })
-      .catch(error => {
-        console.log(error)
-      })
+  computed: {
+    ...mapGetters({
+      user: 'users/user',
+    }),
   },
   data() {
     return {
       errorMessage: '',
       form: {
-        // password: '123456',
-        // repeatPassword: '123456',
-        // first_name: 'Jon',
-        // last_name: 'Snow',
-        // country: 'Winterfell',
-        // date: '01/01/2000',
-        // sport: 'destroy white walkers',
-        // sex: 'male'
       },
       links: [{}],
       pictures: [{}],
@@ -134,6 +115,14 @@ export default {
         headers: { 'Content-Type': 'multipart/form-data' }
       }
     }
+  },
+  created() {
+    this.$store.dispatch('users/fetchUser').then( () => {
+      this.form = { ...this.user.athlete }
+    })
+    .catch(error => {
+      console.log(error)
+    })
   },
   methods: {
     onSubmit(evt) {

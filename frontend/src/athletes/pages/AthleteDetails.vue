@@ -12,8 +12,7 @@
             <img :src="item.image" alt="">
           </el-carousel-item>
         </el-carousel>
-        <h3>{{athlete.first_name}} {{athlete.last_name}}</h3>
-        <el-button type="primary">{{$tc('message.Edit')}}</el-button>
+        <h3>{{athlete.firstName}} {{athlete.lastName}}</h3>
         <div>{{$tc('message.Country')}}: {{athlete.country}}</div>
         <!-- <div>{{$tc('message.Age')}}: {{athlete.age}}</div> -->
         <div>{{$tc('message.Sport')}}: {{athlete.sport}}</div>
@@ -30,6 +29,8 @@
 
 <script>
 import BaseLayout from '@/layout/BaseLayout.vue'
+import { mapGetters } from 'vuex'
+
 
 export default {
   name: 'AthleteDetails',
@@ -37,18 +38,16 @@ export default {
     'gb-base-layout': BaseLayout
   },
   data() {
-    return {
-      athlete: {
-      }
-    }
+    return {}
+  },
+  computed: {
+    ...mapGetters({
+      athlete: 'athletes/athlete',
+    }),
   },
   created() {
-    this.athlete.id = this.$route.params.athleteId
-    this.axios.get('/api/v1/athletes/'+this.athlete.id).then((response) => {
-      this.athlete = response.data
-      }).catch((error) => {
-        console.log(error)
-      })
+    const id = this.$route.params.athleteId
+    this.$store.dispatch('athletes/fetch', id);
   },
 }
 </script>
