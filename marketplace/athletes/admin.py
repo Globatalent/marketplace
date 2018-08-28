@@ -22,7 +22,6 @@ class LinkInline(admin.TabularInline):
 
 
 @admin.register(Athlete)
-class ProjectAdmin(admin.ModelAdmin):
-    model = Athlete
-    list_display = ('first_name', 'sport', 'state',)
+class AthleteAdmin(admin.ModelAdmin):
+    list_display = ('id', 'first_name', 'last_name', 'sport', 'state',)
     inlines = [PictureInline, LinkInline]

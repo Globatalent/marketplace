@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
-
+from model_utils.models import TimeStampedModel
 from easy_thumbnails.fields import ThumbnailerImageField
 
 from marketplace.athletes.constants import SEX_CHOICES, STATE_CHOICES, PENDING_REVIEW
@@ -36,12 +36,6 @@ class Athlete(models.Model):
         """Gets the last token created by the athlete."""
         return self.tokens.last()
 
-    @property
-    def progression(self):
-        if (self.token):
-            return float(self.token.remaining) / float(self.token.amount)
-        return 0.0
-
 
 class Picture(models.Model):
     image = ThumbnailerImageField(
@@ -76,7 +70,7 @@ class Link(models.Model):
         verbose_name_plural = _('links')
 
 
-class Review(models.Model):
+class Review(TimeStampedModel):
     APPROVED = 'APPROVED'
     REJECTED = 'REJECTED'
     REVIEWING = 'REVIEWING'
@@ -98,9 +92,18 @@ class Review(models.Model):
     athlete = models.ForeignKey(Athlete, verbose_name=_('review'),
                                 related_name='reviews', on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'{self.athlete.first_name} - {self.state}'
-
     class Meta:
         verbose_name = _('review')
         verbose_name_plural = _('reviews')
+        ordering = ("created", )
+
+    def __str__(self):
+        return f'{str(self.athlete)} - {self.state}'
+
+    def save(self, *args, **kwargs):
+        result = super().save(*args, **kwargs)
+        # Update athlete state
+        last_review = self.athlete.reviews.last()
+        self.athlete.state = last_review.state
+        self.athlete.save()
+        return result

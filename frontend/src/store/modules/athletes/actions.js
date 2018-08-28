@@ -3,7 +3,7 @@ import AthleteTransformer from '../../../athletes/transformers/AthleteTransforme
 import { store } from '../../index'
 
 export default {
-  list ({commit, state}, payload={}) {
+  list({commit, state}, payload={}) {
     return new Promise((resolve, reject) => {
       const { url, filters, push } = payload
       let endpoint = state.endpoints.athletes
@@ -28,7 +28,7 @@ export default {
       })
     })
   },
-  fetch ({commit, state}, id) {
+  fetch({commit, state}, id) {
     return new Promise((resolve, reject) => {
       Vue.axios.get(`${state.endpoints.athletes}${id}/`).then((response) => {
         const athlete = AthleteTransformer.fetch(response.data);
@@ -47,5 +47,5 @@ export default {
         reject(error)
       })
     })
-  }
+  },
 }

@@ -7,6 +7,7 @@ from marketplace.athletes.models import Picture, Link, Athlete
 from marketplace.users.models import User
 from marketplace.supporters.helpers import is_following
 from marketplace.users.helpers import is_supporter
+from marketplace.tokens.api.v1.serializers import TokenSerializer
 
 
 class PictureSerializer(serializers.ModelSerializer):
@@ -39,7 +40,7 @@ class AthleteSerializer(serializers.ModelSerializer):
     pictures = PictureSerializer(many=True, read_only=True)
     links = LinkSerializer(many=True, read_only=True)
     following = serializers.SerializerMethodField(read_only=True)
-    progression = serializers.FloatField(read_only=True)
+    token = TokenSerializer(read_only=True)
 
     class Meta:
         model = Athlete
@@ -54,8 +55,8 @@ class AthleteSerializer(serializers.ModelSerializer):
             'state',
             'pictures',
             'links',
-            'progression',
             'following',
+            'token',
         ]
 
     def get_following(self, obj):

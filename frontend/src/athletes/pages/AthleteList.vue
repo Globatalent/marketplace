@@ -18,7 +18,8 @@
             </div>
           </div>
           <div>{{athlete.sport}}</div>
-          <div>{{Math.round(athlete.progression * 100)}}%</div>
+          <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" v-if="progress(athlete) < 100"></el-progress>
+          <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success" v-if="progress(athlete) >= 100"></el-progress>
           <div class="bottom clearfix">
           </div>
         </div>
@@ -55,7 +56,7 @@ export default {
   methods: {
     initial() {
       // Load initial page of athletes
-      this.$store.dispatch('athletes/list');
+      this.$store.dispatch('athletes/list', {filters: {state: 'APPROVED'}});
     },
     scroll() {
       // Gets a new page of athletes and push them to the current list
@@ -65,6 +66,12 @@ export default {
     },
     isSupporter() {
       return !!this.user && !!this.user.supporter
+    },
+    progress(athlete) {
+      if (!!athlete.token) {
+        return Math.round(athlete.token.progression * 100)
+      }
+      return 0
     },
     setFollowingAthlete(index, athlete) {
       if (this.isSupporter()) {

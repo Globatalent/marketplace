@@ -10,7 +10,11 @@ class AthleteFilter(django_filters.rest_framework.FilterSet):
         name="supporters__user__id",
         help_text=_("Filter the athletes followed by the user given by ID.")
     )
+    state = django_filters.CharFilter(
+        name="state",
+        help_text=_("Filter the athletes by the state.")
+    )
 
     class Meta:
         model = Athlete
-        fields = ['followed_by']
+        fields = ['followed_by', 'state']

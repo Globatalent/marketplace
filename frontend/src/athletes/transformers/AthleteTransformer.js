@@ -14,9 +14,9 @@ class AthleteTransformer extends Transformer {
       country: athlete.country,
       sport: athlete.sport,
       following: athlete.following,
-      progression: athlete.progression,
       links: athlete.links,
       pictures: athlete.pictures,
+      token: athlete.token,
     })
   }
 }

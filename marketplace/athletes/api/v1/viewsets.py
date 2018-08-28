@@ -11,6 +11,7 @@ from marketplace.athletes.models import Picture, Link, Athlete
 from marketplace.supporters.models import Supporter
 from marketplace.users.helpers import is_supporter
 from marketplace.athletes.api.v1.filters import AthleteFilter
+from marketplace.athletes.constants import APPROVED
 
 
 class PictureViewSet(CreateModelMixin, ReadOnlyModelViewSet):
