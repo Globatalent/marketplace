@@ -24,10 +24,10 @@
         <el-tab-pane :label="$tc('message.Alert',2)">
           <h3>{{$tc('message.Alert',1)}}</h3>
           <el-table :data="alerts" style="width: 100%">
-            <el-table-column prop="id" label="id"></el-table-column>
-            <el-table-column prop="rule" label="rule"></el-table-column>
-            <el-table-column prop="amount" label="amount"></el-table-column>
-            <el-table-column prop="athlete.first_name" label="athlete"></el-table-column>
+            <el-table-column prop="id" label="ID"></el-table-column>
+            <el-table-column prop="rule" label="Rule"></el-table-column>
+            <el-table-column prop="amount" label="Amount"></el-table-column>
+            <el-table-column prop="athlete.firstName" label="Athlete"></el-table-column>
           </el-table>
         </el-tab-pane>
       </el-tabs>

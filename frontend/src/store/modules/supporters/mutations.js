@@ -2,6 +2,14 @@ export default {
   alerts (state, alerts) {
     state.alerts = alerts
   },
+  updateAlert(state, alert) {
+    state.alerts = state.alerts.map(originalAlert => {
+      if (originalAlert.id = alert.id) {
+        return alert
+      }
+      return originalAlert
+    })
+  },
   pushAlerts (state, alerts) {
     state.alerts = state.alerts.concat(alerts)
   },

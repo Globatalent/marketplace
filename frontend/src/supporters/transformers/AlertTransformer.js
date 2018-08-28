@@ -7,7 +7,7 @@ class AlertTransformer extends Transformer {
     return new Alert({
       id: alert.id,
       rule: alert.rule,
-      amount: alert.amoun,
+      amount: alert.amount,
       athlete: alert.athlete,
     })
   }

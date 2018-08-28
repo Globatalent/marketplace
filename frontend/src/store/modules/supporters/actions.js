@@ -4,7 +4,7 @@ import { store } from '../../index'
 
 
 export default {
-  alerts ({commit, state}, payload={}) {
+  alerts ({commit, dispatch, state}, payload={}) {
     return new Promise((resolve, reject) => {
       const { url, filters, push } = payload
       let endpoint = state.endpoints.alerts
@@ -16,7 +16,15 @@ export default {
       }
       Vue.axios.get(endpoint).then((response) => {
         const { results, count, next, previous } = response.data;
-        const alerts = results.map(item => AlertTransformer.fetch(item));
+        const rawAlerts = results.map(item => AlertTransformer.fetch(item));
+        const alerts = rawAlerts.map( alert => {
+          dispatch('athletes/fetch', alert.athlete, {root: true}).then(athlete => {
+            alert.athlete = athlete
+            commit('updateAlert', alert)
+          }).catch( () => {
+          })
+          return alert
+        });
         if (push) {
           commit('pushAlerts', alerts)
         } else {
