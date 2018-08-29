@@ -136,16 +136,16 @@ export default {
   },
   methods: {
     onSubmit(form) {
-      this.$refs[form].validate(valid => {
-        if (valid) {
+      // this.$refs[form].validate(valid => {
+      //   if (valid) {
           const dataForm = Object.assign({}, this.form)
           // Pasamos el objeto con registerUser
           this.registerUser(dataForm)
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+        // } else {
+        //   console.log('error submit!!')
+        //   return false
+        // }
+      // })
     },
     registerUser(data) {
       this.$store
