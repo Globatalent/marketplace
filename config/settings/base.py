@@ -66,10 +66,8 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'rest_framework',
     'url_filter',
     'easy_thumbnails',
-    'rest_framework.authtoken',
     'corsheaders',
 ]
 LOCAL_APPS = [
@@ -78,6 +76,7 @@ LOCAL_APPS = [
     'marketplace.athletes.apps.AthletesConfig',
     'marketplace.actions.apps.ActionsConfig',
     'marketplace.tokens.apps.TokensConfig',
+    'marketplace.emails.apps.EmailsConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -261,8 +260,15 @@ ACCOUNT_ADAPTER = 'marketplace.users.adapters.AccountAdapter'
 # https://django-allauth.readthedocs.io/en/latest/configuration.html
 SOCIALACCOUNT_ADAPTER = 'marketplace.users.adapters.SocialAccountAdapter'
 
-# django Rest Framework
+# DJANGO REST FRAMEWORK
 # ------------------------------------------------------------------------------
+# See: http://www.django-rest-framework.org/
+
+INSTALLED_APPS += (
+    'rest_framework',
+    'rest_framework.authtoken',
+)
+
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
@@ -287,7 +293,10 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'marketplace.core.api.utils.StandardPagination',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
-# END DJANGO REST FRAMEWORK
+JWT_AUTH = {
+    'JWT_ALLOW_REFRESH': True,
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
+}
 
 # DJANGO FILTER
 # ------------------------------------------------------------------------------
@@ -296,15 +305,24 @@ INSTALLED_APPS += (
     'django_filters',
 )
 
-JWT_AUTH = {
-    'JWT_ALLOW_REFRESH': True,
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(hours=1),
-}
+# DJANGO SIMPLE OPTIONS
+# ------------------------------------------------------------------------------
+# See: https://pypi.org/project/django-simple-options/1.0a3/
+INSTALLED_APPS += ('options',)
 
+# SENTRY
+# ------------------------------------------------------------------------------
 SENTRY_DSN = env('DJANGO_SENTRY_DSN', default=None)
 
+# DJANGO CORS HEADERS
+# ------------------------------------------------------------------------------
+# See: https://github.com/ottoyiu/django-cors-headers/
 CORS_ORIGIN_WHITELIST = (
     'localhost:8000',
     'localhost:8080',
     'market.dekaside.com'
 )
+
+# PROJECT SPECIFIC
+# ------------------------------------------------------------------------------
+ENABLE_CUSTOM_EMAIL_SENDING = True

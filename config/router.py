@@ -2,13 +2,14 @@ from django.conf.urls import include, url
 from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
+from marketplace.actions.api.v1.viewsets import NotificationViewSet
 from marketplace.athletes.api.v1.views import AthleteRegistrationView
 from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet, PictureViewSet
 from marketplace.supporters.api.v1.views import SupporterRegistrationView
 from marketplace.supporters.api.v1.viewsets import AlertViewSet
-from marketplace.users.api.v1.viewsets import UserViewSet
-from marketplace.actions.api.v1.viewsets import NotificationViewSet
 from marketplace.tokens.api.v1.viewsets import TokenViewSet, PurchaseViewSet
+from marketplace.users.api.v1.viewsets import UserViewSet, RestorePasswordViewSet, VerifyViewSet, \
+    RequestRestoreCodeViewSet
 
 app_name = 'api'
 
@@ -21,6 +22,9 @@ router_v1.register('alerts', AlertViewSet, 'alerts')
 router_v1.register('notifications', NotificationViewSet, 'notifications')
 router_v1.register('tokens', TokenViewSet, 'tokens')
 router_v1.register('purchases', PurchaseViewSet, 'purchases')
+router_v1.register('request_restore_code', viewset=RequestRestoreCodeViewSet, base_name="request_restore_code")
+router_v1.register('restore_password', viewset=RestorePasswordViewSet, base_name="restore_password")
+router_v1.register('verify_email', viewset=VerifyViewSet, base_name="verify_email")
 
 urlpatterns = [
     # Obtaining a token. Security

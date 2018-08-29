@@ -1,11 +1,15 @@
+import hashlib
+import random
+import time
+
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-
 from marketplace.core.tasks import send_mail_task
+from marketplace.users.emails import RestorePasswordEmail, VerificationEmail
 
 
 class UserManager(BaseUserManager):
@@ -58,10 +62,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     date_joined = models.DateTimeField(verbose_name=_('date joined'), default=timezone.now)
 
-    objects = UserManager()
+    # Restore password
+    restore_password_code = models.CharField(max_length=256, unique=True, null=True, blank=True)
+    restore_password_code_requested_at = models.DateTimeField(null=True, blank=True)
+
+    # Email verification
+    is_email_verified = models.BooleanField(
+        _("verified"),
+        default=False,
+        help_text=_("Designates if the user has the email verified")
+    )
+    verification_code = models.CharField(max_length=256, unique=True, null=True, blank=True)
 
     EMAIL_FIELD = 'email'
     USERNAME_FIELD = 'email'
+
+    objects = UserManager()
 
     class Meta:
         verbose_name = _('user')
@@ -81,3 +97,43 @@ class User(AbstractBaseUser, PermissionsMixin):
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""
         send_mail_task.delay(subject, message, from_email, [self.email], **kwargs)
+
+    def generate_random_code(self):
+        """Generates a restore password code."""
+        return hashlib.sha256(
+            ("{}-{}-{}".format(self.email, time.time(), random.randint(0, 10))).encode('utf-8')
+        ).hexdigest()
+
+    def send_restore_code(self):
+        """Sends an email with the link to restore the password."""
+        self.restore_password_code = self.generate_random_code()
+        self.restore_password_code_requested_at = timezone.now()
+        self.save()
+        email = RestorePasswordEmail(to=self.email, context={"user": self})
+        email.send()
+
+    def send_verification(self):
+        """Send the validation email, to validate the user's email."""
+        assert self.pk is not None
+        assert not self.is_email_verified
+        assert self.verification_code is not None
+
+        email = VerificationEmail(to=self.email, context={"user": self})
+        email.send()
+
+    def verify(self):
+        """Verifies this email user."""
+        self.is_email_verified = True
+        self.verification_code = None
+        self.save()
+
+    def save(self, *args, **kwargs):
+        is_insert = self.pk is None
+        # Creates verification code if it doesn't exists
+        if not self.is_email_verified and (self.verification_code is None or self.verification_code.strip() == ""):
+            self.verification_code = self.generate_random_code()
+        result = super().save(*args, **kwargs)
+        # For every inserts, sends a verification email (excepts superusers)
+        if is_insert and not self.is_email_verified and not self.is_superuser:
+            self.send_verification()
+        return result

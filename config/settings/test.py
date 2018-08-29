@@ -53,3 +53,4 @@ EMAIL_PORT = 1025
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+ENABLE_CUSTOM_EMAIL_SENDING = False
