@@ -1,6 +1,7 @@
 @import 'reset.css';
 @import 'variables.scss';
 @import 'main.scss';
+
 body,
 html {
   height: 100%;
@@ -23,10 +24,79 @@ img {
 }
 
 // Buttons
-.circleButton{
+.el-button {
+  text-transform: uppercase;
+  font-size: 12px;
+  border-radius: 8px;
+  padding: 8px 20px;
+
+  &.is-full-width {
+    width: 100%;
+  }
+
+  &.is-lowercase {
+    text-transform: none;
+    font-size: 12px;
+  }
+
+  &.is-big {
+    padding-right: 80px !important;
+    padding-left: 80px !important;
+
+    &.is-icon-right {
+      padding-right: 10px !important;
+      padding-left: 10px !important;
+      min-width: 250px;
+
+      &>span {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+
+  &.is-small {
+    padding: 5px !important;
+    width: auto;
+
+    &.is-icon-right {
+      font-size: 10px;
+      min-width: 100px;
+
+      &>span {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    .icon {
+      width: 15px;
+    }
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 24px;
+  }
+
+  .icon {
+    margin-left: 20px;
+    width: 20px;
+    height: 22px;
+
+    &.icon-at-glance {
+      width: 30px;
+      height: 18px;
+    }
+  }
+}
+
+.circleButton {
   cursor: pointer;
 }
-.addButtonCircle{
+
+.addButtonCircle {
   font-size: 25px;
 }
 
@@ -39,11 +109,59 @@ img {
   }
 }
 
+.form-lined {
+  border-radius: 0px 0px 10px 10px;
+  border: 2px solid $--color-primary;
+  border-top: none;
+  padding: 30px 15px 15px 15px;
+
+  input {
+    background: transparent;
+    border: 2px solid $--color-primary;
+    color: white;
+    // font-family: $--open-sans;
+  }
+
+  [class^="icon-"],
+  [class*="icon-"] {
+    padding-left: 40px;
+    background-position: left 12px;
+    background-size: 25px;
+  }
+}
+
+.form-lined-title {
+  border-radius: 10px;
+  background-color: $--color-primary;
+  padding: 10px;
+  position: relative;
+  top: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: white;
+  font-size: 12px;
+}
+
+.form-reminderBlock {
+  padding-top: 10px;
+  border-top: 1px solid $--blue;
+  font-size: 12px;
+}
+
 // Login Page
 .forgotPassword {
   .fa-icon {
     vertical-align: text-bottom;
   }
+
+  a {
+    font-size: 12px;
+  }
+}
+
+// Register Page
+.registrationBox-title {
+  margin-bottom: 10px;
 }
 
 // Athlete Form
@@ -52,15 +170,16 @@ img {
     float: left;
     margin-right: 20px;
   }
-  .el-form-item__content{
-    .el-radio-group{
+
+  .el-form-item__content {
+    .el-radio-group {
       margin-top: 10px;
     }
   }
 }
 
 // Athlete Profile Edit Form
-.athleteProfileEdit{
+.athleteProfileEdit {
   .sexFormElement {
     .el-form-item__label {
       float: none;
@@ -69,10 +188,11 @@ img {
   }
 }
 
-.removeButtonCol{
+.removeButtonCol {
   display: flex;
   align-items: flex-end;
-  .circleButton{
+
+  .circleButton {
     margin-bottom: 20px;
   }
 }

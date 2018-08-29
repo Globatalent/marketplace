@@ -8,6 +8,8 @@ export const messages = {
       RememberMe: 'Remember me',
       LogIn: 'Log in',
       ForgotYourPassword: 'Forgot your password?',
+      RecoverPassword: 'Recover password',
+      Recover: 'Recover',
       DontHaveAccount: 'Don\'t have an account?',
       AlreadyAccount: 'Already have an account?',
       SignUp: 'Sign Up',

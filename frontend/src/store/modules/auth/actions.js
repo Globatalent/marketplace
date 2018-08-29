@@ -5,6 +5,9 @@ import router from '@/router.js'
 import { Message } from 'element-ui'
 
 export default {
+  forgot ({commit, state}, userData) {
+    return true
+  },
   login ({commit, state}, userData) {
     /**
      * Login to backend and set the token in state

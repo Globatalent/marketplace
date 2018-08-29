@@ -9,6 +9,11 @@ export default [
     name: 'registration',
     component: resolve => require(['@/auth/pages/Registration.vue'], resolve),
   },
+  {
+    path: '/forgot',
+    name: 'forgot',
+    component: resolve => require(['@/auth/pages/Forgot.vue'], resolve),
+  },
 
   // Athletes
   {

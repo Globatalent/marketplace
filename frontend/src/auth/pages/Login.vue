@@ -1,29 +1,32 @@
 <template>
   <gb-minimal-layout>
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="12" :md="12" :lg="6" :xl="4" class="loginBox text-center">
+      <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="loginBox text-center">
         <img class="logo" src="~@/assets/img/Globatalent-logo-vert.png" />
-        <h2>{{ $tc("message.SignIn") }}</h2>
-        <el-form ref="loginForm" :model="form" :rules="rules">
-          <el-form-item prop="email" :error="loginErrors.email">
-            <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
-          </el-form-item>
-          <el-form-item prop="password" :error="loginErrors.password">
-            <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
-          </el-form-item>
-          <el-form-item class="text-left">
-            <el-checkbox v-bind:label="$tc('message.RememberMe')"></el-checkbox>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" native-type="submit" class="is-uppercase" @click.prevent="onSubmit('loginForm')">{{ $tc("message.LogIn") }}</el-button>
-          </el-form-item>
-          <el-form-item class="forgotPassword">
-            <a href="">
-              <i class="fa fa-lock"></i> {{ $tc("message.ForgotYourPassword") }}</a>
-          </el-form-item>
-        </el-form>
-        <div>{{ $tc("message.DontHaveAccount") }}
-          <router-link :to="{ name: 'registration'}" class="is-main-color">{{ $tc("message.SignUp") }}</router-link>
+        <h2 class="form-lined-title">{{ $tc("message.SignIn") }}</h2>
+        <div class="form-lined">
+          <el-form ref="loginForm" :model="form" :rules="rules">
+            <el-form-item prop="email" :error="loginErrors.email">
+              <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
+            </el-form-item>
+            <el-form-item prop="password" :error="loginErrors.password">
+              <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
+            </el-form-item>
+            <el-form-item class="text-left">
+              <el-checkbox v-bind:label="$tc('message.RememberMe')"></el-checkbox>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" native-type="submit" class="is-uppercase is-full-width" @click.prevent="onSubmit('loginForm')">{{ $tc("message.LogIn") }}</el-button>
+            </el-form-item>
+            <el-form-item class="forgotPassword">
+              <router-link :to="{ name: 'forgot'}" class="is-main-color">
+                <i class="fa fa-lock"></i> {{ $tc("message.ForgotYourPassword") }}
+              </router-link>
+            </el-form-item>
+          </el-form>
+          <div class="form-reminderBlock">{{ $tc("message.DontHaveAccount") }}
+            <router-link :to="{ name: 'registration'}" class="is-main-color">{{ $tc("message.SignUp") }}</router-link>
+          </div>
         </div>
       </el-col>
     </el-row>
