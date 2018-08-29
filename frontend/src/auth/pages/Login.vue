@@ -6,10 +6,10 @@
         <h2 class="form-lined-title">{{ $tc("message.SignIn") }}</h2>
         <div class="form-lined">
           <el-form ref="loginForm" :model="form" :rules="rules">
-            <el-form-item prop="email" :error="loginErrors.email">
+            <el-form-item prop="email">
               <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
             </el-form-item>
-            <el-form-item prop="password" :error="loginErrors.password">
+            <el-form-item prop="password">
               <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item class="text-left">
@@ -44,15 +44,9 @@ export default {
   },
   data() {
     return {
-      errorMessage: '',
       form: {
         email: null,
         password: null
-      },
-      loginErrors: {
-        non_field_errors: '',
-        email: '',
-        password: ''
       },
       rules: {
         email: [
@@ -71,9 +65,8 @@ export default {
           {
             required: true,
             message: 'Please enter your password',
-            trigger: 'change'
-          },
-          { validator: this.validatePassword, trigger: 'blur' }
+            trigger: 'blur'
+          }
         ]
       }
     }

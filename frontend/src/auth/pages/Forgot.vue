@@ -6,7 +6,7 @@
         <h2 class="form-lined-title">{{ $tc("message.RecoverPassword") }}</h2>
         <div class="form-lined">
           <el-form ref="forgotForm" :model="form" :rules="rules">
-            <el-form-item prop="email" :error="formErrors.email">
+            <el-form-item prop="email">
               <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
             </el-form-item>
             <el-form-item>
@@ -30,13 +30,8 @@ export default {
   },
   data() {
     return {
-      errorMessage: '',
       form: {
         email: null,
-      },
-      formErrors: {
-        non_field_errors: '',
-        email: '',
       },
       rules: {
         email: [

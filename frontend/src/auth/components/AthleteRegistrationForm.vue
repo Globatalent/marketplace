@@ -6,52 +6,52 @@
   <el-col :xs="24" :sm="12" :md="12" :lg="10" :xl="6" class="text-center">
     <h2 class="form-lined-title">{{ $tc("message.Athlete",1) }}</h2>
     <div class="form-lined">
-      <el-form ref="form" label-position="top" class="text-left">
+      <el-form ref="form" label-position="top" class="text-left" :model="form" :rules="rules">
         <el-row :gutter="20">
           <el-col :xs="24" :md="12">
-            <el-form-item required>
+            <el-form-item required prop="email">
               <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
             </el-form-item>
-            <el-form-item required>
+            <el-form-item required prop="password">
               <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
             </el-form-item>
-            <el-form-item required>
+            <el-form-item required prop="repeatPassword">
               <el-input v-bind:placeholder="$tc('message.RepeatPassword')" type="password" v-model="form.repeatPassword"></el-input>
             </el-form-item>
-            <el-form-item required>
+            <el-form-item required prop="sport">
               <el-input v-bind:placeholder="$tc('message.Sport')" type="text" v-model="form.sport"></el-input>
             </el-form-item>
-            <el-form-item v-bind:label="$tc('message.Sex')" class="text-left sexFormElement">
-              <el-radio-group>
-                <el-radio label="male" v-model="form.sex">{{ $tc("message.Male") }}</el-radio>
-                <el-radio label="female" v-model="form.sex">{{ $tc("message.Female") }}</el-radio>
+            <el-form-item v-bind:label="$tc('message.Sex')" class="text-left sexFormElement" prop="sex">
+              <el-radio-group v-model="form.sex">
+                <el-radio label="male">{{ $tc("message.Male") }}</el-radio>
+                <el-radio label="female">{{ $tc("message.Female") }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :md="12">
-            <el-form-item required>
+            <el-form-item required prop="firstName">
               <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.firstName"></el-input>
             </el-form-item>
-            <el-form-item required>
+            <el-form-item required prop="lastName">
               <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.lastName"></el-input>
             </el-form-item>
-            <el-form-item required>
+            <el-form-item required prop="country">
               <el-input v-bind:placeholder="$tc('message.Country')" type="text" v-model="form.country"></el-input>
             </el-form-item>
-            <el-form-item required>
+            <el-form-item required prop="date">
               <el-date-picker type="date" v-bind:placeholder="$tc('message.DateOfBirth')" style="width: 100%;" v-model="form.date"></el-date-picker>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item class="text-center">
-          <el-button type="primary" class="is-uppercase" @click="onSubmit">{{ $tc("message.Register") }}</el-button>
+          <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc("message.Register") }}</el-button>
         </el-form-item>
       </el-form>
       <el-row>
-      <div class="form-reminderBlock text-center">{{ $tc("message.AlreadyAccount") }}
-        <router-link :to="{ name: 'login'}" class="is-main-color">{{ $tc("message.LogIn") }}</router-link>
-      </div>
-    </el-row>
+        <div class="form-reminderBlock text-center">{{ $tc("message.AlreadyAccount") }}
+          <router-link :to="{ name: 'login'}" class="is-main-color">{{ $tc("message.LogIn") }}</router-link>
+        </div>
+      </el-row>
     </div>
   </el-col>
 </template>
@@ -63,8 +63,26 @@ export default {
   name: 'AthleteRegistrationForm',
   components: {},
   data() {
+    var validatePass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please input the password'))
+      } else {
+        if (this.form.password !== '') {
+          this.$refs.form.validateField('password')
+        }
+        callback()
+      }
+    }
+    var validatePass2 = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('Please input the password again'))
+      } else if (value !== this.form.password) {
+        callback(new Error("Two inputs don't match!"))
+      } else {
+        callback()
+      }
+    }
     return {
-      errorMessage: '',
       form: {
         email: '',
         password: '',
@@ -75,15 +93,59 @@ export default {
         date: '',
         sport: '',
         sex: 'male'
+      },
+      rules: {
+        email: [
+          {
+            required: true,
+            message: 'Please enter a valid email',
+            trigger: 'blur'
+          },
+          {
+            type: 'email',
+            message: 'Please enter a valid email',
+            trigger: ['blur', 'change']
+          }
+        ],
+        password: [{ validator: validatePass, trigger: 'blur' }],
+        repeatPassword: [{ validator: validatePass2, trigger: 'blur' }],
+        sport: [
+          { required: true, message: 'Please input sport', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, message: 'Please select sex', trigger: 'blur' }
+        ],
+        firstName: [
+          {
+            required: true,
+            message: 'Please input first name',
+            trigger: 'blur'
+          }
+        ],
+        lastName: [
+          { required: true, message: 'Please input last name', trigger: 'blur' }
+        ],
+        country: [
+          { required: true, message: 'Please input country', trigger: 'blur' }
+        ],
+        date: [
+          { required: true, message: 'Please input date', trigger: 'blur' }
+        ]
       }
     }
   },
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault()
-      const dataForm = Object.assign({}, this.form)
-      // Pasamos el objeto con registerUser
-      this.registerUser(dataForm)
+    onSubmit(form) {
+      this.$refs[form].validate(valid => {
+        if (valid) {
+          const dataForm = Object.assign({}, this.form)
+          // Pasamos el objeto con registerUser
+          this.registerUser(dataForm)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     registerUser(data) {
       this.$store
