@@ -3,9 +3,9 @@
     <div class="athleteProfileEdit">
       <h2 class="form-lined-title">{{ $tc("message.AthleteProfileEditPage") }}</h2>
       <div class="form-lined">
-        <el-form ref="form" :model="form" :rules="rules">
-          <el-row :gutter="20" type="flex">
-            <el-col :xs="24" :sm="16" class="form-lined-column">
+        <el-row :gutter="20" type="flex">
+          <el-col :xs="24" :sm="16" class="form-lined-column">
+            <el-form ref="form" :model="form" :rules="rules">
               <el-row justify="center" :gutter="20">
                 <el-col :xs="24" :sm="12" :md="12" class="text-center">
                   <el-form-item required prop="firstName">
@@ -36,12 +36,12 @@
               <h3 class="form-lined-sectionTitle text-center">{{$tc('message.Link',2)}}</h3>
               <el-row type="flex" justify="left" :gutter="20" v-for="(link, index) in links" :key="index">
                 <el-col :xs="24" :sm="12" :md="12" class="text-center">
-                  <el-form-item required prop="linkName">
+                  <el-form-item prop="linkName">
                     <el-input v-bind:placeholder="$tc('message.LinkTitle')" type="text" v-model="link.name"></el-input>
                   </el-form-item>
                 </el-col>
                 <el-col :xs="24" :sm="11" :md="11" class="text-center">
-                  <el-form-item required prop="linkUrl">
+                  <el-form-item prop="linkUrl">
                     <el-input v-bind:placeholder="$tc('message.Link')" type="text" v-model="link.url"></el-input>
                   </el-form-item>
                 </el-col>
@@ -59,43 +59,43 @@
               <h3 class="form-lined-sectionTitle text-center">{{ $tc("message.AthleteImage") }}</h3>
               <el-row type="flex" justify="center" :gutter="20">
                 <el-col :xs="24" :sm="18" :md="18" class="text-center">
-                  <vue-dropzone ref="picturesDropzone"
-                                id="dropzone"
-                                :options="dropzoneOptions"
-                                @vdropzone-removed-file="vdropzoneRemoved"></vue-dropzone>
+                  <vue-dropzone ref="picturesDropzone" id="dropzone" :options="dropzoneOptions" @vdropzone-removed-file="vdropzoneRemoved"></vue-dropzone>
                 </el-col>
               </el-row>
               <el-row type="flex" justify="center" :gutter="20">
-            <el-col :xs="24" class="text-center">
-              <el-form-item class="text-center">
-                <el-button type="primary" class="is-uppercase" @click="onSubmit">{{ $tc("message.Save") }}</el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-            </el-col>
-            <el-col :xs="24" :sm="8">
+                <el-col :xs="24" class="text-center">
+                  <el-form-item class="text-center">
+                    <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc("message.Save") }}</el-button>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </el-col>
+          <el-col :xs="24" :sm="8">
+            <el-form ref="formSale" :model="formSale" :rules="rulesSale">
               <el-form-item required prop="tokenName">
-                <el-input v-bind:placeholder="$tc('message.TokenName')" type="text" v-model="form.tokenName" :disabled="isSaleCreated"></el-input>
+                <el-input v-bind:placeholder="$tc('message.TokenName')" type="text" v-model="formSale.tokenName" :disabled="isSaleCreated"></el-input>
               </el-form-item>
               <el-form-item required prop="tokenCode">
-                <el-input v-bind:placeholder="$tc('message.TokenCode')" type="text" v-model="form.tokenCode" :disabled="isSaleCreated"></el-input>
+                <el-input v-bind:placeholder="$tc('message.TokenCode')" type="text" v-model="formSale.tokenCode" :disabled="isSaleCreated"></el-input>
               </el-form-item>
               <el-form-item required prop="quantity">
-                <el-input v-bind:placeholder="$tc('message.Quantity')" type="text" pattern= "[0-9]" v-model="form.quantity" :disabled="isSaleCreated"></el-input>
+                <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="formSale.quantity" :disabled="isSaleCreated"></el-input>
               </el-form-item>
               <el-form-item required prop="totalPrice">
-                <el-input v-bind:placeholder="$tc('message.TotalPrice')" type="text" v-model="form.totalPrice" :disabled="isSaleCreated"></el-input>
+                <el-input v-bind:placeholder="$tc('message.TotalPrice')" type="number" v-model="formSale.totalPrice" :disabled="isSaleCreated"></el-input>
               </el-form-item>
               <el-row type="flex" justify="center" :gutter="20">
-            <el-col :xs="24" class="text-center">
-              <el-form-item class="text-center">
-                <el-button type="primary" class="is-uppercase" @click="onSubmit">{{ $tc("message.SaveSale") }}</el-button>
-              </el-form-item>
-            </el-col>
-          </el-row>
-            </el-col>
-          </el-row>
-        </el-form>
+                <el-col :xs="24" class="text-center">
+                  <el-form-item class="text-center">
+                    <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('formSale')">{{ $tc("message.SaveSale") }}</el-button>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </el-col>
+        </el-row>
+
       </div>
     </div>
   </gb-base-layout>
@@ -123,6 +123,7 @@ export default {
     return {
       isSaleCreated: false,
       form: {},
+      formSale: {},
       links: [],
       linksToDelete: [],
       pictures: [],
@@ -138,7 +139,7 @@ export default {
         maxFilesize: 2,
         addRemoveLinks: true,
         headers: {
-          'Authorization': this.$store.getters['auth/header']
+          Authorization: this.$store.getters['auth/header']
         }
       },
       rules: {
@@ -153,31 +154,66 @@ export default {
           { required: true, message: 'Please input last name', trigger: 'blur' }
         ],
         birthDate: [
-          { required: true, message: 'Please input birth date', trigger: 'blur' }
+          {
+            required: true,
+            message: 'Please input birth date',
+            trigger: 'blur'
+          }
         ],
         country: [
           { required: true, message: 'Please input country', trigger: 'blur' }
         ],
         sport: [
           { required: true, message: 'Please input sport', trigger: 'blur' }
+        ]
+      },
+      rulesSale: {
+        tokenName: [
+          {
+            required: true,
+            message: 'Please input token name',
+            trigger: 'blur'
+          }
         ],
+        tokenCode: [
+          {
+            required: true,
+            message: 'Please input token code',
+            trigger: 'blur'
+          }
+        ],
+        quantity: [
+          {
+            validator: this.validateQuantity,
+            trigger: 'blur'
+          }
+        ],
+        totalPrice: [
+          {
+            required: true,
+            message: 'Please input total price',
+            trigger: 'blur'
+          }
+        ]
       }
     }
   },
   created() {
-    this.$store.dispatch('users/fetchUser').then( () => {
-      this.form = { ...this.user.athlete }
-      this.links = this.user.athlete.links
-      this.pictures = this.user.athlete.pictures
-      if (this.links.length == 0 ) {
-        this.addRow()
-      }
-      this.loadPictures()
-      this.isSaleCreated = !!this.user.athlete.token
-    })
-    .catch(error => {
-      console.log(error)
-    })
+    this.$store
+      .dispatch('users/fetchUser')
+      .then(() => {
+        this.form = { ...this.user.athlete }
+        this.links = this.user.athlete.links
+        this.pictures = this.user.athlete.pictures
+        if (this.links.length == 0) {
+          this.addRow()
+        }
+        this.loadPictures()
+        this.isSaleCreated = !!this.user.athlete.token
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
   methods: {
     vdropzoneRemoved(file, xhr, error) {
@@ -189,15 +225,34 @@ export default {
     loadPictures() {
       this.pictures.forEach(picture => {
         const url = picture.image
-        const name = url.substring(url.lastIndexOf('/') + 1);
-        const file = { size: 123, name: name, id: picture.id };
-      this.$refs.picturesDropzone.manuallyAddFile(file, url);
+        const name = url.substring(url.lastIndexOf('/') + 1)
+        const file = { size: 123, name: name, id: picture.id }
+        this.$refs.picturesDropzone.manuallyAddFile(file, url)
       })
     },
-    onSubmit(evt) {
-      evt.preventDefault()
-      const dataForm = Object.assign({}, this.form)
-      this.saveUserProfile(dataForm)
+    validateQuantity(rule, value, callback) {
+      if (value === '' || !value) {
+        callback(new Error('Please input the quantity'))
+      } else {
+        const n = Math.floor(Number(value))
+        let isInteger = n !== Infinity && String(n) === value && n >= 0
+        if (!isInteger) {
+          callback(new Error('Please input positive integer'))
+        } else {
+          callback()
+        }
+      }
+    },
+    onSubmit(form) {
+      this.$refs[form].validate(valid => {
+        if (valid) {
+          const dataForm = Object.assign({}, this.form)
+          this.saveUserProfile(dataForm)
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
     saveUserProfile(data) {
       const linksToCreate = this.links.filter(link => !link.id)
@@ -208,30 +263,36 @@ export default {
         linksToDelete: this.linksToDelete,
         ...data
       }
-      this.$store.dispatch('athletes/update', data).then(response => {
-        Promise.all(
-          linksToCreate.map(link => {
-            return this.$store.dispatch('athletes/createLink', link)
-          }).concat(
-            linksToUpdate.map(link => {
-              return this.$store.dispatch('athletes/updateLink', link)
-            })
-          ).concat(
-            this.linksToDelete.map(link => {
-              return this.$store.dispatch('athletes/deleteLink', link)
-            })
-          ).then(() => {
-            console.log("Links saved!")
-          }).catch(() => {
-            console.error("Error saving links!")
-          })
-        )
-      }).catch(error => {
-
-      })
+      this.$store
+        .dispatch('athletes/update', data)
+        .then(response => {
+          Promise.all(
+            linksToCreate
+              .map(link => {
+                return this.$store.dispatch('athletes/createLink', link)
+              })
+              .concat(
+                linksToUpdate.map(link => {
+                  return this.$store.dispatch('athletes/updateLink', link)
+                })
+              )
+              .concat(
+                this.linksToDelete.map(link => {
+                  return this.$store.dispatch('athletes/deleteLink', link)
+                })
+              )
+              .then(() => {
+                console.log('Links saved!')
+              })
+              .catch(() => {
+                console.error('Error saving links!')
+              })
+          )
+        })
+        .catch(error => {})
     },
     addRow() {
-      this.links.push({name: '', url: ''})
+      this.links.push({ name: '', url: '' })
     },
     deleteRow(index) {
       const link = this.links[index]
