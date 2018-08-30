@@ -130,7 +130,6 @@ export default {
       /*
       TODO @victor:
       vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
-      - Remove images action
       */
       dropzoneOptions: {
         url: `${Vue.axios.defaults.baseURL}/api/v1/pictures/`,
@@ -174,6 +173,7 @@ export default {
         this.addRow()
       }
       this.loadPictures()
+      this.isSaleCreated = !!this.user.athlete.token
     })
     .catch(error => {
       console.log(error)
@@ -239,7 +239,16 @@ export default {
         this.linksToDelete.push(link)
       }
       this.links.splice(index, 1)
-    }
+    },
+    onSubmitToken(evt) {
+      const tokenData = {
+        name: this.form.tokenName,
+        code: this.form.tokenCode,
+        amount: this.form.quantity,
+        price: this.form.quantity,
+      }
+      this.$store.dispatch('tokens/create', tokenData).then(response => {})
+    },
   }
 }
 </script>
