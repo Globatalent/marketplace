@@ -40,6 +40,12 @@ export const messages = {
       Alert: 'Alert | Alerts',
       Edit: 'Edit',
       Age: 'Age',
+      AthleteImage: 'Athlete Image',
+      TokenName: 'Token Name',
+      TokenCode: 'Token Code',
+      Quantity: 'Quantity',
+      TotalPrice: 'Total Price',
+      SaveSale: 'Save Sale',
       RestorePassword: 'Restore Password',
     }
   },
