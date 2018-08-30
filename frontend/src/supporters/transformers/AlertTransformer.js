@@ -11,6 +11,15 @@ class AlertTransformer extends Transformer {
       athlete: alert.athlete,
     })
   }
+
+  static send (alert) {
+    return {
+      'id': alert.id,
+      'rule': alert.rule,
+      'amount': alert.amount,
+      'athlete': alert.athlete,
+    }
+  }
 }
 
 export default AlertTransformer

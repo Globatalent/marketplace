@@ -37,5 +37,14 @@ export default {
       })
     })
   },
-
+  createAlert({state}, payload) {
+    return new Promise((resolve, reject) => {
+      Vue.axios.post(state.endpoints.alerts, AlertTransformer.send(payload)).then( response => {
+        const alert = AlertTransformer.fetch(response.data)
+        resolve(alert)
+      }).catch( error => {
+        reject(error)
+      })
+    })
+  },
 }
