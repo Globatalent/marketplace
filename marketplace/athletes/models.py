@@ -41,9 +41,7 @@ class Picture(models.Model):
     image = ThumbnailerImageField(
         max_length=250,
         upload_to=UploadToDir('athletes', populate_from='athlete_id'),
-        blank=False,
         verbose_name=_('image'),
-        default='/athletes/default.png'
     )
     athlete = models.ForeignKey(Athlete, verbose_name=_('athlete'),
                                 related_name='pictures', on_delete=models.CASCADE)

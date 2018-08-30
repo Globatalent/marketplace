@@ -19,6 +19,18 @@ class AthleteTransformer extends Transformer {
       token: athlete.token,
     })
   }
+
+  static send(athlete) {
+    return {
+      'id': athlete.id,
+      'first_name': athlete.firstName,
+      'last_name': athlete.lastName,
+      'date_of_birth': !!athlete.birthDate? Vue.moment(athlete.birthDate).format('YYYY-MM-DD') : null,
+      'sex': athlete.sex,
+      'country': athlete.country,
+      'sport': athlete.sport,
+    }
+  }
 }
 
 export default AthleteTransformer

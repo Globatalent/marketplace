@@ -14,6 +14,7 @@ class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
         fields = [
+            'id',
             'image',
             'athlete'
         ]
@@ -26,6 +27,7 @@ class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
         fields = [
+            'id',
             'name',
             'url',
             'athlete'

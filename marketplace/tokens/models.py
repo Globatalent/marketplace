@@ -12,6 +12,8 @@ from marketplace.athletes.constants import APPROVED
 class Token(TimeStampedModel):
     """Token created by the athlete."""
     athlete = models.ForeignKey("athletes.Athlete", related_name="tokens", on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, null=True, blank=True)
+    code = models.CharField(max_length=16, null=True, blank=True)
     amount = models.PositiveIntegerField(help_text=_("amount of tokens issued by the athlete"))
     price = models.FloatField(help_text=_("total price for the amount of tokens issued"))
 

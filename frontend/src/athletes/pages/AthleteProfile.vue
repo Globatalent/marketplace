@@ -59,7 +59,7 @@
               <h3 class="form-lined-sectionTitle text-center">{{ $tc("message.AthleteImage") }}</h3>
               <el-row type="flex" justify="center" :gutter="20">
                 <el-col :xs="24" :sm="18" :md="18" class="text-center">
-                  <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                  <vue-dropzone ref="picturesDropzone" id="dropzone" :options="dropzoneOptions" @vdropzone-removed-file="vdropzoneRemoved"></vue-dropzone>
                 </el-col>
               </el-row>
               <el-row type="flex" justify="center" :gutter="20">
@@ -102,6 +102,7 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import BaseLayout from '@/layout/BaseLayout.vue'
 import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
@@ -123,19 +124,24 @@ export default {
       isSaleCreated: false,
       form: {},
       formSale: {},
-      links: [{}],
-      pictures: [{}],
+      links: [],
+      linksToDelete: [],
+      pictures: [],
+      picturesToDelete: [],
       /*
       TODO @victor:
       vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
-      - Send images to the backend
       - Remove images action
       */
       dropzoneOptions: {
-        url: '/api/v1/pictures/',
+        url: `${Vue.axios.defaults.baseURL}/api/v1/pictures/`,
+        paramName: 'image',
         thumbnailWidth: 150,
-        maxFilesize: 0.5,
-        headers: { 'Content-Type': 'multipart/form-data' }
+        maxFilesize: 2,
+        addRemoveLinks: true,
+        headers: {
+          Authorization: this.$store.getters['auth/header']
+        }
       },
       rules: {
         firstName: [
@@ -198,12 +204,32 @@ export default {
       .dispatch('users/fetchUser')
       .then(() => {
         this.form = { ...this.user.athlete }
+        this.links = this.user.athlete.links
+        this.pictures = this.user.athlete.pictures
+        if (this.links.length == 0) {
+          this.addRow()
+        }
+        this.loadPictures()
       })
       .catch(error => {
         console.log(error)
       })
   },
   methods: {
+    vdropzoneRemoved(file, xhr, error) {
+      const images = this.pictures.filter(picture => picture.id === file.id)
+      if (images.length > 0) {
+        this.$store.dispatch('athletes/deletePicture', images[0])
+      }
+    },
+    loadPictures() {
+      this.pictures.forEach(picture => {
+        const url = picture.image
+        const name = url.substring(url.lastIndexOf('/') + 1)
+        const file = { size: 123, name: name, id: picture.id }
+        this.$refs.picturesDropzone.manuallyAddFile(file, url)
+      })
+    },
     validateQuantity(rule, value, callback) {
       if (value === '' || !value) {
         callback(new Error('Please input the quantity'))
@@ -229,27 +255,50 @@ export default {
       })
     },
     saveUserProfile(data) {
-      console.log('TODO @victor: Save athlete profile ...', this.form)
-      var testLink = {
-        name: 'Twitter',
-        url: 'http://twitter.com'
+      const linksToCreate = this.links.filter(link => !link.id)
+      const linksToUpdate = this.links.filter(link => !!link.id)
+      const payload = {
+        linksToCreate: linksToCreate,
+        linksToUpdate: linksToUpdate,
+        linksToDelete: this.linksToDelete,
+        ...data
       }
-      this.axios
-        .post('/api/v1/link/', { body: testLink })
+      this.$store
+        .dispatch('athletes/update', data)
         .then(response => {
-          console.log('Added link', response)
+          Promise.all(
+            linksToCreate
+              .map(link => {
+                return this.$store.dispatch('athletes/createLink', link)
+              })
+              .concat(
+                linksToUpdate.map(link => {
+                  return this.$store.dispatch('athletes/updateLink', link)
+                })
+              )
+              .concat(
+                this.linksToDelete.map(link => {
+                  return this.$store.dispatch('athletes/deleteLink', link)
+                })
+              )
+              .then(() => {
+                console.log('Links saved!')
+              })
+              .catch(() => {
+                console.error('Error saving links!')
+              })
+          )
         })
-        .catch(error => {
-          console.log(error)
-        })
+        .catch(error => {})
     },
     addRow() {
-      this.links.push({
-        name: '',
-        url: ''
-      })
+      this.links.push({ name: '', url: '' })
     },
     deleteRow(index) {
+      const link = this.links[index]
+      if (!!link.id) {
+        this.linksToDelete.push(link)
+      }
       this.links.splice(index, 1)
     }
   }

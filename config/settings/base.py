@@ -322,6 +322,10 @@ CORS_ORIGIN_WHITELIST = (
     'localhost:8080',
     'market.dekaside.com'
 )
+from corsheaders.defaults import default_headers
+CORS_ALLOW_HEADERS = default_headers + (
+    'cache-control',
+)
 
 # PROJECT SPECIFIC
 # ------------------------------------------------------------------------------
