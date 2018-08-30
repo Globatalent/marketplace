@@ -59,7 +59,10 @@
               <h3 class="form-lined-sectionTitle text-center">{{ $tc("message.AthleteImage") }}</h3>
               <el-row type="flex" justify="center" :gutter="20">
                 <el-col :xs="24" :sm="18" :md="18" class="text-center">
-                  <vue-dropzone ref="myVueDropzone" id="dropzone" :options="dropzoneOptions"></vue-dropzone>
+                  <vue-dropzone ref="picturesDropzone"
+                                id="dropzone"
+                                :options="dropzoneOptions"
+                                @vdropzone-removed-file="vdropzoneRemoved"></vue-dropzone>
                 </el-col>
               </el-row>
               <el-row type="flex" justify="center" :gutter="20">
@@ -127,15 +130,14 @@ export default {
       /*
       TODO @victor:
       vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
-      - Send images to the backend
       - Remove images action
       */
       dropzoneOptions: {
         url: `${Vue.axios.defaults.baseURL}/api/v1/pictures/`,
         paramName: 'image',
-        maxFilesize: 2,
         thumbnailWidth: 150,
-        maxFilesize: 0.5,
+        maxFilesize: 2,
+        addRemoveLinks: true,
         headers: {
           'Authorization': this.$store.getters['auth/header']
         }
@@ -178,12 +180,18 @@ export default {
     })
   },
   methods: {
+    vdropzoneRemoved(file, xhr, error) {
+      const images = this.pictures.filter(picture => picture.id === file.id)
+      if (images.length > 0) {
+        this.$store.dispatch('athletes/deletePicture', images[0])
+      }
+    },
     loadPictures() {
       this.pictures.forEach(picture => {
         const url = picture.image
         const name = url.substring(url.lastIndexOf('/') + 1);
-        const file = { size: 123, name: name };
-      this.$refs.myVueDropzone.manuallyAddFile(file, url);
+        const file = { size: 123, name: name, id: picture.id };
+      this.$refs.picturesDropzone.manuallyAddFile(file, url);
       })
     },
     onSubmit(evt) {

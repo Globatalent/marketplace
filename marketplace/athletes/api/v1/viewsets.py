@@ -14,11 +14,12 @@ from marketplace.athletes.api.v1.filters import AthleteFilter
 from marketplace.athletes.constants import APPROVED
 
 
-class PictureViewSet(CreateModelMixin, ReadOnlyModelViewSet):
+class PictureViewSet(ModelViewSet):
     serializer_class = PictureSerializer
     queryset = Picture.objects.all()
     permission_classes = [
-        OnlyAthletes
+        OnlyAthletes,
+        OnlyAthleteOwnerUpdates,
     ]
 
     def perform_create(self, serializer):
