@@ -1,7 +1,4 @@
 from rest_framework import serializers
-from rest_framework.validators import UniqueValidator
-from django.contrib.auth import password_validation
-from django.utils.translation import ugettext_lazy as _
 
 from marketplace.tokens.models import Token, Purchase
 
@@ -17,6 +14,8 @@ class TokenSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "athlete",
+            "name",
+            "code",
             "amount",
             "price",
             "unit_price",

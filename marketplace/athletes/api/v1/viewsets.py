@@ -4,7 +4,7 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet, ModelViewSet
 
-from marketplace.athletes.api.v1.permissions import OnlyOwnerUpdates
+from marketplace.athletes.api.v1.permissions import OnlyOwnerUpdates, OnlyAthleteOwnerUpdates
 from marketplace.core.api.permissions import OnlyAthletes
 from marketplace.athletes.api.v1.serializers import PictureSerializer, LinkSerializer, AthleteSerializer
 from marketplace.athletes.models import Picture, Link, Athlete
@@ -25,11 +25,12 @@ class PictureViewSet(CreateModelMixin, ReadOnlyModelViewSet):
         return serializer.save(athlete=self.request.user.athlete)
 
 
-class LinkViewSet(CreateModelMixin, ReadOnlyModelViewSet):
+class LinkViewSet(ModelViewSet):
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
     permission_classes = [
-        OnlyAthletes
+        OnlyAthletes,
+        OnlyAthleteOwnerUpdates,
     ]
 
     def perform_create(self, serializer):
