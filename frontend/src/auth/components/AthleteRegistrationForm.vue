@@ -63,25 +63,6 @@ export default {
   name: 'AthleteRegistrationForm',
   components: {},
   data() {
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the password'))
-      } else {
-        if (this.form.password !== '') {
-          this.$refs.form.validateField('password')
-        }
-        callback()
-      }
-    }
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please input the password again'))
-      } else if (value !== this.form.password) {
-        callback(new Error("Two inputs don't match!"))
-      } else {
-        callback()
-      }
-    }
     return {
       form: {
         email: '',
@@ -107,13 +88,13 @@ export default {
             trigger: ['blur', 'change']
           }
         ],
-        password: [{ validator: validatePass, trigger: 'blur' }],
-        repeatPassword: [{ validator: validatePass2, trigger: 'blur' }],
+        password: [{ validator: this.validatePass, trigger: 'change' }],
+        repeatPassword: [{ validator: this.validatePass2, trigger: 'change' }],
         sport: [
           { required: true, message: 'Please input sport', trigger: 'blur' }
         ],
         sex: [
-          { required: true, message: 'Please select sex', trigger: 'blur' }
+          { required: false, message: 'Please select sex', trigger: 'blur' }
         ],
         firstName: [
           {
@@ -135,27 +116,40 @@ export default {
     }
   },
   methods: {
+    validatePass(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('Please input the password'))
+      } else {
+        callback()
+      }
+    },
+    validatePass2(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('Please input the password again'))
+      } else if (value !== this.form.password) {
+        callback(new Error("Two inputs don't match!"))
+      } else {
+        callback()
+      }
+    },
     onSubmit(form) {
-      // this.$refs[form].validate(valid => {
-      //   if (valid) {
+      this.$refs[form].validate(valid => {
+        if (valid) {
           const dataForm = Object.assign({}, this.form)
           // Pasamos el objeto con registerUser
-          this.registerUser(dataForm)
-        // } else {
-        //   console.log('error submit!!')
-        //   return false
-        // }
-      // })
-    },
-    registerUser(data) {
-      this.$store
-        .dispatch('auth/registerAthlete', data)
-        .then(data => {
-          router.push({ name: 'athlete.list' })
-        })
-        .catch(error => {
-          console.log(error)
-        })
+          this.$store
+            .dispatch('auth/registerAthlete', dataForm)
+            .then(data => {
+              router.push({ name: 'athlete.list' })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     }
   }
 }
