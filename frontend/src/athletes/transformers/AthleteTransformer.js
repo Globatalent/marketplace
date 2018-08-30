@@ -13,6 +13,7 @@ class AthleteTransformer extends Transformer {
       sex: athlete.sex,
       country: athlete.country,
       sport: athlete.sport,
+      biography: athlete.biography,
       following: athlete.following,
       links: athlete.links,
       pictures: athlete.pictures,

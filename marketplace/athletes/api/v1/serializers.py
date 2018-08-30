@@ -55,6 +55,7 @@ class AthleteSerializer(serializers.ModelSerializer):
             'date_of_birth',
             'sport',
             'state',
+            'biography',
             'pictures',
             'links',
             'following',
