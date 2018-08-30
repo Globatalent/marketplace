@@ -46,6 +46,7 @@ export const messages = {
       Quantity: 'Quantity',
       TotalPrice: 'Total Price',
       SaveSale: 'Save Sale',
+      RestorePassword: 'Restore Password',
     }
   },
   es: {

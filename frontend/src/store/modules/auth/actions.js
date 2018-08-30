@@ -1,12 +1,27 @@
 import jwtDecode from 'jwt-decode'
 import Vue from 'vue'
-import VueMoment from 'vue-moment'
 import router from '@/router.js'
 import { Message } from 'element-ui'
 
+
 export default {
-  forgot ({commit, state}, userData) {
-    return true
+  forgot ({state}, payload) {
+    return new Promise((resolve, reject) => {
+      Vue.axios.post(state.endpoints.requestRestoreCode, payload).then((response) => {
+        resolve(response.data)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+  restorePassword ({state}, payload) {
+    return new Promise((resolve, reject) => {
+      Vue.axios.post(state.endpoints.restorePassword, payload).then((response) => {
+        resolve(response.data)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
   },
   login ({commit, state}, userData) {
     /**

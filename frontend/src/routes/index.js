@@ -10,11 +10,16 @@ export default [
     component: resolve => require(['@/auth/pages/Registration.vue'], resolve),
   },
   {
+    path: '/restore-password/:restorePasswordCode/',
+    name: 'restore.password',
+    component: resolve => require(['@/auth/pages/RestorePassword.vue'], resolve),
+    props: true,
+  },
+  {
     path: '/forgot',
     name: 'forgot',
     component: resolve => require(['@/auth/pages/Forgot.vue'], resolve),
   },
-
   // Athletes
   {
     path: '/athlete-profile',
