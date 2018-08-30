@@ -40,6 +40,7 @@ export const messages = {
       Alert: 'Alert | Alerts',
       Edit: 'Edit',
       Age: 'Age',
+      RestorePassword: 'Restore Password',
     }
   },
   es: {

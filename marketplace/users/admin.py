@@ -35,8 +35,15 @@ class MyUserAdmin(AuthUserAdmin):
     add_form = MyUserCreationForm
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
-                                       'groups', 'user_permissions')}),
+        (_('Permissions'), {'fields': ('is_active',
+                                       'is_staff',
+                                       'is_superuser',
+                                       'is_email_verified',
+                                       'verification_code',
+                                       'restore_password_code',
+                                       'restore_password_code_requested_at',
+                                       'groups',
+                                       'user_permissions')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
