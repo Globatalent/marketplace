@@ -73,22 +73,22 @@
           </el-col>
           <el-col :xs="24" :sm="8">
             <el-form ref="formSale" :model="formSale" :rules="rulesSale">
-              <el-form-item required prop="tokenName">
-                <el-input v-bind:placeholder="$tc('message.TokenName')" type="text" v-model="formSale.tokenName" :disabled="isSaleCreated"></el-input>
+              <el-form-item required prop="name">
+                <el-input v-bind:placeholder="$tc('message.TokenName')" type="text" v-model="formSale.name" :disabled="isSaleCreated"></el-input>
               </el-form-item>
-              <el-form-item required prop="tokenCode">
-                <el-input v-bind:placeholder="$tc('message.TokenCode')" type="text" v-model="formSale.tokenCode" :disabled="isSaleCreated"></el-input>
+              <el-form-item required prop="code">
+                <el-input v-bind:placeholder="$tc('message.TokenCode')" type="text" v-model="formSale.code" :disabled="isSaleCreated"></el-input>
               </el-form-item>
-              <el-form-item required prop="quantity">
-                <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="formSale.quantity" :disabled="isSaleCreated"></el-input>
+              <el-form-item required prop="amount">
+                <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="formSale.amount" :disabled="isSaleCreated"></el-input>
               </el-form-item>
-              <el-form-item required prop="totalPrice">
-                <el-input v-bind:placeholder="$tc('message.TotalPrice')" type="number" v-model="formSale.totalPrice" :disabled="isSaleCreated"></el-input>
+              <el-form-item required prop="price">
+                <el-input v-bind:placeholder="$tc('message.TotalPrice')" type="number" v-model="formSale.price" :disabled="isSaleCreated"></el-input>
               </el-form-item>
               <el-row type="flex" justify="center" :gutter="20">
                 <el-col :xs="24" class="text-center">
                   <el-form-item class="text-center">
-                    <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('formSale')">{{ $tc("message.SaveSale") }}</el-button>
+                    <el-button type="primary" class="is-uppercase" @click.prevent="onSubmitToken('formSale')">{{ $tc("message.SaveSale") }}</el-button>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -168,27 +168,27 @@ export default {
         ]
       },
       rulesSale: {
-        tokenName: [
+        name: [
           {
             required: true,
             message: 'Please input token name',
             trigger: 'blur'
           }
         ],
-        tokenCode: [
+        code: [
           {
             required: true,
             message: 'Please input token code',
             trigger: 'blur'
           }
         ],
-        quantity: [
+        amount: [
           {
             validator: this.validateQuantity,
             trigger: 'blur'
           }
         ],
-        totalPrice: [
+        price: [
           {
             required: true,
             message: 'Please input total price',
@@ -210,6 +210,9 @@ export default {
         }
         this.loadPictures()
         this.isSaleCreated = !!this.user.athlete.token
+        if (this.isSaleCreated) {
+          this.formSale = { ...this.user.athlete.token }
+        }
       })
       .catch(error => {
         console.log(error)
@@ -217,6 +220,7 @@ export default {
   },
   methods: {
     vdropzoneRemoved(file, xhr, error) {
+      if (this.$children[0]._isBeingDestroyed) { return }
       const images = this.pictures.filter(picture => picture.id === file.id)
       if (images.length > 0) {
         this.$store.dispatch('athletes/deletePicture', images[0])
@@ -301,14 +305,19 @@ export default {
       }
       this.links.splice(index, 1)
     },
-    onSubmitToken(evt) {
-      const tokenData = {
-        name: this.form.tokenName,
-        code: this.form.tokenCode,
-        amount: this.form.quantity,
-        price: this.form.quantity,
-      }
-      this.$store.dispatch('tokens/create', tokenData).then(response => {})
+    onSubmitToken(form) {
+      this.$refs[form].validate(valid => {
+        if (valid && !this.isSaleCreated) {
+          const tokenData = { ...this.formSale }
+          this.$store.dispatch('tokens/create', tokenData).then(response => {
+            this.isSaleCreated = true
+          }).catch(error => {
+          })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
     },
   }
 }
