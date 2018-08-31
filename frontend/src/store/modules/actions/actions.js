@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import NotificationTransformer from '../../../actions/transformers/NotificationTransformer'
+import NotificationTransformer from '@/actions/transformers/NotificationTransformer'
 
 
 export default {
@@ -28,4 +28,30 @@ export default {
       })
     })
   },
+  updateNotification({dispatch, state}, payload) {
+    return new Promise((resolve, reject) => {
+      Vue.axios.patch(`${state.endpoints.notifications}${payload.id}/`, payload).then(response => {
+        const notification = NotificationTransformer.fetch(response.data)
+        dispatch('unread').then( () => {
+          resolve(notification)
+        }).catch( error => {
+          reject(error)
+        })
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+  unread({commit, state}) {
+    return new Promise((resolve, reject) => {
+      const endpoint = `${state.endpoints.notifications}count/?read=False`
+      Vue.axios.get(endpoint).then((response) => {
+        const { count } = response.data;
+        commit('unread', count)
+        resolve(count)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  }
 }

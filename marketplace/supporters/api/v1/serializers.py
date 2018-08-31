@@ -23,7 +23,13 @@ class SupporterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Supporter
-        fields = ('alerts', 'followers')
+        fields = [
+            'id',
+            'first_name',
+            'last_name',
+            'alerts',
+            'followers'
+        ]
 
 
 class SupporterRegistrationSerializer(serializers.Serializer):

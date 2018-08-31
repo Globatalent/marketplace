@@ -47,6 +47,7 @@ export const messages = {
       TotalPrice: 'Total Price',
       SaveSale: 'Save Sale',
       RestorePassword: 'Restore Password',
+      Notifications: 'Notifications',
     }
   },
   es: {

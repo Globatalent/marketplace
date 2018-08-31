@@ -9,7 +9,7 @@
           <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->
           <el-menu-item index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Athlete",2) }}</el-menu-item>
           <el-submenu index="3">
-            <template slot="title">{{email()}}</template>
+            <template slot="title">{{email()}} <el-badge class="mark" v-if="unread > 0" :value="unread" /></template>
             <el-menu-item v-if="isAthlete()" index="athlete-profile" :route="{name:'athlete.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item v-if="isSupporter()" index="supporter-profile" :route="{name:'supporter.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item class="el-menu-item" index="logout" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
@@ -34,15 +34,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: 'users/user'
+      user: 'users/user',
+      unread: 'actions/unread',
     })
+  },
+  created() {
+    this.$store.dispatch('actions/unread')
   },
   components: {},
   methods: {
-    handleSelect(key, keyPath) {
-      console.log('key', key)
-      console.log('keyPath', keyPath)
-    },
     email() {
       return !!this.user ? this.user.email : null
     },

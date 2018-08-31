@@ -129,7 +129,7 @@ class Notification(TimeStampedModel):
         """Overwrite to handle 'read_at' field."""
         is_insert = self.pk is None
         if not is_insert:
-            previous_notification = Notification.get(pk=self.pk)
+            previous_notification = Notification.objects.get(pk=self.pk)
             if not previous_notification.read and self.read:
                 self.read_at = timezone.now()
         elif self.read:

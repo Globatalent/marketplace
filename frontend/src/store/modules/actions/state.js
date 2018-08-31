@@ -1,4 +1,5 @@
 export default {
+  unread: 0,
   notifications: [],
   pagination: {
     count: 0,
