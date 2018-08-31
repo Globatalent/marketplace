@@ -7,7 +7,7 @@ from marketplace.users.models import User
 from marketplace.users.tests.factories import UserFactory
 from marketplace.supporters.constants import UP
 from marketplace.supporters.tests.factories import SupporterFactory
-from supporters.tests.factories import AlertFactory
+from marketplace.supporters.tests.factories import AlertFactory
 
 
 class SupportersAPITests(APITestCase):

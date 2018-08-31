@@ -14,3 +14,18 @@ class AthleteFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = "athletes.Athlete"
+
+
+class PictureFactory(factory.django.DjangoModelFactory):
+
+    class Meta:
+        model = "athletes.Picture"
+
+
+class ReviewFactory(factory.django.DjangoModelFactory):
+
+    reviewer = factory.SubFactory(UserFactory)
+
+    class Meta:
+        model = "athletes.Review"
+

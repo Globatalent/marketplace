@@ -1,6 +1,6 @@
 from test_plus.test import TestCase
 
-from users.tests.factories import UserFactory
+from marketplace.users.tests.factories import UserFactory
 
 
 class TestUser(TestCase):

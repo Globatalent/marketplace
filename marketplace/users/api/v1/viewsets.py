@@ -10,8 +10,8 @@ from rest_framework.viewsets import GenericViewSet
 
 from marketplace.users.api.v1.serializers import UserSerializer, RequestRestoreCodeSerializer, \
     RestorePasswordSerializer, VerifySerializer
+from marketplace.users.helpers import restore_password, verify_email
 from marketplace.users.models import User
-from users.helpers import restore_password, verify_email
 
 
 class UserViewSet(GenericViewSet):

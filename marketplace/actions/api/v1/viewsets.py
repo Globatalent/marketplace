@@ -3,7 +3,7 @@ from rest_framework.mixins import UpdateModelMixin
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from actions.api.v1.filters import NotificationFilter
+from marketplace.actions.api.v1.filters import NotificationFilter
 from marketplace.actions.api.v1.serializers import NotificationSerializer
 from marketplace.actions.models import Notification
 

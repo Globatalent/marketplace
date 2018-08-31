@@ -327,6 +327,13 @@ CORS_ALLOW_HEADERS = default_headers + (
     'cache-control',
 )
 
+# REST FRAMEWORK GENERIC RELATIONS
+# ------------------------------------------------------------------------------
+# See: https://github.com/Ian-Foote/rest-framework-generic-relations
+INSTALLED_APPS += (
+    'generic_relations',
+)
+
 # PROJECT SPECIFIC
 # ------------------------------------------------------------------------------
 ENABLE_CUSTOM_EMAIL_SENDING = True

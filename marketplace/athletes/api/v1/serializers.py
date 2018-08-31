@@ -3,7 +3,7 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth import password_validation
 from django.utils.translation import ugettext_lazy as _
 
-from marketplace.athletes.models import Picture, Link, Athlete
+from marketplace.athletes.models import Picture, Link, Athlete, Review
 from marketplace.users.models import User
 from marketplace.supporters.helpers import is_following
 from marketplace.users.helpers import is_supporter
@@ -34,6 +34,20 @@ class LinkSerializer(serializers.ModelSerializer):
         ]
         extra_kwargs = {
             'athlete': {'read_only': True},
+        }
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            'id',
+            'text',
+            'state',
+            'reviewer',
+        ]
+        extra_kwargs = {
+            'reviewer': {'read_only': True},
         }
 
 

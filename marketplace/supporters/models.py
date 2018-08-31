@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 
+from marketplace.actions.constants import UNFOLLOWS, FOLLOWS
 from marketplace.actions.decorators import dispatch_action
 from marketplace.athletes.constants import APPROVED
 from marketplace.supporters.constants import RULE_CHOICES, UP
@@ -46,12 +47,12 @@ class Supporter(models.Model):
         return self._follow(athlete)
 
 
-    @dispatch_action("follows", method=True)
+    @dispatch_action(FOLLOWS, method=True)
     def _follow(self, athlete):
         self.following.add(athlete)
         return True
 
-    @dispatch_action("unfollow", method=True)
+    @dispatch_action(UNFOLLOWS, method=True)
     def _unfollow(self, athlete):
         self.following.remove(athlete)
         return False

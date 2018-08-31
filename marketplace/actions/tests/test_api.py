@@ -33,7 +33,6 @@ class ActionsAPITests(APITestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        print(data)
         self.assertEqual(len(unread), data["count"])
         response = self.client.get(
             "/api/v1/notifications/count/?read=True",
