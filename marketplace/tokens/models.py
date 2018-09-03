@@ -2,8 +2,9 @@ from django.db import IntegrityError
 from django.db import models
 from django.db.models import Sum
 from django.utils.translation import ugettext_lazy as _
-from marketplace.purchases.constants import PAID
 from model_utils.models import TimeStampedModel
+
+from marketplace.purchases.constants import PAID, CURRENCY_CHOICES, USD
 
 
 class Token(TimeStampedModel):
@@ -13,6 +14,7 @@ class Token(TimeStampedModel):
     code = models.CharField(max_length=16, null=True, blank=True)
     amount = models.PositiveIntegerField(help_text=_("amount of tokens issued by the athlete"))
     price = models.FloatField(help_text=_("total price for the amount of tokens issued"))
+    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True)
 
     class Meta:
         ordering = ("created", )

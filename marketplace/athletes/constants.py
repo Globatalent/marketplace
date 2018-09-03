@@ -7,6 +7,7 @@ SEX_CHOICES = (
     (MALE, _('Male')),
     (FEMALE, _('Female'))
 )
+
 APPROVED = 'APPROVED'
 REJECTED = 'REJECTED'
 REVIEWING = 'REVIEWING'

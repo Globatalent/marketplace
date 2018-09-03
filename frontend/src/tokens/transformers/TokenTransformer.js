@@ -13,6 +13,7 @@ class TokenTransformer extends Transformer {
       progression: token.progression,
       unitPrice: token.unit_price,
       remaining: token.remaining,
+      currency: token.currency,
     })
   }
 

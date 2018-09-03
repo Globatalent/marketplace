@@ -35,11 +35,11 @@
           <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success"
                        v-if="progress(athlete) >= 100"></el-progress>
           <div class="float-right">
-            <span class="goal">Goal: 100,000</span>
+            <span class="goal">Goal: {{ athlete.token.price }}</span>
           </div>
           <div class="bottom clearfix">
             <div>
-              <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
+              <el-button type="primary" class="is-full-width m-t-20" @click="goToDetails(athlete)">See details</el-button>
             </div>
           </div>
         </div>
@@ -51,6 +51,7 @@
 <script>
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
+  import router from '@/router.js'
 
   export default {
     name: 'AthleteProfile',
@@ -83,6 +84,9 @@
           this.$store.dispatch('athletes/list', {url: this.pagination.next, push: true})
         }
       },
+      goToDetails(athlete) {
+        router.push({ name: 'athlete.details', params: { athleteId: athlete.id }})
+      },
       isSupporter () {
         return !!this.user && !!this.user.supporter
       },
@@ -102,7 +106,6 @@
         }
       },
       likeIconClass (following) {
-        console.log(`This following: ${following}`)
         if (following) {
           return 'heart'
         } else {

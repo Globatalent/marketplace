@@ -5,7 +5,7 @@ from marketplace.tokens.models import Token
 
 class TokenSerializer(serializers.ModelSerializer):
 
-    unit_price = serializers.IntegerField(read_only=True)
+    unit_price = serializers.FloatField(read_only=True)
     remaining = serializers.IntegerField(read_only=True)
     progression = serializers.FloatField(read_only=True)
 
@@ -21,6 +21,7 @@ class TokenSerializer(serializers.ModelSerializer):
             "unit_price",
             "remaining",
             "progression",
+            "currency",
         ]
         extra_kwargs = {
             "athlete": {"read_only": True}

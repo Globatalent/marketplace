@@ -27,33 +27,35 @@
       <div>
         <div class="athlete-details-container">
           <div class="athlete-actions-column">
-            <el-button v-if="athlete.following" type="primary" class="m-b-15">
-              <i class="fas fa-eye"></i> {{$tc('message.Following')}}
-            </el-button>
-            <el-button v-else class="m-b-15">
-              <i class="far fa-eye"></i> {{$tc('message.Follow')}}
-            </el-button>
-            <h3>{{$tc('message.Token')}}: MSI</h3>
+            <div v-if="isSupporter()">
+              <el-button v-if="athlete.following" type="primary" class="m-b-15" @click="setFollowingAthlete()">
+                <i class="fas fa-eye"></i> {{$tc('message.Following')}}
+              </el-button>
+              <el-button v-else class="m-b-15" @click="setFollowingAthlete()">
+                <i class="far fa-eye"></i> {{$tc('message.Follow')}}
+              </el-button>
+            </div>
+            <h3>{{$tc('message.Token')}}: {{ token.code }}</h3>
             <el-row>
               <el-col :span="12">
                 <h4 class="small-title">{{$tc('message.Price')}}</h4>
-                <p>3 GBT</p>
+                <p>{{ token.unitPrice }} {{ token.currency }}</p>
               </el-col>
               <el-col :span="12">
                 <h4 class="small-title text-right">{{$tc('message.Collected')}}</h4>
-                <p class="text-right">25,430 GBT</p>
+                <p class="text-right">{{collected()}} {{ token.currency }}</p>
               </el-col>
             </el-row>
             <div class="progress m-b-15 clearfix">
-              <el-progress :text-inside="true" :stroke-width="18" :percentage="25"
+              <el-progress :text-inside="true" :stroke-width="18" :percentage="progress"
                            v-if="progress < 100"></el-progress>
               <el-progress :text-inside="true" :stroke-width="18" :percentage="progress" status="success"
                            v-if="progress >= 100"></el-progress>
               <div class="float-right">
-                <span class="small-title">Goal: 100,000 GBT</span>
+                <span class="small-title">Goal: {{ token.price }} {{ token.currency }}</span>
               </div>
             </div>
-            <el-button type="primary" class="is-full-width" size="big">
+            <el-button type="primary" class="is-full-width" size="big" v-if="isSupporter()">
               <i class="fas fa-money-bill"></i> {{$tc('message.Invest')}}
             </el-button>
           </div>
@@ -85,24 +87,48 @@
       'gb-base-layout': BaseLayout
     },
     data () {
-      return {}
+      return {
+        token: {}
+      }
     },
     computed: {
       ...mapGetters({
         athlete: 'athletes/athlete',
+        user: 'users/user',
       }),
-
       progress () {
-        if (!!this.athlete.token) {
-          return Math.round(this.athlete.token.progression * 100)
+        if (!!this.token) {
+          return Math.round(this.token.progression * 100)
         }
         return 0
       },
     },
     created () {
       const id = this.$route.params.athleteId
-      this.$store.dispatch('athletes/fetch', id)
+      this.$store.dispatch('athletes/fetch', id).then( () => {
+        this.token = this.athlete.token
+      })
     },
+    methods: {
+      isSupporter () {
+        return !!this.user && !!this.user.supporter
+      },
+      setFollowingAthlete () {
+        if (this.isSupporter()) {
+          this.athlete.following = !this.athlete.following
+          this.$store.dispatch('athletes/follow', this.athlete.id)
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      },
+      collected () {
+        if (!!this.token) {
+          return (this.token.amount - this.token.remaining) * this.token.unitPrice
+        }
+        return 0
+      }
+    }
   }
 </script>
 
