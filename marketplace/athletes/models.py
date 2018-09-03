@@ -63,15 +63,20 @@ class Picture(models.Model):
 class Link(models.Model):
     name = models.CharField(max_length=150, verbose_name=_('name'))
     url = models.URLField(null=True, blank=True, verbose_name=_('url'))
-    athlete = models.ForeignKey(Athlete, verbose_name=_('athlete'),
-                                related_name='links', on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.name
+    athlete = models.ForeignKey(
+        Athlete,
+        verbose_name=_('athlete'),
+        related_name='links',
+        on_delete=models.CASCADE
+    )
+    is_multimedia = models.BooleanField(default=False)
 
     class Meta:
         verbose_name = _('link')
         verbose_name_plural = _('links')
+
+    def __str__(self):
+        return self.name
 
 
 class Review(TimeStampedModel):

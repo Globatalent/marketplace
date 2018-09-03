@@ -30,7 +30,8 @@ class LinkSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'url',
-            'athlete'
+            'is_multimedia',
+            'athlete',
         ]
         extra_kwargs = {
             'athlete': {'read_only': True},
