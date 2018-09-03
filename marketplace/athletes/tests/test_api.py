@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from marketplace.athletes.models import Athlete
-from marketplace.athletes.tests.factories import AthleteFactory
+from marketplace.athletes.tests.factories import AthleteFactory, ReviewFactory
 from marketplace.users.models import User
 from marketplace.users.tests.factories import UserFactory
 from marketplace.supporters.tests.factories import SupporterFactory
@@ -123,6 +123,7 @@ class AthletesAPITests(APITestCase):
         supporter = SupporterFactory()
         athlete = AthleteFactory()
         supporter.follow(athlete)
+        self.client.force_authenticate(athlete.user)
         response = self.client.get(
             "/api/v1/athletes/?followed_by={}".format(supporter.user.pk),
             format="json",
@@ -130,3 +131,16 @@ class AthletesAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(1, data['count'])
+
+    def test_list_reviews(self):
+        athlete = AthleteFactory()
+        reviews = ReviewFactory.create_batch(athlete=athlete, size=10)
+        self.client.force_authenticate(athlete.user)
+        response = self.client.get(
+            "/api/v1/reviews/",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(reviews), data['count'])
+

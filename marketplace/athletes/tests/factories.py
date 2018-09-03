@@ -25,6 +25,7 @@ class PictureFactory(factory.django.DjangoModelFactory):
 class ReviewFactory(factory.django.DjangoModelFactory):
 
     reviewer = factory.SubFactory(UserFactory)
+    athlete = factory.SubFactory(AthleteFactory)
 
     class Meta:
         model = "athletes.Review"

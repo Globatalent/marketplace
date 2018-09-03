@@ -84,6 +84,7 @@ class AthleteSerializer(serializers.ModelSerializer):
 
 
 class AthleteRegistrationSerializer(serializers.Serializer):
+
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     country = serializers.CharField()
@@ -103,3 +104,9 @@ class AthleteRegistrationSerializer(serializers.Serializer):
         if data['password'] != data['repeat_password']:
             raise serializers.ValidationError("Password does not match the confirm password.")
         return data
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass

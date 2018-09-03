@@ -4,7 +4,7 @@ from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token
 
 from marketplace.actions.api.v1.viewsets import NotificationViewSet
 from marketplace.athletes.api.v1.views import AthleteRegistrationView
-from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet, PictureViewSet
+from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet, PictureViewSet, ReviewViewSet
 from marketplace.purchases.api.v1.viewsets import PurchaseViewSet
 from marketplace.supporters.api.v1.views import SupporterRegistrationView
 from marketplace.supporters.api.v1.viewsets import AlertViewSet
@@ -23,6 +23,7 @@ router_v1.register('alerts', AlertViewSet, 'alerts')
 router_v1.register('notifications', NotificationViewSet, 'notifications')
 router_v1.register('tokens', TokenViewSet, 'tokens')
 router_v1.register('purchases', PurchaseViewSet, 'purchases')
+router_v1.register('reviews', ReviewViewSet, 'reviews')
 router_v1.register('request_restore_code', viewset=RequestRestoreCodeViewSet, base_name="request_restore_code")
 router_v1.register('restore_password', viewset=RestorePasswordViewSet, base_name="restore_password")
 router_v1.register('verify_email', viewset=VerifyViewSet, base_name="verify_email")

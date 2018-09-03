@@ -14,7 +14,8 @@ class NotificationViewSet(UpdateModelMixin, ReadOnlyModelViewSet):
     filter_class = NotificationFilter
 
     def get_queryset(self):
-        return Notification.objects.filter(user=self.request.user)
+        queryset = super().get_queryset()
+        return queryset.filter(user=self.request.user)
 
     @action(detail=False)
     def count(self, request, *args, **kwargs):
