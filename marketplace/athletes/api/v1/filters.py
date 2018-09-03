@@ -1,7 +1,7 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
-from marketplace.athletes.models import Athlete, Review, Link
+from marketplace.athletes.models import Athlete, Review, Link, Picture
 
 
 class AthleteFilter(django_filters.rest_framework.FilterSet):
@@ -45,3 +45,15 @@ class LinkFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Link
         fields = ['is_multimedia', 'athlete_id']
+
+
+class PictureFilter(django_filters.rest_framework.FilterSet):
+
+    athlete_id = django_filters.NumberFilter(
+        name="athlete__id",
+        help_text=_("Filter using the athlete internal ID.")
+    )
+
+    class Meta:
+        model = Picture
+        fields = ['athlete_id']

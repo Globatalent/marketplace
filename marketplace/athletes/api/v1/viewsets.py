@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
 
-from marketplace.athletes.api.v1.filters import AthleteFilter, ReviewFilter, LinkFilter
+from marketplace.athletes.api.v1.filters import AthleteFilter, ReviewFilter, LinkFilter, PictureFilter
 from marketplace.athletes.api.v1.permissions import OnlyOwnerUpdates, OnlyAthleteOwnerUpdates
 from marketplace.athletes.api.v1.serializers import PictureSerializer, LinkSerializer, AthleteSerializer, \
     ReviewSerializer
@@ -22,6 +22,7 @@ class PictureViewSet(ModelViewSet):
         OnlyAthletes,
         OnlyAthleteOwnerUpdates,
     ]
+    filter_class = PictureFilter
 
     def perform_create(self, serializer):
         return serializer.save(athlete=self.request.user.athlete)

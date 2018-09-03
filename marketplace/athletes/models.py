@@ -45,8 +45,12 @@ class Picture(models.Model):
         upload_to=UploadToDir('athletes', populate_from='athlete_id'),
         verbose_name=_('image'),
     )
-    athlete = models.ForeignKey(Athlete, verbose_name=_('athlete'),
-                                related_name='pictures', on_delete=models.CASCADE)
+    athlete = models.ForeignKey(
+        Athlete,
+        verbose_name=_('athlete'),
+        related_name='pictures',
+        on_delete=models.CASCADE
+    )
 
     def __str__(self):
         return str(self.id)
