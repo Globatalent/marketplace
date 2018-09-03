@@ -1,7 +1,7 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
-from marketplace.athletes.models import Athlete, Review
+from marketplace.athletes.models import Athlete, Review, Link
 
 
 class AthleteFilter(django_filters.rest_framework.FilterSet):
@@ -30,3 +30,14 @@ class ReviewFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Review
         fields = ['state']
+
+class LinkFilter(django_filters.rest_framework.FilterSet):
+
+    is_multimedia = django_filters.BooleanFilter(
+        name="is_multimedia",
+        help_text=_("Filter by is_multimedia.")
+    )
+
+    class Meta:
+        model = Link
+        fields = ['is_multimedia']
