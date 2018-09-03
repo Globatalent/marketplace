@@ -37,7 +37,11 @@ class LinkFilter(django_filters.rest_framework.FilterSet):
         name="is_multimedia",
         help_text=_("Filter by is_multimedia.")
     )
+    athlete_id = django_filters.NumberFilter(
+        name="athlete__id",
+        help_text=_("Filter using the athlete internal ID.")
+    )
 
     class Meta:
         model = Link
-        fields = ['is_multimedia']
+        fields = ['is_multimedia', 'athlete_id']
