@@ -1,10 +1,10 @@
 from django.db import IntegrityError
 from test_plus.test import TestCase
 
-from marketplace.users.tests.factories import UserFactory
-from marketplace.tokens.tests.factories import TokenFactory
+from marketplace.purchases.models import Purchase
 from marketplace.supporters.tests.factories import SupporterFactory
-from marketplace.tokens.models import Purchase
+from marketplace.tokens.tests.factories import TokenFactory
+from marketplace.users.tests.factories import UserFactory
 
 
 class PurchasesTests(TestCase):

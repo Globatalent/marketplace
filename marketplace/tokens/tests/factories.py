@@ -2,7 +2,6 @@ import factory
 from factory.fuzzy import FuzzyDecimal, FuzzyInteger
 
 from marketplace.athletes.tests.factories import AthleteFactory
-from marketplace.supporters.tests.factories import SupporterFactory
 
 
 class TokenFactory(factory.django.DjangoModelFactory):
@@ -13,12 +12,3 @@ class TokenFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = "tokens.Token"
-
-
-class PurchaseFactory(factory.django.DjangoModelFactory):
-
-    supporter = factory.SubFactory(SupporterFactory)
-    token = factory.SubFactory(TokenFactory)
-
-    class Meta:
-        model = "tokens.Purchase"

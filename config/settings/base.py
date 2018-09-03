@@ -76,6 +76,7 @@ LOCAL_APPS = [
     'marketplace.athletes.apps.AthletesConfig',
     'marketplace.actions.apps.ActionsConfig',
     'marketplace.tokens.apps.TokensConfig',
+    'marketplace.purchases.apps.PurchasesConfig',
     'marketplace.emails.apps.EmailsConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps

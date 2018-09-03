@@ -6,7 +6,8 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 from model_utils.models import TimeStampedModel
 
-from marketplace.actions.constants import ADD_REVIEW
+from marketplace.actions.constants import ADD_REVIEW, PURCHASE
+from marketplace.actions.helpers import human_readable
 from marketplace.athletes.models import Athlete
 from marketplace.supporters.models import Supporter
 from marketplace.users.models import User
@@ -65,17 +66,13 @@ class Action(TimeStampedModel):
         return self.text()
 
     def text(self):
-        text = "{} {}".format(str(self.actor), self.verb)
-        if self.trigger:
-            text = "{} {}".format(text, str(self.trigger))
-        if self.target:
-            text = "{} {}".format(text, str(self.target))
-        return text
+        """Gets the human readable text for the action."""
+        return human_readable(self)
 
     def audience(self):
         """Gets the audience of this action."""
         # Specific verbs cases
-        if self.verb == ADD_REVIEW:
+        if self.verb in (ADD_REVIEW, PURCHASE):
             return User.objects.filter(pk=self.target.user.pk)
         # If the actor is an athlete
         if self.actor_content_type == ContentType.objects.get_for_model(Athlete):

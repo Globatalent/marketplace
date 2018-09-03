@@ -28,18 +28,19 @@ def dispatch_action(verb, method=False):
             """Wrapped function with the decorator."""
             result = func(*args, **kwargs)
             actor, trigger, target = extract_actor_trigger_target(verb, method, *args, **kwargs)
-            action = Action(
-                actor_content_type=ContentType.objects.get_for_model(actor),
-                actor_object_id=actor.pk,
-                verb=verb,
-            )
-            if trigger and hasattr(trigger, "id"):
-                action.trigger_content_type = ContentType.objects.get_for_model(trigger)
-                action.trigger_object_id = trigger.pk
-            if target and hasattr(target, "id"):
-                action.target_content_type = ContentType.objects.get_for_model(target)
-                action.target_object_id = target.pk
-            action.save()
+            if actor:
+                action = Action(
+                    actor_content_type=ContentType.objects.get_for_model(actor),
+                    actor_object_id=actor.pk,
+                    verb=verb,
+                )
+                if trigger and hasattr(trigger, "id"):
+                    action.trigger_content_type = ContentType.objects.get_for_model(trigger)
+                    action.trigger_object_id = trigger.pk
+                if target and hasattr(target, "id"):
+                    action.target_content_type = ContentType.objects.get_for_model(target)
+                    action.target_object_id = target.pk
+                action.save()
             return result
 
         return _wrapper_trigger_action
