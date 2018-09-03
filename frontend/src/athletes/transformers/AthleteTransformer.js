@@ -1,6 +1,7 @@
 import Transformer from '../../base/transformers/BaseTransformer'
 import Athlete from '../models/Athlete'
 import Vue from 'vue'
+import TokenTransformer from '@/tokens/transformers/TokenTransformer'
 
 
 class AthleteTransformer extends Transformer {
@@ -17,7 +18,7 @@ class AthleteTransformer extends Transformer {
       following: athlete.following,
       links: athlete.links,
       pictures: athlete.pictures,
-      token: athlete.token,
+      token: !!athlete.token? TokenTransformer.fetch(athlete.token) : null,
     })
   }
 

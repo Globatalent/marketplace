@@ -3,7 +3,7 @@ from rest_framework.validators import UniqueValidator
 from django.contrib.auth import password_validation
 from django.utils.translation import ugettext_lazy as _
 
-from marketplace.athletes.models import Picture, Link, Athlete
+from marketplace.athletes.models import Picture, Link, Athlete, Review
 from marketplace.users.models import User
 from marketplace.supporters.helpers import is_following
 from marketplace.users.helpers import is_supporter
@@ -30,10 +30,25 @@ class LinkSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'url',
-            'athlete'
+            'is_multimedia',
+            'athlete',
         ]
         extra_kwargs = {
             'athlete': {'read_only': True},
+        }
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            'id',
+            'text',
+            'state',
+            'reviewer',
+        ]
+        extra_kwargs = {
+            'reviewer': {'read_only': True},
         }
 
 
@@ -71,6 +86,7 @@ class AthleteSerializer(serializers.ModelSerializer):
 
 
 class AthleteRegistrationSerializer(serializers.Serializer):
+
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     country = serializers.CharField()
@@ -90,3 +106,9 @@ class AthleteRegistrationSerializer(serializers.Serializer):
         if data['password'] != data['repeat_password']:
             raise serializers.ValidationError("Password does not match the confirm password.")
         return data
+
+    def create(self, validated_data):
+        pass
+
+    def update(self, instance, validated_data):
+        pass

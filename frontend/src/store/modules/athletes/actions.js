@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import AthleteTransformer from '../../../athletes/transformers/AthleteTransformer'
-import { store } from '../../index'
+import ReviewTransformer from '../../../athletes/transformers/ReviewTransformer'
+
 
 export default {
   list({commit, state}, payload={}) {
@@ -126,6 +127,31 @@ export default {
       return Vue.axios.delete(`${state.endpoints.links}${payload.id}/`).then(response => {
         resolve(response)
       }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  reviews({commit, state}, payload={}) {
+    return new Promise((resolve, reject) => {
+      const { url, filters, push } = payload
+      let endpoint = state.endpoints.reviews
+      if (!!url) {
+        endpoint = url
+      } else if (!!filters) {
+        const query = Object.keys(filters).map(key => `${key}=${filters[key]}`).join('&')
+        endpoint = [endpoint, query].join('?')
+      }
+      Vue.axios.get(endpoint).then((response) => {
+        const { results, count, next, previous } = response.data;
+        const reviews = results.map(item => ReviewTransformer.fetch(item));
+        if (push) {
+          commit('pushReviews', reviews)
+        } else {
+          commit('reviews', reviews)
+        }
+        commit('reviewsPagination', {count, next, previous})
+        resolve(reviews)
+      }).catch((error) => {
         reject(error)
       })
     })

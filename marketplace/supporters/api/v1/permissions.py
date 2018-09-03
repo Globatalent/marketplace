@@ -1,6 +1,6 @@
 from rest_framework import permissions
 
-from users.helpers import is_supporter
+from marketplace.users.helpers import is_supporter
 
 
 class CreateUpdateOnlySupporters(permissions.BasePermission):

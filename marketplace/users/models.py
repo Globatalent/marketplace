@@ -91,7 +91,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         return self.email
 
     def get_short_name(self):
-        """Return the short name for the user."""
         return self.email
 
     def email_user(self, subject, message, from_email=None, **kwargs):

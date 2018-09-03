@@ -23,8 +23,8 @@
             </el-form-item>
             <el-form-item v-bind:label="$tc('message.Sex')" class="text-left sexFormElement" prop="sex">
               <el-radio-group v-model="form.sex">
-                <el-radio label="male">{{ $tc("message.Male") }}</el-radio>
-                <el-radio label="female">{{ $tc("message.Female") }}</el-radio>
+                <el-radio label="MALE">{{ $tc("message.Male") }}</el-radio>
+                <el-radio label="FEMALE">{{ $tc("message.Female") }}</el-radio>
               </el-radio-group>
             </el-form-item>
           </el-col>

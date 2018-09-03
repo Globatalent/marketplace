@@ -18,7 +18,7 @@ class PictureInline(admin.TabularInline):
 
 class LinkInline(admin.TabularInline):
     model = Link
-    fields = ('name', 'url')
+    fields = ('name', 'url', 'is_multimedia')
 
 
 @admin.register(Athlete)

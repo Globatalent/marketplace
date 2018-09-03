@@ -8,6 +8,7 @@ import users from './modules/users/index'
 import athletes from './modules/athletes/index'
 import supporters from './modules/supporters/index'
 import tokens from './modules/tokens/index'
+import actions from './modules/actions/index'
 
 export const store = new Vuex.Store({
   modules: {
@@ -16,5 +17,6 @@ export const store = new Vuex.Store({
     athletes,
     supporters,
     tokens,
+    actions,
   },
 })
