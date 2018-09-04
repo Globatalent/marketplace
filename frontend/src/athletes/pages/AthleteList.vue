@@ -6,7 +6,12 @@
       -->
     <masonry :cols="{default: 3, 750: 2, 500: 1}" :gutter="{default: '15px', 750: '15px'}">
       <el-card :body-style="{ padding: '0px' }" v-for="(athlete, index) in athletes" :key="index" style="margin-bottom:15px;">
-        <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}"><img v-bind:src="getPicture(athlete)" class="image"></router-link>
+        <div class="athlete-image">
+          <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
+            <img v-if="getPicture(athlete)" v-bind:src="getPicture(athlete)" class="image">
+            <img v-else src="~@/assets/img/user-placeholder-circle.png" class="image">
+          </router-link>
+        </div>
         <div style="padding: 14px;">
           <div class="top clearfix">
             <el-row>
@@ -147,6 +152,11 @@ export default {
     transform: scale(1.2);
     color: #4e87b1;
   }
+}
+
+.athlete-image {
+  height: 130px;
+  overflow: hidden;
 }
 
 .athlete-name {
