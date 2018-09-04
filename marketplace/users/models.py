@@ -128,11 +128,17 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     def save(self, *args, **kwargs):
         is_insert = self.pk is None
+        # Checks change of email
+        if not is_insert:
+            previous_user = User.objects.get(pk=self.pk)
+            if previous_user.email != self.email:
+                self.is_email_verified  = False
+                self.verification_code = None
         # Creates verification code if it doesn't exists
         if not self.is_email_verified and (self.verification_code is None or self.verification_code.strip() == ""):
             self.verification_code = self.generate_random_code()
         result = super().save(*args, **kwargs)
         # For every inserts, sends a verification email (excepts superusers)
-        if is_insert and not self.is_email_verified and not self.is_superuser:
+        if not self.is_email_verified and not self.is_superuser:
             self.send_verification()
         return result

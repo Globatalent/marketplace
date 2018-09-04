@@ -1,3 +1,4 @@
+from django.contrib.auth.hashers import make_password
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
@@ -12,7 +13,21 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('id', 'email', 'athlete', 'supporter', 'is_staff')
+        fields = [
+            'id',
+            'email',
+            "password",
+            'athlete',
+            'supporter',
+            'is_staff',
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True, "required": False},
+        }
+
+    def validate_password(self, value):
+        value = make_password(value)
+        return value
 
 
 class RequestRestoreCodeSerializer(serializers.Serializer):
