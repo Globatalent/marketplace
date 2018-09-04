@@ -20,6 +20,9 @@ class Purchase(TimeStampedModel):
     class Meta:
         ordering = ("created", )
 
+    def __str__(self):
+        return "{} {}".format(self.amount, self.token.code)
+
     @dispatch_action(PURCHASE, method=True)
     def save(self, *args, **kwargs):
         is_insert = self.pk is None
