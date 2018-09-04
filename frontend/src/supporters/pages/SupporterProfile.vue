@@ -7,17 +7,6 @@
           <el-form ref="form" label-position="top" class="text-left" :model="form" :rules="rules">
             <el-row :gutter="20">
               <el-col :xs="24" :md="12">
-                <el-form-item required prop="email">
-                  <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
-                </el-form-item>
-                <el-form-item prop="password">
-                  <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
-                </el-form-item>
-                <el-form-item prop="repeatPassword">
-                  <el-input v-bind:placeholder="$tc('message.RepeatPassword')" type="password" v-model="form.repeatPassword"></el-input>
-                </el-form-item>
-              </el-col>
-              <el-col :xs="24" :md="12">
                 <el-form-item required prop="firstName">
                   <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.firstName"></el-input>
                 </el-form-item>
@@ -78,33 +67,10 @@ export default {
   data() {
     return {
       form: {
-        email: '',
-        password: '',
-        repeatPassword: '',
         firstName: '',
         lastName: ''
       },
       rules: {
-        email: [
-          {
-            required: true,
-            message: 'Please enter a valid email',
-            trigger: 'blur'
-          },
-          {
-            type: 'email',
-            message: 'Please enter a valid email',
-            trigger: ['blur', 'change']
-          }
-        ],
-        password: [
-          {
-            required: false,
-            message: 'Please input password',
-            trigger: 'change'
-          }
-        ],
-        repeatPassword: [{ validator: this.validatePass2, trigger: 'change' }],
         firstName: [
           {
             required: true,
@@ -128,16 +94,12 @@ export default {
   },
   created() {
     this.initial()
-    console.log(this.user)
-
-    this.form.firstName = this.user.supporter.firstName
-    this.form.lastName = this.user.supporter.lastName
-    this.form.email = this.user.email
   },
   methods: {
     initial() {
       this.$store.dispatch('supporters/alerts')
       this.$store.dispatch('users/fetchUser').then(user => {
+        this.form = { ...this.user.supporter}
         this.$store.dispatch('athletes/list', {
           filters: { followed_by: user.id }
         })

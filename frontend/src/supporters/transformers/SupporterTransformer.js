@@ -9,6 +9,14 @@ class SupporterTransformer extends Transformer {
       lastName: supporter.last_name,
     })
   }
+  static send (supporter) {
+    return {
+      'id': supporter.id,
+      'first_name': supporter.firstName,
+      'last_name': supporter.lastName,
+
+    }
+  }
 }
 
 export default SupporterTransformer

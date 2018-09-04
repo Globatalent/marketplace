@@ -53,7 +53,6 @@ export default {
       const payload = SupporterTransformer.send(data)
       Vue.axios.patch(`${state.endpoints.supporters}${payload.id}/`, payload).then( response => {
         const supporter = SupporterTransformer.fetch(response.data);
-        commit('supporter', supporter)
         resolve(supporter)
       }).catch((error) => {
         reject(error)

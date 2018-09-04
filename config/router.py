@@ -7,7 +7,7 @@ from marketplace.athletes.api.v1.views import AthleteRegistrationView
 from marketplace.athletes.api.v1.viewsets import AthleteViewSet, LinkViewSet, PictureViewSet, ReviewViewSet
 from marketplace.purchases.api.v1.viewsets import PurchaseViewSet
 from marketplace.supporters.api.v1.views import SupporterRegistrationView
-from marketplace.supporters.api.v1.viewsets import AlertViewSet
+from marketplace.supporters.api.v1.viewsets import AlertViewSet, SupporterViewSet
 from marketplace.tokens.api.v1.viewsets import TokenViewSet
 from marketplace.users.api.v1.viewsets import UserViewSet, RestorePasswordViewSet, VerifyViewSet, \
     RequestRestoreCodeViewSet
@@ -16,6 +16,7 @@ app_name = 'api'
 
 router_v1 = routers.DefaultRouter()
 router_v1.register('athletes', AthleteViewSet, 'athletes')
+router_v1.register('supporters', SupporterViewSet, 'supporters')
 router_v1.register('users', UserViewSet, 'users')
 router_v1.register('links', LinkViewSet, 'links')
 router_v1.register('pictures', PictureViewSet, 'pictures')
