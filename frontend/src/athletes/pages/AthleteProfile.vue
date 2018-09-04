@@ -259,7 +259,7 @@ export default {
       })
     },
     saveUserProfile(data) {
-      const linksToCreate = this.links.filter(link => !link.id)
+      const linksToCreate = this.links.filter(link => !link.id && !!link.name)
       const linksToUpdate = this.links.filter(link => !!link.id)
       const payload = {
         linksToCreate: linksToCreate,
