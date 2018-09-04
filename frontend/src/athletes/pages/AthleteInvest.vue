@@ -8,8 +8,8 @@
             <el-form ref="form" label-position="top" class="text-left" :model="form" :rules="rules">
               <el-row :gutter="20">
                 <el-col :xs="24">
-                  <el-form-item required prop="quantity">
-                    <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="form.quantity" min="0"></el-input>
+                  <el-form-item required prop="amount">
+                    <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="form.amount" min="0"></el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
@@ -47,10 +47,10 @@ export default {
     return {
       token: {},
       form: {
-        quantity: 0
+        amount: 0
       },
       rules: {
-        quantity: [
+        amount: [
           {
             required: true,
             message: 'Please input quantity',
@@ -64,13 +64,7 @@ export default {
     ...mapGetters({
       athlete: 'athletes/athlete',
       user: 'users/user'
-    }),
-    progress() {
-      if (!!this.token) {
-        return Math.round(this.token.progression * 100)
-      }
-      return 0
-    }
+    })
   },
   created() {
     const id = this.$route.params.athleteId
@@ -79,19 +73,13 @@ export default {
     })
   },
   methods: {
-    isSupporter() {
-      return !!this.user && !!this.user.supporter
-    },
-    collected() {
-      if (!!this.token) {
-        return (this.token.amount - this.token.remaining) * this.token.unitPrice
-      }
-      return 0
-    },
     onSubmit(form) {
       this.$refs[form].validate(valid => {
         if (valid) {
-          const dataForm = Object.assign({}, this.form)
+          const dataForm = {
+            token: this.athlete.token.id,
+            ...this.form,
+          }
           this.saveInvest(dataForm)
         } else {
           console.log('error submit!!')
@@ -100,14 +88,11 @@ export default {
       })
     },
     saveInvest(data) {
-      console.log('Saving invest ...')
-
-      // this.$store
-      //   .dispatch('athletes/update', data)
-      //   .then(response => {
-
-      //   })
-      //   .catch(error => {})
+      this.$store
+        .dispatch('tokens/purchase', data)
+        .then(response => {
+        })
+        .catch(error => {})
     },
     goBack(){
       router.go(-1)

@@ -35,6 +35,9 @@ class Token(TimeStampedModel):
     def progression(self):
         return 1.0 - (self.remaining / self.amount)
 
+    def __str__(self):
+        return "{} token: {}".format(str(self.athlete), self.code)
+
     def save(self, *args, **kwargs):
         if self.amount <= 0:
             raise IntegrityError("amount field should be greater than 0")
