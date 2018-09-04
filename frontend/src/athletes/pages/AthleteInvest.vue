@@ -13,9 +13,18 @@
                   </el-form-item>
                 </el-col>
               </el-row>
-              <el-form-item class="text-center">
-                <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc("message.Invest") }}</el-button>
-              </el-form-item>
+              <el-row>
+                <el-col :xs="24" :sm="12">
+                  <el-form-item class="text-center">
+                    <el-button type="primary" class="is-uppercase" @click.prevent="goBack()">&lt; {{ $tc("message.Back") }}</el-button>
+                  </el-form-item>
+                </el-col>
+                <el-col :xs="24" :sm="12">
+                  <el-form-item class="text-center">
+                    <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc("message.Invest") }}</el-button>
+                  </el-form-item>
+                </el-col>
+              </el-row>
             </el-form>
           </div>
         </el-col>
@@ -27,6 +36,7 @@
 <script>
 import BaseLayout from '@/layout/BaseLayout.vue'
 import { mapGetters } from 'vuex'
+import router from '@/router.js'
 
 export default {
   name: 'AthleteInvest',
@@ -46,8 +56,8 @@ export default {
             message: 'Please input quantity',
             trigger: 'blur'
           }
-        ],
-      },
+        ]
+      }
     }
   },
   computed: {
@@ -90,7 +100,7 @@ export default {
       })
     },
     saveInvest(data) {
-      console.log('Saving invest ...');
+      console.log('Saving invest ...')
 
       // this.$store
       //   .dispatch('athletes/update', data)
@@ -99,6 +109,9 @@ export default {
       //   })
       //   .catch(error => {})
     },
+    goBack(){
+      router.go(-1)
+    }
   }
 }
 </script>
