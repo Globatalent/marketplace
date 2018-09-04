@@ -113,13 +113,6 @@ export default {
         })
       }
     },
-    likeIconClass(following) {
-      if (following) {
-        return 'heart'
-      } else {
-        return 'thumbs-up'
-      }
-    },
     getPicture(athlete) {
       const picture = athlete.pictures[0]
       if (picture) {
