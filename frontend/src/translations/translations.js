@@ -54,6 +54,7 @@ export const messages = {
       RestorePassword: 'Restore Password',
       Invest: 'Invest',
       Notifications: 'Notifications',
+      Back: 'Back',
     }
   },
   es: {
