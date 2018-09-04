@@ -30,12 +30,14 @@
               </el-col>
             </el-row>
           </div>
-          <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)"
-                       v-if="progress(athlete) < 100"></el-progress>
-          <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success"
-                       v-if="progress(athlete) >= 100"></el-progress>
-          <div class="float-right">
-            <span class="goal">Goal: {{ athlete.token.price }}</span>
+          <div v-if="!!athlete.token">
+            <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)"
+                        v-if="progress(athlete) < 100"></el-progress>
+            <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success"
+                        v-if="progress(athlete) >= 100"></el-progress>
+            <div class="float-right">
+              <span class="goal">Goal: {{ getPrice(athlete) }}</span>
+            </div>
           </div>
           <div class="bottom clearfix">
             <div>
@@ -83,6 +85,9 @@
         if (!!this.pagination.next) {
           this.$store.dispatch('athletes/list', {url: this.pagination.next, push: true})
         }
+      },
+      getPrice(athlete) {
+        return athlete.token? athlete.token.price : 0;
       },
       goToDetails(athlete) {
         router.push({ name: 'athlete.details', params: { athleteId: athlete.id }})

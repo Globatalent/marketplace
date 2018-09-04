@@ -35,29 +35,31 @@
                 <i class="far fa-eye"></i> {{$tc('message.Follow')}}
               </el-button>
             </div>
-            <h3>{{$tc('message.Token')}}: {{ token.code }}</h3>
-            <el-row>
-              <el-col :span="12">
-                <h4 class="small-title">{{$tc('message.Price')}}</h4>
-                <p>{{ token.unitPrice }} {{ token.currency }}</p>
-              </el-col>
-              <el-col :span="12">
-                <h4 class="small-title text-right">{{$tc('message.Collected')}}</h4>
-                <p class="text-right">{{collected()}} {{ token.currency }}</p>
-              </el-col>
-            </el-row>
-            <div class="progress m-b-15 clearfix">
-              <el-progress :text-inside="true" :stroke-width="18" :percentage="progress"
-                           v-if="progress < 100"></el-progress>
-              <el-progress :text-inside="true" :stroke-width="18" :percentage="progress" status="success"
-                           v-if="progress >= 100"></el-progress>
-              <div class="float-right">
-                <span class="small-title">Goal: {{ token.price }} {{ token.currency }}</span>
+            <div v-if="!!token.code">
+              <h3>{{$tc('message.Token')}}: {{ token.code }}</h3>
+              <el-row>
+                <el-col :span="12">
+                  <h4 class="small-title">{{$tc('message.Price')}}</h4>
+                  <p>{{ token.unitPrice }} {{ token.currency }}</p>
+                </el-col>
+                <el-col :span="12">
+                  <h4 class="small-title text-right">{{$tc('message.Collected')}}</h4>
+                  <p class="text-right">{{collected()}} {{ token.currency }}</p>
+                </el-col>
+              </el-row>
+              <div class="progress m-b-15 clearfix">
+                <el-progress :text-inside="true" :stroke-width="18" :percentage="progress"
+                            v-if="progress < 100"></el-progress>
+                <el-progress :text-inside="true" :stroke-width="18" :percentage="progress" status="success"
+                            v-if="progress >= 100"></el-progress>
+                <div class="float-right">
+                  <span class="small-title">Goal: {{ token.price }} {{ token.currency }}</span>
+                </div>
               </div>
+              <el-button type="primary" class="is-full-width" size="big" v-if="isSupporter()">
+                <i class="fas fa-money-bill"></i> {{$tc('message.Invest')}}
+              </el-button>
             </div>
-            <el-button type="primary" class="is-full-width" size="big" v-if="isSupporter()">
-              <i class="fas fa-money-bill"></i> {{$tc('message.Invest')}}
-            </el-button>
           </div>
           <div class="athlete-info-column">
             <!-- <div>{{$tc('message.Age')}}: {{athlete.age}}</div> -->
@@ -106,7 +108,7 @@
     created () {
       const id = this.$route.params.athleteId
       this.$store.dispatch('athletes/fetch', id).then( () => {
-        this.token = this.athlete.token
+        this.token = this.athlete.token ? this.athlete.token : {}
       })
     },
     methods: {
