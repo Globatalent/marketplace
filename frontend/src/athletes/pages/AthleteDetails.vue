@@ -1,13 +1,8 @@
 <template>
   <gb-base-layout>
     <div class="container">
-      <!--
-        TODO @victor:
-        - Connect data with the backend
-        -->
       <el-row type="flex" justify="center">
         <el-col :xs="24">
-          <!-- <h2>Athlete Id:{{athlete.id}} Details</h2> -->
           <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside">
             <el-carousel-item v-for="(item, itemIndex) in athlete.pictures" :key="itemIndex">
               <img :src="item.image" alt="">
@@ -56,7 +51,7 @@
                   <span class="small-title">Goal: {{ token.price }} {{ token.currency }}</span>
                 </div>
               </div>
-              <el-button type="primary" class="is-full-width" size="big" v-if="isSupporter()">
+              <el-button type="primary" class="is-full-width" size="big" v-if="isSupporter()" @click="goToInvest(athlete)">
                 <i class="fas fa-money-bill"></i> {{$tc('message.Invest')}}
               </el-button>
             </div>
@@ -82,6 +77,7 @@
 <script>
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
+  import router from '@/router.js'
 
   export default {
     name: 'AthleteDetails',
@@ -129,7 +125,10 @@
           return (this.token.amount - this.token.remaining) * this.token.unitPrice
         }
         return 0
-      }
+      },
+      goToInvest(athlete) {
+        router.push({ name: 'athlete.invest',params: { athleteId: athlete.id }})
+      },
     }
   }
 </script>

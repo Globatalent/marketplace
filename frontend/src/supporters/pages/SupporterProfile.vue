@@ -10,6 +10,8 @@
                 <el-form-item required prop="firstName">
                   <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.firstName"></el-input>
                 </el-form-item>
+              </el-col>
+              <el-col :xs="24" :md="12">
                 <el-form-item required prop="lastName">
                   <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.lastName"></el-input>
                 </el-form-item>

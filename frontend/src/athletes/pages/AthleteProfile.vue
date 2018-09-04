@@ -128,10 +128,7 @@ export default {
       linksToDelete: [],
       pictures: [],
       picturesToDelete: [],
-      /*
-      TODO @victor:
-      vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
-      */
+      // vue-dropzone Docs  https://rowanwins.github.io/vue-dropzone/docs/dist/#/manual
       dropzoneOptions: {
         url: `${Vue.axios.defaults.baseURL}/api/v1/pictures/`,
         paramName: 'image',

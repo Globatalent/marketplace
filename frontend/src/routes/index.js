@@ -37,6 +37,12 @@ export default [
     component: resolve => require(['@/athletes/pages/AthleteDetails.vue'], resolve),
   },
 
+  {
+    path: '/purchases/:athleteId',
+    name: 'athlete.invest',
+    component: resolve => require(['@/athletes/pages/AthleteInvest.vue'], resolve),
+  },
+
   // Supporters
   {
     path: '/supporter-profile',
