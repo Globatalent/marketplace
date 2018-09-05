@@ -19,7 +19,7 @@ export default {
         if (push) {
           commit('pushNotifications', notifications)
         } else {
-          commit('notifications', athletes)
+          commit('notifications', notifications)
         }
         commit('pagination', {count, next, previous})
         resolve(notifications)
