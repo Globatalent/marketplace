@@ -1,27 +1,20 @@
 <template>
   <gb-base-layout>
     <div class="notifications">
-      <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="12" class="text-center">
-          <el-button-group>
-            <el-button type="primary" @click="userType = 'athlete'">{{ $tc("message.Unread") }}</el-button>
-            <el-button type="primary" @click="userType = 'supporter'">{{ $tc("message.Read") }}</el-button>
-          </el-button-group>
-        </el-col>
-      </el-row>
-      <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="18" :md="18" :lg="12" class="text-left">
-          <ul class="notifications-list">
-            <li class="notifications-list-item">
-              <div class="notifications-list-item-subtitle">Notification subtitle</div>
-            </li>
-            <li class="notifications-list-item">
-              <div class="notifications-list-item-subtitle">Notification subtitle</div>
-            </li>
-            <li class="notifications-list-item">
-              <div class="notifications-list-item-subtitle">Notification subtitle</div>
-            </li>
-          </ul>
+      <el-row>
+        <el-col :xs="24" class="">
+          <el-tabs type="border-card">
+            <el-tab-pane :label="$tc('message.Unread')">
+              <el-table :data="unreadNotifications.action" style="width: 100%">
+                <el-table-column prop="text" label="Notifications"></el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane :label="$tc('message.Read',2)">
+              <el-table :data="readNotifications.action" style="width: 100%">
+                <el-table-column prop="text" label="Notifications"></el-table-column>
+              </el-table>
+            </el-tab-pane>
+          </el-tabs>
         </el-col>
       </el-row>
     </div>
@@ -39,15 +32,38 @@ export default {
     'gb-base-layout': BaseLayout
   },
   data() {
-    return {}
+    return {
+      unreadNotifications: [],
+      readNotifications: []
+    }
   },
   computed: {
     ...mapGetters({
       notifications: 'actions/notifications'
-    }),
+    })
   },
   created() {
-    this.$store.dispatch('actions/notifications')
+    // this.$store.dispatch('actions/notifications')
+    this.$store
+      .dispatch('actions/notifications', {
+        filters: { read: 'False' }
+      })
+      .then(response => {
+        this.unreadNotifications = response
+      })
+      .catch(error => {
+        console.error(error)
+      })
+    this.$store
+      .dispatch('actions/notifications', {
+        filters: { read: 'True' }
+      })
+      .then(response => {
+        this.readNotifications = response
+      })
+      .catch(error => {
+        console.error(error)
+      })
   },
   methods: {}
 }

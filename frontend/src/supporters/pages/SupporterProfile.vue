@@ -28,7 +28,6 @@
       <el-col :xs="24" class="">
         <el-tabs type="border-card">
           <el-tab-pane :label="$tc('message.Following')">
-            <h3>{{$tc('message.Following')}}</h3>
             <el-table :data="athletes" style="width: 100%">
               <el-table-column prop="id" label="id"></el-table-column>
               <el-table-column prop="firstName" label="firstName"></el-table-column>
@@ -43,7 +42,6 @@
             </el-table>
           </el-tab-pane>
           <el-tab-pane :label="$tc('message.Alert',2)">
-            <h3>{{$tc('message.Alert',1)}}</h3>
             <el-table :data="alerts" style="width: 100%">
               <el-table-column prop="id" label="ID"></el-table-column>
               <el-table-column prop="rule" label="Rule"></el-table-column>
