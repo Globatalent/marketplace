@@ -10,18 +10,15 @@
         </el-col>
       </el-row>
       <el-row type="flex" justify="center">
-        <el-col :xs="24" :sm="12" class="text-left">
+        <el-col :xs="24" :sm="18" :md="18" :lg="12" class="text-left">
           <ul class="notifications-list">
             <li class="notifications-list-item">
-              <div class="notifications-list-item-title">Notification title</div>
               <div class="notifications-list-item-subtitle">Notification subtitle</div>
             </li>
             <li class="notifications-list-item">
-              <div class="notifications-list-item-title">Notification title</div>
               <div class="notifications-list-item-subtitle">Notification subtitle</div>
             </li>
             <li class="notifications-list-item">
-              <div class="notifications-list-item-title">Notification title</div>
               <div class="notifications-list-item-subtitle">Notification subtitle</div>
             </li>
           </ul>
