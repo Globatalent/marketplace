@@ -73,7 +73,6 @@ export default {
       user: 'users/user'
     }),
     isSupporter() {
-      console.log(!!this.user && !!this.user.supporter)
       return !!this.user && !!this.user.supporter
     },
   },
