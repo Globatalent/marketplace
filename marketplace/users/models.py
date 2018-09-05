@@ -132,7 +132,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         if not is_insert:
             previous_user = User.objects.get(pk=self.pk)
             if previous_user.email != self.email:
-                self.is_email_verified  = False
+                self.is_email_verified = False
                 self.verification_code = None
         # Creates verification code if it doesn't exists
         if not self.is_email_verified and (self.verification_code is None or self.verification_code.strip() == ""):

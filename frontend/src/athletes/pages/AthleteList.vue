@@ -34,7 +34,7 @@
               <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" v-if="progress(athlete) < 100"></el-progress>
               <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success" v-if="progress(athlete) >= 100"></el-progress>
               <div class="float-right">
-                <span class="goal">Goal: {{ getPrice(athlete) }}</span>
+                <span class="goal">Goal: {{ getPrice(athlete) }} GBT</span>
               </div>
             </div>
           </div>
@@ -73,6 +73,7 @@ export default {
       user: 'users/user'
     }),
     isSupporter() {
+      console.log(!!this.user && !!this.user.supporter)
       return !!this.user && !!this.user.supporter
     },
   },
@@ -82,7 +83,9 @@ export default {
   methods: {
     initial() {
       // Load initial page of athletes
-      this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
+      this.$store.dispatch('users/fetchUser').then( () => {
+        this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
+      })
     },
     scroll() {
       // Gets a new page of athletes and push them to the current list
@@ -94,7 +97,7 @@ export default {
       }
     },
     getPrice(athlete) {
-      return athlete.token ? athlete.token.price : 0
+      return athlete.token ? athlete.token.amount : 0
     },
     progress(athlete) {
       if (!!athlete.token) {

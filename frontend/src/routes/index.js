@@ -25,22 +25,35 @@ export default [
     path: '/athlete-profile',
     name: 'athlete.profile',
     component: resolve => require(['@/athletes/pages/AthleteProfile.vue'], resolve),
+    meta: {
+      auth: true,
+    },
   },
   {
     path: '/athletes',
     name: 'athlete.list',
     component: resolve => require(['@/athletes/pages/AthleteList.vue'], resolve),
+    meta: {
+      auth: true,
+    },
   },
   {
     path: '/athletes/:athleteId',
     name: 'athlete.details',
     component: resolve => require(['@/athletes/pages/AthleteDetails.vue'], resolve),
+    props: true,
+    meta: {
+      auth: true,
+    },
   },
 
   {
     path: '/purchases/:athleteId',
     name: 'athlete.invest',
     component: resolve => require(['@/athletes/pages/AthleteInvest.vue'], resolve),
+    meta: {
+      auth: true,
+    },
   },
 
   // Supporters
@@ -48,12 +61,15 @@ export default [
     path: '/supporter-profile',
     name: 'supporter.profile',
     component: resolve => require(['@/supporters/pages/SupporterProfile.vue'], resolve),
+    meta: {
+      auth: true,
+    },
   },
 
   {
     path: '/notifications',
     name: 'notifications',
-    component: resolve => require(['@/notifications/pages/Notifications.vue'], resolve),
+    component: resolve => require(['@/actions/pages/Notifications.vue'], resolve),
   },
 
   // 404

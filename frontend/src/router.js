@@ -16,8 +16,9 @@ router.beforeEach((to, from, next) => {
     store.dispatch('users/checkUser').then(() => {
       if (to.matched.some(m => m.meta.userType !== undefined && m.meta.userType !== store.getters['users/userType'])) {
         next('/')
+      } else {
+        next()
       }
-      next()
     }).catch(() => {
       next()
       console.log('error getting user')
@@ -29,8 +30,9 @@ router.beforeEach((to, from, next) => {
         center: true,
       })
       next({name: 'login'})
+    } else {
+      next()
     }
-    next()
   })
 })
 

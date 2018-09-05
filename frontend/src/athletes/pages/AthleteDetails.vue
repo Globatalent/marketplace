@@ -39,7 +39,7 @@
                 </el-col>
                 <el-col :span="12">
                   <h4 class="small-title text-right">{{$tc('message.Collected')}}</h4>
-                  <p class="text-right">{{collected()}} {{ token.currency }}</p>
+                  <p class="text-right">{{collected()}} GBT</p>
                 </el-col>
               </el-row>
               <div class="progress m-b-15 clearfix">
@@ -48,7 +48,7 @@
                 <el-progress :text-inside="true" :stroke-width="18" :percentage="progress" status="success"
                             v-if="progress >= 100"></el-progress>
                 <div class="float-right">
-                  <span class="small-title">Goal: {{ token.price }} {{ token.currency }}</span>
+                  <span class="small-title">Goal: {{ token.amount }} GBT</span>
                 </div>
               </div>
               <el-button type="primary" class="is-full-width" size="big" v-if="isSupporter()" @click="goToInvest(athlete)">
@@ -122,7 +122,7 @@
       },
       collected () {
         if (!!this.token) {
-          return (this.token.amount - this.token.remaining) * this.token.unitPrice
+          return this.token.amount - this.token.remaining
         }
         return 0
       },

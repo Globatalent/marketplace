@@ -41,8 +41,14 @@ export default {
   data() {
     return {}
   },
-  computed: {},
-  created() {},
+  computed: {
+    ...mapGetters({
+      notifications: 'actions/notifications'
+    }),
+  },
+  created() {
+    this.$store.dispatch('actions/notifications')
+  },
   methods: {}
 }
 </script>
