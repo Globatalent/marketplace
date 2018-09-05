@@ -76,7 +76,7 @@ export default {
       return !!this.user && !!this.user.supporter
     },
   },
-  mounted() {
+  created() {
     this.initial()
   },
   methods: {
