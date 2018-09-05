@@ -4,6 +4,8 @@ from rest_framework import serializers
 from marketplace.actions.models import Notification, Action
 from marketplace.athletes.api.v1.serializers import AthleteSerializer, PictureSerializer, ReviewSerializer
 from marketplace.athletes.models import Athlete, Picture, Review
+from marketplace.purchases.api.v1.serializers import PurchaseSerializer
+from marketplace.purchases.models import Purchase
 from marketplace.supporters.api.v1.serializers import SupporterSerializer
 from marketplace.supporters.models import Supporter
 from marketplace.users.api.v1.serializers import UserSerializer
@@ -24,6 +26,7 @@ class ActionSerializer(serializers.ModelSerializer):
         User: UserSerializer(),
         Picture: PictureSerializer(),
         Review: ReviewSerializer(),
+        Purchase: PurchaseSerializer(),
     })
     target = GenericRelatedField({
         Supporter: SupporterSerializer(),
@@ -31,6 +34,7 @@ class ActionSerializer(serializers.ModelSerializer):
         User: UserSerializer(),
         Picture: PictureSerializer(),
         Review: ReviewSerializer(),
+        Purchase: PurchaseSerializer(),
     })
 
     class Meta:

@@ -4,8 +4,8 @@
       <el-row type="flex" justify="center">
         <el-col :xs="24" :sm="12" class="text-center">
           <el-button-group>
-            <el-button type="primary" @click="userType = 'athlete'">{{ $tc("message.Unread") }}</el-button>
-            <el-button type="primary" @click="userType = 'supporter'">{{ $tc("message.Read") }}</el-button>
+            <el-button type="primary" @click="getUnreadNotifications()">{{ $tc("message.Unread") }}</el-button>
+            <el-button type="primary" @click="getReadNotifications()">{{ $tc("message.Read") }}</el-button>
           </el-button-group>
         </el-col>
       </el-row>
@@ -46,13 +46,35 @@ export default {
   },
   computed: {
     ...mapGetters({
-      notifications: 'actions/notifications'
+      notifications: 'actions/notifications',
+      pagination: 'actions/pagination'
     }),
   },
   created() {
-    this.$store.dispatch('actions/notifications')
+    this.getUnreadNotifications()
   },
-  methods: {}
+  methods: {
+    setAsRead(notification) {
+      const updatedNotification = {...notification, read: true}
+      this.$store.dispatch('actions/updateNotification', updatedNotification)
+    },
+    getReadNotifications() {
+      this.$store.dispatch('actions/notifications', {filters: {read: "True"}})
+    },
+    getUnreadNotifications() {
+      this.$store.dispatch('actions/notifications', {filters: {read: "False"}})
+    },
+    getNext() {
+      if (this.pagination.next) {
+        this.$store.dispatch('actions/notifications', {url: this.pagination.next})
+      }
+    },
+    getPrevious() {
+      if (this.pagination.previous) {
+        this.$store.dispatch('actions/notifications', {url: this.pagination.previous})
+      }
+    }
+  }
 }
 </script>
 
