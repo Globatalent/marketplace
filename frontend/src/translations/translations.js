@@ -55,6 +55,8 @@ export const messages = {
       Invest: 'Invest',
       Notifications: 'Notifications',
       Back: 'Back',
+      Unread: 'Unread',
+      Read: 'Read',
     }
   },
   es: {

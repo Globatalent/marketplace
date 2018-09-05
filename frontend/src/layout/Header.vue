@@ -8,8 +8,15 @@
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router>
           <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->
           <el-menu-item index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Athlete",2) }}</el-menu-item>
+          <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}">
+            <el-badge :value="2" :max="99" class="item">
+              <el-button size="small" icon="el-icon-bell" circle></el-button>
+            </el-badge>
+          </el-menu-item>
           <el-submenu index="3">
-            <template slot="title">{{email()}} <el-badge class="mark" v-if="unread > 0" :value="unread" /></template>
+            <template slot="title">{{email()}}
+              <el-badge class="mark" v-if="unread > 0" :value="unread" />
+            </template>
             <el-menu-item v-if="isAthlete()" index="athlete-profile" :route="{name:'athlete.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item v-if="isSupporter()" index="supporter-profile" :route="{name:'supporter.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
@@ -35,7 +42,7 @@ export default {
   computed: {
     ...mapGetters({
       user: 'users/user',
-      unread: 'actions/unread',
+      unread: 'actions/unread'
     })
   },
   created() {
@@ -59,7 +66,7 @@ export default {
         type: 'warning'
       })
         .then(() => {
-          this.$store.dispatch('auth/logout').then(()=>{
+          this.$store.dispatch('auth/logout').then(() => {
             router.push({ name: 'login' })
           })
           this.$message({

@@ -24,6 +24,12 @@ img {
   width: 100%;
 }
 
+ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 .is-uppercase {
   text-transform: uppercase;
 }
@@ -115,6 +121,20 @@ img {
 
 .addButtonCircle {
   font-size: 25px;
+}
+
+.el-badge{
+  &__content{
+    &.is-fixed{
+      top: 12px;
+      line-height: 16px;
+    }
+  }
+}
+
+.el-menu-item [class^="el-icon-"]{
+  margin: 0;
+  width: inherit;
 }
 
 // Forms
@@ -275,4 +295,21 @@ img {
 }
 .m-r-20 {
   margin-right: 20px;
+}
+
+// Notifications
+.notifications-list-item{
+  padding: 5px;
+  border-bottom: 1px solid $--blue-light;
+  margin-top: 30px;
+  box-shadow: 0px 3px 6px -2px $--blue-light;
+}
+
+.notifications-list-item-title{
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.notifications-list-item-subtitle{
+  font-size: 12px;
 }
