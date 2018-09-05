@@ -22,7 +22,7 @@ class Purchase(TimeStampedModel):
         ordering = ("created", )
 
     def __str__(self):
-        return "{} {}".format(self.amount, self.token.code)
+        return "{} GBT".format(self.amount)
 
     def send_confirmation_email(self):
         email = PurchaseEmail(to=self.supporter.user.email, context={"purchase": self})
