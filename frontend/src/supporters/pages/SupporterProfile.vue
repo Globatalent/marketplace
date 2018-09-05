@@ -97,6 +97,7 @@ export default {
   },
   methods: {
     initial() {
+      this.$store.commit('athletes/athletes', [])
       this.$store.dispatch('supporters/alerts')
       this.$store.dispatch('users/fetchUser').then(user => {
         this.form = { ...this.user.supporter}

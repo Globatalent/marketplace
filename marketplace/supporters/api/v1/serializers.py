@@ -37,6 +37,8 @@ class SupporterRegistrationSerializer(serializers.Serializer):
                                                                message=_('There is another user with this email'))])
     password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
     repeat_password = serializers.CharField(style={'input_type': 'password'}, write_only=True)
+    first_name = serializers.CharField(write_only=True, required=False)
+    last_name = serializers.CharField(write_only=True, required=False)
 
     def validate_password(self, value):
         password_validation.validate_password(password=value, user=User)

@@ -82,6 +82,7 @@ export default {
   methods: {
     initial() {
       // Load initial page of athletes
+      this.$store.commit('athletes/athletes', [])
       this.$store.dispatch('users/fetchUser').then( () => {
         this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
       })

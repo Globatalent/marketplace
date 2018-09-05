@@ -39,6 +39,7 @@
 
 <script>
 import router from '@/router.js'
+import { Message } from 'element-ui'
 
 export default {
   name: 'SupporterRegistrationForm',
@@ -107,10 +108,14 @@ export default {
               router.push({ name: 'athlete.list' })
             })
             .catch(error => {
-              console.log(error)
+              if (!!error.response) {
+                Message.error({ message: error.response.data.error, center: true })
+              } else {
+                console.error(error)
+              }
             })
         } else {
-          console.log('error submit!!')
+          console.error('error submit!!')
           return false
         }
       })

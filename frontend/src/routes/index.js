@@ -20,6 +20,12 @@ export default [
     name: 'forgot',
     component: resolve => require(['@/auth/pages/Forgot.vue'], resolve),
   },
+  {
+    path: '/verified/:verificationCode/',
+    name: 'verified',
+    component: resolve => require(['@/auth/pages/Verified.vue'], resolve),
+    props: true,
+  },
   // Athletes
   {
     path: '/athlete-profile',

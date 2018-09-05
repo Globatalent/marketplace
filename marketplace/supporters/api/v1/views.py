@@ -18,8 +18,14 @@ class SupporterRegistrationView(APIView):
         serializer.is_valid(raise_exception=True)
 
         with transaction.atomic():
-            user = User.objects.create_user(email=serializer.validated_data['email'],
-                                            password=serializer.validated_data['password'])
+            user = User.objects.create_user(
+                email=serializer.validated_data['email'],
+                password=serializer.validated_data['password']
+            )
             token = jwt_payload(user)
-            Supporter.objects.create(user=user)
+            Supporter.objects.create(
+                user=user,
+                first_name=serializer.validated_data.get('first_name', ""),
+                last_name=serializer.validated_data.get('last_name', "")
+            )
         return Response(data={'token': token}, status=status.HTTP_201_CREATED)

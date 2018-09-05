@@ -35,6 +35,28 @@ class SupportersAPITests(APITestCase):
         self.assertIn("token", data)
         self.assertIsNotNone(data["token"])
 
+    def test_register_supporter_with_name(self):
+        users = User.objects.all().count()
+        supporters = Supporter.objects.all().count()
+        data = {
+            "email": "foo@example.com",
+            "password": "pass1234",
+            "repeat_password": "pass1234",
+            "first_name": "foo",
+            "last_name": "var",
+        }
+        response = self.client.post(
+            "/api/v1/register/supporter/",
+            format="json",
+            data=data
+        )
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(supporters + 1, Supporter.objects.all().count())
+        self.assertEqual(users + 1, User.objects.all().count())
+        supporter = Supporter.objects.last()
+        self.assertEquals(data["first_name"], supporter.first_name)
+        self.assertEquals(data["last_name"], supporter.last_name)
+
     def test_create_alert(self):
         athlete = AthleteFactory()
         supporter = SupporterFactory()

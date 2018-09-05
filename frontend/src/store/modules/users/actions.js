@@ -27,6 +27,16 @@ export default {
       resolve()
     })
   },
+  verify({state}, verificationCode ) {
+    return new Promise((resolve, reject) => {
+      const payload = {verification_code: verificationCode}
+      Vue.axios.post(state.endpoints.verifyEmail, payload).then(response => {
+        resolve(response)
+      }).catch(error => {
+        reject(error)
+      });
+    })
+  },
   clearUser ({commit}) {
     commit('clearUser')
   },

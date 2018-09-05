@@ -1,8 +1,4 @@
 <template>
-  <!--
-      TODO @victor:
-        - Fix Sex radio option
-    -->
   <el-col :xs="24" :sm="12" :md="12" :lg="10" :xl="6" class="text-center">
     <h2 class="form-lined-title">{{ $tc("message.Athlete",1) }}</h2>
     <div class="form-lined">
@@ -58,6 +54,7 @@
 
 <script>
 import router from '@/router.js'
+import { Message } from 'element-ui'
 
 export default {
   name: 'AthleteRegistrationForm',
@@ -143,7 +140,11 @@ export default {
               router.push({ name: 'athlete.list' })
             })
             .catch(error => {
-              console.log(error)
+              if (!!error.response) {
+                Message.error({ message: error.response.data.error, center: true })
+              } else {
+                console.error(error)
+              }
             })
         } else {
           console.log('error submit!!')
