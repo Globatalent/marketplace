@@ -7,6 +7,7 @@ from marketplace.actions.constants import PURCHASE
 from marketplace.actions.decorators import dispatch_action
 from marketplace.athletes.constants import APPROVED
 from marketplace.purchases.constants import STATUS_CHOICES, PENDING
+from marketplace.purchases.emails import PurchaseEmail
 
 
 class Purchase(TimeStampedModel):
@@ -23,6 +24,10 @@ class Purchase(TimeStampedModel):
     def __str__(self):
         return "{} {}".format(self.amount, self.token.code)
 
+    def send_confirmation_email(self):
+        email = PurchaseEmail(to=self.supporter.user.email, context={"purchase": self})
+        email.send()
+
     @dispatch_action(PURCHASE, method=True)
     def save(self, *args, **kwargs):
         is_insert = self.pk is None
@@ -32,4 +37,7 @@ class Purchase(TimeStampedModel):
             raise IntegrityError("You can't purchase tokens from an unapproved athlete")
         if is_insert and not self.total and self.token:
             self.total = self.token.unit_price * self.amount
-        return super().save(*args, **kwargs)
+        result = super().save(*args, **kwargs)
+        if is_insert:
+            self.send_confirmation_email()
+        return result
