@@ -93,8 +93,24 @@ def _human_readable_default(action):
         text = "{} {}".format(text, str(action.target))
     return text
 
+
+def _human_readable_purchase(action):
+    """Makes an action human readable."""
+    text = "{} has invested {} in {}".format(str(action.actor), str(action.trigger), str(action.target))
+    return text
+
+
+def _human_readable_picture(action):
+    """Makes an action human readable."""
+    text = "{} {}".format(str(action.actor), action.verb)
+    return text
+
+
 def human_readable(action):
     """Makes an action human readable."""
-    handlers = {}  # Use to specify special handlers to verbs
+    handlers = {
+        ADD_PICTURE: _human_readable_picture,
+        PURCHASE: _human_readable_purchase,
+    }  # Use to specify special handlers to verbs
     default_handler = _human_readable_default
     return handlers.get(action.verb, default_handler)(action)
