@@ -87,7 +87,7 @@ export default {
       this.$store
         .dispatch('auth/login', this.form)
         .then(data => {
-          router.push({ name: 'athlete.list' })
+          this.$router.push({ name: 'athlete.list' })
         })
         .catch(error => {
           console.log(error)
