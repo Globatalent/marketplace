@@ -9,7 +9,9 @@
               <el-row :gutter="20">
                 <el-col :xs="24">
                   <el-form-item required prop="amount">
-                    <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="form.amount" min="0"></el-input>
+                    <el-input v-bind:placeholder="$tc('message.Quantity')" type="number" v-model="form.amount" min="0">
+                      <template slot="append">GBT</template>
+                    </el-input>
                   </el-form-item>
                 </el-col>
               </el-row>
