@@ -12,7 +12,7 @@
             <template slot="title">{{email()}} <el-badge class="mark" v-if="unread > 0" :value="unread" /></template>
             <el-menu-item v-if="isAthlete()" index="athlete-profile" :route="{name:'athlete.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item v-if="isSupporter()" index="supporter-profile" :route="{name:'supporter.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
-            <el-menu-item class="el-menu-item" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
+            <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>

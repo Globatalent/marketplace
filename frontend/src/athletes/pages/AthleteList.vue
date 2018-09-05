@@ -1,9 +1,5 @@
 <template>
   <gb-base-layout>
-    <!--
-      TODO @victor:
-      - Connect data to the backend
-      -->
     <masonry :cols="{default: 3, 750: 2, 500: 1}" :gutter="{default: '15px', 750: '15px'}">
       <el-card :body-style="{ padding: '0px' }" v-for="(athlete, index) in athletes" :key="index" style="margin-bottom:15px;">
         <div class="athlete-image">
@@ -97,7 +93,7 @@ export default {
     getPrice(athlete) {
       return athlete.token ? athlete.token.price : 0
     },
-    isSupporter() {
+    isSupporter(test=true) {
       return !!this.user && !!this.user.supporter
     },
     progress(athlete) {
@@ -107,7 +103,7 @@ export default {
       return 0
     },
     setFollowingAthlete(index, athlete) {
-      if (this.isSupporter()) {
+      if (this.isSupporter(false)) {
         athlete.following = !athlete.following
         this.$store.dispatch('athletes/follow', athlete.id).catch(error => {
           console.log(error)
