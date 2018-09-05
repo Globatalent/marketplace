@@ -44,7 +44,9 @@
           </div>
           <div class="bottom clearfix">
             <div>
-              <el-button type="primary" class="is-full-width m-t-20" @click="goToDetails(athlete)">See details</el-button>
+              <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
+                <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -94,12 +96,6 @@ export default {
     },
     getPrice(athlete) {
       return athlete.token ? athlete.token.price : 0
-    },
-    goToDetails(athlete) {
-      router.push({
-        name: 'athlete.details',
-        params: { athleteId: athlete.id }
-      })
     },
     isSupporter() {
       return !!this.user && !!this.user.supporter
