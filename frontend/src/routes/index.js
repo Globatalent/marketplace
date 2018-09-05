@@ -69,7 +69,7 @@ export default [
   {
     path: '/notifications',
     name: 'notifications',
-    component: resolve => require(['@/notifications/pages/Notifications.vue'], resolve),
+    component: resolve => require(['@/actions/pages/Notifications.vue'], resolve),
   },
 
   // 404

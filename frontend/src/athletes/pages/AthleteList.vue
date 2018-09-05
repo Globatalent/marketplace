@@ -34,7 +34,7 @@
               <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" v-if="progress(athlete) < 100"></el-progress>
               <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success" v-if="progress(athlete) >= 100"></el-progress>
               <div class="float-right">
-                <span class="goal">Goal: {{ getPrice(athlete) }}</span>
+                <span class="goal">Goal: {{ getPrice(athlete) }} GBT</span>
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@ export default {
       }
     },
     getPrice(athlete) {
-      return athlete.token ? athlete.token.price : 0
+      return athlete.token ? athlete.token.amount : 0
     },
     progress(athlete) {
       if (!!athlete.token) {
