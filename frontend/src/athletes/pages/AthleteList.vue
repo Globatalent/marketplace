@@ -22,7 +22,7 @@
                 </div>
               </el-col>
               <el-col :span="4">
-                <div class="likeButton" v-if="isSupporter()" @click="setFollowingAthlete(index,athlete)">
+                <div class="likeButton" v-if="isSupporter" @click="setFollowingAthlete(index, athlete)">
                   <i class="fas fa-eye likeIcon is-following" v-if="athlete.following"></i>
                   <i class="far fa-eye likeIcon" v-else></i>
                 </div>
@@ -71,7 +71,10 @@ export default {
       athletes: 'athletes/athletes',
       pagination: 'athletes/pagination',
       user: 'users/user'
-    })
+    }),
+    isSupporter() {
+      return !!this.user && !!this.user.supporter
+    },
   },
   created() {
     this.initial()
@@ -93,9 +96,6 @@ export default {
     getPrice(athlete) {
       return athlete.token ? athlete.token.price : 0
     },
-    isSupporter(test=true) {
-      return !!this.user && !!this.user.supporter
-    },
     progress(athlete) {
       if (!!athlete.token) {
         return Math.round(athlete.token.progression * 100)
@@ -103,7 +103,7 @@ export default {
       return 0
     },
     setFollowingAthlete(index, athlete) {
-      if (this.isSupporter(false)) {
+      if (this.isSupporter){
         athlete.following = !athlete.following
         this.$store.dispatch('athletes/follow', athlete.id).catch(error => {
           console.log(error)
