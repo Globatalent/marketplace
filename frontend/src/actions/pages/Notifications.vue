@@ -2,23 +2,34 @@
   <gb-base-layout>
     <el-row>
       <el-col :xs="24" class="">
-        <el-tabs type="border-card">
-          <el-tab-pane :label="$tc('message.Unread')">
-            <el-table :data="unreadNotifications" style="width: 100%">
-              <el-table-column fixed="left" label="Operaciones" width="135" class="text-left">
+        <el-tabs type="border-card" @tab-click="handleTabClick" value="unread">
+          <el-tab-pane :label="$tc('message.Unread')" name="unread">
+            <el-table :data="notifications" style="width: 100%" v-loading="loadingNotifications">
+              <el-table-column fixed="left" label="Operations" width="135" class="text-left">
                 <template slot-scope="scope">
-                  <el-button @click="setAsRead(scope,unreadNotifications)" type="primary" size="mini" round>Mark as read</el-button>
+                  <el-button @click="setAsRead(scope)" type="primary" size="mini" round>Mark as read</el-button>
                 </template>
               </el-table-column>
               <el-table-column prop="action.text" label="Notifications"></el-table-column>
             </el-table>
           </el-tab-pane>
-          <el-tab-pane :label="$tc('message.Read')">
-            <el-table :data="readNotifications" style="width: 100%">
+          <el-tab-pane :label="$tc('message.Read')" name="read">
+            <el-table :data="notifications" style="width: 100%" v-loading="loadingNotifications">
               <el-table-column prop="action.text" label="Notifications"></el-table-column>
             </el-table>
           </el-tab-pane>
         </el-tabs>
+      </el-col>
+    </el-row>
+    <el-row v-if="pagination.count > 0">
+      <el-col :xs="24" class="text-center">
+        <el-pagination
+          layout="prev, next"
+          :total="pagination.count"
+          :disabled="loadingNotifications"
+          @prev-click="getPrevious()"
+          @next-click="getNext()">
+        </el-pagination>
       </el-col>
     </el-row>
   </gb-base-layout>
@@ -36,48 +47,44 @@ export default {
   },
   data() {
     return {
-      unreadNotifications: [],
-      readNotifications: []
     }
   },
   computed: {
     ...mapGetters({
+      unread: 'actions/unread',
       notifications: 'actions/notifications',
+      loadingNotifications: 'actions/loadingNotifications',
       pagination: 'actions/pagination'
     })
   },
   created() {
     this.getUnreadNotifications()
-    this.getReadNotifications()
   },
   methods: {
-    setAsRead(notification) {
-      debugger
-      const updatedNotification = { ...notification, read: true }
+    handleTabClick(tab, event) {
+      if (tab.name == 'read') {
+        this.getReadNotifications()
+      } else if (tab.name == 'unread') {
+        this.getUnreadNotifications()
+      }
+    },
+    setAsRead(scope) {
+      const updatedNotification = { ...scope.row, read: true }
       this.$store.dispatch('actions/updateNotification', updatedNotification)
+        .then( () => {
+          this.getUnreadNotifications()
+        })
     },
     getReadNotifications() {
       this.$store
         .dispatch('actions/notifications', {
           filters: { read: 'True' }
         })
-        .then(response => {
-          this.readNotifications = response
-          console.log(this.readNotifications)
-        })
-        .catch(error => {
-          console.error(error)
-        })
     },
     getUnreadNotifications() {
       this.$store
-        .dispatch('actions/notifications', { filters: { read: 'False' } })
-        .then(response => {
-          this.unreadNotifications = response
-          console.log(this.unreadNotifications)
-        })
-        .catch(error => {
-          console.error(error)
+        .dispatch('actions/notifications', {
+          filters: { read: 'False' }
         })
     },
     getNext() {

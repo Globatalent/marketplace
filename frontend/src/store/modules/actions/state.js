@@ -1,6 +1,7 @@
 export default {
   unread: 0,
   notifications: [],
+  loadingNotifications: false,
   pagination: {
     count: 0,
     next: null,

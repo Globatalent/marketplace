@@ -15,9 +15,10 @@
             <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
           </el-submenu>
           <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}">
-            <el-badge :value="unread" :max="99" class="item">
+            <el-badge :value="unread" :max="99" class="item" v-if="unread > 0">
               <el-button size="small" icon="el-icon-bell" circle></el-button>
             </el-badge>
+            <el-button size="small" icon="el-icon-bell" circle v-else></el-button>
           </el-menu-item>
         </el-menu>
       </el-col>

@@ -8,6 +8,9 @@ export default {
   unread (state, unread) {
     state.unread = unread
   },
+  loadingNotifications (state, status) {
+    state.loadingNotifications = status
+  },
   pagination(state, pagination) {
     state.pagination.count = pagination.count;
     state.pagination.next = pagination.next;

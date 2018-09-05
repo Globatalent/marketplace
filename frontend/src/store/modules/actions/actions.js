@@ -5,6 +5,7 @@ import NotificationTransformer from '@/actions/transformers/NotificationTransfor
 export default {
   notifications({commit, state}, payload={}) {
     return new Promise((resolve, reject) => {
+      commit('loadingNotifications', true)
       const { url, filters, push } = payload
       let endpoint = state.endpoints.notifications
       if (!!url) {
@@ -22,8 +23,10 @@ export default {
           commit('notifications', notifications)
         }
         commit('pagination', {count, next, previous})
+        commit('loadingNotifications', false)
         resolve(notifications)
       }).catch((error) => {
+        commit('loadingNotifications', false)
         reject(error)
       })
     })
