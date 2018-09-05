@@ -50,6 +50,12 @@ export default [
     component: resolve => require(['@/supporters/pages/SupporterProfile.vue'], resolve),
   },
 
+  {
+    path: '/notifications',
+    name: 'notifications',
+    component: resolve => require(['@/notifications/pages/Notifications.vue'], resolve),
+  },
+
   // 404
   {
     path: '/404',
