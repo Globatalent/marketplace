@@ -92,7 +92,8 @@ export default {
     saveInvest(data) {
       this.$store
         .dispatch('tokens/purchase', data)
-        .then(response => {
+        .then( purchase => {
+          router.push({ name: 'athlete.invested', params: { purchaseId: purchase.id }})
         })
         .catch(error => {})
     },

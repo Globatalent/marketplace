@@ -1,9 +1,12 @@
 from rest_framework import serializers
 
 from marketplace.purchases.models import Purchase
+from marketplace.tokens.api.v1.serializers import TokenSerializer
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
+
+    token = TokenSerializer()
 
     class Meta:
         model = Purchase

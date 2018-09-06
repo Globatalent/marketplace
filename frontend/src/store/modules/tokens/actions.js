@@ -29,7 +29,7 @@ export default {
     })
   },
 
-  purchases({commit}) {
+  purchases({state, commit}) {
     return new Promise((resolve, reject) => {
       Vue.axios.get(state.endpoints.purchases).then((response) => {
         const { results, count, next, previous } = response.data;
@@ -41,12 +41,14 @@ export default {
       })
     })
   },
-  fetchPurchases({commit}, id) {
+  fetchPurchase({dispatch, state, commit}, id) {
     return new Promise((resolve, reject) => {
       Vue.axios.get(`${state.endpoints.purchases}${id}/`).then((response) => {
         const purchase = PurchaseTransformer.fetch(response.data);
-        commit('purchase', purchase)
-        resolve(purchase)
+        dispatch('athletes/fetch', purchase.token.athlete, {root: true}).then( () => {
+          commit('purchase', purchase)
+          resolve(purchase)
+        })
       }).catch((error) => {
         reject(error)
       })
