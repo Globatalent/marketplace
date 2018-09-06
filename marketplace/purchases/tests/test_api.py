@@ -28,7 +28,7 @@ class PurchasesAPITests(APITestCase):
         self.assertEqual(response.status_code,status.HTTP_201_CREATED)
 
     def test_cant_purchase_token(self):
-        supporter = SupporterFactory()
+        SupporterFactory()
         token = TokenFactory(amount=1000, price=1)
         self.client.force_authenticate(token.athlete.user)
         data = {
