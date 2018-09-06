@@ -8,7 +8,7 @@
             <el-row :gutter="20">
               <el-col :xs="24" class="text-left">
                 <p>Thank you for your interest in the athlete {{athlete.firstName}} {{athlete.lastName}}.</p>
-                <p>To complete your investment make a transfer of "xxx" Globatokens within 24 hours to the address:</p>
+                <p>To complete your investment make a transfer of {{purchase.amount}} Globatokens within 24 hours to the address:</p>
                 <p class="text-center">3BXbD7LJmScJrV6GaSMfus4uGmsKw8jZyD</p>
                 <img src="~@/assets/img/frame.png" class="qrImage">
               </el-col>
