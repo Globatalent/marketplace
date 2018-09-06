@@ -164,6 +164,12 @@ ul{
     background-position: left 12px;
     background-size: 25px;
   }
+  .el-date-editor{
+    [class^="icon-"],
+    [class*="icon-"] {
+      padding-left: inherit;
+    }
+  }
 }
 
 .form-lined-column{
