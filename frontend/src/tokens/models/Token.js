@@ -1,7 +1,7 @@
 import Model from '@/base/models/BaseModel';
 
-class Athlete extends Model {
+class Token extends Model {
   //
 }
 
-export default Athlete;
+export default Token;

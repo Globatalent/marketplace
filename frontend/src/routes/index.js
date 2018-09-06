@@ -62,9 +62,10 @@ export default [
     },
   },
   {
-    path: '/purchased/:athleteId',
+    path: '/purchased/:purchaseId',
     name: 'athlete.invested',
     component: resolve => require(['@/athletes/pages/AthleteInvested.vue'], resolve),
+    props: true,
     meta: {
       auth: true,
     },

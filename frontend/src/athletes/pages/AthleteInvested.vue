@@ -41,12 +41,13 @@ export default {
   computed: {
     ...mapGetters({
       athlete: 'athletes/athlete',
+      purchase: 'tokens/purchase',
       user: 'users/user'
     })
   },
   created() {
-    const id = this.$route.params.athleteId
-    this.$store.dispatch('athletes/fetch', id)
+    const id = this.$route.params.purchaseId
+    this.$store.dispatch('tokens/fetchPurchase', id)
   },
   methods: {
     goClose() {
