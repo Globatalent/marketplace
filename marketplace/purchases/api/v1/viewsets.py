@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 
 from marketplace.purchases.api.v1.permissions import CanCreatePurchase, CantUpdateDelete
-from marketplace.purchases.api.v1.serializers import PurchaseSerializer
+from marketplace.purchases.api.v1.serializers import PurchaseSerializer, PurchaseReadSerializer
 from marketplace.purchases.models import Purchase
 from marketplace.users.helpers import is_supporter, is_athlete
 
@@ -15,6 +15,11 @@ class PurchaseViewSet(viewsets.ModelViewSet):
         CantUpdateDelete,
         CanCreatePurchase,
     ]
+
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return PurchaseReadSerializer
+        return super().get_serializer_class()
 
     def get_queryset(self):
         queryset = super().get_queryset()

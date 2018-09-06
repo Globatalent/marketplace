@@ -6,8 +6,6 @@ from marketplace.tokens.api.v1.serializers import TokenSerializer
 
 class PurchaseSerializer(serializers.ModelSerializer):
 
-    token = TokenSerializer()
-
     class Meta:
         model = Purchase
         fields = [
@@ -21,3 +19,8 @@ class PurchaseSerializer(serializers.ModelSerializer):
             "total": {"read_only": True},
             "status": {"read_only": True}
         }
+
+
+class PurchaseReadSerializer(PurchaseSerializer):
+
+    token = TokenSerializer()
