@@ -96,11 +96,12 @@ class Review(TimeStampedModel):
     )
     text = models.TextField(null=True, blank=True, verbose_name=_('text'))
     state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
-    reviewer = models.OneToOneField(
+    reviewer = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         limit_choices_to={'is_staff': True},
-        verbose_name=_('user')
+        verbose_name=_('user'),
+        related_name="reviews"
     )
     athlete = models.ForeignKey(Athlete, verbose_name=_('review'),
                                 related_name='reviews', on_delete=models.CASCADE)
@@ -109,6 +110,7 @@ class Review(TimeStampedModel):
         verbose_name = _('review')
         verbose_name_plural = _('reviews')
         ordering = ("created", )
+        unique_together = ('reviewer', 'athlete')
 
     def __str__(self):
         return f'{str(self.athlete)} - {self.state}'
