@@ -61,6 +61,14 @@ export default [
       auth: true,
     },
   },
+  {
+    path: '/purchased/:athleteId',
+    name: 'athlete.invested',
+    component: resolve => require(['@/athletes/pages/AthleteInvested.vue'], resolve),
+    meta: {
+      auth: true,
+    },
+  },
 
   // Supporters
   {

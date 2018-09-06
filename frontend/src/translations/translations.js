@@ -57,6 +57,7 @@ export const messages = {
       Back: 'Back',
       Unread: 'Unread',
       Read: 'Read',
+      Close: 'Close',
     }
   },
   es: {
