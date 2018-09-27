@@ -91,11 +91,13 @@ export default {
     initial() {
       // Load initial page of athletes
       this.$store.commit('athletes/athletes', [])
-      this.$store.dispatch('users/fetchUser').then(() => {
-        this.$store.dispatch('athletes/list', {
-          filters: { state: 'APPROVED' }
+      if (!!this.user) {
+        this.$store.dispatch('users/fetchUser').then( () => {
+          this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
         })
-      })
+      } else {
+        this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
+      }
     },
     scroll() {
       // Gets a new page of athletes and push them to the current list

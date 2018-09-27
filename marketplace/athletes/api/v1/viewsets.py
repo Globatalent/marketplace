@@ -46,7 +46,6 @@ class AthleteViewSet(ModelViewSet):
     queryset = Athlete.objects.all()
     serializer_class = AthleteSerializer
     permission_classes = [
-        IsAuthenticated,
         OnlyOwnerUpdates
     ]
     filter_class = AthleteFilter

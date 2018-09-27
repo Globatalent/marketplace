@@ -8,13 +8,14 @@
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router>
           <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->
           <el-menu-item index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Athlete",2) }}</el-menu-item>
-          <el-submenu index="3">
+          <el-submenu index="3" v-if="!!user">
             <template slot="title">{{email()}}</template>
             <el-menu-item v-if="isAthlete()" index="athlete-profile" :route="{name:'athlete.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item v-if="isSupporter()" index="supporter-profile" :route="{name:'supporter.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
           </el-submenu>
-          <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}">
+          <el-menu-item class="el-menu-item" index="login" :route="{name:'login'}" v-else>{{ $tc("message.LogIn") }}</el-menu-item>
+          <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}" v-if="!!user">
             <el-badge :value="unread" :max="99" class="item" v-if="unread > 0">
               <el-button size="small" icon="el-icon-bell" circle></el-button>
             </el-badge>
@@ -45,7 +46,9 @@ export default {
     })
   },
   created() {
-    this.$store.dispatch('actions/unread')
+    if (!!this.user) {
+      this.$store.dispatch('actions/unread')
+    }
   },
   components: {},
   methods: {
@@ -66,7 +69,7 @@ export default {
       })
         .then(() => {
           this.$store.dispatch('auth/logout').then(() => {
-            router.push({ name: 'login' })
+            router.push({ name: 'athlete.list' })
           })
           this.$message({
             type: 'success',
