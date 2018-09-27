@@ -1,33 +1,36 @@
 <template>
   <gb-base-layout>
-    <masonry :cols="{default: 3, 750: 2, 500: 1}" :gutter="{default: '15px', 750: '15px'}">
-      <el-card :body-style="{ padding: '0px' }" v-for="(athlete, index) in athletes" :key="index" style="margin-bottom:15px;">
+    <masonry :cols="{default: 4, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
+      <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(athlete, index) in athletes" :key="index">
         <div class="athlete-image">
           <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
             <img v-if="getPicture(athlete)" v-bind:src="getPicture(athlete)" class="image">
             <img v-else src="~@/assets/img/user-placeholder-circle.png" class="image">
           </router-link>
+            <div class="athlete-sport">
+              <!-- <i class="fas fa-mars" v-if="athlete.sex==='MALE'"></i>
+              <i class="fas fa-venus" v-else></i> -->
+              {{athlete.sport}}
+            </div>
         </div>
-        <div style="padding: 14px;">
-          <div class="top clearfix">
+        <div class="athlete-info">
+          <div class="clearfix athlete-nameBlock">
             <el-row>
               <el-col :span="20">
                 <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
                   <span class="athlete-name">{{athlete.firstName}} {{athlete.lastName}}</span>
                 </router-link>
-                <div class="athlete-sport">
-                  <i class="fas fa-mars" v-if="athlete.sex==='MALE'"></i>
-                  <i class="fas fa-venus" v-else></i>
-                  {{athlete.sport}}
-                </div>
+
               </el-col>
-              <el-col :span="4">
-                <div class="likeButton" v-if="isSupporter" @click="setFollowingAthlete(index, athlete)">
-                  <i class="fas fa-eye likeIcon is-following" v-if="athlete.following"></i>
-                  <i class="far fa-eye likeIcon" v-else></i>
-                </div>
+              <el-col :span="4" class="text-right">
+                <!-- <img src="~@/assets/img/bandera.png" alt="" class="image athlete-flag"> -->
               </el-col>
             </el-row>
+            <!-- <el-row>
+              <el-col>
+                <div class="athlete-subtitle">10% players transfer right in next 5 years</div>
+              </el-col>
+            </el-row> -->
           </div>
           <div class="athlete-progress">
             <div v-if="!!athlete.token">
@@ -38,11 +41,16 @@
               </div>
             </div>
           </div>
-          <div class="bottom clearfix">
-            <div>
-              <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
+          <div class="clearfix athlete-footer">
+            <!-- <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
                 <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
-              </router-link>
+              </router-link> -->
+            <!-- <div class="timeLeft">
+              <i class="far fa-clock"></i><span class="timeLeft-text">30 days left</span>
+            </div> -->
+            <div class="likeButton" v-if="isSupporter" @click="setFollowingAthlete(index, athlete)">
+              <i class="fas fa-heart likeIcon is-following" v-if="athlete.following"></i>
+              <i class="far fa-heart likeIcon" v-else></i>
             </div>
           </div>
         </div>
@@ -74,7 +82,7 @@ export default {
     }),
     isSupporter() {
       return !!this.user && !!this.user.supporter
-    },
+    }
   },
   created() {
     this.initial()
@@ -83,8 +91,10 @@ export default {
     initial() {
       // Load initial page of athletes
       this.$store.commit('athletes/athletes', [])
-      this.$store.dispatch('users/fetchUser').then( () => {
-        this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
+      this.$store.dispatch('users/fetchUser').then(() => {
+        this.$store.dispatch('athletes/list', {
+          filters: { state: 'APPROVED' }
+        })
       })
     },
     scroll() {
@@ -106,7 +116,7 @@ export default {
       return 0
     },
     setFollowingAthlete(index, athlete) {
-      if (this.isSupporter){
+      if (this.isSupporter) {
         athlete.following = !athlete.following
         this.$store.dispatch('athletes/follow', athlete.id).catch(error => {
           console.log(error)
@@ -126,6 +136,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.el-card {
+  border-radius: 8px;
+  height: 420px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 35px;
+  &:hover {
+    box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+}
 .likeButton {
   margin-left: 15px;
   float: right;
@@ -133,9 +152,11 @@ export default {
 }
 
 .likeIcon {
-  font-size: 20px;
+  font-size: 18px;
   transition: all 0.2s ease-in;
   color: #aaa;
+  position: relative;
+  top: 2px;
   &.is-following {
     transform: scale(1.2);
     color: #4e87b1;
@@ -143,27 +164,34 @@ export default {
 }
 
 .athlete-image {
-  height: 130px;
+  height: 200px;
   overflow: hidden;
 }
 
 .athlete-name {
-  font-size: 1.2em;
+  font-size: 19px;
   line-height: 1em;
+  color: #000000;
+  font-family: 'Montserrat Bold';
 }
 
 .athlete-sport {
-  color: #999;
+  color: white;
   font-size: 0.8em;
   line-height: 1em;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 15px;
+  background-color: #40c7ff;
+  padding: 5px 10px;
+  border-radius: 25px;
+  display: inline-block;
+  margin-left: 10px;
 }
 
 .athlete-progress {
   overflow: hidden;
-  height: 45px;
+  flex-grow: 1;
 }
 
 .goal {
@@ -173,5 +201,40 @@ export default {
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 15px;
+}
+
+.timeLeft {
+  display: inline-block;
+  font-size: 13px;
+  .far {
+    margin-right: 10px;
+  }
+}
+
+.athlete-subtitle {
+  font-family: 'OpenSans Regular';
+}
+.athlete-info {
+  color: #687173;
+  font-size: 13px;
+  height: 220px;
+  display: flex;
+  flex-direction: column;
+}
+.athlete-nameBlock {
+  padding: 25px 20px 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.athlete-progress {
+  padding: 12px 20px 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.athlete-footer {
+  padding: 10px 20px 10px 20px;
+}
+.athlete-flag {
+  width: 30px;
+  height: auto;
+  display: inline-block;
 }
 </style>
