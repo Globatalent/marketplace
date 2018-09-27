@@ -2,7 +2,9 @@
   <gb-minimal-layout>
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="loginBox text-center">
-        <img class="logo" src="~@/assets/img/Globatalent-logo-vert.png" />
+        <router-link :to="{ name: 'athlete.list'}">
+          <img class="logo" src="~@/assets/img/Globatalent-logo-vert.png" />
+        </router-link>
         <h2 class="form-lined-title">{{ $tc("message.SignIn") }}</h2>
         <div class="form-lined">
           <el-form ref="loginForm" :model="form" :rules="rules">
