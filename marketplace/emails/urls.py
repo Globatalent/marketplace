@@ -1,6 +1,6 @@
 from django.urls import path
 
-from climatetrade.emails.views import PreviewEmailView
+from marketplace.emails.views import PreviewEmailView
 
 app_name = 'emails'
 urlpatterns = [
