@@ -69,7 +69,7 @@ export default {
       })
         .then(() => {
           this.$store.dispatch('auth/logout').then(() => {
-            router.push({ name: 'login' })
+            router.push({ name: 'athlete.list' })
           })
           this.$message({
             type: 'success',
