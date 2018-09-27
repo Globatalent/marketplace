@@ -39,18 +39,12 @@ export default [
     path: '/athletes',
     name: 'athlete.list',
     component: resolve => require(['@/athletes/pages/AthleteList.vue'], resolve),
-    meta: {
-      auth: true,
-    },
   },
   {
     path: '/athletes/:athleteId',
     name: 'athlete.details',
     component: resolve => require(['@/athletes/pages/AthleteDetails.vue'], resolve),
     props: true,
-    meta: {
-      auth: true,
-    },
   },
 
   {
@@ -96,7 +90,7 @@ export default [
   // Redirects
   {
     path: '/',
-    redirect: '/login',
+    redirect: '/athletes',
   },
   {
     path: '/*',
