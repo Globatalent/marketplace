@@ -1,6 +1,6 @@
 <template>
   <gb-base-layout>
-    <masonry :cols="{default: 4, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
+    <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(athlete, index) in athletes" :key="index">
         <div class="athlete-image">
           <router-link :to="{ name: 'athlete.details', params: { athleteId: athlete.id }}">
@@ -34,11 +34,13 @@
           </div>
           <div class="athlete-progress">
             <div v-if="!!athlete.token">
-              <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" v-if="progress(athlete) < 100"></el-progress>
-              <el-progress :text-inside="true" :stroke-width="18" :percentage="progress(athlete)" status="success" v-if="progress(athlete) >= 100"></el-progress>
-              <div class="float-right">
-                <span class="goal">Goal: {{ getPrice(athlete) }} GBT</span>
+              <div class="athlete-progress-info">
+                <div class="athlete-progress-info-funding">
+                  <span class="athlete-progress-info-funding-text">Funding:</span><span class="athlete-progress-info-funding-qty"> {{ getPrice(athlete) }} GBT</span>
+                </div>
               </div>
+              <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(athlete)" v-if="progress(athlete) < 100"></el-progress>
+              <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(athlete)" status="success" v-if="progress(athlete) >= 100"></el-progress>
             </div>
           </div>
           <div class="clearfix athlete-footer">
@@ -92,11 +94,15 @@ export default {
       // Load initial page of athletes
       this.$store.commit('athletes/athletes', [])
       if (!!this.user) {
-        this.$store.dispatch('users/fetchUser').then( () => {
-          this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
+        this.$store.dispatch('users/fetchUser').then(() => {
+          this.$store.dispatch('athletes/list', {
+            filters: { state: 'APPROVED' }
+          })
         })
       } else {
-        this.$store.dispatch('athletes/list', { filters: { state: 'APPROVED' } })
+        this.$store.dispatch('athletes/list', {
+          filters: { state: 'APPROVED' }
+        })
       }
     },
     scroll() {
@@ -196,6 +202,10 @@ export default {
   flex-grow: 1;
 }
 
+.el-progress{
+  margin-top: 10px;
+}
+
 .goal {
   color: #999;
   font-size: 1em;
@@ -238,5 +248,11 @@ export default {
   width: 30px;
   height: auto;
   display: inline-block;
+}
+.athlete-progress-info-funding-text{
+  font-family: 'OpenSans Bold';
+}
+.athlete-progress-info-funding-qty{
+  font-family: 'OpenSans Regular';
 }
 </style>
