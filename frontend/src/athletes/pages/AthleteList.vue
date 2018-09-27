@@ -167,7 +167,7 @@ export default {
   top: 2px;
   &.is-following {
     transform: scale(1.2);
-    color: #4e87b1;
+    color: #a0a8ab;
   }
 }
 
