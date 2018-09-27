@@ -14,6 +14,7 @@
             <el-menu-item v-if="isSupporter()" index="supporter-profile" :route="{name:'supporter.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
           </el-submenu>
+          <el-menu-item class="el-menu-item" index="login" :route="{name:'login'}" v-else>{{ $tc("message.LogIn") }}</el-menu-item>
           <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}" v-if="!!user">
             <el-badge :value="unread" :max="99" class="item" v-if="unread > 0">
               <el-button size="small" icon="el-icon-bell" circle></el-button>
