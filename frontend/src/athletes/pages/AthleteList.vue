@@ -174,6 +174,7 @@ export default {
 .athlete-image {
   height: 200px;
   overflow: hidden;
+  position: relative;
 }
 
 .athlete-name {
@@ -189,12 +190,13 @@ export default {
   line-height: 1em;
   font-weight: bold;
   text-transform: uppercase;
-  margin-bottom: 15px;
   background-color: #40c7ff;
   padding: 5px 10px;
   border-radius: 25px;
   display: inline-block;
-  margin-left: 10px;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
 }
 
 .athlete-progress {
