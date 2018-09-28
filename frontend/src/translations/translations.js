@@ -15,6 +15,7 @@ export const messages = {
       SignUp: 'Sign Up',
       SelectYourUserType: 'Select your user type:',
       Athlete: 'Athlete | Athletes',
+      Campaign: 'Campaign | Campaigns',
       Supporter: 'Supporter',
       FirstName: 'First name',
       LastName: 'Last name',
@@ -58,13 +59,17 @@ export const messages = {
       Unread: 'Unread',
       Read: 'Read',
       Close: 'Close',
+      News: 'News',
+      Faq: 'Faq',
+      English: 'English',
     }
   },
   es: {
     message: {
-      SignIn: 'Registro',
+      SignIn: 'Acceder',
       Email: 'Email',
-      Password: 'Contraseña'
+      Password: 'Contraseña',
+      Ingles: 'Ingles',
     }
   }
 }

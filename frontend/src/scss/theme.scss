@@ -23,6 +23,10 @@
   font-family: 'OpenSans Bold';
   src: url('../fonts/OpenSans-Bold.ttf');
 }
+@font-face {
+  font-family: 'OpenSans SemiBold';
+  src: url('../fonts/OpenSans-SemiBold.ttf');
+}
 
 body,
 html {
@@ -125,6 +129,14 @@ ul{
       height: 18px;
     }
   }
+}
+
+.btn{
+  background-color: #419ce2;
+  color: white;
+  padding: 8px 20px;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 .circleButton {
