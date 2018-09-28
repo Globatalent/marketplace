@@ -177,28 +177,6 @@ export default {
   position: relative;
 }
 
-.athlete-name {
-  font-size: 19px;
-  line-height: 1em;
-  color: #000000;
-  font-family: 'Montserrat Bold';
-}
-
-.athlete-sport {
-  color: white;
-  font-size: 0.8em;
-  line-height: 1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  background-color: #40c7ff;
-  padding: 5px 10px;
-  border-radius: 25px;
-  display: inline-block;
-  position: absolute;
-  left: 10px;
-  bottom: 10px;
-}
-
 .athlete-progress {
   overflow: hidden;
   flex-grow: 1;

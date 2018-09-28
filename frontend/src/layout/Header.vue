@@ -10,12 +10,9 @@
           <el-menu-item index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
         </el-menu>
         <el-menu :default-active="activeIndex" class="el-menu-right" mode="horizontal" router>
-          <!-- <el-menu-item>
-            <el-select v-model="value" placeholder="Select">
-              <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-              </el-option>
-            </el-select>
-          </el-menu-item> -->
+          <!-- <el-select v-model="$i18n.locale">
+            <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</el-option>
+          </el-select> -->
           <el-submenu index="3" v-if="!!user">
             <template slot="title">{{email()}}</template>
             <el-menu-item v-if="isAthlete()" index="athlete-profile" :route="{name:'athlete.profile'}">{{ $tc("message.Profile") }}</el-menu-item>
@@ -40,14 +37,15 @@
 <script>
 import router from '@/router.js'
 import { mapGetters } from 'vuex'
-import Vue from 'vue'
+import VueI18n from 'vue-i18n'
 
 export default {
   name: 'gb-header',
   data() {
     return {
       activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex2: '1',
+      langs: ['en', 'es']
     }
   },
   computed: {
@@ -94,10 +92,6 @@ export default {
           })
         })
     },
-    changeLocale(locale) {
-      locale = 'es'
-      Vue.config.lang = locale
-    }
   }
 }
 </script>
@@ -130,6 +124,9 @@ export default {
 }
 .el-menu-right {
   float: right;
+  .el-select{
+    float: left;
+  }
 }
 
 .el-menu-item {
