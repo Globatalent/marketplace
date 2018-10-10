@@ -9,7 +9,6 @@ from marketplace.purchases.constants import PAID, CURRENCY_CHOICES, USD
 
 class Token(TimeStampedModel):
     """Token created by the athlete."""
-    athlete = models.ForeignKey("athletes.Athlete", related_name="tokens", on_delete=models.CASCADE)
     name = models.CharField(max_length=100, null=True, blank=True)
     code = models.CharField(max_length=16, null=True, blank=True)
     amount = models.PositiveIntegerField(help_text=_("amount of tokens issued by the athlete"))
@@ -22,7 +21,7 @@ class Token(TimeStampedModel):
     @property
     def unit_price(self):
         """Price for single token."""
-        return self.price / self.amount
+        return float(self.price / self.amount)
 
     @property
     def remaining(self):
@@ -36,7 +35,7 @@ class Token(TimeStampedModel):
         return 1.0 - (self.remaining / self.amount)
 
     def __str__(self):
-        return "{} token: {}".format(str(self.athlete), self.code)
+        return "{} token".format(str(self.campaign))
 
     def save(self, *args, **kwargs):
         if self.amount <= 0:

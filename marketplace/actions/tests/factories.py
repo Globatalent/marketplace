@@ -1,7 +1,7 @@
 import factory
 from django.contrib.contenttypes.models import ContentType
 
-from marketplace.athletes.tests.factories import AthleteFactory
+from marketplace.campaigns.tests.factories import CampaignFactory
 from marketplace.users.tests.factories import UserFactory
 
 
@@ -16,9 +16,9 @@ class ActionFactory(factory.django.DjangoModelFactory):
         abstract = True
 
 
-class ActionAthleteFactory(ActionFactory):
+class ActionCampaignFactory(ActionFactory):
 
-    actor = factory.SubFactory(AthleteFactory)
+    actor = factory.SubFactory(CampaignFactory)
 
     class Meta:
         model = "actions.Action"
@@ -27,7 +27,7 @@ class ActionAthleteFactory(ActionFactory):
 class NotificationFactory(factory.django.DjangoModelFactory):
 
     user = factory.SubFactory(UserFactory)
-    action = factory.SubFactory(ActionAthleteFactory)
+    action = factory.SubFactory(ActionCampaignFactory)
 
     class Meta:
         model = "actions.Notification"

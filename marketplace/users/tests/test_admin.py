@@ -1,7 +1,7 @@
 from test_plus.test import TestCase
 
 from marketplace.users.tests.factories import UserFactory
-from ..admin import MyUserCreationForm
+from ..admin import UserCreationForm
 
 
 class TestMyUserCreationForm(TestCase):
@@ -12,7 +12,7 @@ class TestMyUserCreationForm(TestCase):
 
     def test_clean_email_success(self):
         # Instantiate the form with a new username
-        form = MyUserCreationForm(
+        form = UserCreationForm(
             {
                 "email": "alamode@example.com",
                 "password1": "7jefB#f@Cc7YJB]2v",
@@ -29,7 +29,7 @@ class TestMyUserCreationForm(TestCase):
 
     def test_clean_email_false(self):
         # Instantiate the form with the same username as self.user
-        form = MyUserCreationForm(
+        form = UserCreationForm(
             {
                 "email": self.user.email,
                 "password1": "notalamodespassword",

@@ -2,12 +2,10 @@ from generic_relations.relations import GenericRelatedField
 from rest_framework import serializers
 
 from marketplace.actions.models import Notification, Action
-from marketplace.athletes.api.v1.serializers import AthleteSerializer, PictureSerializer, ReviewSerializer
-from marketplace.athletes.models import Athlete, Picture, Review
+from marketplace.campaigns.api.v1.serializers import CampaignSerializer
+from marketplace.campaigns.models import Campaign
 from marketplace.purchases.api.v1.serializers import PurchaseSerializer
 from marketplace.purchases.models import Purchase
-from marketplace.supporters.api.v1.serializers import SupporterSerializer
-from marketplace.supporters.models import Supporter
 from marketplace.users.api.v1.serializers import UserSerializer
 from marketplace.users.models import User
 
@@ -16,25 +14,18 @@ class ActionSerializer(serializers.ModelSerializer):
 
     text = serializers.CharField(read_only=True)
     actor = GenericRelatedField({
-        Supporter: SupporterSerializer(),
-        Athlete: AthleteSerializer(),
         User: UserSerializer(),
+        Campaign: CampaignSerializer(),
     })
     trigger = GenericRelatedField({
-        Supporter: SupporterSerializer(),
-        Athlete: AthleteSerializer(),
         User: UserSerializer(),
-        Picture: PictureSerializer(),
-        Review: ReviewSerializer(),
         Purchase: PurchaseSerializer(),
+        Campaign: CampaignSerializer(),
     })
     target = GenericRelatedField({
-        Supporter: SupporterSerializer(),
-        Athlete: AthleteSerializer(),
         User: UserSerializer(),
-        Picture: PictureSerializer(),
-        Review: ReviewSerializer(),
         Purchase: PurchaseSerializer(),
+        Campaign: CampaignSerializer(),
     })
 
     class Meta:

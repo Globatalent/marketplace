@@ -1,22 +1,23 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.contrib.auth.forms import UserChangeForm as AuthUserChangeForm, UserCreationForm as AuthUserCreationForm
 from django.utils.translation import ugettext_lazy as _
-from .models import User
+
+from marketplace.users.models import User
 
 
-class MyUserChangeForm(UserChangeForm):
-    class Meta(UserChangeForm.Meta):
+class UserChangeForm(AuthUserChangeForm):
+    class Meta(AuthUserChangeForm.Meta):
         model = User
 
 
-class MyUserCreationForm(UserCreationForm):
-    error_message = UserCreationForm.error_messages.update({
+class UserCreationForm(AuthUserCreationForm):
+    error_message = AuthUserCreationForm.error_messages.update({
         'duplicate_email': 'This email has already been taken.'
     })
 
-    class Meta(UserCreationForm.Meta):
+    class Meta(AuthUserCreationForm.Meta):
         model = User
         fields = ('email',)
 
@@ -30,9 +31,9 @@ class MyUserCreationForm(UserCreationForm):
 
 
 @admin.register(User)
-class MyUserAdmin(AuthUserAdmin):
-    form = MyUserChangeForm
-    add_form = MyUserCreationForm
+class UserAdmin(AuthUserAdmin):
+    form = UserChangeForm
+    add_form = UserCreationForm
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         (_('Permissions'), {'fields': ('is_active',
@@ -44,6 +45,7 @@ class MyUserAdmin(AuthUserAdmin):
                                        'restore_password_code_requested_at',
                                        'groups',
                                        'user_permissions')}),
+        (_("Profile"), {"fields": ("fist_name", "last_name", "following")}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
@@ -55,3 +57,5 @@ class MyUserAdmin(AuthUserAdmin):
     list_display = ('email', 'is_superuser', 'date_joined')
     ordering = ('id',)
     search_fields = ('email',)
+    autocomplete_fields = ["following"]
+

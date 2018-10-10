@@ -13,7 +13,7 @@ class TokenSerializer(serializers.ModelSerializer):
         model = Token
         fields = [
             "id",
-            "athlete",
+            "campaign",
             "name",
             "code",
             "amount",
@@ -24,5 +24,5 @@ class TokenSerializer(serializers.ModelSerializer):
             "currency",
         ]
         extra_kwargs = {
-            "athlete": {"read_only": True}
+            "campaign": {"read_only": True}
         }

@@ -6,11 +6,11 @@ from marketplace.tokens.models import Token
 
 class TokenFilter(django_filters.rest_framework.FilterSet):
 
-    athlete_id = django_filters.NumberFilter(
-        name="athlete__id",
-        help_text=_("Filter using the athlete internal ID.")
+    campaign_id = django_filters.NumberFilter(
+        field_name="campaign__id",
+        help_text=_("Filter using the campaign internal ID.")
     )
 
     class Meta:
         model = Token
-        fields = ['athlete_id']
+        fields = ['campaign_id']

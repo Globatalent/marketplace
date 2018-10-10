@@ -8,8 +8,7 @@ from model_utils.models import TimeStampedModel
 
 from marketplace.actions.constants import ADD_REVIEW, PURCHASE
 from marketplace.actions.helpers import human_readable
-from marketplace.athletes.models import Athlete
-from marketplace.supporters.models import Supporter
+from marketplace.campaigns.models import Campaign
 from marketplace.users.models import User
 
 
@@ -75,12 +74,12 @@ class Action(TimeStampedModel):
         if self.verb in (ADD_REVIEW, PURCHASE):
             return User.objects.filter(pk=self.target.user.pk)
         # If the actor is an athlete
-        if self.actor_content_type == ContentType.objects.get_for_model(Athlete):
-            supporters = self.actor.supporters.all()
-            return User.objects.filter(pk__in=supporters.values_list('user__pk', flat=True))
-        # If the actor is a support and the trigger is and athlete
-        if self.actor_content_type == ContentType.objects.get_for_model(Supporter) and \
-           self.trigger_content_type == ContentType.objects.get_for_model(Athlete):
+        if self.actor_content_type == ContentType.objects.get_for_model(Campaign):
+            followers = self.actor.followers.all()
+            return User.objects.filter(pk__in=followers.values_list('pk', flat=True))
+        # If the actor is an user and the trigger is and campaign
+        if self.actor_content_type == ContentType.objects.get_for_model(User) and \
+           self.trigger_content_type == ContentType.objects.get_for_model(Campaign):
             return User.objects.filter(pk=self.trigger.user.pk)
         return User.objects.none()
 

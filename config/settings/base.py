@@ -72,12 +72,13 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     'marketplace.users.apps.UsersConfig',
-    'marketplace.supporters.apps.SupportersConfig',
-    'marketplace.athletes.apps.AthletesConfig',
     'marketplace.actions.apps.ActionsConfig',
     'marketplace.tokens.apps.TokensConfig',
     'marketplace.purchases.apps.PurchasesConfig',
     'marketplace.emails.apps.EmailsConfig',
+    'marketplace.campaigns.apps.CampaignsConfig',
+    'marketplace.tags.apps.TagsConfig',
+    'marketplace.alerts.apps.AlertsConfig',
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -292,6 +293,7 @@ REST_FRAMEWORK = {
     'DEFAULT_SEARCH_BACKEND': ('django_filters.rest_framework.SearchFilter',),
     'DEFAULT_ORDERING_BACKEND': ('django_filters.rest_framework.OrderingFilter',),
     'DEFAULT_PAGINATION_CLASS': 'marketplace.core.api.utils.StandardPagination',
+    'EXCEPTION_HANDLER': 'marketplace.core.api.exceptions.extra_exception_handler',
     'TEST_REQUEST_DEFAULT_FORMAT': 'json',
 }
 JWT_AUTH = {

@@ -1,12 +1,12 @@
 import factory
 
-from marketplace.supporters.tests.factories import SupporterFactory
 from marketplace.tokens.tests.factories import TokenFactory
+from marketplace.users.tests.factories import UserFactory
 
 
 class PurchaseFactory(factory.django.DjangoModelFactory):
 
-    supporter = factory.SubFactory(SupporterFactory)
+    user = factory.SubFactory(UserFactory)
     token = factory.SubFactory(TokenFactory)
 
     class Meta:

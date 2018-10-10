@@ -1,9 +1,8 @@
 from django.db import IntegrityError
 from test_plus.test import TestCase
 
+from marketplace.campaigns.tests.factories import CampaignFactory
 from marketplace.purchases.models import Purchase
-from marketplace.supporters.tests.factories import SupporterFactory
-from marketplace.tokens.tests.factories import TokenFactory
 from marketplace.users.tests.factories import UserFactory
 
 
@@ -14,8 +13,9 @@ class PurchasesTests(TestCase):
         self.user = self.make_user()
 
     def test_purchase(self):
-        token = TokenFactory(amount=100000, price=100000)
-        purchase = Purchase(token=token, amount=token.amount / 2, supporter=SupporterFactory())
+        campaign = CampaignFactory(is_draft=False, funds=100000)
+        token = campaign.token
+        purchase = Purchase(token=token, amount=token.amount / 2, user=UserFactory())
         try:
             purchase.save()
             raised_exception = False
@@ -25,8 +25,9 @@ class PurchasesTests(TestCase):
         self.assertAlmostEqual(purchase.total, token.unit_price * purchase.amount)
 
     def test_purchase_amount_limit(self):
-        token = TokenFactory(amount=100000, price=100000)
-        purchase = Purchase(token=token, amount=token.amount + 1, supporter=SupporterFactory())
+        campaign = CampaignFactory(is_draft=False, funds=100000)
+        token = campaign.token
+        purchase = Purchase(token=token, amount=token.amount + 1, user=UserFactory())
         try:
             purchase.save()
             raised_exception = False

@@ -11,7 +11,7 @@ from marketplace.actions.models import Notification
 class NotificationViewSet(UpdateModelMixin, ReadOnlyModelViewSet):
     serializer_class = NotificationSerializer
     queryset = Notification.objects.all()
-    filter_class = NotificationFilter
+    filterset_class = NotificationFilter
 
     def get_queryset(self):
         queryset = super().get_queryset()

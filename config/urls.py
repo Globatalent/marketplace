@@ -1,13 +1,13 @@
 from django.conf import settings
-from django.urls import include, path
+from django.conf.urls import include
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.views.generic import TemplateView
-from django.views import defaults as default_views
-from django.conf.urls import include, url
-from rest_framework.documentation import include_docs_urls
+from django.urls import path
 from django.utils.translation import ugettext_lazy as _
-
+from django.views import defaults as default_views
+from django.views.generic import TemplateView
+from rest_framework.documentation import include_docs_urls
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
@@ -24,9 +24,14 @@ urlpatterns += [
 # API URLs
 # Create a router and register our resources with it.
 urlpatterns += [
-    path(r'api/docs/', include_docs_urls(title='Globatalent Marketplace API Docs')),
-    path(r'api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path(r'api/', include('config.router', namespace='api')),
+    # JWT Token
+    path('api/v1/auth/jwt/token/', obtain_jwt_token),
+    path('api/v1/auth/jwt/refresh/', refresh_jwt_token),
+    path('api/v1/auth/jwt/verify/', verify_jwt_token),
+    # Docs
+    path('api/v1/docs/', include_docs_urls(title='Globatalent Marketplace API Docs')),
+    # Endpoints
+    path('api/v1/', include('config.router', namespace='api')),
 ]
 
 if settings.DEBUG:

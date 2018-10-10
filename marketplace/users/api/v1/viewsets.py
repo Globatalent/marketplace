@@ -2,28 +2,34 @@ import coreapi
 import coreschema
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import status, viewsets
-from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.schemas import ManualSchema
-from rest_framework.viewsets import GenericViewSet
 
+from marketplace.users.api.v1.permissions import IsAuthenticatedOnRetrieve, NoDeletes
 from marketplace.users.api.v1.serializers import UserSerializer, RequestRestoreCodeSerializer, \
     RestorePasswordSerializer, VerifySerializer
 from marketplace.users.helpers import restore_password, verify_email
 from marketplace.users.models import User
 
 
-class UserViewSet(GenericViewSet):
+class UserViewSet(viewsets.ModelViewSet):
+
+    queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticatedOnRetrieve, NoDeletes]
 
     def get_queryset(self):
-        return User.objects.filter(pk=self.request.user.pk)
+        queryset = super().get_queryset()
+        return queryset.filter(pk=self.request.user.pk)  # Only list current user
 
-    @action(methods=['GET'], detail=False)
-    def me(self, request):
-        serializer = self.get_serializer(instance=request.user)
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
+    def get_object(self):
+        if self.kwargs.get("pk", None) == "me":
+            self.kwargs["pk"] = self.request.user.id
+        return super().get_object()
+
+
+me = UserViewSet.as_view({"get": "retrieve", "patch": "partial_update"})
 
 
 class RequestRestoreCodeViewSet(viewsets.ViewSet):

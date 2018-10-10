@@ -7,7 +7,7 @@ from marketplace.actions.models import Notification
 class NotificationFilter(django_filters.rest_framework.FilterSet):
 
     read = django_filters.BooleanFilter(
-        name="read",
+        field_name="read",
         help_text=_("Filter by read or not notifications.")
     )
 
