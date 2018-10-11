@@ -62,6 +62,7 @@ export const messages = {
       News: 'News',
       Faq: 'Faq',
       English: 'English',
+      RegisterNewUser: 'Register new user',
     }
   },
   es: {

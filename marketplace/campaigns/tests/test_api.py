@@ -181,3 +181,17 @@ class CampaignAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(1, data['count'])
+
+    def test_followed_is_draft(self):
+        user = UserFactory()
+        CampaignFactory.create_batch(is_draft=True, size=10)
+        campaign = CampaignFactory(is_draft=False)
+        user.follow(campaign)
+        self.client.force_authenticate(user)
+        response = self.client.get(
+            "/api/v1/campaigns/?is_draft=False",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(1, data['count'])

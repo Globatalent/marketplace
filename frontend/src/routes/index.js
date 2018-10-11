@@ -65,20 +65,32 @@ export default [
     },
   },
 
-  // Supporters
+  // User
   {
-    path: '/supporter-profile',
-    name: 'supporter.profile',
-    component: resolve => require(['@/supporters/pages/SupporterProfile.vue'], resolve),
+    path: '/profile',
+    name: 'profile',
+    component: resolve => require(['@/auth/pages/Profile.vue'], resolve),
     meta: {
       auth: true,
     },
   },
-
   {
     path: '/notifications',
     name: 'notifications',
     component: resolve => require(['@/actions/pages/Notifications.vue'], resolve),
+  },
+
+  // Campaigns
+  {
+    path: '/campaigns',
+    name: 'campaign.list',
+    component: resolve => require(['@/campaigns/pages/CampaignList.vue'], resolve),
+  },
+  {
+    path: '/campaigns/:campaignId',
+    name: 'campaign.details',
+    component: resolve => require(['@/campaigns/pages/CampaignDetails.vue'], resolve),
+    props: true,
   },
 
   // 404
@@ -90,7 +102,7 @@ export default [
   // Redirects
   {
     path: '/',
-    redirect: '/athletes',
+    redirect: '/campaigns',
   },
   {
     path: '/*',

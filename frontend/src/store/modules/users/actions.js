@@ -14,6 +14,17 @@ export default {
       })
     })
   },
+  update({commit, state}, data) {
+    return new Promise((resolve, reject) => {
+      const payload = UserTransformer.send(data)
+      Vue.axios.patch(`${state.endpoints.users}me/`, payload).then( response => {
+        const supporter = UserTransformer.fetch(response.data);
+        resolve(supporter)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
   checkUser ({dispatch, state}) {
     return new Promise((resolve, reject) => {
       if (!state.user) {

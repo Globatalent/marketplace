@@ -16,7 +16,7 @@ from marketplace.campaigns.api.v1.serializers import (
     SportSerializer,
     RevenueSerializer,
     IncomeSerializer,
-    RecommendationSerializer)
+    RecommendationSerializer, ReadCampaignSerializer)
 from marketplace.campaigns.models import Campaign, Picture, Link, Sport, Revenue, Income, Recommendation
 
 
@@ -79,6 +79,11 @@ class CampaignViewSet(viewsets.ModelViewSet):
         OnlyOwnerUpdates,
     ]
     filterset_class = CampaignFilter
+
+    def get_serializer_class(self):
+        if self.action in ('list', 'retrieve'):
+            return ReadCampaignSerializer
+        return super().get_serializer_class()
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)

@@ -140,3 +140,6 @@ class CampaignSerializer(serializers.ModelSerializer):
             return is_following(user, obj)
         return False
 
+
+class ReadCampaignSerializer(CampaignSerializer):
+    sport = SportSerializer(read_only=True)

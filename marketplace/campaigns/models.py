@@ -13,7 +13,7 @@ from marketplace.purchases.constants import CURRENCY_CHOICES, USD
 
 class Sport(TimeStampedModel):
     """List of available sports in the platform."""
-    name = models.TextField(unique=True)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -24,7 +24,7 @@ class Campaign(TimeStampedModel):
     athlete and club.
     """
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="campaigns", on_delete=models.CASCADE)
-    is_draft = models.BooleanField(default=True, help_text=_("if the campaign is a draft it isn't complete"))
+    is_draft = models.BooleanField(default=True, help_text=_("If the campaign is a draft it isn't complete"))
     kind = models.CharField(max_length=8, choices=CAMPAIGN_TYPES)
     token = models.OneToOneField(
         "tokens.Token",
@@ -80,11 +80,8 @@ class Campaign(TimeStampedModel):
 
     def save(self, *args, **kwargs):
         """Handles token creation when save."""
-        try:
-            self.token
-        except ObjectDoesNotExist:
-            if not self.is_draft and self.funds > 0.0:
-                self.token = create_token(self)
+        if not self.token and not self.is_draft and self.funds and self.funds > 0.0:
+            self.token = create_token(self)
         super().save(*args, **kwargs)
 
 

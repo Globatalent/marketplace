@@ -2,11 +2,14 @@ from django.contrib.auth.hashers import make_password
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
+from marketplace.users.helpers import jwt_payload
 from marketplace.users.models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
     """Serializer to handle users."""
+
+    token = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -15,11 +18,16 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "first_name",
             "last_name",
-            "password"
+            "password",
+            "token",
         ]
         extra_kwargs = {
             "password": {"write_only": True, "required": False},
         }
+
+    def get_token(self, obj):
+        """Gets token information."""
+        return jwt_payload(obj)
 
     def validate_password(self, value):
         value = make_password(value)

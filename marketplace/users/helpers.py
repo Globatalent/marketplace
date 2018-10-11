@@ -27,4 +27,6 @@ def verify_email(verification_code):
 
 def is_following(user, campaign):
     """Checks if the given user is following the given campaign."""
-    return user.following.filter(pk=campaign.pk).exists()
+    if user.is_authenticated:
+        return user.following.filter(pk=campaign.pk).exists()
+    return False
