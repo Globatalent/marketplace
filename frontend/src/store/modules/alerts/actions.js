@@ -1,7 +1,5 @@
 import Vue from 'vue'
-import AlertTransformer from '../../../supporters/transformers/AlertTransformer'
-import SupporterTransformer from '../../../supporters/transformers/SupporterTransformer'
-import { store } from '../../index'
+import AlertTransformer from '../../../users/transformers/AlertTransformer'
 
 
 export default {
@@ -44,17 +42,6 @@ export default {
         const alert = AlertTransformer.fetch(response.data)
         resolve(alert)
       }).catch( error => {
-        reject(error)
-      })
-    })
-  },
-  update({commit, state}, data) {
-    return new Promise((resolve, reject) => {
-      const payload = SupporterTransformer.send(data)
-      Vue.axios.patch(`${state.endpoints.supporters}${payload.id}/`, payload).then( response => {
-        const supporter = SupporterTransformer.fetch(response.data);
-        resolve(supporter)
-      }).catch((error) => {
         reject(error)
       })
     })

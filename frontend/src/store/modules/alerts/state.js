@@ -7,6 +7,5 @@ export default {
   },
   endpoints: {
     alerts: '/api/v1/alerts/',
-    supporters: '/api/v1/supporters/',
   },
 }

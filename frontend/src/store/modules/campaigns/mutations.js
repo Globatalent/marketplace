@@ -5,6 +5,9 @@ export default {
   campaigns (state, campaigns) {
     state.campaigns = campaigns
   },
+  sports (state, sports) {
+    state.sports = sports
+  },
   pushCampaigns (state, campaigns) {
     state.campaigns = state.campaigns.concat(campaigns)
   },

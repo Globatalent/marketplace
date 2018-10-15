@@ -63,6 +63,7 @@ export const messages = {
       Faq: 'Faq',
       English: 'English',
       RegisterNewUser: 'Register new user',
+      Club: 'Club',
     }
   },
   es: {

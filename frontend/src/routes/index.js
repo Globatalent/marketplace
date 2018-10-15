@@ -26,50 +26,12 @@ export default [
     component: resolve => require(['@/auth/pages/Verified.vue'], resolve),
     props: true,
   },
-  // Athletes
-  {
-    path: '/athlete-profile',
-    name: 'athlete.profile',
-    component: resolve => require(['@/athletes/pages/AthleteProfile.vue'], resolve),
-    meta: {
-      auth: true,
-    },
-  },
-  {
-    path: '/athletes',
-    name: 'athlete.list',
-    component: resolve => require(['@/athletes/pages/AthleteList.vue'], resolve),
-  },
-  {
-    path: '/athletes/:athleteId',
-    name: 'athlete.details',
-    component: resolve => require(['@/athletes/pages/AthleteDetails.vue'], resolve),
-    props: true,
-  },
-
-  {
-    path: '/purchases/:athleteId',
-    name: 'athlete.invest',
-    component: resolve => require(['@/athletes/pages/AthleteInvest.vue'], resolve),
-    meta: {
-      auth: true,
-    },
-  },
-  {
-    path: '/purchased/:purchaseId',
-    name: 'athlete.invested',
-    component: resolve => require(['@/athletes/pages/AthleteInvested.vue'], resolve),
-    props: true,
-    meta: {
-      auth: true,
-    },
-  },
 
   // User
   {
     path: '/profile',
     name: 'profile',
-    component: resolve => require(['@/auth/pages/Profile.vue'], resolve),
+    component: resolve => require(['@/users/pages/Profile.vue'], resolve),
     meta: {
       auth: true,
     },
@@ -87,10 +49,37 @@ export default [
     component: resolve => require(['@/campaigns/pages/CampaignList.vue'], resolve),
   },
   {
+    path: '/campaigns/create',
+    name: 'campaign.create',
+    component: resolve => require(['@/campaigns/pages/CampaignCreate.vue'], resolve),
+    props: true,
+    meta: {
+      auth: true,
+    },
+  },
+  {
+    path: '/campaigns/:campaignId/edit',
+    name: 'campaign.edit',
+    component: resolve => require(['@/campaigns/pages/CampaignEdit.vue'], resolve),
+    props: true,
+    meta: {
+      auth: true,
+    },
+  },
+  {
     path: '/campaigns/:campaignId',
     name: 'campaign.details',
     component: resolve => require(['@/campaigns/pages/CampaignDetails.vue'], resolve),
     props: true,
+  },
+  {
+    path: '/purchased/:purchaseId',
+    name: 'athlete.invested',
+    component: resolve => require(['@/campaigns/pages/CampaignInvested.vue'], resolve),
+    props: true,
+    meta: {
+      auth: true,
+    },
   },
 
   // 404
@@ -99,6 +88,7 @@ export default [
     name: 'not-found',
     component: resolve => require(['@/pages/NotFound.vue'], resolve),
   },
+
   // Redirects
   {
     path: '/',

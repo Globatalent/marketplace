@@ -227,4 +227,24 @@ export default {
       })
     })
   },
+  sports({commit, state}, payload={}) {
+    return new Promise((resolve, reject) => {
+      const { url, filters } = payload
+      let endpoint = state.endpoints.sports
+      if (!!url) {
+        endpoint = url
+      } else if (!!filters) {
+        const query = Object.keys(filters).map(key => `${key}=${filters[key]}`).join('&')
+        endpoint = [endpoint, query].join('?')
+      }
+      Vue.axios.get(endpoint).then((response) => {
+        const { results } = response.data;
+        const sports = results;
+        commit('sports', sports)
+        resolve(sports)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
 }

@@ -109,7 +109,7 @@ import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'AthleteProfile',
+  name: 'CampaignForm',
   components: {
     'gb-base-layout': BaseLayout,
     vueDropzone: vue2Dropzone
