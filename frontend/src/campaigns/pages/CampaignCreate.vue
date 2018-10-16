@@ -57,8 +57,11 @@ export default {
   },
   methods: {
     create(kind) {
-      this.$store.dispatch('campaigns/create', {kind: kind}).then( () => {
-        this.kind = kind
+      this.$store.dispatch('campaigns/create', {kind: kind}).then( campaign => {
+        router.push({ name: 'campaign.edit', params: {
+          campaignId: campaign.id ,
+          step: 'card',
+        }})
       })
     }
   }

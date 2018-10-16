@@ -23,7 +23,7 @@
           <div class="el-upload__text">Upload Image</div>
         </el-upload>
       </el-form-item>
-      <el-form-item v-bind:label="$tc('message.Gender')" class="text-left sexFormElement">
+      <el-form-item v-bind:label="$tc('message.Gender')" class="text-left sexFormElement" v-if="form.kind==='athlete'">
         <el-radio-group>
           <el-radio label="male" v-model="form.gender">{{ $tc("message.Male") }}</el-radio>
           <el-radio label="female" v-model="form.gender">{{ $tc("message.Female") }}</el-radio>

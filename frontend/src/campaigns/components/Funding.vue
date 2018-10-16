@@ -63,6 +63,7 @@
     </div>
     <el-form-item>
       <el-button type="primary" class="is-uppercase" @click.prevent="onSaveAndContinue()">{{ $tc("message.SaveContinute") }}</el-button>
+      <el-button class="is-uppercase" @click.prevent="onLaunch()">Launch</el-button>
     </el-form-item>
   </el-col>
 </template>
@@ -172,6 +173,9 @@ export default {
           examples: this.form.examples,
         }
         this.$store.dispatch('campaigns/update', payload)
+      },
+      onLaunch() {
+        this.$store.dispatch('campaigns/update', {id: this.campaign.id, isDraft: false})
       }
   }
 }
