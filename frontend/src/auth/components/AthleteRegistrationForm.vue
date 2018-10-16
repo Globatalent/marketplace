@@ -137,7 +137,7 @@ export default {
           this.$store
             .dispatch('auth/registerAthlete', dataForm)
             .then(data => {
-              router.push({ name: 'athlete.list' })
+              router.push({ name: 'campaing.list' })
             })
             .catch(error => {
               if (!!error.response) {

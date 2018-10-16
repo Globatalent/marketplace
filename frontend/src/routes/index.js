@@ -58,7 +58,7 @@ export default [
     },
   },
   {
-    path: '/campaigns/:campaignId/edit',
+    path: '/campaigns/:campaignId/edit/:step',
     name: 'campaign.edit',
     component: resolve => require(['@/campaigns/pages/CampaignEdit.vue'], resolve),
     props: true,

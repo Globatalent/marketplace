@@ -1,12 +1,9 @@
 <template>
   <gb-base-layout>
-    <div v-if="!!kind">
-      <component :is="forms[kind]"></component>
-    </div>
-    <div v-else>
-      <el-button-group>
-          <el-button type="primary" @click="kind = 'athlete'">{{ $tc("message.Athlete",1) }}</el-button>
-          <el-button type="primary" @click="kind = 'club'">{{ $tc("message.Club") }}</el-button>
+    <div>
+      <el-button-group v-if="allow">
+          <el-button type="primary" @click="create('athlete')">{{ $tc("message.Athlete",1) }}</el-button>
+          <el-button type="primary" @click="create('club')">{{ $tc("message.Club") }}</el-button>
         </el-button-group>
     </div>
   </gb-base-layout>
@@ -15,38 +12,55 @@
 <script>
 import Vue from 'vue'
 import BaseLayout from '@/layout/BaseLayout.vue'
-import vue2Dropzone from 'vue2-dropzone'
 import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import { mapGetters } from 'vuex'
+import router from '@/router.js'
 
-import AthleteForm from "../components/AthleteForm";
-import ClubForm from "../components/ClubForm";
 
 export default {
   name: 'CampaignForm',
   components: {
     'gb-base-layout': BaseLayout,
-    'gb-athlete-form': AthleteForm,
-    'gb-club-form': ClubForm,
-    vueDropzone: vue2Dropzone,
   },
   computed: {
     ...mapGetters({
+      user: 'users/user',
+      campaigns: 'campaigns/campaigns',
+      campaign: 'campaigns/campaign',
       user: 'users/user'
     })
   },
   data() {
     return {
-      forms: {
-        athlete: 'gb-athlete-form',
-        club: 'gb-club-form',
-      },
+      allow: false,
       kind: null,
     }
   },
   created() {
+    this.$store.dispatch('campaigns/list', {filters: {
+      user: this.user.id,
+      is_draft: 'True',
+    }}).then( campaigns => {
+      // There is no draft campaign
+      if (campaigns.length === 0) {
+        this.allow = true
+      // There is a draft campaign, so we load it to edit
+      } else {
+        const campaign = campaigns[0]
+        this.$store.commit('campaigns/campaign', campaign)
+        router.push({ name: 'campaign.edit', params: {
+          campaignId: campaign.id ,
+          step: 'card',
+        }})
+      }
+    })
   },
   methods: {
+    create(kind) {
+      this.$store.dispatch('campaigns/create', {kind: kind}).then( () => {
+        this.kind = kind
+      })
+    }
   }
 }
 </script>

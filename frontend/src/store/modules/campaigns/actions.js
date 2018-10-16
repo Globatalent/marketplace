@@ -39,13 +39,49 @@ export default {
       })
     })
   },
-  update({commit, state}, data) {
+  create({commit, state}, data) {
     return new Promise((resolve, reject) => {
       const payload = CampaignTransformer.send(data)
-      Vue.axios.patch(`${state.endpoints.campaigns}${payload.id}/`, payload).then( response => {
+      Vue.axios.post(state.endpoints.campaigns, payload).then( response => {
         const campaign = CampaignTransformer.fetch(response.data);
         commit('campaign', campaign)
         resolve(campaign)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+  update({commit, state}, data) {
+    return new Promise((resolve, reject) => {
+      const { links } = data
+      const payload = CampaignTransformer.send(data)
+      Vue.axios.patch(`${state.endpoints.campaigns}${payload.id}/`, payload).then( response => {
+        const campaign = CampaignTransformer.fetch(response.data);
+        let requests = []  // All extra requests needed
+        // Check for links
+        if (typeof links !== "undefined" && links.length > 0) {
+          const toCreateLinks = links.filter( link => !link.id && link.url !== "")
+          const toEditLinks = links.filter( link => !!link.id && link.url !== "")
+          requests = requests.concat(
+            toCreateLinks.map(linkPayload => {
+              return Vue.axios.post(`${state.endpoints.links}`, linkPayload)
+            })
+          ).concat(
+            toEditLinks.map(linkPayload => {
+              return Vue.axios.patch(`${state.endpoints.links}${linkPayload.id}/`, linkPayload)
+            })
+          )
+        }
+        // If there are some external requests, wait for all of them
+        if (requests.length > 0) {
+          Vue.axios.all(requests).then( () => {
+            commit('campaign', campaign)
+            resolve(campaign)
+          })
+        } else {
+          commit('campaign', campaign)
+          resolve(campaign)
+        }
       }).catch((error) => {
         reject(error)
       })
