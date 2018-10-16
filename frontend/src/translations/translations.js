@@ -64,6 +64,11 @@ export const messages = {
       English: 'English',
       RegisterNewUser: 'Register new user',
       Club: 'Club',
+      SubscribeToUs: 'Subscribe to us',
+      InputEmail: 'Input Email',
+      Press: 'Press',
+      About: 'About',
+      Careers: 'Careers',
     }
   },
   es: {
