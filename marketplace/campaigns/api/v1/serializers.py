@@ -19,6 +19,7 @@ class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
         fields = [
+            "id",
             "campaign",
             "image",
         ]
@@ -28,6 +29,7 @@ class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
         fields = [
+            "id",
             "campaign",
             "network",
             "url",
@@ -38,6 +40,7 @@ class RevenueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Revenue
         fields = [
+            "id",
             "campaign",
             "year",
             "currency",
@@ -49,6 +52,7 @@ class IncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Income
         fields = [
+            "id",
             "campaign",
             "year",
             "currency",
@@ -60,8 +64,9 @@ class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
         fields = [
+            "id",
             "campaign",
-            "image",
+            "file",
         ]
 
 
@@ -99,6 +104,7 @@ class CampaignSerializer(serializers.ModelSerializer):
         fields = [
             "id",
             "is_draft",
+            "kind",
             "token",
             "title",
             "description",

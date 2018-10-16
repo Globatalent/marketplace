@@ -2,7 +2,7 @@
   <gb-minimal-layout>
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="12" :md="12" :lg="8" :xl="4" class="loginBox text-center">
-        <router-link :to="{ name: 'athlete.list'}">
+        <router-link :to="{ name: 'campaing.list'}">
           <img class="logo" src="~@/assets/img/Globatalent-logo-vert.png" />
         </router-link>
         <h2 class="form-lined-title">{{ $tc("message.SignIn") }}</h2>

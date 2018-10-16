@@ -15,6 +15,7 @@
           </el-select> -->
           <el-submenu index="3" v-if="!!user">
             <template slot="title">{{email()}}</template>
+            <el-menu-item index="campaign.create" :route="{name: 'campaign.create'}">{{ $tc("message.CreateCampaign") }}</el-menu-item>
             <el-menu-item index="profile" :route="{name: 'profile'}">{{ $tc("message.Profile") }}</el-menu-item>
             <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
           </el-submenu>

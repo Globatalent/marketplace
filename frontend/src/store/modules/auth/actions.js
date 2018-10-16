@@ -79,7 +79,7 @@ export default {
   logout ({commit, dispatch}) {
     commit('cleanToken')
     dispatch('users/clearUser', {}, {root: true})
-    router.push({name: 'athlete.list'})
+    router.push({name: 'campaing.list'})
   },
   refreshToken ({commit, state, dispatch}) {
     return new Promise((resolve, reject) => {

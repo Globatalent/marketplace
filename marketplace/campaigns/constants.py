@@ -14,13 +14,14 @@ SEX_CHOICES = (
     (FEMALE, _('Female'))
 )
 
-FACEBOOK, INSTAGRAM, TWITTER, YOUTUBE, LINKEDIN, TWITCH = \
-    "facebook", "instagram", "twitter", "youtube", "linkedin", "twitch"
+FACEBOOK, INSTAGRAM, TWITTER, YOUTUBE, LINKEDIN, WHATSAPP, FLICKR = \
+    "facebook", "instagram", "twitter", "youtube", "linkedin", "whatsapp", "flickr"
 SOCIAL_NETWORKS = (
     (FACEBOOK, _("Facebook")),
     (INSTAGRAM, _("Instagram")),
     (TWITTER, _("Twitter")),
     (YOUTUBE, _("YouTube")),
     (LINKEDIN, _("LinkedIn")),
-    (TWITCH, _("Twitch")),
+    (WHATSAPP, _("WhatsApp")),
+    (FLICKR, _("Flickr")),
 )

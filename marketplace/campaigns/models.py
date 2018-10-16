@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
@@ -14,6 +13,9 @@ from marketplace.purchases.constants import CURRENCY_CHOICES, USD
 class Sport(TimeStampedModel):
     """List of available sports in the platform."""
     name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["name"]
 
     def __str__(self):
         return self.name
@@ -35,15 +37,23 @@ class Campaign(TimeStampedModel):
     )
 
     # Card
-    title = models.CharField(max_length=250)
-    description = models.TextField()
+    title = models.CharField(max_length=250, null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
     image = ThumbnailerImageField(
         max_length=250,
         upload_to=UploadToDir('campaigns', random_name=True),
         verbose_name=_('image'),
+        null=True,
+        blank=True
     )
     gender = models.CharField(choices=SEX_CHOICES, null=True, blank=True, max_length=20, verbose_name=_('sex'))
-    sport = models.ForeignKey("campaigns.Sport", related_name="campaigns", on_delete=models.SET_NULL, null=True)
+    sport = models.ForeignKey(
+        "campaigns.Sport",
+        related_name="campaigns",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
     tags = models.ManyToManyField("tags.Tag", blank=True)
 
     # Content
@@ -76,7 +86,7 @@ class Campaign(TimeStampedModel):
         ordering = ["-created"]
 
     def __str__(self):
-        return self.title
+        return self.title or str(self.id)
 
     def save(self, *args, **kwargs):
         """Handles token creation when save."""
@@ -101,7 +111,7 @@ class Link(TimeStampedModel):
     url = models.URLField(null=True, blank=True, verbose_name=_('url'))
 
     def __str__(self):
-        return self.url
+        return self.url or str(self.id)
 
 
 class Revenue(TimeStampedModel):
@@ -128,8 +138,7 @@ class Income(TimeStampedModel):
 
 class Recommendation(TimeStampedModel):
     campaign = models.ForeignKey("campaigns.Campaign", related_name="recommendations", on_delete=models.CASCADE)
-    image = ThumbnailerImageField(
+    file = models.FileField(
         max_length=250,
-        upload_to=UploadToDir('recommendations', random_name=True),
-        verbose_name=_('image'),
+        upload_to=UploadToDir('recommendations', random_name=True)
     )

@@ -124,7 +124,7 @@ class CampaignAPITests(APITestCase):
         with open(picture_tmp_file.name, 'rb') as picture:
             data = {
                 "campaign": campaign.pk,
-                "image": picture,
+                "file": picture,
             }
             self.client.force_authenticate(self.user)
             response = self.client.post(

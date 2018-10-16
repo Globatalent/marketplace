@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     goClose() {
-      router.push({ name: 'athlete.list' })
+      router.push({ name: 'campaing.list' })
     }
   }
 }
