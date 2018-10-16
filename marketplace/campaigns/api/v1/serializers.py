@@ -2,6 +2,7 @@ from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
 from marketplace.campaigns.models import Campaign, Sport, Picture, Link, Revenue, Income, Recommendation
+from marketplace.tags.models import Tag
 from marketplace.tokens.api.v1.serializers import TokenSerializer
 from marketplace.users.helpers import is_following
 
@@ -97,6 +98,11 @@ class CampaignSerializer(serializers.ModelSerializer):
         help_text=_("List of recommendations objects."),
     )
     token = TokenSerializer(read_only=True)
+    tags = serializers.ListField(
+        required=False,
+        child=serializers.CharField(),
+        source="tag_names"
+    )
     following = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
@@ -145,6 +151,35 @@ class CampaignSerializer(serializers.ModelSerializer):
             user = self.context['request'].user
             return is_following(user, obj)
         return False
+
+    def validate_tags(self, value):
+        """Gets or create tags."""
+        tags = []
+        for name in value:
+            tag, created = Tag.objects.get_or_create(name=name, defaults={"name": name})
+            tags.append(tag)
+        return tags
+
+    def create(self, validated_data):
+        try:
+            tags = validated_data.pop('tag_names')
+        except KeyError:
+            tags = []
+        campaign = super().create(validated_data)
+        for tag in tags:
+            campaign.tags.add(tag)
+        return campaign
+
+    def update(self, instance, validated_data):
+        try:
+            tags = validated_data.pop('tag_names')
+        except KeyError:
+            tags = []
+        campaign = super().update(instance, validated_data)
+        campaign.tags.clear()
+        for tag in tags:
+            campaign.tags.add(tag)
+        return campaign
 
 
 class ReadCampaignSerializer(CampaignSerializer):

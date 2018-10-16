@@ -88,6 +88,9 @@ class Campaign(TimeStampedModel):
     def __str__(self):
         return self.title or str(self.id)
 
+    def tag_names(self):
+        return self.tags.values_list("name", flat=True)
+
     def save(self, *args, **kwargs):
         """Handles token creation when save."""
         if not self.token and not self.is_draft and self.funds and self.funds > 0.0:

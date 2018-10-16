@@ -145,6 +145,7 @@ export default {
           description: this.form.description,
           gender: this.form.gender,
           sport: this.form.sport.id,
+          tags: this.form.tags,
         }
         this.$store.dispatch('campaigns/update', payload).then( () => {
           router.push({ name: 'campaign.edit', params: {

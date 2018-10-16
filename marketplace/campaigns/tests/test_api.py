@@ -3,6 +3,7 @@ from django.core.files.temp import NamedTemporaryFile
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from marketplace.campaigns.constants import ATHLETE
 from marketplace.campaigns.models import Campaign
 from marketplace.campaigns.tests.factories import CampaignFactory
 from marketplace.users.models import User
@@ -22,8 +23,10 @@ class CampaignAPITests(APITestCase):
         with open(picture_tmp_file.name, 'rb') as picture:
             data = {
                 "title": "foo",
+                "kind": ATHLETE,
                 "description": "foo",
                 "image": picture,
+                "tags": ["tag"]
             }
             self.client.force_authenticate(self.user)
             response = self.client.post(
@@ -33,8 +36,9 @@ class CampaignAPITests(APITestCase):
             )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(campaigns + 1, Campaign.objects.all().count())
-        data = response.json()
-        self.assertIn("token", data)
+        campaign = response.json()
+        self.assertIn("token", campaign)
+        self.assertEqual(len(data["tags"]), len(campaign["tags"]))
 
     def test_edit_campaign(self):
         campaign = CampaignFactory(user=self.user)
@@ -51,6 +55,25 @@ class CampaignAPITests(APITestCase):
         edited_campaign = Campaign.objects.get(pk=campaign.pk)
         self.assertNotEqual(campaign.title, edited_campaign.title)
         self.assertEqual(data["title"], edited_campaign.title)
+
+    def test_edit_campaign_tags(self):
+        campaign = CampaignFactory(user=self.user)
+        self.client.force_authenticate(self.user)
+        data = {
+            "tags": [
+                "tag 1",
+                "tag 2",
+                "tag 3",
+            ],
+        }
+        response = self.client.patch(
+            "/api/v1/campaigns/{}/".format(campaign.pk),
+            format="json",
+            data=data
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        edited_campaign = Campaign.objects.get(pk=campaign.pk)
+        self.assertEqual(len(data["tags"]), edited_campaign.tags.count())
 
     def test_not_allow_edit_campaign(self):
         campaign = CampaignFactory(user=self.user)
