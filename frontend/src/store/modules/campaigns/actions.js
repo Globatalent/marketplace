@@ -53,7 +53,7 @@ export default {
   },
   update({commit, state}, data) {
     return new Promise((resolve, reject) => {
-      const { links } = data
+      const { links, revenues, incomes } = data
       const payload = CampaignTransformer.send(data)
       Vue.axios.patch(`${state.endpoints.campaigns}${payload.id}/`, payload).then( response => {
         const campaign = CampaignTransformer.fetch(response.data);
@@ -69,6 +69,34 @@ export default {
           ).concat(
             toEditLinks.map(linkPayload => {
               return Vue.axios.patch(`${state.endpoints.links}${linkPayload.id}/`, linkPayload)
+            })
+          )
+        }
+        // Check for revenues
+        if (typeof revenues !== "undefined" && revenues.length > 0) {
+          const toCreateRevenues = revenues.filter( revenue => !revenue.id && !!revenue.amount)
+          const toEditRevenues = revenues.filter( revenue => !!revenue.id && !!revenue.amount)
+          requests = requests.concat(
+            toCreateRevenues.map(revenuePayload => {
+              return Vue.axios.post(`${state.endpoints.revenues}`, revenuePayload)
+            })
+          ).concat(
+            toEditRevenues.map(revenuePayload => {
+              return Vue.axios.patch(`${state.endpoints.revenues}${revenuePayload.id}/`, revenuePayload)
+            })
+          )
+        }
+        // Check for incomes
+        if (typeof incomes !== "undefined" && incomes.length > 0) {
+          const toCreateIncomes = incomes.filter( income => !income.id && !!income.amount)
+          const toEditIncomes = incomes.filter( income => !!income.id && !!income.amount)
+          requests = requests.concat(
+            toCreateIncomes.map(incomePayload => {
+              return Vue.axios.post(`${state.endpoints.incomes}`, incomePayload)
+            })
+          ).concat(
+            toEditIncomes.map(incomePayload => {
+              return Vue.axios.patch(`${state.endpoints.incomes}${incomePayload.id}/`, incomePayload)
             })
           )
         }
