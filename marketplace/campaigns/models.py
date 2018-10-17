@@ -8,7 +8,8 @@ from marketplace.actions.constants import ADD_REVIEW
 from marketplace.actions.decorators import dispatch_action
 from marketplace.campaigns.constants import SEX_CHOICES, SOCIAL_NETWORKS, CAMPAIGN_TYPES, STATE_CHOICES, PENDING_REVIEW, \
     APPROVED, REJECTED, REVIEWING
-from marketplace.campaigns.emails import CampaignApprovedEmail, CampaignReviewingEmail, CampaignRejectedEmail
+from marketplace.campaigns.emails import CampaignApprovedEmail, CampaignReviewingEmail, CampaignRejectedEmail, \
+    CampaignCreationEmail
 from marketplace.campaigns.helpers import create_token
 from marketplace.core.files import UploadToDir
 from marketplace.purchases.constants import CURRENCY_CHOICES, USD
@@ -96,6 +97,10 @@ class Campaign(TimeStampedModel):
     def tag_names(self):
         return self.tags.values_list("name", flat=True)
 
+    def send_creation_email(self):
+        email = CampaignCreationEmail(to=self.user.email, context={'campaign': self})
+        email.send()
+
     def send_state_changed_email(self):
         """Sends an email about the status change."""
         email_classes = {
@@ -103,7 +108,7 @@ class Campaign(TimeStampedModel):
             REVIEWING: CampaignReviewingEmail,
             REJECTED: CampaignRejectedEmail,
         }
-        email = email_classes[self.state](context={'campaign': self})
+        email = email_classes[self.state](to=self.user.email, context={'campaign': self})
         email.send()
 
     def save(self, *args, **kwargs):
@@ -115,6 +120,8 @@ class Campaign(TimeStampedModel):
             previous_campaign = Campaign.objects.get(pk=self.pk)
             if self.state != previous_campaign.state:
                 self.send_state_changed_email()
+            if not self.is_draft and previous_campaign.is_draft:
+                self.send_creation_email()
         super().save(*args, **kwargs)
 
 
