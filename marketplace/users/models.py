@@ -12,7 +12,7 @@ from model_utils.models import TimeStampedModel
 from marketplace.actions.constants import FOLLOWS, UNFOLLOWS
 from marketplace.actions.decorators import dispatch_action
 from marketplace.core.tasks import send_mail_task
-from marketplace.users.emails import RestorePasswordEmail, VerificationEmail, ChangedPasswordEmail
+from marketplace.users.emails import RestorePasswordEmail, VerificationEmail, ChangedPasswordEmail, VerifiedEmail
 from marketplace.users.helpers import is_following
 from marketplace.users.managers import UserManager
 
@@ -111,6 +111,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.is_email_verified = True
         self.verification_code = None
         self.save()
+        email = VerifiedEmail(to=self.email, context={"user": self})
+        email.send()
 
     def follow(self, campaign):
         """The given campaign is followed by the current user and returns True.
