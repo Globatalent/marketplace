@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
-from marketplace.campaigns.models import Campaign, Sport, Picture, Link, Revenue, Income, Recommendation
+from marketplace.campaigns.models import Campaign, Sport, Picture, Link, Revenue, Income, Recommendation, Review
 from marketplace.tags.models import Tag
 from marketplace.tokens.api.v1.serializers import TokenSerializer
 from marketplace.users.helpers import is_following
@@ -184,3 +184,18 @@ class CampaignSerializer(serializers.ModelSerializer):
 
 class ReadCampaignSerializer(CampaignSerializer):
     sport = SportSerializer(read_only=True)
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Review
+        fields = [
+            'id',
+            'text',
+            'state',
+            'campaign',
+            'reviewer',
+        ]
+        extra_kwargs = {
+            'reviewer': {'read_only': True},
+        }

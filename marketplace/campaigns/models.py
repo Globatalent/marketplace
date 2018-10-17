@@ -4,7 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from model_utils.models import TimeStampedModel
 
-from marketplace.campaigns.constants import SEX_CHOICES, SOCIAL_NETWORKS, CAMPAIGN_TYPES
+from marketplace.actions.constants import ADD_REVIEW
+from marketplace.actions.decorators import dispatch_action
+from marketplace.campaigns.constants import SEX_CHOICES, SOCIAL_NETWORKS, CAMPAIGN_TYPES, STATE_CHOICES, PENDING_REVIEW, \
+    APPROVED, REJECTED, REVIEWING
+from marketplace.campaigns.emails import CampaignApprovedEmail, CampaignReviewingEmail, CampaignRejectedEmail
 from marketplace.campaigns.helpers import create_token
 from marketplace.core.files import UploadToDir
 from marketplace.purchases.constants import CURRENCY_CHOICES, USD
@@ -28,6 +32,7 @@ class Campaign(TimeStampedModel):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="campaigns", on_delete=models.CASCADE)
     is_draft = models.BooleanField(default=True, help_text=_("If the campaign is a draft it isn't complete"))
     kind = models.CharField(max_length=8, choices=CAMPAIGN_TYPES)
+    state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
     token = models.OneToOneField(
         "tokens.Token",
         related_name="campaign",
@@ -91,10 +96,25 @@ class Campaign(TimeStampedModel):
     def tag_names(self):
         return self.tags.values_list("name", flat=True)
 
+    def send_state_changed_email(self):
+        """Sends an email about the status change."""
+        email_classes = {
+            APPROVED: CampaignApprovedEmail,
+            REVIEWING: CampaignReviewingEmail,
+            REJECTED: CampaignRejectedEmail,
+        }
+        email = email_classes[self.state](context={'campaign': self})
+        email.send()
+
     def save(self, *args, **kwargs):
         """Handles token creation when save."""
+        is_insert = self.pk is None
         if not self.token and not self.is_draft and self.funds and self.funds > 0.0:
             self.token = create_token(self)
+        if not is_insert:
+            previous_campaign = Campaign.objects.get(pk=self.pk)
+            if self.state != previous_campaign.state:
+                self.send_state_changed_email()
         super().save(*args, **kwargs)
 
 
@@ -145,3 +165,34 @@ class Recommendation(TimeStampedModel):
         max_length=250,
         upload_to=UploadToDir('recommendations', random_name=True)
     )
+
+
+class Review(TimeStampedModel):
+    text = models.TextField(null=True, blank=True, verbose_name=_('text'))
+    state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
+    reviewer = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        limit_choices_to={'is_staff': True},
+        verbose_name=_('user'),
+        related_name="reviews"
+    )
+    campaign = models.ForeignKey(
+        Campaign,
+        related_name='reviews',
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        verbose_name = _('review')
+        verbose_name_plural = _('reviews')
+        ordering = ("created", )
+        unique_together = ('reviewer', 'campaign')
+
+    def __str__(self):
+        return self.campaign
+
+    @dispatch_action(ADD_REVIEW, method=True)
+    def save(self, *args, **kwargs):
+        result = super().save(*args, **kwargs)
+        return result

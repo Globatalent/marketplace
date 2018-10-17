@@ -2,8 +2,9 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from marketplace.campaigns.api.v1.filters import CampaignFilter
+from marketplace.campaigns.api.v1.filters import CampaignFilter, ReviewFilter
 from marketplace.campaigns.api.v1.permissions import (
     OnlyOwnerUpdates,
     IsAuthenticatedForCreate,
@@ -16,8 +17,8 @@ from marketplace.campaigns.api.v1.serializers import (
     SportSerializer,
     RevenueSerializer,
     IncomeSerializer,
-    RecommendationSerializer, ReadCampaignSerializer)
-from marketplace.campaigns.models import Campaign, Picture, Link, Sport, Revenue, Income, Recommendation
+    RecommendationSerializer, ReadCampaignSerializer, ReviewSerializer)
+from marketplace.campaigns.models import Campaign, Picture, Link, Sport, Revenue, Income, Recommendation, Review
 
 
 class SportViewSet(viewsets.ReadOnlyModelViewSet):
@@ -92,3 +93,9 @@ class CampaignViewSet(viewsets.ModelViewSet):
     def follow(self, request, **kwargs):
         campaign = self.get_object()
         return Response(data={'following': request.user.follow(campaign)})
+
+
+class ReviewViewSet(ReadOnlyModelViewSet):
+    serializer_class = ReviewSerializer
+    queryset = Review.objects.all()
+    filter_class = ReviewFilter

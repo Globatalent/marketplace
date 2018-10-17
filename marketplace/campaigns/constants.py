@@ -7,6 +7,17 @@ CAMPAIGN_TYPES = (
     (CLUB, _("Club")),
 )
 
+APPROVED = 'approved'
+REJECTED = 'rejected'
+REVIEWING = 'reviewing'
+PENDING_REVIEW = 'pending_review'
+STATE_CHOICES = (
+    (APPROVED, _('Approved')),
+    (REJECTED, _('Rejected')),
+    (REVIEWING, _('Reviewing')),
+    (PENDING_REVIEW, _('Pending Review')),
+)
+
 MALE = 'male'
 FEMALE = 'female'
 SEX_CHOICES = (

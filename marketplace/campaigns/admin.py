@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from marketplace.campaigns.models import Campaign, Sport, Link, Revenue, Income, Recommendation, Picture
+from marketplace.campaigns.models import Campaign, Sport, Link, Revenue, Income, Recommendation, Picture, Review
 
 
 @admin.register(Sport)
@@ -29,10 +29,14 @@ class RecommendationInline(admin.TabularInline):
     model = Recommendation
 
 
+class ReviewInLine(admin.TabularInline):
+    model = Review
+
+
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
-    list_display = ["id", "kind", "title", "is_draft", "user", "created"]
-    list_filter = ["is_draft", "kind"]
+    list_display = ["id", "kind", "title", "is_draft", "state", "user", "created"]
+    list_filter = ["is_draft", "kind", "state"]
     autocomplete_fields = ["sport", "user", "tags"]
     search_fields = ["user__email", "title"]
-    inlines = [LinkInline, PictureInline, RevenueInline, IncomeInline, RecommendationInline]
+    inlines = [LinkInline, PictureInline, RevenueInline, IncomeInline, RecommendationInline, ReviewInLine]

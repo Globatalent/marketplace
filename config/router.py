@@ -5,7 +5,7 @@ from rest_framework import routers
 from marketplace.actions.api.v1.viewsets import NotificationViewSet
 from marketplace.alerts.api.v1.viewsets import AlertViewSet
 from marketplace.campaigns.api.v1.viewsets import CampaignViewSet, SportViewSet, RevenueViewSet, PictureViewSet, \
-    LinkViewSet, IncomeViewSet, RecommendationViewSet
+    LinkViewSet, IncomeViewSet, RecommendationViewSet, ReviewViewSet
 from marketplace.purchases.api.v1.viewsets import PurchaseViewSet
 from marketplace.tokens.api.v1.viewsets import TokenViewSet
 from marketplace.users.api.v1.viewsets import UserViewSet, RestorePasswordViewSet, VerifyViewSet, \
@@ -29,6 +29,7 @@ router_v1.register('alerts', AlertViewSet, 'alerts')
 router_v1.register('notifications', NotificationViewSet, 'notifications')
 router_v1.register('tokens', TokenViewSet, 'tokens')
 router_v1.register('purchases', PurchaseViewSet, 'purchases')
+router_v1.register('reviews', ReviewViewSet, 'reviews')
 
 
 urlpatterns = [

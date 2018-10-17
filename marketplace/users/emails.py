@@ -15,3 +15,9 @@ class RestorePasswordEmail(TemplateEmailMessage):
 
     template_name = "emails/restore_password.html"
     default_subject = _("Restore your password")
+
+
+class ChangedPasswordEmail(TemplateEmailMessage):
+
+    template_name = "emails/changed_password.html"
+    default_subject = _("Your password has changed")

@@ -101,7 +101,10 @@ export default {
         })
       } else {
         this.$store.dispatch('campaigns/list', {
-          filters: { is_draft: 'False' }
+          filters: {
+            is_draft: 'False',
+            state: 'approved',
+          }
         })
       }
     },

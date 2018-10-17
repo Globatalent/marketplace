@@ -12,7 +12,7 @@ from model_utils.models import TimeStampedModel
 from marketplace.actions.constants import FOLLOWS, UNFOLLOWS
 from marketplace.actions.decorators import dispatch_action
 from marketplace.core.tasks import send_mail_task
-from marketplace.users.emails import RestorePasswordEmail, VerificationEmail
+from marketplace.users.emails import RestorePasswordEmail, VerificationEmail, ChangedPasswordEmail
 from marketplace.users.helpers import is_following
 from marketplace.users.managers import UserManager
 
@@ -131,6 +131,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.following.remove(campaign)
         return False
 
+    def send_changed_password(self):
+        """Sends the email for password change."""
+        email = ChangedPasswordEmail(to=self.email, context={"user": self})
+        email.send()
+
     def save(self, *args, **kwargs):
         is_insert = self.pk is None
         # Checks change of email
@@ -139,6 +144,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             if previous_user.email != self.email:
                 self.is_email_verified = False
                 self.verification_code = None
+            if previous_user.password != self.password:
+                self.send_changed_password()
         # Creates verification code if it doesn't exists
         if not self.is_email_verified and (self.verification_code is None or self.verification_code.strip() == ""):
             self.verification_code = self.generate_random_code()

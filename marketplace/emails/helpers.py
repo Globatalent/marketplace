@@ -28,24 +28,30 @@ class TemplateEmailMessage(object):
         self.subject = '%s' % self.default_subject if subject is None else subject
         self.from_email = self.default_from_email if from_email is None else from_email
         self.attaches = [] if attaches is None else attaches
-        self.context = {} if context is None else context
+        self.default_context = {} if context is None else context
+
+    def get_context(self):
+        """Hook to customize context."""
         # Add default context
         current_site = Site.objects.get_current()
-        self.context.update({
+        self.default_context.update({
             "site": current_site,
             "frontend": Option.objects.get_value("FRONTEND_SITE_DOMAIN", current_site.domain)
         })
+        return self.default_context
 
     def preview(self):
         """Renders the message for a preview."""
-        message = render_to_string(self.template_name, self.context, using='django')
+        context = self.get_context()
+        message = render_to_string(self.template_name, context, using='django')
         return message
 
     def send(self, async=True):
         """Sends the email at the moment or using a Celery task."""
         if not settings.ENABLE_CUSTOM_EMAIL_SENDING:
             return
-        message = render_to_string(self.template_name, self.context, using='django')
+        context = self.get_context()
+        message = render_to_string(self.template_name, context, using='django')
         message_txt = message.replace("\n", "")
         message_txt = message_txt.replace("</p>", "\n")
         message_txt = message_txt.replace("</h1>", "\n\n")
