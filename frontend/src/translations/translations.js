@@ -99,6 +99,13 @@ export const messages = {
       IncomeFor: 'Income forecast for the next 5 years',
       CreateCampaign: 'Create Campaign',
       Recommendations: 'Recommendations',
+      AnAthlete: 'An athlete.',
+      AllSportsText: 'All sports are welcome to Globatalent marketplace',
+      AClubOrganization: 'A club or organization.',
+      SoLetsBegin: 'So lets begin',
+      Im: 'I´m ',
+      raising: 'raising funds',
+      forDots: ' for...'
     }
   },
   es: {
