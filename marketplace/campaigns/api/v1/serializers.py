@@ -139,6 +139,8 @@ class CampaignSerializer(serializers.ModelSerializer):
             "recommendations",
             'following',
             "created",
+            "history",
+            "players",
         ]
         extra_kwargs = {
             "created": {"read_only": True},

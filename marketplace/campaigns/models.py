@@ -75,10 +75,12 @@ class Campaign(TimeStampedModel):
         blank=True
     )
 
-    # Career
+    # Career & club
     ranking = models.CharField(max_length=128, null=True, blank=True)
     biography = models.TextField(null=True, blank=True)
     achievements = models.TextField(null=True, blank=True)
+    history = models.TextField(null=True, blank=True)
+    players = models.TextField(null=True, blank=True)
     expected = models.TextField(null=True, blank=True)
 
     # Founding

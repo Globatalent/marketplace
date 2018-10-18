@@ -15,7 +15,7 @@ import { mapGetters } from 'vuex'
 import BaseLayout from '@/layout/BaseLayout.vue'
 import CardCampaign from "../components/CardCampaign";
 import Content from "../components/Content";
-import Career from "../components/Career";
+import CareerClub from "../components/CareerClub";
 import Funding from "../components/Funding";
 
 
@@ -25,7 +25,7 @@ export default {
     'gb-base-layout': BaseLayout,
     'gb-card-campaign': CardCampaign,
     'gb-content': Content,
-    'gb-career': Career,
+    'gb-career-club': CareerClub,
     'gb-funding': Funding,
   },
     computed: {
@@ -38,7 +38,7 @@ export default {
       steps: {
         card: 'gb-card-campaign',
         content: 'gb-content',
-        career: 'gb-career',
+        career: 'gb-career-club',
         funding: 'gb-funding',
       }
     }
