@@ -99,6 +99,9 @@ export const messages = {
       IncomeFor: 'Income forecast for the next 5 years',
       CreateCampaign: 'Create Campaign',
       Recommendations: 'Recommendations',
+      ClubHistory: 'Club History',
+      ExpectedSportsAchievements: 'Expected sports achievements',
+      Players: 'Players',
     }
   },
   es: {

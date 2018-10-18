@@ -144,7 +144,7 @@ export default {
           title: this.form.title,
           description: this.form.description,
           gender: this.form.gender,
-          sport: this.form.sport.id,
+          sport: !!this.form.sport ? this.form.sport.id : null,
           tags: this.form.tags,
         }
         this.$store.dispatch('campaigns/update', payload).then( () => {

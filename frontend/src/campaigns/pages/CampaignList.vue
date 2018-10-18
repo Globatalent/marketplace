@@ -96,7 +96,7 @@ export default {
       if (!!this.user) {
         this.$store.dispatch('users/fetchUser').then(() => {
           this.$store.dispatch('campaigns/list', {
-            filters: { is_draft: 'False' }
+            filters: { is_draft: 'False', state: 'approved' }
           })
         })
       } else {
