@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     goClose() {
-      router.push({ name: 'campaing.list' })
+      router.push({ name: 'campaign.list' })
     }
   }
 }
