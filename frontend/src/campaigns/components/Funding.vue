@@ -78,7 +78,9 @@
 <script>
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
+import { Message } from 'element-ui'
 import router from '@/router.js'
+
 
 export default {
   name: 'Funding',
@@ -210,6 +212,7 @@ export default {
           isDraft: false
         })
       } else {
+        Message.error({ message: "You must complete the missing mandatory fields", center: true })
         console.error(errors)
       }
     }
