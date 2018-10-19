@@ -423,6 +423,18 @@ ul {
   }
 }
 
+// Tabs
+.el-tabs__header{
+  margin-bottom: 20px;
+}
+
+.tabTitle{
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: black;
+  font-family: 'OpenSans Regular';
+}
+
 // Main container
 .el-container {
   &.main-container {

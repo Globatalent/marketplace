@@ -34,6 +34,7 @@
         <el-tabs v-model="activePitch" @tab-click="handleClick">
           <el-tab-pane label="Add Video" name="video">
             <div class="tabTitle">Video URL</div>
+            <p class="formSteps-inputText">Enter a YouTube or Vimeo URL to appear at the top of your campaign pages.</p>
             <el-input type="text" v-model="form.pitchUrl" placeholder="Video url"></el-input>
           </el-tab-pane>
           <el-tab-pane label="Add Image" name="image">
