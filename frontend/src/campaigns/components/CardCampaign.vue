@@ -29,9 +29,9 @@
         </el-upload>
       </el-form-item>
       <el-form-item required v-bind:label="$tc('message.Gender')" class="text-left sexFormElement" v-if="form.kind==='athlete'">
-        <el-radio-group>
-          <el-radio label="male" v-model="form.gender">{{ $tc("message.Male") }}</el-radio>
-          <el-radio label="female" v-model="form.gender">{{ $tc("message.Female") }}</el-radio>
+        <el-radio-group v-model="form.gender">
+          <el-radio label="male">{{ $tc("message.Male") }}</el-radio>
+          <el-radio label="female">{{ $tc("message.Female") }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item required :label="$tc('message.Sport')">
