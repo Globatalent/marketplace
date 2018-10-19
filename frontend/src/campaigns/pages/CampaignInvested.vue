@@ -3,11 +3,11 @@
     <div class="container">
       <el-row type="flex" justify="center">
         <el-col :xs="24" :sm="12" :md="12" :lg="10" :xl="6" class="text-center">
-          <h2 class="form-lined-title">Invested on {{athlete.firstName}} {{athlete.lastName}}</h2>
+          <h2 class="form-lined-title">Invested on {{campaign.title}}</h2>
           <div class="form-lined">
             <el-row :gutter="20">
               <el-col :xs="24" class="text-left">
-                <p>Thank you for your interest in the athlete {{athlete.firstName}} {{athlete.lastName}}.</p>
+                <p>Thank you for your interest in the campaign {{campaign.title}}.</p>
                 <p>To complete your investment make a transfer of {{purchase.amount}} Globatokens within 24 hours to the address:</p>
                 <p class="text-center">3BXbD7LJmScJrV6GaSMfus4uGmsKw8jZyD</p>
                 <img src="~@/assets/img/frame.png" class="qrImage">
@@ -31,7 +31,7 @@ import { mapGetters } from 'vuex'
 import router from '@/router.js'
 
 export default {
-  name: 'AthleteInvested',
+  name: 'CampaignInvested',
   components: {
     'gb-base-layout': BaseLayout
   },
@@ -40,7 +40,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      athlete: 'athletes/athlete',
+      campaign: 'campaigns/campaign',
       purchase: 'tokens/purchase',
       user: 'users/user'
     })

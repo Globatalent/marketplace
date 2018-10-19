@@ -73,8 +73,16 @@ export default [
     props: true,
   },
   {
+    path: '/purchases/:campaignId',
+    name: 'campaign.invest',
+    component: resolve => require(['@/campaigns/pages/CampaignInvest.vue'], resolve),
+    meta: {
+      auth: true,
+    },
+  },
+  {
     path: '/purchased/:purchaseId',
-    name: 'athlete.invested',
+    name: 'campaign.invested',
     component: resolve => require(['@/campaigns/pages/CampaignInvested.vue'], resolve),
     props: true,
     meta: {

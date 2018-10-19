@@ -17,8 +17,8 @@ export default {
         const { results, count, next, previous } = response.data;
         const rawAlerts = results.map(item => AlertTransformer.fetch(item));
         const alerts = rawAlerts.map( alert => {
-          dispatch('athletes/fetch', alert.athlete, {root: true}).then(athlete => {
-            alert.athlete = athlete
+          dispatch('campaigns/fetch', alert.campaign, {root: true}).then(campaign => {
+            alert.campaign = campaign
             commit('updateAlert', alert)
           }).catch( () => {
           })

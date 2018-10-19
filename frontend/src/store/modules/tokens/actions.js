@@ -45,7 +45,7 @@ export default {
     return new Promise((resolve, reject) => {
       Vue.axios.get(`${state.endpoints.purchases}${id}/`).then((response) => {
         const purchase = PurchaseTransformer.fetch(response.data);
-        dispatch('athletes/fetch', purchase.token.athlete, {root: true}).then( () => {
+        dispatch('campaigns/fetch', purchase.token.campaign, {root: true}).then( () => {
           commit('purchase', purchase)
           resolve(purchase)
         })

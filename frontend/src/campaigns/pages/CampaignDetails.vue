@@ -44,13 +44,13 @@
                 </el-col>
               </el-row>
               <div class="progress m-b-15 clearfix">
-                <el-progress text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" v-if="progress < 100"></el-progress>
-                <el-progress text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
+                <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" v-if="progress < 100"></el-progress>
+                <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
                 <div class="float-right">
                   <span class="small-title">Goal: {{ token.amount }} GBT</span>
                 </div>
               </div>
-              <el-button type="primary" class="is-full-width" size="big" v-if="!!this.user" @click="goToInvest(athlete)">
+              <el-button type="primary" class="is-full-width" size="big" v-if="!!this.user" @click="goToInvest(campaign)">
                 <i class="fas fa-money-bill"></i> {{$tc('message.Invest')}}
               </el-button>
             </div>
@@ -61,8 +61,8 @@
 
             <h4>{{$tc('message.Link', 2)}}</h4>
             <p v-for="(link, linkIndex) in campaign.links" :key="linkIndex">
-              <a :href="link.url" :title="link.name" target="_blank">
-                {{link.name}} <i class="fas fa-external-link-alt"></i>
+              <a :href="link.url" :title="link.url" target="_blank"  v-if="!!link.url">
+                {{link.url}} <i class="fas fa-external-link-alt"></i>
               </a>
             </p>
           </div>
