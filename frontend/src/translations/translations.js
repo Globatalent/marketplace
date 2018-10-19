@@ -82,7 +82,7 @@ export const messages = {
       BasicInformation: 'Basic Information',
       Height: 'Height',
       Weight: 'Weight',
-      SaveContinute: 'Save & Continute',
+      SaveContinue: 'Save & Continue',
       ActualClub: 'Actual Club',
       ActualCoach: 'Actual Coach',
       PitchVideoorImage: 'Pitch Video or Image',
@@ -109,6 +109,7 @@ export const messages = {
       ClubHistory: 'Club History',
       ExpectedSportsAchievements: 'Expected sports achievements',
       Players: 'Players',
+      ReviewLaunch: 'Review & Launch'
     }
   },
   es: {

@@ -1,32 +1,47 @@
 <template>
-  <el-col :xs="24">
-    <div class="form-steps">
-      <h2 class="">{{ $tc("message.CardCampaign") }}</h2>
+  <el-col :xs="24" class="formSteps-container">
+    <div class="infoTag">Draft Campaign</div>
+    <el-breadcrumb separator=">">
+      <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
+      <el-breadcrumb-item><a href="/campaigns/create">Card campaign</a></el-breadcrumb-item>
+    </el-breadcrumb>
+    <div class="formSteps-actions">
+      <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
+    </div>
+    <div class="formSteps">
+      <h2 class="formSteps-title">{{ $tc("message.CardCampaign") }}</h2>
+      <p class="formSteps-text">Make a good first impression: introduce your campaign objectives and entice people to learn more. This basic information will represent your campaign on your campaign page, on your campaign card, and in searches.</p>
       <el-form-item required :label="$tc('message.CampaignTitle')">
+        <p class="formSteps-inputText">What is the title of you campaign?</p>
         <el-input v-bind:placeholder="$tc('message.EnterExcitingTitle')" type="text" v-model="form.title"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.CampaignTagline')">
+        <p class="formSteps-inputText">Provide a short description that best describes your campaign</p>
         <el-input v-bind:placeholder="$tc('message.ShortDescription')" type="text" v-model="form.description"></el-input>
       </el-form-item>
-      <el-form-item :label="$tc('message.CampaignCardImage')">
+      <el-form-item required :label="$tc('message.CampaignCardImage')">
+        <p class="formSteps-inputText">Upload a square image that represents your campaign.<br />
+          640 x 640 recommended resolution, 220 x 220 minimum resolution.</p>
         <el-upload drag thumbnail-mode :limit="1" :action="options.action" :headers="options.headers" :name="options.name" :http-request="options.httpRequest" :file-list="!!form.image ? [{name: form.image.substring(form.image.lastIndexOf('/') + 1), url: form.image}] : []">
           <i class="el-icon-upload" style="padding: 0"></i>
           <div class="el-upload__text">Upload Image</div>
         </el-upload>
       </el-form-item>
-      <el-form-item v-bind:label="$tc('message.Gender')" class="text-left sexFormElement" v-if="form.kind==='athlete'">
+      <el-form-item required v-bind:label="$tc('message.Gender')" class="text-left sexFormElement" v-if="form.kind==='athlete'">
         <el-radio-group>
           <el-radio label="male" v-model="form.gender">{{ $tc("message.Male") }}</el-radio>
           <el-radio label="female" v-model="form.gender">{{ $tc("message.Female") }}</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item :label="$tc('message.Sport')">
+      <el-form-item required :label="$tc('message.Sport')">
+        <p class="formSteps-inputText">Provide a short description that best describes your campaign to your audience.</p>
         <el-select v-model="form.sport" placeholder="Select">
           <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item :label="$tc('message.Tags')">
+      <el-form-item required :label="$tc('message.Tags')">
+        <p class="formSteps-inputText">Enter up to five keywords that best describe your campaign. These tags will help with organization and discoverability.</p>
         <el-tag :key="tag" v-for="tag in form.tags" closable :disable-transitions="false" @close="handleTagClose(tag)">
           {{tag}}
         </el-tag>
@@ -34,10 +49,11 @@
         </el-input>
         <el-button v-else class="button-new-tag" size="small" @click="showTagInput">Add +</el-button>
       </el-form-item>
+      <el-form-item>
+        <div class="formSteps-lineButton"></div>
+        <el-button type="primary" class="is-uppercase" @click.prevent="onSaveAndContinue()">{{ $tc("message.SaveContinue") }}</el-button>
+      </el-form-item>
     </div>
-    <el-form-item>
-      <el-button type="primary" class="is-uppercase" @click.prevent="onSaveAndContinue()">{{ $tc("message.SaveContinute") }}</el-button>
-    </el-form-item>
   </el-col>
 </template>
 

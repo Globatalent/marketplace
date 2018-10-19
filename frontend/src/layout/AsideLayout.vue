@@ -1,12 +1,12 @@
 <template>
-  <el-container class="main-container">
+  <el-container class="main-container aside-container">
     <el-header height="auto">
       <gb-header></gb-header>
     </el-header>
     <el-container>
       <el-aside width="230px">
-        <el-menu default-active="4" class="el-menu-aside">
-          <el-menu-item index="1">
+        <el-menu default-active="4" class="el-menu-aside" default-openeds="4" router="true">
+          <!-- <el-menu-item index="1">
             <span>Campaign title</span>
           </el-menu-item>
           <el-menu-item index="2">
@@ -14,26 +14,26 @@
           </el-menu-item>
           <el-menu-item index="3">
             <span>Pre-Launch Page</span>
-          </el-menu-item>
+          </el-menu-item> -->
           <el-submenu index="4">
             <template slot="title">
               <span>Campaign Editor</span>
             </template>
-            <el-menu-item index="4-1">Card Campaign</el-menu-item>
-            <el-menu-item index="4-2">Content</el-menu-item>
-            <el-menu-item index="4-3">Career</el-menu-item>
-            <el-menu-item index="4-4">Funding</el-menu-item>
+            <el-menu-item index="card">Card Campaign</el-menu-item>
+            <el-menu-item index="content">Content</el-menu-item>
+            <el-menu-item index="career">Career</el-menu-item>
+            <el-menu-item index="funding">Funding</el-menu-item>
           </el-submenu>
-          <el-submenu index="5">
+          <!-- <el-submenu index="5">
             <template slot="title">
               <span>Resources</span>
             </template>
             <el-menu-item index="5-1">Education Center</el-menu-item>
             <el-menu-item index="5-2">Experts Directory</el-menu-item>
-          </el-submenu>
+          </el-submenu> -->
         </el-menu>
       </el-aside>
-      <el-main>
+      <el-main :class="$route.params.step">
         <slot></slot>
       </el-main>
     </el-container>

@@ -11,18 +11,22 @@
   font-family: 'Aller Regular';
   src: url('../fonts/Aller_Rg.ttf');
 }
+
 @font-face {
   font-family: 'Montserrat Bold';
   src: url('../fonts/Montserrat-Bold.ttf');
 }
+
 @font-face {
   font-family: 'OpenSans Regular';
   src: url('../fonts/OpenSans-Regular.ttf');
 }
+
 @font-face {
   font-family: 'OpenSans Bold';
   src: url('../fonts/OpenSans-Bold.ttf');
 }
+
 @font-face {
   font-family: 'OpenSans SemiBold';
   src: url('../fonts/OpenSans-SemiBold.ttf');
@@ -40,7 +44,7 @@ img {
   width: 100%;
 }
 
-ul{
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -56,7 +60,7 @@ ul{
   justify-content: center;
 }
 
-.is-bold{
+.is-bold {
   font-weight: bold;
 }
 
@@ -135,7 +139,7 @@ ul{
   }
 }
 
-.btn{
+.btn {
   background-color: #419ce2;
   color: white;
   padding: 8px 20px;
@@ -151,18 +155,23 @@ ul{
   font-size: 25px;
 }
 
-.el-badge{
-  &__content{
-    &.is-fixed{
+.el-badge {
+  &__content {
+    &.is-fixed {
       top: 12px;
       line-height: 16px;
     }
   }
 }
 
-.el-menu-item [class^="el-icon-"]{
+.el-menu-item [class^="el-icon-"] {
   margin: 0;
   width: inherit;
+}
+
+// Header
+.header{
+  padding: 20px 20px 30px 20px;
 }
 
 // Forms
@@ -192,7 +201,9 @@ ul{
     background-position: left 12px;
     background-size: 25px;
   }
-  .el-date-editor{
+
+  .el-date-editor {
+
     [class^="icon-"],
     [class*="icon-"] {
       padding-left: inherit;
@@ -200,7 +211,7 @@ ul{
   }
 }
 
-.form-lined-column{
+.form-lined-column {
   border-right: 2px solid $--color-primary;
 }
 
@@ -216,7 +227,7 @@ ul{
   font-size: 12px;
 }
 
-.form-lined-sectionTitle{
+.form-lined-sectionTitle {
   color: $--color-primary;
   border-bottom: 1px solid $--color-primary;
   margin-bottom: 15px;
@@ -227,6 +238,134 @@ ul{
   padding-top: 10px;
   border-top: 1px solid $--blue;
   font-size: 12px;
+}
+
+.formSteps {
+  max-width: 540px;
+  font-family: 'OpenSans Regular';
+
+  .el-form-item {
+    margin-bottom: 35px;
+  }
+
+  .el-form-item__content {
+    line-height: 14px;
+  }
+
+  .el-form-item__label {
+    font-size: 16px;
+    color: black;
+    line-height: 16px;
+    margin: 0 0 15px 0;
+
+    &:before {
+      float: right;
+      margin-left: 4px;
+      font-weight: bold;
+    }
+  }
+  .formSteps-lineButton{
+    margin: 30px 0;
+    border: 2px solid $--grey-border;
+    max-width: 405px;
+    width: 100%;
+  }
+}
+
+.formSteps-actions{
+  float: right;
+}
+
+.formSteps-text {
+  font-size: 14px;
+  color: $--grey-text;
+  margin-bottom: 40px;
+}
+
+.formSteps-inputText {
+  font-size: 14px;
+  line-height: 18px;
+  color: $--grey-text;
+  margin: 0 0 15px;
+}
+
+.formSteps-container {
+  position: relative;
+  padding-left: 30px;
+  .infoTag{
+    position: absolute;
+    top: -50px;
+  }
+  .el-button {
+    &.el-button--primary {
+      color: white;
+      background: $--blue-primary;
+      border-color: $--blue-primary;
+      max-width: 385px;
+      width: 100%;
+      font-family: 'OpenSans SemiBold';
+      font-size: 15px;
+    }
+    &.el-button--secondary {
+      color: white;
+      background: $--green-secondary;
+      border-color: $--green-secondary;
+      max-width: 212px;
+      width: 100%;
+      font-family: 'OpenSans SemiBold';
+      font-size: 15px;
+    }
+  }
+
+}
+// Main container
+.el-container{
+  &.main-container{
+    &.aside-container{
+      background: url('../assets/img/body-background.png');
+      background-repeat: no-repeat;
+      background-position: -25px 15px;
+    }
+  }
+}
+
+// Main
+.el-main {
+  &.card,
+  &.content,
+  &.career,
+  &.funding {
+    border-left: solid 1px $--grey-border;
+    overflow: visible;
+  }
+}
+
+// Menu
+.el-menu {
+  &.el-menu-aside {
+    border: none;
+  }
+}
+
+// Info Tag
+.infoTag{
+  display: inline-block;
+  background:$--pink;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 25px;
+  padding: 2px 15px;
+  font-family: 'Montserrat Bold';
+  font-size: 12px;
+}
+
+// Breadcrumb
+.el-breadcrumb {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  display: inline-block;
+  font-family: 'OpenSans Regular';
 }
 
 // Login Page
@@ -261,10 +400,11 @@ ul{
 
 // Athlete Profile Edit Form
 .athleteProfileEdit {
-  .linksRow{
+  .linksRow {
     margin-bottom: 30px;
   }
-  #dropzone{
+
+  #dropzone {
     margin: 10px 0 20px 0;
   }
 }
@@ -332,64 +472,79 @@ ul{
 .m-t-5 {
   margin-top: 5px;
 }
+
 .m-t-10 {
   margin-top: 10px;
 }
+
 .m-t-15 {
   margin-top: 15px;
 }
+
 .m-t-20 {
   margin-top: 20px;
 }
+
 .m-b-5 {
   margin-bottom: 5px;
 }
+
 .m-b-10 {
   margin-bottom: 10px;
 }
+
 .m-b-15 {
   margin-bottom: 15px;
 }
+
 .m-b-20 {
   margin-bottom: 20px;
 }
+
 .m-l-5 {
   margin-left: 5px;
 }
+
 .m-l-10 {
   margin-left: 10px;
 }
+
 .m-l-15 {
   margin-left: 15px;
 }
+
 .m-l-20 {
   margin-left: 20px;
 }
+
 .m-r-5 {
   margin-right: 5px;
 }
+
 .m-r-10 {
   margin-right: 10px;
 }
+
 .m-r-15 {
   margin-right: 15px;
 }
+
 .m-r-20 {
   margin-right: 20px;
 }
 
 // Notifications
-.notifications-list-item{
+.notifications-list-item {
   padding: 5px;
   border-bottom: 1px solid $--blue-light;
   margin-top: 30px;
 }
 
-.notifications-list-item-title{
+.notifications-list-item-title {
   font-weight: bold;
   font-size: 14px;
 }
 
-.notifications-list-item-subtitle{
+.notifications-list-item-subtitle {
   font-size: 12px;
 }
