@@ -110,6 +110,9 @@ export default {
             Vue.axios.defaults.baseURL
           }/api/v1/campaigns/${this.campaign.id}/`
           this.form = { ...this.campaign }
+          if (!!this.form.sport) {
+            this.form.sport = this.form.sport.id
+          }
         }
       }).catch(()=> router.push({name: 'campaign.create'}))
   },
@@ -138,7 +141,6 @@ export default {
       })
     },
     onSaveAndContinue() {
-      console.log(this.form.sport)
       const payload = {
         id: this.campaign.id,
         title: this.form.title,

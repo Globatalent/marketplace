@@ -64,7 +64,6 @@ export default {
             restore_password_code: this.restorePasswordCode,
             ...this.form,
           }
-          console.log(dataRestorePassword)
           this.logUser(dataRestorePassword)
         } else {
           console.log('error submit!!')
