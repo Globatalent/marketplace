@@ -96,12 +96,14 @@ export default {
         if (!!this.campaign && !!this.campaign.id) {
           this.form = { ...this.campaign }
         }
-      })
+      }).catch(()=> router.push({name: 'campaign.create'}))
   },
   methods: {
     onDiscard() {
       const payload = { id: this.campaign.id }
-      this.$store.dispatch('campaigns/delete', payload)
+      this.$store.dispatch('campaigns/delete', payload).then( () => {
+        router.push({name: 'campaign.create'})
+      })
     },
     onSaveAndContinue() {
       const payload = {

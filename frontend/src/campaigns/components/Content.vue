@@ -39,7 +39,10 @@
           </el-tab-pane>
           <el-tab-pane label="Add Image" name="image">
             <div class="tabTitle">Add Image</div>
-            <el-input type="text" v-model="form.pitchImage" placeholder="Image url"></el-input>
+            <el-upload drag thumbnail-mode :limit="1" :action="options.action" :headers="options.headers" :name="options.name" :http-request="options.httpRequest" :file-list="!!form.pitchImage ? [{name: form.pitchImage.substring(form.pitchImage.lastIndexOf('/') + 1), url: form.pitchImage}] : []">
+              <i class="el-icon-upload" style="padding: 0"></i>
+              <div class="el-upload__text">Upload Image</div>
+            </el-upload>
           </el-tab-pane>
         </el-tabs>
       </el-form-item>
@@ -55,6 +58,7 @@
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import router from '@/router.js'
+import ajax from '@/base/helpers/ajax'
 
 export default {
   name: 'Content',
@@ -71,6 +75,15 @@ export default {
         pitchUrl: null,
         pitchImage: null
       },
+      // Card Image
+      options: {
+        name: 'pitch_image',
+        headers: {
+          Authorization: this.$store.getters['auth/header']
+        },
+        httpRequest: ajax,
+        action: ''
+      },
       activePitch: 'video'
     }
   },
@@ -85,14 +98,17 @@ export default {
       .dispatch('campaigns/fetch', this.$route.params.campaignId)
       .then(() => {
         if (!!this.campaign && !!this.campaign.id) {
+          this.options.action = `${
+            Vue.axios.defaults.baseURL
+          }/api/v1/campaigns/${this.campaign.id}/`
           this.form = { ...this.campaign }
           this.form.links = this.initialSocialLinks(this.campaign)
         }
-      })
+      }).catch(()=> router.push({name: 'campaign.create'}))
   },
   methods: {
     handleClick(tab, event) {
-      console.log(tab, event)
+      // console.log(tab, event)
     },
     initialSocialLinks(campaign) {
       const networks = [
@@ -115,7 +131,9 @@ export default {
     },
     onDiscard() {
       const payload = { id: this.campaign.id }
-      this.$store.dispatch('campaigns/delete', payload)
+      this.$store.dispatch('campaigns/delete', payload).then( () => {
+        router.push({name: 'campaign.create'})
+      })
     },
     onSaveAndContinue() {
       const payload = {

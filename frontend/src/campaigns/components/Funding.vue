@@ -137,7 +137,7 @@ export default {
             this.form.currency = 'USD'
           }
         }
-      })
+      }).catch(()=> router.push({name: 'campaign.create'}))
   },
   methods: {
     initialRevenues(campaign) {
@@ -193,7 +193,9 @@ export default {
     },
     onDiscard() {
       const payload = { id: this.campaign.id }
-      this.$store.dispatch('campaigns/delete', payload)
+      this.$store.dispatch('campaigns/delete', payload).then( () => {
+        router.push({name: 'campaign.create'})
+      })
     },
     onLaunch(save=true) {
       if (save) {
