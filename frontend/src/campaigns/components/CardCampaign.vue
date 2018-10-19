@@ -111,7 +111,7 @@ export default {
           }/api/v1/campaigns/${this.campaign.id}/`
           this.form = { ...this.campaign }
         }
-      })
+      }).catch(()=> router.push({name: 'campaign.create'}))
   },
   methods: {
     handleTagClose(tag) {
@@ -133,15 +133,18 @@ export default {
     },
     onDiscard() {
       const payload = { id: this.campaign.id }
-      this.$store.dispatch('campaigns/delete', payload)
+      this.$store.dispatch('campaigns/delete', payload).then( () => {
+        router.push({name: 'campaign.create'})
+      })
     },
     onSaveAndContinue() {
+      console.log(this.form.sport)
       const payload = {
         id: this.campaign.id,
         title: this.form.title,
         description: this.form.description,
         gender: this.form.gender,
-        sport: !!this.form.sport ? this.form.sport.id : null,
+        sport: !!this.form.sport ? this.form.sport : null,
         tags: this.form.tags
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {

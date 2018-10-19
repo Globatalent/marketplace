@@ -45,7 +45,7 @@ class UserAdmin(AuthUserAdmin):
                                        'restore_password_code_requested_at',
                                        'groups',
                                        'user_permissions')}),
-        (_("Profile"), {"fields": ("fist_name", "last_name", "following")}),
+        (_("Profile"), {"fields": ("first_name", "last_name", "following")}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
     add_fieldsets = (
