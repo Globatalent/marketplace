@@ -190,6 +190,10 @@ export default {
       }
       this.$store.dispatch('campaigns/update', payload)
     },
+    onDiscard() {
+      const payload = { id: this.campaign.id }
+      this.$store.dispatch('campaigns/delete', payload)
+    },
     onLaunch() {
       this.$store.dispatch('campaigns/update', {
         id: this.campaign.id,

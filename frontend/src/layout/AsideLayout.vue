@@ -5,7 +5,7 @@
     </el-header>
     <el-container>
       <el-aside width="230px">
-        <el-menu default-active="4" class="el-menu-aside" default-openeds="4" router="true">
+        <el-menu default-active="4" class="el-menu-aside" :default-openeds="['4']" :router="true">
           <!-- <el-menu-item index="1">
             <span>Campaign title</span>
           </el-menu-item>
@@ -21,7 +21,8 @@
             </template>
             <el-menu-item index="card">Card Campaign</el-menu-item>
             <el-menu-item index="content">Content</el-menu-item>
-            <el-menu-item index="career">Career</el-menu-item>
+            <el-menu-item index="career" v-if="campaign.kind == 'athlete'">Career</el-menu-item>
+            <el-menu-item index="career" v-else>Club</el-menu-item>
             <el-menu-item index="funding">Funding</el-menu-item>
           </el-submenu>
           <!-- <el-submenu index="5">
@@ -46,18 +47,20 @@
 <script>
 import Header from '@/layout/Header.vue'
 import Footer from '@/layout/Footer.vue'
+import { mapGetters } from 'vuex'
+
 
 export default {
   name: 'aside-layout',
-
   data() {
     return {}
   },
-
-  computed: {},
-
-  mounted: function() {},
-
+  computed: {
+    ...mapGetters({
+      campaign: 'campaigns/campaign',
+      user: 'users/user'
+    })
+  },
   methods: {},
   components: {
     'gb-header': Header,
