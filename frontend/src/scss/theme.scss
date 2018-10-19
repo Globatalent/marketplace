@@ -170,7 +170,7 @@ ul {
 }
 
 // Header
-.header{
+.header {
   padding: 20px 20px 30px 20px;
 }
 
@@ -245,7 +245,11 @@ ul {
   font-family: 'OpenSans Regular';
 
   .el-form-item {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
+  }
+
+  .el-input {
+    margin-bottom: 10px;
   }
 
   .el-form-item__content {
@@ -264,7 +268,8 @@ ul {
       font-weight: bold;
     }
   }
-  .formSteps-lineButton{
+
+  .formSteps-lineButton {
     margin: 30px 0;
     border: 2px solid $--grey-border;
     max-width: 405px;
@@ -272,7 +277,7 @@ ul {
   }
 }
 
-.formSteps-actions{
+.formSteps-actions {
   float: right;
 }
 
@@ -292,10 +297,12 @@ ul {
 .formSteps-container {
   position: relative;
   padding-left: 30px;
-  .infoTag{
+
+  .infoTag {
     position: absolute;
     top: -50px;
   }
+
   .el-button {
     &.el-button--primary {
       color: white;
@@ -306,6 +313,7 @@ ul {
       font-family: 'OpenSans SemiBold';
       font-size: 15px;
     }
+
     &.el-button--secondary {
       color: white;
       background: $--green-secondary;
@@ -316,12 +324,56 @@ ul {
       font-size: 15px;
     }
   }
-
 }
+
+.formSteps-inputSelect {
+
+  .el-input,
+  .el-select {
+    display: inline-block;
+  }
+
+  .el-input {
+    width: 100%;
+    max-width: 210px;
+  }
+
+  .el-select {
+    width: 100%;
+    max-width: 70px;
+
+    .el-input__inner {
+      background: $--grey-border;
+      padding-right: 25px;
+      padding-left: 10px;
+      color: $--grey-text;
+    }
+  }
+}
+
+.formSteps-containerInputSelect{
+  .formSteps-inputSelect{
+    display: inline-block;
+    width: auto;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    .el-input {
+      max-width: 160px;
+    }
+  }
+}
+
+.formSteps-inputSelect-year{
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: black;
+  font-family: 'OpenSans Regular';
+}
+
 // Main container
-.el-container{
-  &.main-container{
-    &.aside-container{
+.el-container {
+  &.main-container {
+    &.aside-container {
       background: url('../assets/img/body-background.png');
       background-repeat: no-repeat;
       background-position: -25px 15px;
@@ -331,12 +383,19 @@ ul {
 
 // Main
 .el-main {
+
   &.card,
   &.content,
   &.career,
   &.funding {
     border-left: solid 1px $--grey-border;
     overflow: visible;
+  }
+
+  &.funding {
+    .formSteps{
+      max-width: 760px;
+    }
   }
 }
 
@@ -348,9 +407,9 @@ ul {
 }
 
 // Info Tag
-.infoTag{
+.infoTag {
   display: inline-block;
-  background:$--pink;
+  background: $--pink;
   color: white;
   text-transform: uppercase;
   border-radius: 25px;

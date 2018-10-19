@@ -12,7 +12,10 @@
       <h2 class="formSteps-title">{{ $tc("message.Content") }}</h2>
       <p class="formSteps-text">Make a good first impression: introduce your campaign objectives and entice people to learn more. This basic information will represent your campaign on your campaign page, on your campaign card, and in searches.</p>
       <el-form-item :label="$tc('message.SocialMedia')">
-        <el-input type="text" v-for="(link, index) in form.links" :key="index" v-model="link.url"></el-input>
+        <div v-for="(link, index) in form.links" :key="index">
+          <!-- <span :class="link.network"></span> -->
+          <el-input type="text" v-model="link.url" :placeholder="link.network + ' url'"></el-input>
+        </div>
       </el-form-item>
       <el-form-item :label="$tc('message.BasicInformation')">
         <el-input type="text" :placeholder="$tc('message.Height')" v-model="form.height"></el-input>
@@ -24,9 +27,11 @@
       <el-form-item :label="$tc('message.ActualCoach')" v-if="form.kind==='athlete'">
         <el-input type="text" v-model="form.coach"></el-input>
       </el-form-item>
-      <el-form-item :label="$tc('message.PitchVideoorImage')">
-        <el-input type="text" v-model="form.pitchUrl"></el-input>
-        <el-input type="text" v-model="form.pitchImage"></el-input>
+      <el-form-item required :label="$tc('message.PitchVideoorImage')">
+        <p class="formSteps-inputText">Add a video or image to appear on the top of your campaign page. Campaigns with videos
+raise 2000% more then campaigns without videos. Keep your video 2-3 minutes. </p>
+        <el-input type="text" v-model="form.pitchUrl" placeholder="Video url"></el-input>
+        <el-input type="text" v-model="form.pitchImage" placeholder="Image url"></el-input>
       </el-form-item>
       <el-form-item>
         <div class="formSteps-lineButton"></div>
