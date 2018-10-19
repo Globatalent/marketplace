@@ -109,7 +109,8 @@ export const messages = {
       ClubHistory: 'Club History',
       ExpectedSportsAchievements: 'Expected sports achievements',
       Players: 'Players',
-      ReviewLaunch: 'Review & Launch'
+      ReviewLaunch: 'Review & Launch',
+      DiscardCampaign: 'Discard Campaign'
     }
   },
   es: {

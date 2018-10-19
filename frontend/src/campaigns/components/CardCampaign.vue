@@ -6,6 +6,7 @@
       <el-breadcrumb-item><a href="/campaigns/create">Card campaign</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
+      <el-button type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
       <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
