@@ -279,6 +279,11 @@ ul {
 
 .formSteps-actions {
   float: right;
+  text-align: right;
+  .el-button{
+    display: inline-block;
+    width: auto !important;
+  }
 }
 
 .formSteps-text {
@@ -318,6 +323,14 @@ ul {
       color: white;
       background: $--green-secondary;
       border-color: $--green-secondary;
+      max-width: 212px;
+      width: 100%;
+      font-family: 'OpenSans SemiBold';
+      font-size: 15px;
+    }
+
+    &.el-button--danger {
+      color: white;
       max-width: 212px;
       width: 100%;
       font-family: 'OpenSans SemiBold';
@@ -368,6 +381,46 @@ ul {
   font-size: 14px;
   color: black;
   font-family: 'OpenSans Regular';
+}
+
+.socialLinks-icon{
+  display: inline-block;
+  width: 33px;
+  height: 33px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+  margin-right: 10px;
+  margin-top:5px;
+  &.facebook{
+    background-image: url('../assets/img/icon-facebook.png');
+  }
+  &.instagram{
+    background-image: url('../assets/img/icon-instagram.png');
+  }
+  &.twitter{
+    background-image: url('../assets/img/icon-twitter.png');
+  }
+  &.youtube{
+    background-image: url('../assets/img/icon-youtube.png');
+  }
+  &.linkedin{
+    background-image: url('../assets/img/icon-linkedin.png');
+  }
+  &.whatsapp{
+    background-image: url('../assets/img/icon-whatsapp.png');
+  }
+  &.flickr{
+    background-image: url('../assets/img/icon-flickr.png');
+  }
+}
+
+.socialLinks{
+  .el-input{
+    display: inline-block;
+    max-width: 490px;
+    vertical-align: top;
+  }
 }
 
 // Main container

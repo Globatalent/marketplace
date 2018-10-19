@@ -6,32 +6,41 @@
       <el-breadcrumb-item><a href="/campaigns/create">Content</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
+      <el-button type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
       <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
       <h2 class="formSteps-title">{{ $tc("message.Content") }}</h2>
       <p class="formSteps-text">Make a good first impression: introduce your campaign objectives and entice people to learn more. This basic information will represent your campaign on your campaign page, on your campaign card, and in searches.</p>
       <el-form-item :label="$tc('message.SocialMedia')">
-        <div v-for="(link, index) in form.links" :key="index">
-          <!-- <span :class="link.network"></span> -->
-          <el-input type="text" v-model="link.url" :placeholder="link.network + ' url'"></el-input>
+        <div v-for="(link, index) in form.links" :key="index" class="socialLinks">
+          <span :class="link.network+' socialLinks-icon'"></span>
+          <el-input type="text" v-model="link.url" placeholder="http://"></el-input>
         </div>
       </el-form-item>
-      <el-form-item :label="$tc('message.BasicInformation')">
+      <el-form-item required :label="$tc('message.BasicInformation')">
         <el-input type="text" :placeholder="$tc('message.Height')" v-model="form.height"></el-input>
         <el-input type="text" :placeholder="$tc('message.Weight')" v-model="form.weight"></el-input>
       </el-form-item>
-      <el-form-item :label="$tc('message.ActualClub')" v-if="form.kind==='athlete'">
+      <el-form-item required :label="$tc('message.ActualClub')" v-if="form.kind==='athlete'">
         <el-input type="text" v-model="form.club"></el-input>
       </el-form-item>
-      <el-form-item :label="$tc('message.ActualCoach')" v-if="form.kind==='athlete'">
+      <el-form-item required :label="$tc('message.ActualCoach')" v-if="form.kind==='athlete'">
         <el-input type="text" v-model="form.coach"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.PitchVideoorImage')">
         <p class="formSteps-inputText">Add a video or image to appear on the top of your campaign page. Campaigns with videos
-raise 2000% more then campaigns without videos. Keep your video 2-3 minutes. </p>
-        <el-input type="text" v-model="form.pitchUrl" placeholder="Video url"></el-input>
-        <el-input type="text" v-model="form.pitchImage" placeholder="Image url"></el-input>
+          raise 2000% more then campaigns without videos. Keep your video 2-3 minutes. </p>
+        <el-tabs v-model="activePitch" @tab-click="handleClick">
+          <el-tab-pane label="Add Video" name="video">
+            <div class="tabTitle">Video URL</div>
+            <el-input type="text" v-model="form.pitchUrl" placeholder="Video url"></el-input>
+          </el-tab-pane>
+          <el-tab-pane label="Add Image" name="image">
+            <div class="tabTitle">Add Image</div>
+            <el-input type="text" v-model="form.pitchImage" placeholder="Image url"></el-input>
+          </el-tab-pane>
+        </el-tabs>
       </el-form-item>
       <el-form-item>
         <div class="formSteps-lineButton"></div>
@@ -60,7 +69,8 @@ export default {
         coach: null,
         pitchUrl: null,
         pitchImage: null
-      }
+      },
+      activePitch: 'video'
     }
   },
   computed: {
@@ -80,6 +90,9 @@ export default {
       })
   },
   methods: {
+    handleClick(tab, event) {
+      console.log(tab, event)
+    },
     initialSocialLinks(campaign) {
       const networks = [
         'facebook',
