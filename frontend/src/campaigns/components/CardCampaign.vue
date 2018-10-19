@@ -86,7 +86,7 @@ export default {
       options: {
         name: 'image',
         headers: {
-          Authorization: this.$store.getters['auth/header']
+          Authorization: this.$store.getters['auth/header'],
         },
         httpRequest: ajax,
         action: ''

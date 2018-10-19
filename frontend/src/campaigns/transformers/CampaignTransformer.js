@@ -41,7 +41,7 @@ class CampaignTransformer extends Transformer {
   }
 
   static send(campaign) {
-    return {
+    let data = {
       'id': campaign.id,
       'is_draft': campaign.isDraft,
       'kind': campaign.kind,
@@ -50,7 +50,6 @@ class CampaignTransformer extends Transformer {
       'image': campaign.image,
       'gender': campaign.gender,
       'sport': campaign.sport,
-      'tags': campaign.tags,
       'height': campaign.height,
       'weight': campaign.weight,
       'club': campaign.club,
@@ -64,9 +63,13 @@ class CampaignTransformer extends Transformer {
       'currency': campaign.currency,
       'funds': campaign.funds,
       'use': campaign.use,
-      'give_back': campaign.give_back,
+      'give_back': campaign.giveBack,
       'examples': campaign.examples,
     }
+    if (!!campaign.tags) {
+      data.tags = campaign.tags
+    }
+    return data
   }
 }
 

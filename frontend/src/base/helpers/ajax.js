@@ -67,7 +67,7 @@ export default function upload(option) {
     option.onSuccess(getBody(xhr));
   };
 
-  xhr.open('patch', action, true);
+  xhr.open('PATCH', action, true);
 
   if (option.withCredentials && 'withCredentials' in xhr) {
     xhr.withCredentials = true;

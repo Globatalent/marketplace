@@ -163,24 +163,20 @@ class CampaignSerializer(serializers.ModelSerializer):
         return tags
 
     def create(self, validated_data):
-        try:
-            tags = validated_data.pop('tag_names')
-        except KeyError:
-            tags = []
+        tags = validated_data.pop('tag_names') if 'tag_names' in validated_data else None
         campaign = super().create(validated_data)
-        for tag in tags:
-            campaign.tags.add(tag)
+        if tags is not None:
+            for tag in tags:
+                campaign.tags.add(tag)
         return campaign
 
     def update(self, instance, validated_data):
-        try:
-            tags = validated_data.pop('tag_names')
-        except KeyError:
-            tags = []
+        tags = validated_data.pop('tag_names') if 'tag_names' in validated_data else None
         campaign = super().update(instance, validated_data)
-        campaign.tags.clear()
-        for tag in tags:
-            campaign.tags.add(tag)
+        if tags is not None:
+            campaign.tags.clear()
+            for tag in tags:
+                campaign.tags.add(tag)
         return campaign
 
 
