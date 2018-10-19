@@ -7,7 +7,7 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerMenu">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router>
+        <el-menu class="el-menu-demo" mode="horizontal" router>
           <el-menu-item class="el-menu-demo-item" index="sports" :route="{name:'athlete.list'}">{{ $tc("message.Sport",2) }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
@@ -27,7 +27,7 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
-        <el-menu :default-active="activeIndex" class="el-menu-footer-bottom" mode="horizontal" router>
+        <el-menu class="el-menu-footer-bottom" mode="horizontal" router>
           <el-menu-item class="el-menu-footer-bottom-item" index="sports" :route="{name:'athlete.list'}">{{ $tc("message.Press",2) }}</el-menu-item>
           <el-menu-item class="el-menu-footer-bottom-item" index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.About",2) }}</el-menu-item>
           <el-menu-item class="el-menu-footer-bottom-item" index="news" :route="{name:'news'}">{{ $tc("message.Careers") }}</el-menu-item>

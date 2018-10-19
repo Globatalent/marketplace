@@ -4,7 +4,7 @@
     <div class="form-lined">
       <el-form ref="form" label-position="top" class="text-left" :model="form" :rules="rules">
         <el-row :gutter="20">
-          <el-col :xs="24" :md="12">
+          <el-col :xs="24">
             <el-form-item required prop="email">
               <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
             </el-form-item>

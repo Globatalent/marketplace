@@ -105,7 +105,10 @@ export const messages = {
       SoLetsBegin: 'So lets begin',
       Im: 'I´m ',
       raising: 'raising funds',
-      forDots: ' for...'
+      forDots: ' for...',
+      ClubHistory: 'Club History',
+      ExpectedSportsAchievements: 'Expected sports achievements',
+      Players: 'Players',
     }
   },
   es: {
