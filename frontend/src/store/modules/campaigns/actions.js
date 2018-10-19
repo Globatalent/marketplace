@@ -39,6 +39,17 @@ export default {
       })
     })
   },
+  delete({commit, state}, data) {
+    return new Promise((resolve, reject) => {
+      const payload = CampaignTransformer.send(data)
+      Vue.axios.delete(`${state.endpoints.campaigns}${payload.id}/`, payload).then( response => {
+        commit('campaign', {})
+        resolve()
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
   create({commit, state}, data) {
     return new Promise((resolve, reject) => {
       const payload = CampaignTransformer.send(data)

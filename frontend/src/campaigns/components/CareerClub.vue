@@ -98,6 +98,10 @@ export default {
       })
   },
   methods: {
+    onDiscard() {
+      const payload = { id: this.campaign.id }
+      this.$store.dispatch('campaigns/delete', payload)
+    },
     onSaveAndContinue() {
       const payload = {
         id: this.campaign.id,
