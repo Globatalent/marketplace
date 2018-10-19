@@ -194,11 +194,21 @@ export default {
       const payload = { id: this.campaign.id }
       this.$store.dispatch('campaigns/delete', payload)
     },
-    onLaunch() {
-      this.$store.dispatch('campaigns/update', {
-        id: this.campaign.id,
-        isDraft: false
-      })
+    onLaunch(save=true) {
+      if (save) {
+        this.onSaveAndContinue()
+      }
+      // Check if the campaign has all the data
+      const required = ['title', 'image', 'sport', 'funds']
+      const errors = required.filter(field => !this.campaign[field])
+      if (errors.length == 0) {
+        this.$store.dispatch('campaigns/update', {
+          id: this.campaign.id,
+          isDraft: false
+        })
+      } else {
+        console.error(errors)
+      }
     }
   }
 }
