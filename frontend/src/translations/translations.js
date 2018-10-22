@@ -110,7 +110,14 @@ export const messages = {
       ExpectedSportsAchievements: 'Expected sports achievements',
       Players: 'Players',
       ReviewLaunch: 'Review & Launch',
-      DiscardCampaign: 'Discard Campaign'
+      DiscardCampaign: 'Discard Campaign',
+      WeBringTheTalent: 'We bring the talent to you',
+      TheFirstSportsCryptoExchange: 'The <span class="is-bold">first sports crypto exchange</span> where you can <span class="is-marked is-blue">tokenize</span><br/><span class="is-marked is-green">trade</span> and support your favorite clubs and sports idols',
+      AllCampaigns: 'All Campaigns',
+      LaunchingSoon: 'Launching Soon',
+      New: 'New',
+      Ending: 'Ending',
+      Hot: 'Hot',
     }
   },
   es: {

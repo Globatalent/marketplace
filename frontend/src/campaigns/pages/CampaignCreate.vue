@@ -115,32 +115,6 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/variables.scss';
-.beginBlock {
-  display: block;
-  width: 100%;
-  max-width: 525px;
-  margin: 0 auto 30px auto;
-  background: url('../../assets/img/figures-background.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  background-position: top center;
-}
-
-.beginBlock-title {
-  font-size: 16px;
-  text-transform: uppercase;
-  color: $--grey-title;
-  padding-top: 40px;
-}
-
-.beginBlock-subTitle {
-  font-size: 31px;
-  color: $--black-subtitle;
-  font-family: 'Aller';
-  .is-bold {
-    font-family: 'Aller Regular';
-  }
-}
 
 .campaignProfile {
   display: flex;

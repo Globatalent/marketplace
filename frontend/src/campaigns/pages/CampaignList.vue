@@ -1,18 +1,42 @@
 <template>
   <gb-base-layout>
+    <el-row>
+      <el-col :xs="24">
+        <div class="beginBlock text-center">
+          <h3 class="beginBlock-title">{{ $tc("message.WeBringTheTalent") }}</h3>
+          <h4 class="beginBlock-subTitle" v-html="$t('message.TheFirstSportsCryptoExchange')"></h4>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col :xs="24">
+        <ul class="campaignsFilter">
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">54</span><span class="campaignsFilter-item-text">{{ $tc("message.AllCampaigns") }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">21</span><span class="campaignsFilter-item-text">{{ $tc("message.LaunchingSoon") }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">44</span><span class="campaignsFilter-item-text">{{ $tc("message.New") }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span class="campaignsFilter-item-text">{{ $tc("message.Ending") }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span class="campaignsFilter-item-text">{{ $tc("message.Hot") }}</span></li>
+        </ul>
+      </el-col>
+    </el-row>
     <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(campaign, index) in campaigns" :key="index">
-        <div class="campaign-image">
-          <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
-            <img v-if="campaign.image" v-bind:src="campaign.image" class="image">
-            <img v-else src="~@/assets/img/user-placeholder-circle.png" class="image">
-          </router-link>
+        <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
+          <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
             <div class="campaign-sport">
               <!-- <i class="fas fa-mars" v-if="campaign.sex==='MALE'"></i>
               <i class="fas fa-venus" v-else></i> -->
               {{campaign.sport.name}}
             </div>
-        </div>
+          </div>
+          <div class="campaign-image" v-else :style="{backgroundImage:'url(~@/assets/img/user-placeholder-circle.png)'}">
+            <div class="campaign-sport">
+              <!-- <i class="fas fa-mars" v-if="campaign.sex==='MALE'"></i>
+              <i class="fas fa-venus" v-else></i> -->
+              {{campaign.sport.name}}
+            </div>
+          </div>
+        </router-link>
         <div class="campaign-info">
           <div class="clearfix campaign-nameBlock">
             <el-row>
@@ -103,7 +127,7 @@ export default {
         this.$store.dispatch('campaigns/list', {
           filters: {
             is_draft: 'False',
-            state: 'approved',
+            state: 'approved'
           }
         })
       }
@@ -131,7 +155,7 @@ export default {
       this.$store.dispatch('campaign/follow', campaign.id).catch(error => {
         console.log(error)
       })
-    },
+    }
   }
 }
 </script>
@@ -145,6 +169,12 @@ export default {
   &:hover {
     box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.2);
   }
+}
+
+.beginBlock {
+  background: url('../../assets/img/background-list-title.png');
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .likeButton {
   margin-left: 15px;
@@ -168,6 +198,9 @@ export default {
   height: 200px;
   overflow: hidden;
   position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
 }
 
 .campaign-progress {
@@ -175,7 +208,7 @@ export default {
   flex-grow: 1;
 }
 
-.el-progress{
+.el-progress {
   margin-top: 10px;
 }
 
@@ -209,6 +242,7 @@ export default {
 .campaign-nameBlock {
   padding: 25px 20px 15px 20px;
   border-bottom: 1px solid #f0f0f0;
+  min-height: 90px;
 }
 .campaign-progress {
   padding: 12px 20px 12px 20px;
@@ -222,10 +256,10 @@ export default {
   height: auto;
   display: inline-block;
 }
-.campaign-progress-info-funding-text{
+.campaign-progress-info-funding-text {
   font-family: 'OpenSans Bold';
 }
-.campaign-progress-info-funding-qty{
+.campaign-progress-info-funding-qty {
   font-family: 'OpenSans Regular';
 }
 </style>

@@ -64,6 +64,23 @@ ul {
   font-weight: bold;
 }
 
+.is-marked {
+  display: inline-block;
+  border-radius: 4px;
+  padding-left: 2px;
+  padding-right: 3px;
+
+  &.is-blue {
+    background-color: $--blue-mark;
+    color: white;
+  }
+
+  &.is-green {
+    background-color: $--green-mark;
+    color: white;
+  }
+}
+
 .clearfix:after {
   content: '';
   clear: both;
@@ -280,7 +297,8 @@ ul {
 .formSteps-actions {
   float: right;
   text-align: right;
-  .el-button{
+
+  .el-button {
     display: inline-block;
     width: auto !important;
   }
@@ -364,26 +382,27 @@ ul {
   }
 }
 
-.formSteps-containerInputSelect{
-  .formSteps-inputSelect{
+.formSteps-containerInputSelect {
+  .formSteps-inputSelect {
     display: inline-block;
     width: auto;
     margin-right: 15px;
     margin-bottom: 15px;
+
     .el-input {
       max-width: 160px;
     }
   }
 }
 
-.formSteps-inputSelect-year{
+.formSteps-inputSelect-year {
   margin-bottom: 10px;
   font-size: 14px;
   color: black;
   font-family: 'OpenSans Regular';
 }
 
-.socialLinks-icon{
+.socialLinks-icon {
   display: inline-block;
   width: 33px;
   height: 33px;
@@ -391,32 +410,39 @@ ul {
   background-position: center;
   background-size: 100%;
   margin-right: 10px;
-  margin-top:5px;
-  &.facebook{
+  margin-top: 5px;
+
+  &.facebook {
     background-image: url('../assets/img/icon-facebook.png');
   }
-  &.instagram{
+
+  &.instagram {
     background-image: url('../assets/img/icon-instagram.png');
   }
-  &.twitter{
+
+  &.twitter {
     background-image: url('../assets/img/icon-twitter.png');
   }
-  &.youtube{
+
+  &.youtube {
     background-image: url('../assets/img/icon-youtube.png');
   }
-  &.linkedin{
+
+  &.linkedin {
     background-image: url('../assets/img/icon-linkedin.png');
   }
-  &.whatsapp{
+
+  &.whatsapp {
     background-image: url('../assets/img/icon-whatsapp.png');
   }
-  &.flickr{
+
+  &.flickr {
     background-image: url('../assets/img/icon-flickr.png');
   }
 }
 
-.socialLinks{
-  .el-input{
+.socialLinks {
+  .el-input {
     display: inline-block;
     max-width: 490px;
     vertical-align: top;
@@ -424,11 +450,11 @@ ul {
 }
 
 // Tabs
-.el-tabs__header{
+.el-tabs__header {
   margin-bottom: 20px;
 }
 
-.tabTitle{
+.tabTitle {
   margin-bottom: 10px;
   font-size: 14px;
   color: black;
@@ -438,6 +464,10 @@ ul {
 // Main container
 .el-container {
   &.main-container {
+    background: url('../assets/img/background-campaigns.png');
+    background-repeat: no-repeat;
+    background-position: -25px 15px;
+
     &.aside-container {
       background: url('../assets/img/body-background.png');
       background-repeat: no-repeat;
@@ -458,7 +488,7 @@ ul {
   }
 
   &.funding {
-    .formSteps{
+    .formSteps {
       max-width: 760px;
     }
   }
@@ -672,3 +702,76 @@ ul {
 .notifications-list-item-subtitle {
   font-size: 12px;
 }
+
+.beginBlock {
+  display: block;
+  width: 100%;
+  margin: 0 auto 30px auto;
+  background: url('../assets/img/figures-background.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: top center;
+}
+
+.beginBlock-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  color: $--grey-title;
+  padding-top: 40px;
+}
+
+.beginBlock-subTitle {
+  font-size: 31px;
+  color: $--black-subtitle;
+  font-family: 'Aller';
+  line-height: 41px;
+
+  .is-bold {
+    font-family: 'Aller Regular';
+  }
+}
+
+.campaignsFilter {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.campaignsFilter-item {
+  display: inline-block;
+  cursor: pointer;
+  color: $--grey-text;
+  font-size: 18px;
+  font-family: 'OpenSans Semibold';
+  padding: 0 10px;
+  border-right: 1px solid $--grey-text;
+  &:last-child{
+    border-right: none;
+  }
+  &:hover,
+  &.is-active{
+    .campaignsFilter-item-number{
+      color: black;
+      background-color: $--blue-lighter;
+      border-color: black;
+    }
+    .campaignsFilter-item-text{
+      color: black;
+    }
+  }
+
+}
+
+.campaignsFilter-item-number{
+  display: inline-block;
+  font-size: 14px;
+  padding: 0px 6px;
+  border: 2px solid $--grey-text;
+  margin-right: 10px;
+  border-radius: 4px;
+  line-height: 18px;
+}
+
+
