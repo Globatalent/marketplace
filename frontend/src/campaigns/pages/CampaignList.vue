@@ -19,6 +19,27 @@
         </ul>
       </el-col>
     </el-row>
+    <el-row>
+      <el-col :xs="24">
+        <div class="searchList">
+          <el-input :placeholder='$tc("message.Search")' class="searchList-input">
+            <i slot="suffix" class="el-input__icon el-icon-search"></i>
+          </el-input>
+          <el-select :placeholder='$tc("message.BySport")' class="searchList-option">
+            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option> -->
+          </el-select>
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option">
+            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option> -->
+          </el-select>
+          <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option">
+            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+            </el-option> -->
+          </el-select>
+        </div>
+      </el-col>
+    </el-row>
     <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(campaign, index) in campaigns" :key="index">
         <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
@@ -44,23 +65,27 @@
                 <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
                   <span class="campaign-name">{{campaign.title}}</span>
                 </router-link>
-
               </el-col>
               <el-col :span="4" class="text-right">
                 <!-- <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag"> -->
               </el-col>
             </el-row>
-            <!-- <el-row>
+            <el-row>
               <el-col>
-                <div class="campaign-subtitle">10% players transfer right in next 5 years</div>
+                <div class="campaign-subtitle"><span v-if="campaign.description">{{campaign.description.substring(0,50)+" ..."}}</span></div>
               </el-col>
-            </el-row> -->
+            </el-row>
           </div>
+
           <div class="campaign-progress">
-            <div v-if="!!campaign.token">
+            <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <span class="campaign-progress-info-funding-text">Funding:</span><span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">Funding:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">Soft Capt:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
+                </div>
+                <div class="campaign-progress-rating">
+                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="15" :round-start-rating="false"></star-rating>
                 </div>
               </div>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(campaign)" v-if="progress(campaign) < 100"></el-progress>
@@ -89,11 +114,13 @@
 import BaseLayout from '@/layout/BaseLayout.vue'
 import { mapGetters } from 'vuex'
 import router from '@/router.js'
+import StarRating from 'vue-star-rating'
 
 export default {
   name: 'CampaignList',
   components: {
-    'gb-base-layout': BaseLayout
+    'gb-base-layout': BaseLayout,
+    StarRating
   },
   data() {
     return {
@@ -124,12 +151,16 @@ export default {
           })
         })
       } else {
-        this.$store.dispatch('campaigns/list', {
-          filters: {
-            is_draft: 'False',
-            state: 'approved'
-          }
-        })
+        this.$store
+          .dispatch('campaigns/list', {
+            filters: {
+              is_draft: 'False',
+              state: 'approved'
+            }
+          })
+          .then(() => {
+            console.log(this.campaigns)
+          })
       }
     },
     scroll() {
@@ -155,19 +186,27 @@ export default {
       this.$store.dispatch('campaign/follow', campaign.id).catch(error => {
         console.log(error)
       })
+    },
+    getRandomRating(){
+      const precision = 10; // 1 decimals
+      return Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import '../../scss/variables.scss';
 .el-card {
   border-radius: 8px;
-  height: 420px;
+  height: 445px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 35px;
   &:hover {
     box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+  a:hover {
+    text-decoration: none;
   }
 }
 
@@ -231,18 +270,18 @@ export default {
 
 .campaign-subtitle {
   font-family: 'OpenSans Regular';
+  height: 50px;
 }
 .campaign-info {
   color: #687173;
   font-size: 13px;
-  height: 220px;
   display: flex;
   flex-direction: column;
 }
 .campaign-nameBlock {
   padding: 25px 20px 15px 20px;
   border-bottom: 1px solid #f0f0f0;
-  min-height: 90px;
+  min-height: 130px;
 }
 .campaign-progress {
   padding: 12px 20px 12px 20px;
@@ -256,10 +295,29 @@ export default {
   height: auto;
   display: inline-block;
 }
+.campaign-progress-info{
+  display: flex;
+  flex-direction: row;
+}
+.campaign-progress-info-funding{
+  width: 65%;
+}
+.campaign-progress-rating{
+  width: 35%;
+  text-align: right;
+}
 .campaign-progress-info-funding-text {
   font-family: 'OpenSans Bold';
 }
 .campaign-progress-info-funding-qty {
   font-family: 'OpenSans Regular';
+}
+.searchList {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 35px;
+}
+.searchList-option {
+  margin-left: 30px;
 }
 </style>

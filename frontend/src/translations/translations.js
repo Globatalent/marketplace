@@ -118,6 +118,10 @@ export const messages = {
       New: 'New',
       Ending: 'Ending',
       Hot: 'Hot',
+      Search: 'Search',
+      BySport: 'By Sport',
+      ByCountry: 'By Country',
+      AllTypes: 'All Types',
     }
   },
   es: {
