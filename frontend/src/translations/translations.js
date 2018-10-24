@@ -122,6 +122,7 @@ export const messages = {
       BySport: 'By Sport',
       ByCountry: 'By Country',
       AllTypes: 'All Types',
+      Raised: 'raised',
     }
   },
   es: {

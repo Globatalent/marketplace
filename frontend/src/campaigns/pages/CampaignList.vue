@@ -158,9 +158,9 @@ export default {
               state: 'approved'
             }
           })
-          .then(() => {
-            console.log(this.campaigns)
-          })
+          // .then(() => {
+          //   console.log(this.campaigns)
+          // })
       }
     },
     scroll() {

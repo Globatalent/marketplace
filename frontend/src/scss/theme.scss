@@ -64,6 +64,10 @@ ul {
   font-weight: bold;
 }
 
+.is-padding-boxed{
+  padding: 0 20px;
+}
+
 .is-marked {
   display: inline-block;
   border-radius: 4px;
@@ -476,9 +480,16 @@ ul {
   }
 }
 
+.main-container{
+  &[campaignid]{
+    .el-main{
+      padding: 0;
+    }
+  }
+}
+
 // Main
 .el-main {
-
   &.card,
   &.content,
   &.career,
@@ -520,7 +531,14 @@ ul {
   text-transform: uppercase;
   display: inline-block;
   font-family: 'OpenSans Regular';
+
+  &.breadcrumbCampaignDetail {
+    font-size: 13px;
+    color: $--grey-text;
+  }
 }
+
+
 
 // Login Page
 .forgotPassword {
@@ -621,6 +639,8 @@ ul {
   color: #000000;
   font-family: 'Montserrat Bold';
 }
+
+
 
 // Margins
 .m-t-5 {
@@ -747,24 +767,27 @@ ul {
   font-family: 'OpenSans Semibold';
   padding: 0 10px;
   border-right: 1px solid $--grey-text;
-  &:last-child{
+
+  &:last-child {
     border-right: none;
   }
+
   &:hover,
-  &.is-active{
-    .campaignsFilter-item-number{
+  &.is-active {
+    .campaignsFilter-item-number {
       color: black;
       background-color: $--blue-lighter;
       border-color: black;
     }
-    .campaignsFilter-item-text{
+
+    .campaignsFilter-item-text {
       color: black;
     }
   }
 
 }
 
-.campaignsFilter-item-number{
+.campaignsFilter-item-number {
   display: inline-block;
   font-size: 14px;
   padding: 0px 6px;
@@ -773,5 +796,3 @@ ul {
   border-radius: 4px;
   line-height: 18px;
 }
-
-
