@@ -16,6 +16,7 @@ import vue2Dropzone from 'vue2-dropzone'
 /** Axios **/
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import vueSmoothScroll from 'vue-smooth-scroll'
 
 Vue.config.productionTip = false
 
@@ -25,6 +26,7 @@ Vue.use(ElementUI, { locale })
 Vue.use(VueMasonry)
 Vue.use(vue2Dropzone)
 Vue.use(VueAxios, axios)
+Vue.use(vueSmoothScroll)
 
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL

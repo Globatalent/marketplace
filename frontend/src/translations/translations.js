@@ -128,6 +128,13 @@ export const messages = {
       Updates: 'Updates',
       Ratings: 'Ratings',
       Favorite: 'Favorite',
+      DaysLeft: 'days left',
+      M10Token: '1 M10 token',
+      SoftCapt: 'Soft Capt',
+      ExpertsRating: 'Experts Rating',
+      FundsRequierement: 'Funds requirement',
+      LookingToRaise: 'Looking to raise',
+      PlayerPoweredBy: 'Player powered by',
     }
   },
   es: {
