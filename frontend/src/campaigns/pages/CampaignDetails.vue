@@ -39,55 +39,82 @@
             <p class="campaignDetails-description">{{campaign.description}}</p>
             <div class="campaignDetails-fundingDetails">
               <div class="campaignDetails-fundingDetails-numbers">
-                  <div class="campaignDetails-fundingDetails-numbers-row">
-                    <span class="campaignDetails-fundingDetails-numbers-row-title">Funding:</span>
-                    <span class="campaignDetails-fundingDetails-numbers-row-number">$500,000</span>
-                  </div>
-                  <div class="campaignDetails-fundingDetails-numbers-row">
-                    <span class="campaignDetails-fundingDetails-numbers-row-title">1 M10 token =</span>
-                    <span class="campaignDetails-fundingDetails-numbers-row-number">$5</span>
-                  </div>
-                  <div class="campaignDetails-fundingDetails-numbers-row">
-                    <span class="campaignDetails-fundingDetails-numbers-row-title">Soft Capt:</span>
-                    <span class="campaignDetails-fundingDetails-numbers-row-number">$150,000</span>
-                  </div>
+                <div class="campaignDetails-fundingDetails-numbers-row">
+                  <span class="campaignDetails-fundingDetails-numbers-row-title">Funding:</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number">$500,000</span>
+                </div>
+                <div class="campaignDetails-fundingDetails-numbers-row">
+                  <span class="campaignDetails-fundingDetails-numbers-row-title">1 M10 token =</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number">$5</span>
+                </div>
+                <div class="campaignDetails-fundingDetails-numbers-row">
+                  <span class="campaignDetails-fundingDetails-numbers-row-title">Soft Capt:</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number">$150,000</span>
+                </div>
               </div>
               <div class="campaignDetails-fundingDetails-rating">
                 <div class="campaignDetails-fundingDetails-rating-experts"><span class="is-marked is-mark-down">73</span><span class="campaignDetails-fundingDetails-rating-experts-text"> Experts Rating</span></div>
-                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="15" :round-start-rating="false" active-color="#419ce1"></star-rating>
+                <star-rating :rating="getRandomRating()" read-only :show-rating="false" star-size="16" padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
-
-            <el-button type="primary" class="is-full-width" size="big" v-if="!!this.user" @click="goToInvest(campaign)">
-              <i class="fas fa-money-bill"></i> {{$tc('message.BuyTokens')}}
-            </el-button>
+            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
+            <div class="campaignDetails-favoriteSocial">
+              <div class="favoriteLink" v-if="campaign.following" type="primary" @click="setFollowingCampaign()">
+                <i class="fas fa-heart"></i> {{$tc('message.Favorite')}}
+              </div>
+              <div class="favoriteLink" v-else @click="setFollowingCampaign()">
+                <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
+              </div>
+            </div>
           </el-col>
         </el-row>
       </div>
     </div>
-    <div>
-      <div class="campaign-details-container">
-        <div class="campaign-actions-column">
-          <div v-if="!!this.user">
-            <el-button v-if="campaign.following" type="primary" class="m-b-15" @click="setFollowingCampaign()">
-              <i class="fas fa-heart"></i> {{$tc('message.Following')}}
-            </el-button>
-            <el-button v-else class="m-b-15" @click="setFollowingCampaign()">
-              <i class="far fa-heart"></i> {{$tc('message.Follow')}}
-            </el-button>
-          </div>
-
-        </div>
-        <div class="campaign-info-column">
-          <p>{{campaign.description}}</p>
-
-          <h4>{{$tc('message.Link', 2)}}</h4>
-          <p v-for="(link, linkIndex) in campaign.links" :key="linkIndex">
-            <a :href="link.url" :title="link.url" target="_blank" v-if="!!link.url">
-              {{link.url}} <i class="fas fa-external-link-alt"></i>
-            </a>
-          </p>
-        </div>
+    <div class="campaignDetails-infoContainer is-padding-boxed">
+      <el-row>
+        <el-col :xs="24">
+          <ul class="campaignsFilter">
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">45</span><span class="campaignsFilter-item-text">{{ $tc("message.Story") }}</span></li>
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-text">{{ $tc("message.Faq") }}</span></li>
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">12</span><span class="campaignsFilter-item-text">{{ $tc("message.Updates") }}</span></li>
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span class="campaignsFilter-item-text">{{ $tc("message.Ratings") }}</span></li>
+          </ul>
+        </el-col>
+      </el-row>
+      <div class="campaignDetails-infoContainer-data">
+        <el-row :gutter="50">
+          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title">&nbsp;</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text"><span class="campaignDetails-infoContainer-data-text-title">Leo Messi</span></el-col>
+        </el-row>
+        <el-row :gutter="50">
+          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">Story</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">A fan club is a group that is dedicated to celebrities group, or idea Most fan clubs are run by fans who devote considerable time and resources. supporting considerable time and resources.
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50">
+          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">Biography</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">Detail your main life milestones, such as when you started to practice sports why you want to be a sports professional and other details that you want to mention
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50">
+          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">Funds requirement</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            <div class="fundsQty"><span class="fundsQty-currency">$</span>250,000</div> Looking to raise
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50">
+          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">&nbsp;</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text is-last-block">
+            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
+            <div class="campaignDetails-infoContainer-campaignCopyright">
+              <img src="~@/assets/img/logo-only.png" alt="" class="campaignDetails-infoContainer-campaignCopyright-img">
+              <div class="campaignDetails-infoContainer-campaignCopyright-text">Player powered by <span class="campaignDetails-infoContainer-campaignCopyright-text-name">GlobaTalent</span></div>
+            </div>
+          </el-col>
+        </el-row>
       </div>
     </div>
   </gb-base-layout>
@@ -151,9 +178,14 @@ export default {
         params: { campaigneId: campaign.id }
       })
     },
-    getRandomRating(){
-      const precision = 10; // 1 decimals
-      return Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
+    getRandomRating() {
+      const precision = 10 // 1 decimals
+      return (
+        Math.floor(
+          Math.random() * (10 * precision - 1 * precision) + 1 * precision
+        ) /
+        (1 * precision)
+      )
     }
   }
 }
@@ -172,19 +204,26 @@ a:hover {
   text-decoration: none;
 }
 
-.is-marked{
+.is-marked {
   display: inline-block;
   border-radius: 5px;
   background-color: $--pink;
   color: white;
   font-family: 'OpenSans Regular';
   font-size: 12px;
+  padding: 0 3px;
 }
-.is-mark-down{
-  &::after{
-    content: "<";
+.is-mark-down {
+  &::after {
+    content: '<';
     transform: rotate(-90deg);
+    position: relative;
+    display: inline-block;
+    margin-left: 3px;
   }
+}
+.el-carousel__item {
+  border-radius: 5px;
 }
 
 .el-carousel__item h3 {
@@ -208,6 +247,7 @@ a:hover {
   border-top: 2px solid $--grey-detailCampaign-border;
   border-bottom: 2px solid $--grey-detailCampaign-border;
   margin-top: 100px;
+  padding-bottom: 50px;
   .campaignDetails-col {
     position: relative;
     top: -100px;
@@ -250,7 +290,7 @@ a:hover {
   float: right;
 }
 
-.campaignDetails-collected{
+.campaignDetails-collected {
   font-size: 32px;
   line-height: 32px;
   color: $--black;
@@ -259,13 +299,13 @@ a:hover {
 }
 
 .campaignDetails-collected-currency,
-.campaignDetails-collected-text{
+.campaignDetails-collected-text {
   font-size: 14px;
   font-family: 'OpenSans Regular';
   color: $--black;
 }
 
-.campaignDetails-collected-currency{
+.campaignDetails-collected-currency {
   margin-right: 5px;
 }
 
@@ -297,45 +337,45 @@ a:hover {
   font-size: initial;
 }
 
-.campaignDetails-invest{
+.campaignDetails-invest {
   font-size: 20px;
   font-family: 'OpenSans Regular';
   color: $--black;
   margin-bottom: 10px;
 }
 
-.campaignDetails-description{
+.campaignDetails-description {
   font-family: 'OpenSans Regular';
   color: $--grey-title;
   font-size: 14px;
 }
 
-.progress{
+.progress {
   margin-bottom: 50px;
 }
 
-.campaignDetails-fundingDetails{
+.campaignDetails-fundingDetails {
   border-top: 1px solid $--grey-detailCampaign-border;
   padding-top: 20px;
   font-family: 'OpenSans Regular';
   font-size: 0;
 }
 
-.campaignDetails-fundingDetails-numbers-row-title{
+.campaignDetails-fundingDetails-numbers-row-title {
   font-size: 15px;
   color: $--grey-title;
 }
-.campaignDetails-fundingDetails-numbers{
+.campaignDetails-fundingDetails-numbers {
   display: inline-block;
   width: 60%;
   padding-right: 5px;
 }
-.campaignDetails-fundingDetails-numbers-row-number{
+.campaignDetails-fundingDetails-numbers-row-number {
   font-size: 15px;
   color: $--green-numbers;
 }
 
-.campaignDetails-fundingDetails-rating{
+.campaignDetails-fundingDetails-rating {
   display: inline-block;
   width: 40%;
   border: 1px solid $--grey-detailCampaign-border;
@@ -344,8 +384,111 @@ a:hover {
   border-radius: 5px;
 }
 
-.campaignDetails-fundingDetails-rating-text{
+.campaignDetails-fundingDetails-rating-experts-text {
+  color: $--pink;
+  text-decoration: underline;
+  font-size: 14px;
+  font-family: 'OpenSans Regular';
+  display: inline-block;
+  margin-left: 10px;
+}
 
+.buyTokensButton {
+  font-weight: bold;
+  margin-top: 30px;
+}
+
+.campaignDetails-infoContainer {
+  position: relative;
+  top: -100px;
+}
+
+.campaignDetails-infoContainer-data {
+  padding: 40px 85px;
+  margin-top: 30px;
+  background-color: white;
+  border: 2px solid $--grey-detailCampaign-border;
+  background-image: url('~@/assets/img/logo-translucent.png');
+  background-repeat: no-repeat;
+  background-position: right 50px bottom 50px;
+}
+
+.campaignDetails-infoContainer-data-text-title {
+  font-size: 25px;
+  font-family: 'OpenSans Regular';
+  color: $--black;
+  margin-bottom: 20px;
+}
+
+.campaignDetails-infoContainer-data-title {
+  color: black;
+  font-size: 20px;
+  line-height: 20px;
+  font-family: 'OpenSans Regular';
+}
+
+.campaignDetails-infoContainer-data-text {
+  font-size: 14px;
+  color: $--grey-text;
+  font-family: 'OpenSans Regular';
+  margin-bottom: 20px;
+  .line {
+    margin-top: 20px;
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    border-top: 1px solid $--grey-detailCampaign-border;
+  }
+  &.is-last-block{
+    max-width: 383px;
+  }
+}
+
+.fundsQty {
+  font-family: 'OpenSans SemiBold';
+  font-size: 28px;
+  line-height: 28px;
+  color: $--green-numbers;
+  display: inline-block;
+  .fundsQty-currency {
+    font-size: 18px;
+    position: relative;
+    top: -13px;
+    margin-right: 3px;
+  }
+}
+.campaignDetails-infoContainer-campaignCopyright{
+  text-align: center;
+  margin: 30px auto 0 auto;
+}
+.campaignDetails-infoContainer-campaignCopyright-img{
+  max-width: 23px;
+  display: inline-block;
+  margin-right: 10px;
+}
+.campaignDetails-infoContainer-campaignCopyright-text{
+  display: inline-block;
+  color: black;
+}
+.campaignDetails-infoContainer-campaignCopyright-text-name{
+  font-weight: bold;
+  color: $--blue-dark;
+}
+
+.campaignDetails-infoContainer-logoTranslucent{
+  position: absolute;
+  bottom: 50px;
+  right: 50px;
+  max-width: 130px;
+}
+.campaignDetails-favoriteSocial{
+  margin-top: 30px;
+  text-align: center;
+}
+.favoriteLink{
+  font-size: 14px;
+  font-family: 'OpenSans Regular';
+  cursor: pointer;
 }
 
 @media screen and (min-width: 800px) {

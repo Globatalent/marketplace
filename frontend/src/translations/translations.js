@@ -123,6 +123,11 @@ export const messages = {
       ByCountry: 'By Country',
       AllTypes: 'All Types',
       Raised: 'raised',
+      BuyTokens: 'Buy Tokens',
+      Story: 'Story',
+      Updates: 'Updates',
+      Ratings: 'Ratings',
+      Favorite: 'Favorite',
     }
   },
   es: {
