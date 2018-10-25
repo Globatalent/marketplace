@@ -1,3 +1,5 @@
+import datetime
+
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -20,12 +22,13 @@ class UserAPITests(APITestCase):
 
     def test_register_user(self):
         users = User.objects.all().count()
-        data = {"email": "new@example.com", "password": "secure"}
+        data = {"email": "new@example.com", "password": "secure", "birth_date": "2000-01-02"}
         response = self.client.post("/api/v1/users/", data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(users + 1, User.objects.all().count())
         user = User.objects.get(email=data["email"])
         self.assertTrue(user.check_password(data["password"]))
+        self.assertEqual(user.birth_date, datetime.date(year=2000, month=1, day=2))
 
     def test_get_me(self):
         self.client.force_authenticate(self.user)

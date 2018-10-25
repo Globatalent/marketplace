@@ -21,6 +21,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     first_name = models.CharField(max_length=100, verbose_name=_('first name'), default="")
     last_name = models.CharField(max_length=100, verbose_name=_('last name'), default="")
+    birth_date = models.DateField(verbose_name=_('birth date'), null=True)
 
     email = models.EmailField(verbose_name=_('email address'), unique=True, blank=True,
                               error_messages={'unique': _('There is another user with this email')})
