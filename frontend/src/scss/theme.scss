@@ -797,3 +797,26 @@ ul {
   border-radius: 4px;
   line-height: 18px;
 }
+
+.campaignDetails-infoContainer-data-miniMenu-item{
+  display: block;
+  &:hover{
+    .menuLine{
+      border-color: $--blue-primary;
+    }
+    .campaignDetails-infoContainer-data-miniMenu-item-text{
+      color: $--blue-primary;
+    }
+  }
+}
+.menuLine{
+  display: inline-block;
+  border-top: 2px solid $--grey-detailCampaign-border;
+  width: 100%;
+  max-width: 35px;
+  margin-right: 20px;
+}
+.campaignDetails-infoContainer-data-miniMenu-item-text{
+  font-size: 13px;
+  color: $--grey-text;
+}
