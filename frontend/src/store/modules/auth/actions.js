@@ -61,7 +61,6 @@ export default {
   },
   register ({commit, state}, userData) {
     return new Promise((resolve, reject) => {
-      debugger
       const payload = {
         email: userData.email,
         password: userData.password,

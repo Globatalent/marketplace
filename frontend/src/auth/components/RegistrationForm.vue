@@ -130,7 +130,7 @@
 </script>
 
 <style type="scss" scoped>
-  .datepicker {
+  .el-date-editor.el-input.datepicker {
     width: 100%;
   }
 </style>
