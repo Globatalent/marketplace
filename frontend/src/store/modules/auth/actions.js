@@ -3,7 +3,6 @@ import Vue from 'vue'
 import router from '@/router.js'
 import { Message } from 'element-ui'
 
-
 export default {
   forgot ({state}, payload) {
     return new Promise((resolve, reject) => {
@@ -60,12 +59,14 @@ export default {
       })
     })
   },
-  register({commit, state}, userData) {
+  register ({commit, state}, userData) {
     return new Promise((resolve, reject) => {
+      debugger
       const payload = {
         email: userData.email,
         password: userData.password,
-        repeat_password: userData.repeatPassword
+        repeat_password: userData.repeatPassword,
+        birth_date: userData.birthDate.toISOString().split('T')[0],
       }
       Vue.axios.post(state.endpoints.users, payload).then((response) => {
         commit('updateToken', response.data.token)

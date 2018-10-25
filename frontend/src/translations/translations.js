@@ -3,6 +3,7 @@ export const messages = {
     message: {
       SignIn: 'Sign In',
       Email: 'Email',
+      DateFormat: 'yyyy-mm-dd',
       Password: 'Password',
       RepeatPassword: 'Repeat password',
       RememberMe: 'Remember me',
@@ -141,6 +142,7 @@ export const messages = {
     message: {
       SignIn: 'Sign In',
       Email: 'Email',
+      DateFormat: 'aaaa-mm-dd',
       Password: 'Password',
       RepeatPassword: 'Repeat password',
       RememberMe: 'Remember me',
