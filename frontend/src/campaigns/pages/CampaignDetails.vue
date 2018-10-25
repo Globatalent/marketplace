@@ -65,6 +65,12 @@
               <div class="favoriteLink" v-else @click="setFollowingCampaign()">
                 <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
               </div>
+              <!-- <pre>{{campaign.links}}</pre> -->
+              <div class="socialLinksDetail">
+                <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url">
+                  <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
+                </a>
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -528,6 +534,23 @@ a:hover {
   font-size: 14px;
   font-family: 'OpenSans Regular';
   cursor: pointer;
+  display: inline-block;
+  width: auto;
+  margin-right: 20px;
+}
+
+.socialLinksDetail {
+  display: inline-block;
+  width: auto;
+  a {
+    color: $--grey-text;
+  }
+}
+
+.socialLinks-icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 0;
 }
 
 .campaignsFilter-item {
