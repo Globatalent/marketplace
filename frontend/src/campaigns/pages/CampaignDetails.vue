@@ -41,7 +41,7 @@
               <div class="campaignDetails-fundingDetails-numbers">
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.Funding')}}:</span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number">$500,000</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number">${{campaign.funds}}</span>
                 </div>
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.M10Token')}} = </span>
@@ -54,7 +54,7 @@
               </div>
               <div class="campaignDetails-fundingDetails-rating">
                 <div class="campaignDetails-fundingDetails-rating-experts"><span class="is-marked is-mark-down">73</span><span class="campaignDetails-fundingDetails-rating-experts-text"> {{$tc('message.ExpertsRating')}}</span></div>
-                <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="16" padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
+                <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="16" :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
             <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
@@ -65,7 +65,6 @@
               <div class="favoriteLink" v-else @click="setFollowingCampaign()">
                 <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
               </div>
-              <!-- <pre>{{campaign.links}}</pre> -->
               <div class="socialLinksDetail">
                 <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url">
                   <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
@@ -125,7 +124,7 @@
         </el-row>
         <el-row :gutter="50">
           <el-col :xs="24" :md="8" id="biographySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Biography") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">Detail your main life milestones, such as when you started to practice sports why you want to be a sports professional and other details that you want to mention
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">{{campaign.biography}}
             <span class="line"></span>
           </el-col>
         </el-row>
@@ -133,6 +132,13 @@
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.FundsRequierement") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             <div class="fundsQty"><span class="fundsQty-currency">$</span>250,000</div> {{ $tc("message.LookingToRaise") }}
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Achievements") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            {{campaign.achievements}}
             <span class="line"></span>
           </el-col>
         </el-row>
@@ -165,7 +171,7 @@ export default {
   },
   data() {
     return {
-      token: {}
+      token: {},
     }
   },
   computed: {
@@ -184,6 +190,8 @@ export default {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
+      console.log(this.campaign);
+
     })
   },
   methods: {
