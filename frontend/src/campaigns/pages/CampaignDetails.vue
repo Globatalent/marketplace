@@ -41,7 +41,7 @@
               <div class="campaignDetails-fundingDetails-numbers">
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.Funding')}}:</span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number">$500,000</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number">${{campaign.funds}}</span>
                 </div>
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.M10Token')}} = </span>
@@ -54,7 +54,7 @@
               </div>
               <div class="campaignDetails-fundingDetails-rating">
                 <div class="campaignDetails-fundingDetails-rating-experts"><span class="is-marked is-mark-down">73</span><span class="campaignDetails-fundingDetails-rating-experts-text"> {{$tc('message.ExpertsRating')}}</span></div>
-                <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="16" padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
+                <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="16" :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
             <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
@@ -64,6 +64,11 @@
               </div>
               <div class="favoriteLink" v-else @click="setFollowingCampaign()">
                 <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
+              </div>
+              <div class="socialLinksDetail">
+                <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url">
+                  <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
+                </a>
               </div>
             </div>
           </el-col>
@@ -84,9 +89,26 @@
       <div class="campaignDetails-infoContainer-data">
         <ul class="campaignDetails-infoContainer-data-miniMenu">
           <li class="campaignDetails-infoContainer-data-miniMenu-item">
-            <a href="#div-id" v-smooth-scroll>
-            <span class="menuLine"></span>
-            <span class="campaignDetails-infoContainer-data-miniMenu-item-text"></span>
+            <a href="#storySection" v-smooth-scroll>
+              <span class="menuLine"></span>
+              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.Story") }}</span>
+            </a>
+          </li>
+          <li class="campaignDetails-infoContainer-data-miniMenu-item">
+            <a href="#biographySection" v-smooth-scroll>
+              <span class="menuLine"></span>
+              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.Biography") }}</span>
+            </a>
+          <li class="campaignDetails-infoContainer-data-miniMenu-item">
+            <a href="#fundsSection" v-smooth-scroll>
+              <span class="menuLine"></span>
+              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.FundsRequierement") }}</span>
+            </a>
+          </li>
+          <li class="campaignDetails-infoContainer-data-miniMenu-item">
+            <a href="#buyTokenSection" v-smooth-scroll>
+              <span class="menuLine"></span>
+              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{$tc('message.BuyTokens')}}</span>
             </a>
           </li>
         </ul>
@@ -95,27 +117,34 @@
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text"><span class="campaignDetails-infoContainer-data-text-title">{{campaign.title}}</span></el-col>
         </el-row>
         <el-row :gutter="50">
-          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Story") }}</el-col>
+          <el-col :xs="24" :md="8" id="storySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Story") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">A fan club is a group that is dedicated to celebrities group, or idea Most fan clubs are run by fans who devote considerable time and resources. supporting considerable time and resources.
             <span class="line"></span>
           </el-col>
         </el-row>
         <el-row :gutter="50">
-          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Biography") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">Detail your main life milestones, such as when you started to practice sports why you want to be a sports professional and other details that you want to mention
+          <el-col :xs="24" :md="8" id="biographySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Biography") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">{{campaign.biography}}
             <span class="line"></span>
           </el-col>
         </el-row>
         <el-row :gutter="50">
-          <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.FundsRequierement") }}</el-col>
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.FundsRequierement") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             <div class="fundsQty"><span class="fundsQty-currency">$</span>250,000</div> {{ $tc("message.LookingToRaise") }}
             <span class="line"></span>
           </el-col>
         </el-row>
         <el-row :gutter="50">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Achievements") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            {{campaign.achievements}}
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50">
           <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">&nbsp;</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text is-last-block">
+          <el-col :xs="24" :md="16" id="buyTokenSection" class="campaignDetails-infoContainer-data-text is-last-block">
             <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
             <div class="campaignDetails-infoContainer-campaignCopyright">
               <img src="~@/assets/img/logo-only.png" alt="" class="campaignDetails-infoContainer-campaignCopyright-img">
@@ -142,7 +171,7 @@ export default {
   },
   data() {
     return {
-      token: {}
+      token: {},
     }
   },
   computed: {
@@ -161,6 +190,8 @@ export default {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
+      console.log(this.campaign);
+
     })
   },
   methods: {
@@ -369,28 +400,31 @@ a:hover {
   font-size: 0;
 }
 
-.campaignDetails-fundingDetails-numbers-row-title {
-  font-size: 15px;
-  color: $--grey-title;
-}
 .campaignDetails-fundingDetails-numbers {
   display: inline-block;
-  width: 60%;
+  width: 48%;
   padding-right: 5px;
 }
+
+.campaignDetails-fundingDetails-numbers-row-title {
+  font-size: 14px;
+  color: $--grey-title;
+}
 .campaignDetails-fundingDetails-numbers-row-number {
-  font-size: 15px;
+  font-size: 14px;
   color: $--green-numbers;
 }
 
 .campaignDetails-fundingDetails-rating {
   display: inline-block;
   vertical-align: top;
-  width: 40%;
+  width: 52%;
   border: 1px solid $--grey-detailCampaign-border;
   background: white;
   padding: 5px 10px;
   border-radius: 5px;
+  max-width: 180px;
+  float: right;
 }
 
 .campaignDetails-fundingDetails-rating-experts {
@@ -422,6 +456,7 @@ a:hover {
 }
 
 .campaignDetails-infoContainer-data {
+  position: relative;
   padding: 40px 85px;
   margin-top: 30px;
   background-color: white;
@@ -507,12 +542,30 @@ a:hover {
   font-size: 14px;
   font-family: 'OpenSans Regular';
   cursor: pointer;
+  display: inline-block;
+  width: auto;
+  margin-right: 20px;
 }
 
-.campaignsFilter-item{
-  &.is-active{
-    &::after{
-      content:"";
+.socialLinksDetail {
+  display: inline-block;
+  width: auto;
+  a {
+    color: $--grey-text;
+  }
+}
+
+.socialLinks-icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 10px 0 0;
+}
+
+.campaignsFilter-item {
+  position: relative;
+  &.is-active {
+    &::after {
+      content: '';
       display: block;
       width: 70%;
       position: absolute;
@@ -521,6 +574,14 @@ a:hover {
       border: 1px solid $--blue;
     }
   }
+}
+
+.campaignDetails-infoContainer-data-miniMenu {
+  position: absolute;
+  left: 30px;
+  top: 50px;
+  z-index: 1;
+  width: 200px;
 }
 
 @media screen and (min-width: 800px) {
