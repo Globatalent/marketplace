@@ -44,18 +44,10 @@
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(campaign, index) in campaigns" :key="index">
         <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
           <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
-            <div class="campaign-sport">
-              <!-- <i class="fas fa-mars" v-if="campaign.sex==='MALE'"></i>
-              <i class="fas fa-venus" v-else></i> -->
-              {{campaign.sport.name}}
-            </div>
+            <div class="campaign-sport" v-if="campaign.sport">{{campaign.sport.name}}</div>
           </div>
-          <div class="campaign-image" v-else :style="{backgroundImage:'url(~@/assets/img/user-placeholder-circle.png)'}">
-            <div class="campaign-sport">
-              <!-- <i class="fas fa-mars" v-if="campaign.sex==='MALE'"></i>
-              <i class="fas fa-venus" v-else></i> -->
-              {{campaign.sport.name}}
-            </div>
+          <div class="campaign-image is-placeholder-image" v-else>
+            <div class="campaign-sport" v-if="campaign.sport">{{campaign.sport.name}}</div>
           </div>
         </router-link>
         <div class="campaign-info">
@@ -81,8 +73,8 @@
             <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">Funding:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">Soft Capt:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
                 </div>
                 <div class="campaign-progress-rating">
                   <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="15" :round-start-rating="false"></star-rating>
@@ -151,16 +143,15 @@ export default {
           })
         })
       } else {
-        this.$store
-          .dispatch('campaigns/list', {
-            filters: {
-              is_draft: 'False',
-              state: 'approved'
-            }
-          })
-          // .then(() => {
-          //   console.log(this.campaigns)
-          // })
+        this.$store.dispatch('campaigns/list', {
+          filters: {
+            is_draft: 'False',
+            state: 'approved'
+          }
+        })
+        // .then(() => {
+        //   console.log(this.campaigns)
+        // })
       }
     },
     scroll() {
@@ -187,9 +178,14 @@ export default {
         console.log(error)
       })
     },
-    getRandomRating(){
-      const precision = 10; // 1 decimals
-      return Math.floor(Math.random() * (10 * precision - 1 * precision) + 1 * precision) / (1*precision);
+    getRandomRating() {
+      const precision = 10 // 1 decimals
+      return (
+        Math.floor(
+          Math.random() * (10 * precision - 1 * precision) + 1 * precision
+        ) /
+        (1 * precision)
+      )
     }
   }
 }
@@ -240,6 +236,11 @@ export default {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
+  &.is-placeholder-image {
+    background-image: url('../../assets/img/user-placeholder-circle.png');
+    background-size: 60%;
+    background-position: center;
+  }
 }
 
 .campaign-progress {
@@ -295,14 +296,14 @@ export default {
   height: auto;
   display: inline-block;
 }
-.campaign-progress-info{
+.campaign-progress-info {
   display: flex;
   flex-direction: row;
 }
-.campaign-progress-info-funding{
+.campaign-progress-info-funding {
   width: 65%;
 }
-.campaign-progress-rating{
+.campaign-progress-rating {
   width: 35%;
   text-align: right;
 }
