@@ -7,10 +7,13 @@ from django.contrib.auth.models import AbstractUser, PermissionsMixin
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
+from easy_thumbnails.fields import ThumbnailerImageField
 from model_utils.models import TimeStampedModel
 
 from marketplace.actions.constants import FOLLOWS, UNFOLLOWS
 from marketplace.actions.decorators import dispatch_action
+from marketplace.core.fields import CountryCodeField
+from marketplace.core.files import UploadToDir
 from marketplace.core.tasks import send_mail_task
 from marketplace.users.emails import (
     RestorePasswordEmail,
@@ -38,6 +41,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         error_messages={"unique": _("There is another user with this email")},
     )
+    avatar = ThumbnailerImageField(
+        max_length=250,
+        upload_to=UploadToDir("users", random_name=True),
+        verbose_name=_("avatar"),
+        null=True,
+        blank=True,
+    )
+    country = CountryCodeField(null=True, blank=True)
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
