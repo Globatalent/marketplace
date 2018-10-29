@@ -25,11 +25,11 @@
           <el-input :placeholder='$tc("message.Search")' class="searchList-input">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <el-select :placeholder='$tc("message.BySport")' class="searchList-option">
-            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option> -->
+          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="filters.sport">
+            <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+            </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option">
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="filters.country">
             <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option> -->
           </el-select>
@@ -77,7 +77,7 @@
                   <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
                 </div>
                 <div class="campaign-progress-rating">
-                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="15" :round-start-rating="false"></star-rating>
+                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
                 </div>
               </div>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(campaign)" v-if="progress(campaign) < 100"></el-progress>
@@ -116,11 +116,17 @@ export default {
   },
   data() {
     return {
+      filters: {
+        search: null,
+        sport: null,
+        country: null,
+      },
       errorMessage: ''
     }
   },
   computed: {
     ...mapGetters({
+      sports: 'campaigns/sports',
       campaigns: 'campaigns/campaigns',
       pagination: 'campaigns/pagination',
       user: 'users/user'
@@ -130,6 +136,7 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch('campaigns/sports')
     this.initial()
   },
   methods: {
@@ -153,6 +160,16 @@ export default {
         //   console.log(this.campaigns)
         // })
       }
+    },
+    filter() {
+      // Update the campaign list using the filters
+      let filters = {
+        is_draft: 'False',
+        state: 'approved'
+      }
+      if (!!this.filter.search) filters.search = this.filter.search
+      if (!!this.filter.sport) filters.sport = this.filter.sport
+      this.$store.dispatch('campaigns/list', {filters: filters})
     },
     scroll() {
       // Gets a new page of campaigns and push them to the current list

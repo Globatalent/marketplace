@@ -24,6 +24,7 @@ from marketplace.campaigns.models import Campaign, Picture, Link, Sport, Revenue
 class SportViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = SportSerializer
     queryset = Sport.objects.all()
+    permission_classes = []
 
 
 class PictureViewSet(viewsets.ModelViewSet):

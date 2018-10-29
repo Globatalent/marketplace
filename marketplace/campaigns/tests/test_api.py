@@ -218,3 +218,29 @@ class CampaignAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(1, data['count'])
+
+    def test_search_campaigns(self):
+        other_campaigns = CampaignFactory.create_batch(title="other title", description="other description", size=10)
+        foo_campaigns = CampaignFactory.create_batch(title="foo title", description="foo description", size=5)
+        CampaignFactory(title="one title", description="one description")
+        response = self.client.get(
+            "/api/v1/campaigns/?search=other",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(other_campaigns), data['count'])
+        response = self.client.get(
+            "/api/v1/campaigns/?search=foo",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(foo_campaigns), data['count'])
+        response = self.client.get(
+            "/api/v1/campaigns/?search=one",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(1, data['count'])

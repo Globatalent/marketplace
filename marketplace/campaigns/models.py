@@ -11,6 +11,7 @@ from marketplace.campaigns.constants import SEX_CHOICES, SOCIAL_NETWORKS, CAMPAI
 from marketplace.campaigns.emails import CampaignApprovedEmail, CampaignReviewingEmail, CampaignRejectedEmail, \
     CampaignCreationEmail
 from marketplace.campaigns.helpers import create_token
+from marketplace.campaigns.managers import CampaignManager
 from marketplace.core.files import UploadToDir
 from marketplace.purchases.constants import CURRENCY_CHOICES, USD
 
@@ -89,6 +90,8 @@ class Campaign(TimeStampedModel):
     use = models.TextField(null=True, blank=True)
     give_back = models.TextField(null=True, blank=True)
     examples = models.TextField(null=True, blank=True)
+
+    objects = CampaignManager()
 
     class Meta:
         ordering = ["-created"]
