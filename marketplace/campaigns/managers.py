@@ -15,7 +15,7 @@ class CampaignQuerySet(models.QuerySet):
             Q(description__icontains=query) |
             Q(sport__name__icontains=query) |
             Q(tags__name__icontains=query)
-        )
+        ).distinct()
 
     def active(self):
         """Returns active campaigns"""
