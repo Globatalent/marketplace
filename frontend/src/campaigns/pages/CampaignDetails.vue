@@ -5,7 +5,7 @@
         <el-col>
           <el-breadcrumb separator=">" class="breadcrumbCampaignDetail">
             <el-breadcrumb-item :to="{ path: '/' }">Sports</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">Football</a></el-breadcrumb-item>
+            <el-breadcrumb-item><a href="/">{{!!campaign.sport ? campaign.sport.name : ''}}</a></el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
@@ -17,10 +17,10 @@
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
               <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-              <div class="campaign-sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
+              <div class="campaign-sport" :style="'background-color:' + getRandomSportColor(campaign.sport)">{{!!campaign.sport ? campaign.sport.name : ''}}</div>
               <div class="campaignDetails-timeRemaining">
                 <i class="el-icon-time"></i>
-                <span class="campaignDetails-timeRemaining-text">30 {{$tc('message.DaysLeft')}}</span>
+                <span class="campaignDetails-timeRemaining-text">{{campaign.remaining}} {{$tc('message.DaysLeft')}}</span>
               </div>
             </div>
             <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside">
@@ -166,7 +166,7 @@
         <el-row :gutter="50" v-if="campaign.revenues.length > 0">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Revenue3years") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id" >
+            <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
               {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
             </div>
             <span class="line"></span>
@@ -175,7 +175,7 @@
         <el-row :gutter="50" v-if="campaign.incomes.length > 0">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.IncomeForecastFor5") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id" >
+            <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
               {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
             </div>
             <span class="line"></span>
@@ -220,7 +220,7 @@ export default {
   },
   data() {
     return {
-      token: {},
+      token: {}
     }
   },
   computed: {
@@ -239,8 +239,7 @@ export default {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
-      console.log(this.campaign);
-
+      console.log(this.campaign)
     })
   },
   methods: {
@@ -279,22 +278,29 @@ export default {
       return randomResult
     },
     getRandomSportColor(sport) {
-      let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
-      let localSportsColors
-      if (localStorage.sportsColors === undefined) {
-        localSportsColors = []
+      if (!!sport) {
+        let randomColor =
+          '#' + Math.floor(Math.random() * 16777215).toString(16)
+        let localSportsColors
+        if (localStorage.sportsColors === undefined) {
+          localSportsColors = []
+          localStorage.setItem(
+            'sportsColors',
+            JSON.stringify(localSportsColors)
+          )
+        }
+        localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+        if (!localSportsColors[sport.id]) {
+          localSportsColors[sport] = randomColor
+        }
         localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+        return localSportsColors[sport.id]
       }
-      localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
-      if (!localSportsColors[sport]) {
-        localSportsColors[sport] = randomColor
-      }
-      localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
-      return localSportsColors[sport]
+      return ''
     },
     formatPrice(value) {
-        let val = (value/1).toFixed(0).replace('.', ',')
-        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
+      let val = (value / 1).toFixed(0).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }

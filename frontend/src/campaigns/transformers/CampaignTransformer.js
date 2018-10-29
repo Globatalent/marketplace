@@ -36,6 +36,9 @@ class CampaignTransformer extends Transformer {
       revenues: campaign.revenues,
       incomes: campaign.incomes,
       recommendations: campaign.recommendations,
+      remaining: campaign.remaining,
+      started: campaign.started,
+      finished: campaign.finished,
       token: !!campaign.token? TokenTransformer.fetch(campaign.token) : null,
     })
   }
