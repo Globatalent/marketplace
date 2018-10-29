@@ -30,12 +30,12 @@
             </el-carousel>
           </el-col>
           <el-col :xs="24" :md="8" class="campaignDetails-col">
-            <div class="campaignDetails-collected">{{collected()}} <span class="campaignDetails-collected-currency">GBT</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span></div>
+            <div class="campaignDetails-collected">{{collected()}} <span class="campaignDetails-collected-currency">USD</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span></div>
             <div class="progress m-b-15 clearfix">
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" v-if="progress < 100"></el-progress>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
             </div>
-            <div class="campaignDetails-invest">Invest in {{campaign.title}}</div>
+            <div class="campaignDetails-invest">{{$tc('message.InvestIn')}} {{campaign.title}}</div>
             <p class="campaignDetails-description">{{campaign.description}}</p>
             <div class="campaignDetails-fundingDetails">
               <div class="campaignDetails-fundingDetails-numbers">
@@ -219,12 +219,15 @@ export default {
     },
     getRandomRating() {
       const precision = 10 // 1 decimals
-      return (
-        Math.floor(
-          Math.random() * (10 * precision - 1 * precision) + 1 * precision
-        ) /
-        (1 * precision)
-      )
+      let randomResult = 0
+      while (randomResult < 4 || randomResult > 5) {
+        randomResult =
+          Math.floor(
+            Math.random() * (10 * precision - 1 * precision) + 1 * precision
+          ) /
+          (1 * precision)
+      }
+      return randomResult
     }
   }
 }

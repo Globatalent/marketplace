@@ -64,7 +64,7 @@
             </el-row>
             <el-row>
               <el-col>
-                <div class="campaign-subtitle"><span v-if="campaign.description">{{campaign.description.substring(0,50)+" ..."}}</span></div>
+                <div class="campaign-subtitle"><span v-if="campaign.give_back">{{campaign.give_back.substring(0,50)+" ..."}}</span></div>
               </el-col>
             </el-row>
           </div>
@@ -88,12 +88,14 @@
             <!-- <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
                 <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
               </router-link> -->
-            <!-- <div class="timeLeft">
-              <i class="far fa-clock"></i><span class="timeLeft-text">30 days left</span>
-            </div> -->
+            <div class="timeLeft">
+              <i class="far fa-clock"></i><span class="timeLeft-text">90 days left</span>
+            </div>
             <div class="likeButton" v-if="isSupporter" @click="setFollowingCampaign(index, campaign)">
-              <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
-              <i class="far fa-heart likeIcon" v-else></i>
+              <el-tooltip class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom">
+                <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
+                <i class="far fa-heart likeIcon" v-else></i>
+              </el-tooltip>
             </div>
           </div>
         </div>
@@ -105,7 +107,7 @@
           <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
           <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
         </div>
-        <el-button type="primary" class="startFreeButton" size="big" >{{$tc('message.StartFreeTrial')}}</el-button>
+        <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button>
       </div>
     </div>
   </gb-base-layout>
@@ -158,9 +160,9 @@ export default {
             state: 'approved'
           }
         })
-        // .then(() => {
-        //   console.log(this.campaigns)
-        // })
+        .then(() => {
+          console.log(this.campaigns)
+        })
       }
     },
     scroll() {
@@ -189,12 +191,15 @@ export default {
     },
     getRandomRating() {
       const precision = 10 // 1 decimals
-      return (
-        Math.floor(
-          Math.random() * (10 * precision - 1 * precision) + 1 * precision
-        ) /
-        (1 * precision)
-      )
+      let randomResult = 0
+      while (randomResult < 4 || randomResult > 5) {
+        randomResult =
+          Math.floor(
+            Math.random() * (10 * precision - 1 * precision) + 1 * precision
+          ) /
+          (1 * precision)
+      }
+      return randomResult
     }
   }
 }
@@ -204,7 +209,7 @@ export default {
 @import '../../scss/variables.scss';
 .el-card {
   border-radius: 8px;
-  height: 445px;
+  height: 470px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 35px;
   &:hover {
@@ -341,7 +346,7 @@ export default {
   font-size: 0px;
 }
 
-.campaignList-startBlock-container{
+.campaignList-startBlock-container {
   max-width: 585px;
   display: block;
   margin: 0 auto;
@@ -355,7 +360,7 @@ export default {
   width: 70%;
 }
 
-.campaignList-startBlock-sentence1{
+.campaignList-startBlock-sentence1 {
   font-weight: normal;
   font-family: 'OpenSans Regular';
   font-size: 36px;
@@ -363,7 +368,7 @@ export default {
   margin: 0;
 }
 
-.campaignList-startBlock-sentence2{
+.campaignList-startBlock-sentence2 {
   font-size: 14px;
 }
 
@@ -373,5 +378,7 @@ export default {
   width: 30%;
   font-size: 14px;
   font-family: 'OpenSans SemiBold';
+  position: relative;
+  top: 6px;
 }
 </style>
