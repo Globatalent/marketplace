@@ -36,7 +36,7 @@ class ReviewInLine(admin.TabularInline):
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
     list_display = ["id", "kind", "title", "is_draft", "state", "user", "created"]
-    list_filter = ["is_draft", "kind", "state"]
+    list_filter = ["is_draft", "kind", "state", "sport"]
     autocomplete_fields = ["sport", "user", "tags"]
-    search_fields = ["user__email", "title"]
+    search_fields = ["user__email", "title", "description", "tags__name", "sport__name"]
     inlines = [LinkInline, PictureInline, RevenueInline, IncomeInline, RecommendationInline, ReviewInLine]

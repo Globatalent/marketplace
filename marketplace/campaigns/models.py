@@ -1,8 +1,11 @@
+import datetime
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from model_utils.models import TimeStampedModel
+from options.models import Option
 
 from marketplace.actions.constants import ADD_REVIEW
 from marketplace.actions.decorators import dispatch_action
@@ -11,6 +14,7 @@ from marketplace.campaigns.constants import SEX_CHOICES, SOCIAL_NETWORKS, CAMPAI
 from marketplace.campaigns.emails import CampaignApprovedEmail, CampaignReviewingEmail, CampaignRejectedEmail, \
     CampaignCreationEmail
 from marketplace.campaigns.helpers import create_token
+from marketplace.campaigns.managers import CampaignManager
 from marketplace.core.files import UploadToDir
 from marketplace.purchases.constants import CURRENCY_CHOICES, USD
 
@@ -40,6 +44,16 @@ class Campaign(TimeStampedModel):
         on_delete=models.CASCADE,
         null=True,
         blank=True
+    )
+    started = models.DateField(
+        null=True,
+        blank=True,
+        help_text=_("Date when the campaign started, automatically set when the campaign is approved.")
+    )
+    finished = models.DateField(
+        null=True,
+        blank=True,
+        help_text=_("Date when the campaign finished.")
     )
 
     # Card
@@ -90,6 +104,8 @@ class Campaign(TimeStampedModel):
     give_back = models.TextField(null=True, blank=True)
     examples = models.TextField(null=True, blank=True)
 
+    objects = CampaignManager()
+
     class Meta:
         ordering = ["-created"]
 
@@ -113,6 +129,13 @@ class Campaign(TimeStampedModel):
         email = email_classes[self.state](to=self.user.email, context={'campaign': self})
         email.send()
 
+    def remaining(self):
+        """Returns the remaining days of the campaign."""
+        today = datetime.date.today()
+        if self.finished and self.finished >= today:
+            return (self.finished - today).days
+        return None
+
     def save(self, *args, **kwargs):
         """Handles token creation when save."""
         is_insert = self.pk is None
@@ -122,6 +145,12 @@ class Campaign(TimeStampedModel):
             previous_campaign = Campaign.objects.get(pk=self.pk)
             if self.state != previous_campaign.state:
                 self.send_state_changed_email()
+                # Update started and finished date when approved
+                if self.state == APPROVED:
+                    self.started = datetime.date.today()
+                    self.finished = self.started + datetime.timedelta(
+                        days=Option.objects.get_value("DEFAULT_CAMPAIGN_LIFETIME", 90)
+                    )
             if not self.is_draft and previous_campaign.is_draft:
                 self.send_creation_email()
         super().save(*args, **kwargs)

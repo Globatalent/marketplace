@@ -22,14 +22,14 @@
     <el-row>
       <el-col :xs="24">
         <div class="searchList">
-          <el-input :placeholder='$tc("message.Search")' class="searchList-input">
+          <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search" @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <el-select :placeholder='$tc("message.BySport")' class="searchList-option">
-            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option> -->
+          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport">
+            <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+            </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option">
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country">
             <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option> -->
           </el-select>
@@ -77,7 +77,7 @@
                   <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
-                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="15" :round-start-rating="false"></star-rating>
+                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
                 </div>
               </div>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(campaign)" v-if="progress(campaign) < 100"></el-progress>
@@ -127,11 +127,15 @@ export default {
   },
   data() {
     return {
+      search: null,
+      sport: null,
+      country: null,
       errorMessage: ''
     }
   },
   computed: {
     ...mapGetters({
+      sports: 'campaigns/sports',
       campaigns: 'campaigns/campaigns',
       pagination: 'campaigns/pagination',
       user: 'users/user'
@@ -141,6 +145,7 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch('campaigns/sports')
     this.initial()
   },
   methods: {
@@ -150,19 +155,28 @@ export default {
       if (!!this.user) {
         this.$store.dispatch('users/fetchUser').then(() => {
           this.$store.dispatch('campaigns/list', {
-            filters: { is_draft: 'False', state: 'approved' }
+            filters: { active: 'True' }
           })
         })
       } else {
         this.$store.dispatch('campaigns/list', {
           filters: {
-            is_draft: 'False',
-            state: 'approved'
+            active: 'True'
           }
         })
         // .then(() => {
         //   console.log(this.campaigns)
         // })
+      }
+    },
+    onSearch(event) {
+      // Update the campaign list using the search
+      if (event.keyCode === 13) {
+        let filters = {
+          active: 'True'
+        }
+        if (!!this.search && this.search !== "") filters.search = this.search
+        this.$store.dispatch('campaigns/list', {filters: filters})
       }
     },
     scroll() {
