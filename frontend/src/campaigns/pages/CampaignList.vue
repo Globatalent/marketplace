@@ -73,8 +73,8 @@
             <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
                   <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
@@ -99,6 +99,15 @@
         </div>
       </el-card>
     </masonry>
+    <div class="campaignList-startBlock">
+      <div class="campaignList-startBlock-container">
+        <div class="campaignList-startBlock-sentence">
+          <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+          <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
+        </div>
+        <el-button type="primary" class="startFreeButton" size="big" >{{$tc('message.StartFreeTrial')}}</el-button>
+      </div>
+    </div>
   </gb-base-layout>
 </template>
 
@@ -337,5 +346,49 @@ export default {
 }
 .searchList-option {
   margin-left: 30px;
+}
+
+.campaignList-startBlock {
+  margin: 30px auto;
+  border-top: 1px solid $--grey-detailCampaign-border;
+  padding-top: 40px;
+  display: block;
+  width: 100%;
+  max-width: 895px;
+  font-size: 0px;
+}
+
+.campaignList-startBlock-container{
+  max-width: 585px;
+  display: block;
+  margin: 0 auto;
+}
+
+.campaignList-startBlock-sentence {
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  padding-right: 20px;
+  width: 70%;
+}
+
+.campaignList-startBlock-sentence1{
+  font-weight: normal;
+  font-family: 'OpenSans Regular';
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0;
+}
+
+.campaignList-startBlock-sentence2{
+  font-size: 14px;
+}
+
+.startFreeButton {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  font-size: 14px;
+  font-family: 'OpenSans SemiBold';
 }
 </style>

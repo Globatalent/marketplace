@@ -136,6 +136,10 @@ export const messages = {
       FundsRequierement: 'Funds requirement',
       LookingToRaise: 'Looking to raise',
       PlayerPoweredBy: 'Player powered by',
+      ContactUs: 'Contact us',
+      StartFreeTrial: 'Start free trial',
+      StartCampaignNow: '<span class="is-bold">Start</span> a campaign now',
+      AlsoGift: 'Also, we have a gift for you!',
     }
   },
   es: {
