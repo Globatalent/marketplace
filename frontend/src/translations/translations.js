@@ -142,6 +142,12 @@ export const messages = {
       AlsoGift: 'Also, we have a gift for you!',
       AddFavorites: 'Add to favorites',
       InvestIn: 'Invest in',
+      ExpectedSportAchievements: 'Expected Sport Achievements',
+      HowYouWillUse: 'How you will use the funds',
+      WhatWillYou: 'What will you give back to your supporters?',
+      Revenue3years: 'Revenue for the last 3 years',
+      IncomeForecastFor5: 'Income forecast for the next 5 years',
+      ExamplesIncomeSimilar: 'Examples of income from similar players of the same sport',
     }
   },
   es: {
