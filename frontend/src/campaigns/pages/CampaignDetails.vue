@@ -163,6 +163,7 @@ import { mapGetters } from 'vuex'
 import router from '@/router.js'
 import StarRating from 'vue-star-rating'
 
+
 export default {
   name: 'CampaignDetails',
   components: {
