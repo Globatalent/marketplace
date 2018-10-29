@@ -88,18 +88,18 @@
       </el-row>
       <div class="campaignDetails-infoContainer-data">
         <ul class="campaignDetails-infoContainer-data-miniMenu">
-          <li class="campaignDetails-infoContainer-data-miniMenu-item">
+          <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.description">
             <a href="#storySection" v-smooth-scroll>
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.Story") }}</span>
             </a>
           </li>
-          <li class="campaignDetails-infoContainer-data-miniMenu-item">
+          <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.biography">
             <a href="#biographySection" v-smooth-scroll>
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.Biography") }}</span>
             </a>
-          <li class="campaignDetails-infoContainer-data-miniMenu-item">
+          <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.funds">
             <a href="#fundsSection" v-smooth-scroll>
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.FundsRequierement") }}</span>
@@ -116,29 +116,78 @@
           <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title">&nbsp;</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text"><span class="campaignDetails-infoContainer-data-text-title">{{campaign.title}}</span></el-col>
         </el-row>
-        <el-row :gutter="50">
+        <el-row :gutter="50" v-if="campaign.description">
           <el-col :xs="24" :md="8" id="storySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Story") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">A fan club is a group that is dedicated to celebrities group, or idea Most fan clubs are run by fans who devote considerable time and resources. supporting considerable time and resources.
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">{{campaign.description}}
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50">
+        <el-row :gutter="50" v-if="campaign.biography">
           <el-col :xs="24" :md="8" id="biographySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Biography") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">{{campaign.biography}}
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50">
+        <el-row :gutter="50" v-if="campaign.funds">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.FundsRequierement") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            <div class="fundsQty"><span class="fundsQty-currency">$</span>250,000</div> {{ $tc("message.LookingToRaise") }}
+            <div class="fundsQty"><span class="fundsQty-currency">$</span>{{campaign.funds}}</div> {{ $tc("message.LookingToRaise") }}
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50">
+        <el-row :gutter="50" v-if="campaign.achievements">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Achievements") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             {{campaign.achievements}}
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50" v-if="campaign.expected">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.ExpectedSportAchievements") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            {{campaign.expected}}
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50" v-if="campaign.use">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.HowYouWillUse") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            {{campaign.use}}
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50" v-if="campaign.give_back">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.WhatWillYou") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            {{campaign.give_back}}
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50" v-if="campaign.revenues.length > 0">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Revenue3years") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
+              {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+            </div>
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50" v-if="campaign.incomes.length > 0">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.IncomeForecastFor5") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
+              {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+            </div>
+            <span class="line"></span>
+          </el-col>
+        </el-row>
+        <el-row :gutter="50" v-if="campaign.examples.length > 0">
+          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.ExamplesIncomeSimilar") }}</el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            {{campaign.examples}}
+            <!-- <div class="incomeRow" v-for="item in campaign.examples" :key="item.id" >
+              {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+            </div> -->
             <span class="line"></span>
           </el-col>
         </el-row>
@@ -163,7 +212,6 @@ import { mapGetters } from 'vuex'
 import router from '@/router.js'
 import StarRating from 'vue-star-rating'
 
-
 export default {
   name: 'CampaignDetails',
   components: {
@@ -172,7 +220,7 @@ export default {
   },
   data() {
     return {
-      token: {},
+      token: {}
     }
   },
   computed: {
@@ -191,8 +239,7 @@ export default {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
-      console.log(this.campaign);
-
+      console.log(this.campaign)
     })
   },
   methods: {
@@ -232,11 +279,15 @@ export default {
     },
     getRandomSportColor(sport) {
       if (!!sport) {
-        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+        let randomColor =
+          '#' + Math.floor(Math.random() * 16777215).toString(16)
         let localSportsColors
         if (localStorage.sportsColors === undefined) {
           localSportsColors = []
-          localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+          localStorage.setItem(
+            'sportsColors',
+            JSON.stringify(localSportsColors)
+          )
         }
         localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
         if (!localSportsColors[sport.id]) {
@@ -245,7 +296,11 @@ export default {
         localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
         return localSportsColors[sport.id]
       }
-      return ""
+      return ''
+    },
+    formatPrice(value) {
+      let val = (value / 1).toFixed(0).replace('.', ',')
+      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }
@@ -497,7 +552,7 @@ a:hover {
 .campaignDetails-infoContainer-data-title {
   color: black;
   font-size: 20px;
-  line-height: 20px;
+  line-height: 25px;
   font-family: 'OpenSans Regular';
 }
 
@@ -505,7 +560,7 @@ a:hover {
   font-size: 14px;
   color: $--grey-text;
   font-family: 'OpenSans Regular';
-  margin-bottom: 20px;
+  margin-bottom: 40px;
   .line {
     margin-top: 20px;
     display: block;
