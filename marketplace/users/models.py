@@ -49,6 +49,8 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
     )
     country = CountryCodeField(null=True, blank=True)
+    citizenship = models.CharField(max_length=100, null=True, blank=True)
+
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
