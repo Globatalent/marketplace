@@ -17,7 +17,7 @@
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
               <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-              <div class="campaign-sport">{{campaign.sport.name}}</div>
+              <div class="campaign-sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
               <div class="campaignDetails-timeRemaining">
                 <i class="el-icon-time"></i>
                 <span class="campaignDetails-timeRemaining-text">30 {{$tc('message.DaysLeft')}}</span>
@@ -30,12 +30,12 @@
             </el-carousel>
           </el-col>
           <el-col :xs="24" :md="8" class="campaignDetails-col">
-            <div class="campaignDetails-collected">{{collected()}} <span class="campaignDetails-collected-currency">GBT</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span></div>
+            <div class="campaignDetails-collected">{{collected()}} <span class="campaignDetails-collected-currency">USD</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span></div>
             <div class="progress m-b-15 clearfix">
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" v-if="progress < 100"></el-progress>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
             </div>
-            <div class="campaignDetails-invest">Invest in {{campaign.title}}</div>
+            <div class="campaignDetails-invest">{{$tc('message.InvestIn')}} {{campaign.title}}</div>
             <p class="campaignDetails-description">{{campaign.description}}</p>
             <div class="campaignDetails-fundingDetails">
               <div class="campaignDetails-fundingDetails-numbers">
@@ -220,12 +220,29 @@ export default {
     },
     getRandomRating() {
       const precision = 10 // 1 decimals
-      return (
-        Math.floor(
-          Math.random() * (10 * precision - 1 * precision) + 1 * precision
-        ) /
-        (1 * precision)
-      )
+      let randomResult = 0
+      while (randomResult < 4 || randomResult > 5) {
+        randomResult =
+          Math.floor(
+            Math.random() * (10 * precision - 1 * precision) + 1 * precision
+          ) /
+          (1 * precision)
+      }
+      return randomResult
+    },
+    getRandomSportColor(sport) {
+      let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+      let localSportsColors
+      if (localStorage.sportsColors === undefined) {
+        localSportsColors = []
+        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      }
+      localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+      if (!localSportsColors[sport]) {
+        localSportsColors[sport] = randomColor
+      }
+      localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      return localSportsColors[sport]
     }
   }
 }

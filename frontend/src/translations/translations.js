@@ -140,6 +140,8 @@ export const messages = {
       StartFreeTrial: 'Start free trial',
       StartCampaignNow: '<span class="is-bold">Start</span> a campaign now',
       AlsoGift: 'Also, we have a gift for you!',
+      AddFavorites: 'Add to favorites',
+      InvestIn: 'Invest in',
     }
   },
   es: {
