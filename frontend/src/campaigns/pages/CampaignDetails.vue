@@ -5,7 +5,7 @@
         <el-col>
           <el-breadcrumb separator=">" class="breadcrumbCampaignDetail">
             <el-breadcrumb-item :to="{ path: '/' }">Sports</el-breadcrumb-item>
-            <el-breadcrumb-item><a href="/">Football</a></el-breadcrumb-item>
+            <el-breadcrumb-item><a href="/">{{!!campaign.sport ? campaign.sport.name : ''}}</a></el-breadcrumb-item>
           </el-breadcrumb>
         </el-col>
       </el-row>
@@ -17,10 +17,10 @@
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
               <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-              <div class="campaign-sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
+              <div class="campaign-sport" :style="'background-color:' + getRandomSportColor(campaign.sport)">{{!!campaign.sport ? campaign.sport.name : ''}}</div>
               <div class="campaignDetails-timeRemaining">
                 <i class="el-icon-time"></i>
-                <span class="campaignDetails-timeRemaining-text">30 {{$tc('message.DaysLeft')}}</span>
+                <span class="campaignDetails-timeRemaining-text">{{campaign.remaining}} {{$tc('message.DaysLeft')}}</span>
               </div>
             </div>
             <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside">
@@ -231,18 +231,21 @@ export default {
       return randomResult
     },
     getRandomSportColor(sport) {
-      let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
-      let localSportsColors
-      if (localStorage.sportsColors === undefined) {
-        localSportsColors = []
+      if (!!sport) {
+        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+        let localSportsColors
+        if (localStorage.sportsColors === undefined) {
+          localSportsColors = []
+          localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+        }
+        localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+        if (!localSportsColors[sport.id]) {
+          localSportsColors[sport] = randomColor
+        }
         localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+        return localSportsColors[sport.id]
       }
-      localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
-      if (!localSportsColors[sport]) {
-        localSportsColors[sport] = randomColor
-      }
-      localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
-      return localSportsColors[sport]
+      return ""
     }
   }
 }
