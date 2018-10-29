@@ -44,10 +44,10 @@
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(campaign, index) in campaigns" :key="index">
         <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
           <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
-            <div class="campaign-sport" v-if="campaign.sport">{{campaign.sport.name}}</div>
+            <div class="campaign-sport" v-if="campaign.sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
           </div>
           <div class="campaign-image is-placeholder-image" v-else>
-            <div class="campaign-sport" v-if="campaign.sport">{{campaign.sport.name}}</div>
+            <div class="campaign-sport" v-if="campaign.sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
           </div>
         </router-link>
         <div class="campaign-info">
@@ -160,9 +160,9 @@ export default {
             state: 'approved'
           }
         })
-        .then(() => {
-          console.log(this.campaigns)
-        })
+        // .then(() => {
+        //   console.log(this.campaigns)
+        // })
       }
     },
     scroll() {
@@ -200,6 +200,20 @@ export default {
           (1 * precision)
       }
       return randomResult
+    },
+    getRandomSportColor(sport) {
+      let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+      let localSportsColors
+      if (localStorage.sportsColors === undefined) {
+        localSportsColors = []
+        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      }
+      localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+      if (!localSportsColors[sport]) {
+        localSportsColors[sport] = randomColor
+      }
+      localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      return localSportsColors[sport]
     }
   }
 }

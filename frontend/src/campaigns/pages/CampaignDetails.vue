@@ -17,7 +17,7 @@
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
               <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-              <div class="campaign-sport">{{campaign.sport.name}}</div>
+              <div class="campaign-sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
               <div class="campaignDetails-timeRemaining">
                 <i class="el-icon-time"></i>
                 <span class="campaignDetails-timeRemaining-text">30 {{$tc('message.DaysLeft')}}</span>
@@ -228,6 +228,20 @@ export default {
           (1 * precision)
       }
       return randomResult
+    },
+    getRandomSportColor(sport) {
+      let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+      let localSportsColors
+      if (localStorage.sportsColors === undefined) {
+        localSportsColors = []
+        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      }
+      localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+      if (!localSportsColors[sport]) {
+        localSportsColors[sport] = randomColor
+      }
+      localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      return localSportsColors[sport]
     }
   }
 }
