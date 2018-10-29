@@ -22,14 +22,14 @@
     <el-row>
       <el-col :xs="24">
         <div class="searchList">
-          <el-input :placeholder='$tc("message.Search")' class="searchList-input">
+          <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search" @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="filters.sport">
+          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport">
             <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
             </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="filters.country">
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country">
             <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option> -->
           </el-select>
@@ -125,11 +125,9 @@ export default {
   },
   data() {
     return {
-      filters: {
-        search: null,
-        sport: null,
-        country: null,
-      },
+      search: null,
+      sport: null,
+      country: null,
       errorMessage: ''
     }
   },
@@ -155,14 +153,13 @@ export default {
       if (!!this.user) {
         this.$store.dispatch('users/fetchUser').then(() => {
           this.$store.dispatch('campaigns/list', {
-            filters: { is_draft: 'False', state: 'approved' }
+            filters: { active: 'True' }
           })
         })
       } else {
         this.$store.dispatch('campaigns/list', {
           filters: {
-            is_draft: 'False',
-            state: 'approved'
+            active: 'True'
           }
         })
         // .then(() => {
@@ -170,15 +167,15 @@ export default {
         // })
       }
     },
-    filter() {
-      // Update the campaign list using the filters
-      let filters = {
-        is_draft: 'False',
-        state: 'approved'
+    onSearch(event) {
+      // Update the campaign list using the search
+      if (event.keyCode === 13) {
+        let filters = {
+          active: 'True'
+        }
+        if (!!this.search && this.search !== "") filters.search = this.search
+        this.$store.dispatch('campaigns/list', {filters: filters})
       }
-      if (!!this.filter.search) filters.search = this.filter.search
-      if (!!this.filter.sport) filters.sport = this.filter.sport
-      this.$store.dispatch('campaigns/list', {filters: filters})
     },
     scroll() {
       // Gets a new page of campaigns and push them to the current list

@@ -98,6 +98,7 @@ class CampaignSerializer(serializers.ModelSerializer):
         help_text=_("List of recommendations objects."),
     )
     token = TokenSerializer(read_only=True)
+    remaining = serializers.IntegerField(read_only=True)
     tags = serializers.ListField(
         required=False,
         child=serializers.CharField(),
@@ -141,10 +142,15 @@ class CampaignSerializer(serializers.ModelSerializer):
             "created",
             "history",
             "players",
+            "started",
+            "finished",
+            "remaining",
         ]
         extra_kwargs = {
             "created": {"read_only": True},
             "token": {"read_only": True},
+            "finished": {"read_only": True},
+            "started": {"read_only": True},
         }
 
     def get_following(self, obj):

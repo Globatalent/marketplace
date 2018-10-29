@@ -35,13 +35,22 @@ class CampaignFilter(django_filters.rest_framework.FilterSet):
         method='_search',
         help_text=_("Search the given query string over the campaigns.")
     )
+    active = django_filters.BooleanFilter(
+        method='_active',
+        help_text=_("Search the given query string over the campaigns.")
+    )
 
     class Meta:
         model = Campaign
-        fields = ["is_draft", "kind", "user", "followed_by", "sport", "search"]
+        fields = ["is_draft", "kind", "user", "followed_by", "sport", "search", "active"]
 
     def _search(self, queryset, name, value):
         return queryset.search(query=value)
+
+    def _active(self, queryset, name, value):
+        if value:
+            return queryset.active()
+        return queryset.inactive()
 
 
 class ReviewFilter(django_filters.rest_framework.FilterSet):

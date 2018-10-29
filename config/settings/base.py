@@ -313,6 +313,14 @@ INSTALLED_APPS += (
 # See: https://pypi.org/project/django-simple-options/1.0a3/
 INSTALLED_APPS += ('options',)
 
+CONFIGURATION_DEFAULT_OPTIONS = {
+    "DEFAULT_CAMPAIGN_LIFETIME": {
+        "value": 90,
+        "type": 1,
+        "public_name": "Default campaign lifetime",
+    },
+}
+
 # SENTRY
 # ------------------------------------------------------------------------------
 SENTRY_DSN = env('DJANGO_SENTRY_DSN', default=None)

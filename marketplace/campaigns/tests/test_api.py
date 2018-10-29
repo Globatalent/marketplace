@@ -1,9 +1,11 @@
+import datetime
+
 from PIL import Image
 from django.core.files.temp import NamedTemporaryFile
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from marketplace.campaigns.constants import ATHLETE
+from marketplace.campaigns.constants import ATHLETE, APPROVED
 from marketplace.campaigns.models import Campaign
 from marketplace.campaigns.tests.factories import CampaignFactory
 from marketplace.users.models import User
@@ -219,7 +221,7 @@ class CampaignAPITests(APITestCase):
         data = response.json()
         self.assertEqual(1, data['count'])
 
-    def test_search_campaigns(self):
+    def test_list_search_campaigns(self):
         other_campaigns = CampaignFactory.create_batch(title="other title", description="other description", size=10)
         foo_campaigns = CampaignFactory.create_batch(title="foo title", description="foo description", size=5)
         CampaignFactory(title="one title", description="one description")
@@ -244,3 +246,30 @@ class CampaignAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(1, data['count'])
+
+    def test_list_active_campaigns(self):
+        active_campaigns = CampaignFactory.create_batch(is_draft=False, size=10)
+        for campaign in active_campaigns:
+            campaign.state = APPROVED
+            campaign.save()
+        inactive_campaigns = CampaignFactory.create_batch(is_draft=False, size=5)
+        for campaign in inactive_campaigns:
+            campaign.state = APPROVED
+            campaign.save()
+            campaign.started = datetime.date.today() - datetime.timedelta(days=10)
+            campaign.finished = datetime.date.today() - datetime.timedelta(days=1)
+            campaign.save()
+        response = self.client.get(
+            "/api/v1/campaigns/?active=True",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(active_campaigns), data['count'])
+        response = self.client.get(
+            "/api/v1/campaigns/?active=False",
+            format="json",
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(len(inactive_campaigns), data['count'])
