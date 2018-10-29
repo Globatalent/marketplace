@@ -9,10 +9,22 @@ from options.models import Option
 
 from marketplace.actions.constants import ADD_REVIEW
 from marketplace.actions.decorators import dispatch_action
-from marketplace.campaigns.constants import SEX_CHOICES, SOCIAL_NETWORKS, CAMPAIGN_TYPES, STATE_CHOICES, PENDING_REVIEW, \
-    APPROVED, REJECTED, REVIEWING
-from marketplace.campaigns.emails import CampaignApprovedEmail, CampaignReviewingEmail, CampaignRejectedEmail, \
-    CampaignCreationEmail
+from marketplace.campaigns.constants import (
+    SEX_CHOICES,
+    SOCIAL_NETWORKS,
+    CAMPAIGN_TYPES,
+    STATE_CHOICES,
+    PENDING_REVIEW,
+    APPROVED,
+    REJECTED,
+    REVIEWING,
+)
+from marketplace.campaigns.emails import (
+    CampaignApprovedEmail,
+    CampaignReviewingEmail,
+    CampaignRejectedEmail,
+    CampaignCreationEmail,
+)
 from marketplace.campaigns.helpers import create_token
 from marketplace.campaigns.managers import CampaignManager
 from marketplace.core.files import UploadToDir
@@ -21,6 +33,7 @@ from marketplace.purchases.constants import CURRENCY_CHOICES, USD
 
 class Sport(TimeStampedModel):
     """List of available sports in the platform."""
+
     name = models.CharField(max_length=100, unique=True)
 
     class Meta:
@@ -34,26 +47,36 @@ class Campaign(TimeStampedModel):
     """An user can create a campaign. There are two kinds of campaigns:
     athlete and club.
     """
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="campaigns", on_delete=models.CASCADE)
-    is_draft = models.BooleanField(default=True, help_text=_("If the campaign is a draft it isn't complete"))
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="campaigns", on_delete=models.CASCADE
+    )
+    is_draft = models.BooleanField(
+        default=True, help_text=_("If the campaign is a draft it isn't complete")
+    )
     kind = models.CharField(max_length=8, choices=CAMPAIGN_TYPES)
-    state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
+    state = models.CharField(
+        choices=STATE_CHOICES,
+        default=PENDING_REVIEW,
+        max_length=20,
+        verbose_name=_("state"),
+    )
     token = models.OneToOneField(
         "tokens.Token",
         related_name="campaign",
         on_delete=models.CASCADE,
         null=True,
-        blank=True
+        blank=True,
     )
     started = models.DateField(
         null=True,
         blank=True,
-        help_text=_("Date when the campaign started, automatically set when the campaign is approved.")
+        help_text=_(
+            "Date when the campaign started, automatically set when the campaign is approved."
+        ),
     )
     finished = models.DateField(
-        null=True,
-        blank=True,
-        help_text=_("Date when the campaign finished.")
+        null=True, blank=True, help_text=_("Date when the campaign finished.")
     )
 
     # Card
@@ -61,18 +84,20 @@ class Campaign(TimeStampedModel):
     description = models.TextField(null=True, blank=True)
     image = ThumbnailerImageField(
         max_length=250,
-        upload_to=UploadToDir('campaigns', random_name=True),
-        verbose_name=_('image'),
+        upload_to=UploadToDir("campaigns", random_name=True),
+        verbose_name=_("image"),
         null=True,
-        blank=True
+        blank=True,
     )
-    gender = models.CharField(choices=SEX_CHOICES, null=True, blank=True, max_length=20, verbose_name=_('sex'))
+    gender = models.CharField(
+        choices=SEX_CHOICES, null=True, blank=True, max_length=20, verbose_name=_("sex")
+    )
     sport = models.ForeignKey(
         "campaigns.Sport",
         related_name="campaigns",
         on_delete=models.SET_NULL,
         null=True,
-        blank=True
+        blank=True,
     )
     tags = models.ManyToManyField("tags.Tag", blank=True)
 
@@ -84,9 +109,9 @@ class Campaign(TimeStampedModel):
     pitch_url = models.URLField(null=True, blank=True)
     pitch_image = ThumbnailerImageField(
         max_length=250,
-        upload_to=UploadToDir('campaigns', random_name=True),
+        upload_to=UploadToDir("campaigns", random_name=True),
         null=True,
-        blank=True
+        blank=True,
     )
 
     # Career & club
@@ -116,7 +141,7 @@ class Campaign(TimeStampedModel):
         return self.tags.values_list("name", flat=True)
 
     def send_creation_email(self):
-        email = CampaignCreationEmail(to=self.user.email, context={'campaign': self})
+        email = CampaignCreationEmail(to=self.user.email, context={"campaign": self})
         email.send()
 
     def send_state_changed_email(self):
@@ -126,7 +151,9 @@ class Campaign(TimeStampedModel):
             REVIEWING: CampaignReviewingEmail,
             REJECTED: CampaignRejectedEmail,
         }
-        email = email_classes[self.state](to=self.user.email, context={'campaign': self})
+        email = email_classes[self.state](
+            to=self.user.email, context={"campaign": self}
+        )
         email.send()
 
     def remaining(self):
@@ -158,8 +185,13 @@ class Campaign(TimeStampedModel):
 
 class Picture(models.Model):
     """Model to upload generic pictures, used by WYSWYG editors for campaign data."""
-    campaign = models.ForeignKey("campaigns.Campaign", related_name="pictures", on_delete=models.CASCADE)
-    image = ThumbnailerImageField(max_length=250, upload_to=UploadToDir('pictures', random_name=True))
+
+    campaign = models.ForeignKey(
+        "campaigns.Campaign", related_name="pictures", on_delete=models.CASCADE
+    )
+    image = ThumbnailerImageField(
+        max_length=250, upload_to=UploadToDir("pictures", random_name=True)
+    )
 
     def __str__(self):
         return self.image
@@ -167,9 +199,14 @@ class Picture(models.Model):
 
 class Link(TimeStampedModel):
     """Link related with the campaign."""
-    campaign = models.ForeignKey("campaigns.Campaign", related_name="links", on_delete=models.CASCADE)
-    network = models.CharField(max_length=32, choices=SOCIAL_NETWORKS, null=True, blank=True)
-    url = models.URLField(null=True, blank=True, verbose_name=_('url'))
+
+    campaign = models.ForeignKey(
+        "campaigns.Campaign", related_name="links", on_delete=models.CASCADE
+    )
+    network = models.CharField(
+        max_length=32, choices=SOCIAL_NETWORKS, null=True, blank=True
+    )
+    url = models.URLField(null=True, blank=True, verbose_name=_("url"))
 
     def __str__(self):
         return self.url or str(self.id)
@@ -177,9 +214,14 @@ class Link(TimeStampedModel):
 
 class Revenue(TimeStampedModel):
     """Past revenues."""
-    campaign = models.ForeignKey("campaigns.Campaign", related_name="revenues", on_delete=models.CASCADE)
+
+    campaign = models.ForeignKey(
+        "campaigns.Campaign", related_name="revenues", on_delete=models.CASCADE
+    )
     year = models.PositiveIntegerField()
-    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True)
+    currency = models.CharField(
+        max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True
+    )
     amount = models.FloatField()
 
     class Meta:
@@ -188,9 +230,14 @@ class Revenue(TimeStampedModel):
 
 class Income(TimeStampedModel):
     """Future incomes."""
-    campaign = models.ForeignKey("campaigns.Campaign", related_name="incomes", on_delete=models.CASCADE)
+
+    campaign = models.ForeignKey(
+        "campaigns.Campaign", related_name="incomes", on_delete=models.CASCADE
+    )
     year = models.PositiveIntegerField()
-    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True)
+    currency = models.CharField(
+        max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True
+    )
     amount = models.FloatField()
 
     class Meta:
@@ -198,34 +245,38 @@ class Income(TimeStampedModel):
 
 
 class Recommendation(TimeStampedModel):
-    campaign = models.ForeignKey("campaigns.Campaign", related_name="recommendations", on_delete=models.CASCADE)
+    campaign = models.ForeignKey(
+        "campaigns.Campaign", related_name="recommendations", on_delete=models.CASCADE
+    )
     file = models.FileField(
-        max_length=250,
-        upload_to=UploadToDir('recommendations', random_name=True)
+        max_length=250, upload_to=UploadToDir("recommendations", random_name=True)
     )
 
 
 class Review(TimeStampedModel):
-    text = models.TextField(null=True, blank=True, verbose_name=_('text'))
-    state = models.CharField(choices=STATE_CHOICES, default=PENDING_REVIEW, max_length=20, verbose_name=_('state'))
+    text = models.TextField(null=True, blank=True, verbose_name=_("text"))
+    state = models.CharField(
+        choices=STATE_CHOICES,
+        default=PENDING_REVIEW,
+        max_length=20,
+        verbose_name=_("state"),
+    )
     reviewer = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        limit_choices_to={'is_staff': True},
-        verbose_name=_('user'),
-        related_name="reviews"
+        limit_choices_to={"is_staff": True},
+        verbose_name=_("user"),
+        related_name="reviews",
     )
     campaign = models.ForeignKey(
-        Campaign,
-        related_name='reviews',
-        on_delete=models.CASCADE
+        Campaign, related_name="reviews", on_delete=models.CASCADE
     )
 
     class Meta:
-        verbose_name = _('review')
-        verbose_name_plural = _('reviews')
-        ordering = ("created", )
-        unique_together = ('reviewer', 'campaign')
+        verbose_name = _("review")
+        verbose_name_plural = _("reviews")
+        ordering = ("created",)
+        unique_together = ("reviewer", "campaign")
 
     def __str__(self):
         return self.campaign

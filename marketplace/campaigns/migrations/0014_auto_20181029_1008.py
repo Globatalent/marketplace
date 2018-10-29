@@ -8,10 +8,9 @@ from marketplace.campaigns.constants import APPROVED
 
 def update_started(apps, schema_editor):
     today = datetime.date.today()
-    Campaign = apps.get_model('campaigns', 'Campaign')
+    Campaign = apps.get_model("campaigns", "Campaign")
     Campaign.objects.filter(state=APPROVED).update(
-        started=today,
-        finished=today + datetime.timedelta(days=90)
+        started=today, finished=today + datetime.timedelta(days=90)
     )
 
 
@@ -21,10 +20,6 @@ def backwards_started(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0013_auto_20181029_1008'),
-    ]
+    dependencies = [("campaigns", "0013_auto_20181029_1008")]
 
-    operations = [
-        migrations.RunPython(update_started, backwards_started),
-    ]
+    operations = [migrations.RunPython(update_started, backwards_started)]

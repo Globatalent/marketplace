@@ -9,14 +9,21 @@ from marketplace.purchases.constants import PAID, CURRENCY_CHOICES, USD
 
 class Token(TimeStampedModel):
     """Token created by the athlete."""
+
     name = models.CharField(max_length=100, null=True, blank=True)
     code = models.CharField(max_length=16, null=True, blank=True)
-    amount = models.PositiveIntegerField(help_text=_("amount of tokens issued by the athlete"))
-    price = models.FloatField(help_text=_("total price for the amount of tokens issued"))
-    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True)
+    amount = models.PositiveIntegerField(
+        help_text=_("amount of tokens issued by the athlete")
+    )
+    price = models.FloatField(
+        help_text=_("total price for the amount of tokens issued")
+    )
+    currency = models.CharField(
+        max_length=3, choices=CURRENCY_CHOICES, default=USD, blank=True
+    )
 
     class Meta:
-        ordering = ("created", )
+        ordering = ("created",)
 
     @property
     def unit_price(self):
@@ -27,7 +34,10 @@ class Token(TimeStampedModel):
     def remaining(self):
         """Remaining amount of tokens."""
         return self.amount - (
-            self.purchases.filter(status=PAID).aggregate(total_amount=Sum('amount')).get('total_amount', 0) or 0
+            self.purchases.filter(status=PAID)
+            .aggregate(total_amount=Sum("amount"))
+            .get("total_amount", 0)
+            or 0
         )
 
     @property

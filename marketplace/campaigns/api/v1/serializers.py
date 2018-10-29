@@ -1,7 +1,16 @@
 from django.utils.translation import ugettext_lazy as _
 from rest_framework import serializers
 
-from marketplace.campaigns.models import Campaign, Sport, Picture, Link, Revenue, Income, Recommendation, Review
+from marketplace.campaigns.models import (
+    Campaign,
+    Sport,
+    Picture,
+    Link,
+    Revenue,
+    Income,
+    Recommendation,
+    Review,
+)
 from marketplace.tags.models import Tag
 from marketplace.tokens.api.v1.serializers import TokenSerializer
 from marketplace.users.helpers import is_following
@@ -10,74 +19,43 @@ from marketplace.users.helpers import is_following
 class SportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sport
-        fields = [
-            "id",
-            "name",
-        ]
+        fields = ["id", "name"]
 
 
 class PictureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Picture
-        fields = [
-            "id",
-            "campaign",
-            "image",
-        ]
+        fields = ["id", "campaign", "image"]
 
 
 class LinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Link
-        fields = [
-            "id",
-            "campaign",
-            "network",
-            "url",
-        ]
+        fields = ["id", "campaign", "network", "url"]
 
 
 class RevenueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Revenue
-        fields = [
-            "id",
-            "campaign",
-            "year",
-            "currency",
-            "amount",
-        ]
+        fields = ["id", "campaign", "year", "currency", "amount"]
 
 
 class IncomeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Income
-        fields = [
-            "id",
-            "campaign",
-            "year",
-            "currency",
-            "amount",
-        ]
+        fields = ["id", "campaign", "year", "currency", "amount"]
 
 
 class RecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recommendation
-        fields = [
-            "id",
-            "campaign",
-            "file",
-        ]
+        fields = ["id", "campaign", "file"]
 
 
 class CampaignSerializer(serializers.ModelSerializer):
 
     links = LinkSerializer(
-        many=True,
-        required=False,
-        read_only=True,
-        help_text=_("List of links objects."),
+        many=True, required=False, read_only=True, help_text=_("List of links objects.")
     )
     revenues = RevenueSerializer(
         many=True,
@@ -100,9 +78,7 @@ class CampaignSerializer(serializers.ModelSerializer):
     token = TokenSerializer(read_only=True)
     remaining = serializers.IntegerField(read_only=True)
     tags = serializers.ListField(
-        required=False,
-        child=serializers.CharField(),
-        source="tag_names"
+        required=False, child=serializers.CharField(), source="tag_names"
     )
     following = serializers.SerializerMethodField(read_only=True)
 
@@ -138,7 +114,7 @@ class CampaignSerializer(serializers.ModelSerializer):
             "revenues",
             "incomes",
             "recommendations",
-            'following',
+            "following",
             "created",
             "history",
             "players",
@@ -155,8 +131,8 @@ class CampaignSerializer(serializers.ModelSerializer):
 
     def get_following(self, obj):
         """Gets if the user who makes the request is following the campaign."""
-        if 'request' in self.context:
-            user = self.context['request'].user
+        if "request" in self.context:
+            user = self.context["request"].user
             return is_following(user, obj)
         return False
 
@@ -169,7 +145,9 @@ class CampaignSerializer(serializers.ModelSerializer):
         return tags
 
     def create(self, validated_data):
-        tags = validated_data.pop('tag_names') if 'tag_names' in validated_data else None
+        tags = (
+            validated_data.pop("tag_names") if "tag_names" in validated_data else None
+        )
         campaign = super().create(validated_data)
         if tags is not None:
             for tag in tags:
@@ -177,7 +155,9 @@ class CampaignSerializer(serializers.ModelSerializer):
         return campaign
 
     def update(self, instance, validated_data):
-        tags = validated_data.pop('tag_names') if 'tag_names' in validated_data else None
+        tags = (
+            validated_data.pop("tag_names") if "tag_names" in validated_data else None
+        )
         campaign = super().update(instance, validated_data)
         if tags is not None:
             campaign.tags.clear()
@@ -193,13 +173,5 @@ class ReadCampaignSerializer(CampaignSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = [
-            'id',
-            'text',
-            'state',
-            'campaign',
-            'reviewer',
-        ]
-        extra_kwargs = {
-            'reviewer': {'read_only': True},
-        }
+        fields = ["id", "text", "state", "campaign", "reviewer"]
+        extra_kwargs = {"reviewer": {"read_only": True}}

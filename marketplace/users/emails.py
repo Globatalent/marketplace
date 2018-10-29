@@ -27,4 +27,3 @@ class VerifiedEmail(TemplateEmailMessage):
 
     template_name = "emails/verified.html"
     default_subject = _("Your account is now verified")
-

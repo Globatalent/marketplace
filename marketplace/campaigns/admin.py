@@ -1,6 +1,15 @@
 from django.contrib import admin
 
-from marketplace.campaigns.models import Campaign, Sport, Link, Revenue, Income, Recommendation, Picture, Review
+from marketplace.campaigns.models import (
+    Campaign,
+    Sport,
+    Link,
+    Revenue,
+    Income,
+    Recommendation,
+    Picture,
+    Review,
+)
 
 
 @admin.register(Sport)
@@ -39,4 +48,11 @@ class CampaignAdmin(admin.ModelAdmin):
     list_filter = ["is_draft", "kind", "state", "sport"]
     autocomplete_fields = ["sport", "user", "tags"]
     search_fields = ["user__email", "title", "description", "tags__name", "sport__name"]
-    inlines = [LinkInline, PictureInline, RevenueInline, IncomeInline, RecommendationInline, ReviewInLine]
+    inlines = [
+        LinkInline,
+        PictureInline,
+        RevenueInline,
+        IncomeInline,
+        RecommendationInline,
+        ReviewInLine,
+    ]

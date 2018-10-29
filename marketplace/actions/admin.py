@@ -11,4 +11,3 @@ class ActionAdmin(admin.ModelAdmin):
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "action", "read", "read_at", "created"]
-

@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0001_initial'),
-    ]
+    dependencies = [("campaigns", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='sport',
-            name='name',
+            model_name="sport",
+            name="name",
             field=models.CharField(max_length=100, unique=True),
-        ),
+        )
     ]

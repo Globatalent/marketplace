@@ -5,14 +5,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0008_auto_20181017_0926'),
-    ]
+    dependencies = [("campaigns", "0008_auto_20181017_0926")]
 
     operations = [
         migrations.AlterField(
-            model_name='campaign',
-            name='state',
-            field=models.CharField(choices=[('approved', 'Approved'), ('rejected', 'Rejected'), ('reviewing', 'Reviewing'), ('pending_review', 'Pending Review')], default='pending_review', max_length=20, verbose_name='state'),
-        ),
+            model_name="campaign",
+            name="state",
+            field=models.CharField(
+                choices=[
+                    ("approved", "Approved"),
+                    ("rejected", "Rejected"),
+                    ("reviewing", "Reviewing"),
+                    ("pending_review", "Pending Review"),
+                ],
+                default="pending_review",
+                max_length=20,
+                verbose_name="state",
+            ),
+        )
     ]

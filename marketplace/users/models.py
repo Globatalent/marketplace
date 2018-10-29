@@ -12,62 +12,81 @@ from model_utils.models import TimeStampedModel
 from marketplace.actions.constants import FOLLOWS, UNFOLLOWS
 from marketplace.actions.decorators import dispatch_action
 from marketplace.core.tasks import send_mail_task
-from marketplace.users.emails import RestorePasswordEmail, VerificationEmail, ChangedPasswordEmail, VerifiedEmail
+from marketplace.users.emails import (
+    RestorePasswordEmail,
+    VerificationEmail,
+    ChangedPasswordEmail,
+    VerifiedEmail,
+)
 from marketplace.users.helpers import is_following
 from marketplace.users.managers import UserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
 
-    first_name = models.CharField(max_length=100, verbose_name=_('first name'), default="")
-    last_name = models.CharField(max_length=100, verbose_name=_('last name'), default="")
-    birth_date = models.DateField(verbose_name=_('birth date'), null=True)
+    first_name = models.CharField(
+        max_length=100, verbose_name=_("first name"), default=""
+    )
+    last_name = models.CharField(
+        max_length=100, verbose_name=_("last name"), default=""
+    )
+    birth_date = models.DateField(verbose_name=_("birth date"), null=True)
 
-    email = models.EmailField(verbose_name=_('email address'), unique=True, blank=True,
-                              error_messages={'unique': _('There is another user with this email')})
+    email = models.EmailField(
+        verbose_name=_("email address"),
+        unique=True,
+        blank=True,
+        error_messages={"unique": _("There is another user with this email")},
+    )
     is_staff = models.BooleanField(
-        _('staff status'),
+        _("staff status"),
         default=False,
-        help_text=_('Designates whether the user can log into this admin site.'),
+        help_text=_("Designates whether the user can log into this admin site."),
     )
     is_active = models.BooleanField(
-        verbose_name=_('active'),
+        verbose_name=_("active"),
         default=True,
         help_text=_(
-            'Designates whether this user should be treated as active. '
-            'Unselect this instead of deleting accounts.'
+            "Designates whether this user should be treated as active. "
+            "Unselect this instead of deleting accounts."
         ),
     )
-    date_joined = models.DateTimeField(verbose_name=_('date joined'), default=timezone.now)
+    date_joined = models.DateTimeField(
+        verbose_name=_("date joined"), default=timezone.now
+    )
 
     following = models.ManyToManyField(
         "campaigns.Campaign",
         blank=True,
-        related_name='followers',
-        verbose_name=_('following'),
-        limit_choices_to={'is_draft': False}
+        related_name="followers",
+        verbose_name=_("following"),
+        limit_choices_to={"is_draft": False},
     )
 
     # Restore password
-    restore_password_code = models.CharField(max_length=256, unique=True, null=True, blank=True)
+    restore_password_code = models.CharField(
+        max_length=256, unique=True, null=True, blank=True
+    )
     restore_password_code_requested_at = models.DateTimeField(null=True, blank=True)
 
     # Email verification
     is_email_verified = models.BooleanField(
         _("verified"),
         default=False,
-        help_text=_("Designates if the user has the email verified")
+        help_text=_("Designates if the user has the email verified"),
     )
-    verification_code = models.CharField(max_length=256, unique=True, null=True, blank=True)
+    verification_code = models.CharField(
+        max_length=256, unique=True, null=True, blank=True
+    )
 
-    EMAIL_FIELD = 'email'
-    USERNAME_FIELD = 'email'
+    EMAIL_FIELD = "email"
+    USERNAME_FIELD = "email"
 
     objects = UserManager()
 
     class Meta:
-        verbose_name = _('user')
-        verbose_name_plural = _('users')
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
         ordering = ["-date_joined"]
 
     def clean(self):
@@ -87,7 +106,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def generate_random_code(self):
         """Generates a restore password code."""
         return hashlib.sha256(
-            ("{}-{}-{}".format(self.email, time.time(), random.randint(0, 10))).encode('utf-8')
+            ("{}-{}-{}".format(self.email, time.time(), random.randint(0, 10))).encode(
+                "utf-8"
+            )
         ).hexdigest()
 
     def send_restore_code(self):
@@ -150,7 +171,9 @@ class User(AbstractBaseUser, PermissionsMixin):
             if previous_user.password != self.password:
                 self.send_changed_password()
         # Creates verification code if it doesn't exists
-        if not self.is_email_verified and (self.verification_code is None or self.verification_code.strip() == ""):
+        if not self.is_email_verified and (
+            self.verification_code is None or self.verification_code.strip() == ""
+        ):
             self.verification_code = self.generate_random_code()
         result = super().save(*args, **kwargs)
         # For every inserts, sends a verification email (excepts superusers)

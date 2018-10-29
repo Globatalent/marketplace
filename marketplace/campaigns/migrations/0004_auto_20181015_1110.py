@@ -6,19 +6,36 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0003_auto_20181015_0837'),
-    ]
+    dependencies = [("campaigns", "0003_auto_20181015_0837")]
 
     operations = [
         migrations.AlterField(
-            model_name='campaign',
-            name='sport',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='campaigns', to='campaigns.Sport'),
+            model_name="campaign",
+            name="sport",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="campaigns",
+                to="campaigns.Sport",
+            ),
         ),
         migrations.AlterField(
-            model_name='link',
-            name='network',
-            field=models.CharField(blank=True, choices=[('facebook', 'Facebook'), ('instagram', 'Instagram'), ('twitter', 'Twitter'), ('youtube', 'YouTube'), ('linkedin', 'LinkedIn'), ('whatsapp', 'WhatsApp'), ('flickr', 'Flickr')], max_length=32, null=True),
+            model_name="link",
+            name="network",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("facebook", "Facebook"),
+                    ("instagram", "Instagram"),
+                    ("twitter", "Twitter"),
+                    ("youtube", "YouTube"),
+                    ("linkedin", "LinkedIn"),
+                    ("whatsapp", "WhatsApp"),
+                    ("flickr", "Flickr"),
+                ],
+                max_length=32,
+                null=True,
+            ),
         ),
     ]

@@ -12,14 +12,25 @@ from marketplace.purchases.emails import PurchaseEmail
 
 class Purchase(TimeStampedModel):
     """A purchase from a supporter of an amount of tokens from an athlete."""
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="purchases", on_delete=models.CASCADE)
-    token = models.ForeignKey("tokens.Token", related_name="purchases", on_delete=models.CASCADE)
-    amount = models.PositiveIntegerField(help_text=_("amount of tokens purchased by the user"))
-    total = models.FloatField(blank=True, help_text=_("total paid for the amount of tokens"))
-    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default=PENDING, blank=True)
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL, related_name="purchases", on_delete=models.CASCADE
+    )
+    token = models.ForeignKey(
+        "tokens.Token", related_name="purchases", on_delete=models.CASCADE
+    )
+    amount = models.PositiveIntegerField(
+        help_text=_("amount of tokens purchased by the user")
+    )
+    total = models.FloatField(
+        blank=True, help_text=_("total paid for the amount of tokens")
+    )
+    status = models.CharField(
+        max_length=8, choices=STATUS_CHOICES, default=PENDING, blank=True
+    )
 
     class Meta:
-        ordering = ("created", )
+        ordering = ("created",)
 
     def __str__(self):
         return "{} GBT".format(self.amount)

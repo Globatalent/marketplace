@@ -9,7 +9,8 @@ from marketplace.campaigns.api.v1.permissions import (
     OnlyOwnerUpdates,
     IsAuthenticatedForCreate,
     OnlyCampaignOwnerUpdates,
-    IsAuthenticatedForFollow)
+    IsAuthenticatedForFollow,
+)
 from marketplace.campaigns.api.v1.serializers import (
     CampaignSerializer,
     PictureSerializer,
@@ -17,8 +18,20 @@ from marketplace.campaigns.api.v1.serializers import (
     SportSerializer,
     RevenueSerializer,
     IncomeSerializer,
-    RecommendationSerializer, ReadCampaignSerializer, ReviewSerializer)
-from marketplace.campaigns.models import Campaign, Picture, Link, Sport, Revenue, Income, Recommendation, Review
+    RecommendationSerializer,
+    ReadCampaignSerializer,
+    ReviewSerializer,
+)
+from marketplace.campaigns.models import (
+    Campaign,
+    Picture,
+    Link,
+    Sport,
+    Revenue,
+    Income,
+    Recommendation,
+    Review,
+)
 
 
 class SportViewSet(viewsets.ReadOnlyModelViewSet):
@@ -30,46 +43,31 @@ class SportViewSet(viewsets.ReadOnlyModelViewSet):
 class PictureViewSet(viewsets.ModelViewSet):
     serializer_class = PictureSerializer
     queryset = Picture.objects.all()
-    permission_classes = [
-        IsAuthenticated,
-        OnlyCampaignOwnerUpdates,
-    ]
+    permission_classes = [IsAuthenticated, OnlyCampaignOwnerUpdates]
 
 
 class LinkViewSet(viewsets.ModelViewSet):
     serializer_class = LinkSerializer
     queryset = Link.objects.all()
-    permission_classes = [
-        IsAuthenticated,
-        OnlyCampaignOwnerUpdates,
-    ]
+    permission_classes = [IsAuthenticated, OnlyCampaignOwnerUpdates]
 
 
 class RevenueViewSet(viewsets.ModelViewSet):
     serializer_class = RevenueSerializer
     queryset = Revenue.objects.all()
-    permission_classes = [
-        IsAuthenticated,
-        OnlyCampaignOwnerUpdates,
-    ]
+    permission_classes = [IsAuthenticated, OnlyCampaignOwnerUpdates]
 
 
 class IncomeViewSet(viewsets.ModelViewSet):
     serializer_class = IncomeSerializer
     queryset = Income.objects.all()
-    permission_classes = [
-        IsAuthenticated,
-        OnlyCampaignOwnerUpdates,
-    ]
+    permission_classes = [IsAuthenticated, OnlyCampaignOwnerUpdates]
 
 
 class RecommendationViewSet(viewsets.ModelViewSet):
     serializer_class = RecommendationSerializer
     queryset = Recommendation.objects.all()
-    permission_classes = [
-        IsAuthenticated,
-        OnlyCampaignOwnerUpdates,
-    ]
+    permission_classes = [IsAuthenticated, OnlyCampaignOwnerUpdates]
 
 
 class CampaignViewSet(viewsets.ModelViewSet):
@@ -83,17 +81,17 @@ class CampaignViewSet(viewsets.ModelViewSet):
     filterset_class = CampaignFilter
 
     def get_serializer_class(self):
-        if self.action in ('list', 'retrieve'):
+        if self.action in ("list", "retrieve"):
             return ReadCampaignSerializer
         return super().get_serializer_class()
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
 
-    @action(methods=['post'], detail=True)
+    @action(methods=["post"], detail=True)
     def follow(self, request, **kwargs):
         campaign = self.get_object()
-        return Response(data={'following': request.user.follow(campaign)})
+        return Response(data={"following": request.user.follow(campaign)})
 
 
 class ReviewViewSet(ReadOnlyModelViewSet):

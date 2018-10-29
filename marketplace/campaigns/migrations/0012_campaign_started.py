@@ -5,14 +5,16 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0011_auto_20181018_0729'),
-    ]
+    dependencies = [("campaigns", "0011_auto_20181018_0729")]
 
     operations = [
         migrations.AddField(
-            model_name='campaign',
-            name='started',
-            field=models.DateField(blank=True, help_text='Date when the campaigns started, automatically set when the campaign is approved.', null=True),
-        ),
+            model_name="campaign",
+            name="started",
+            field=models.DateField(
+                blank=True,
+                help_text="Date when the campaigns started, automatically set when the campaign is approved.",
+                null=True,
+            ),
+        )
     ]

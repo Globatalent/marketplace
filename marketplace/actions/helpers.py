@@ -29,9 +29,9 @@ def _extract_actor_trigger_target_save_purchase(*args, **kwargs):
     """
     from marketplace.purchases.models import Purchase
 
-    assert len(args) >= 1, 'There should be at last a self argument'
-    assert isinstance(args[0], Purchase), 'The instance should be a Picture'
-    assert args[0].pk is not None, 'The model should be saved'
+    assert len(args) >= 1, "There should be at last a self argument"
+    assert isinstance(args[0], Purchase), "The instance should be a Picture"
+    assert args[0].pk is not None, "The model should be saved"
 
     actor = args[0].user
     trigger = args[0]
@@ -46,7 +46,11 @@ def extract_actor_trigger_target(verb, method, *args, **kwargs):
         UNFOLLOWS: _extract_actor_trigger_target_method,
         PURCHASE: _extract_actor_trigger_target_save_purchase,
     }
-    default_handler = _extract_actor_trigger_target_method if method else _extract_actor_trigger_target
+    default_handler = (
+        _extract_actor_trigger_target_method
+        if method
+        else _extract_actor_trigger_target
+    )
     return handlers.get(verb, default_handler)(*args, **kwargs)
 
 
@@ -62,7 +66,9 @@ def _human_readable_default(action):
 
 def _human_readable_purchase(action):
     """Makes an action human readable."""
-    text = "{} has invested {} in {}".format(str(action.actor), str(action.trigger), str(action.target))
+    text = "{} has invested {} in {}".format(
+        str(action.actor), str(action.trigger), str(action.target)
+    )
     return text
 
 

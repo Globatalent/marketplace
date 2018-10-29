@@ -23,6 +23,4 @@ class TokenSerializer(serializers.ModelSerializer):
             "progression",
             "currency",
         ]
-        extra_kwargs = {
-            "campaign": {"read_only": True}
-        }
+        extra_kwargs = {"campaign": {"read_only": True}}

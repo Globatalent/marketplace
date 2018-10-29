@@ -13,28 +13,25 @@ from marketplace.users.tests.factories import UserFactory
 
 
 class CampaignAPITests(APITestCase):
-
     def setUp(self):
         self.user = UserFactory()
 
     def test_create_campaign(self):
         campaigns = Campaign.objects.all().count()
-        picture = Image.new('RGB', (100, 100))
-        picture_tmp_file = NamedTemporaryFile(suffix='.jpg')
+        picture = Image.new("RGB", (100, 100))
+        picture_tmp_file = NamedTemporaryFile(suffix=".jpg")
         picture.save(picture_tmp_file)
-        with open(picture_tmp_file.name, 'rb') as picture:
+        with open(picture_tmp_file.name, "rb") as picture:
             data = {
                 "title": "foo",
                 "kind": ATHLETE,
                 "description": "foo",
                 "image": picture,
-                "tags": ["tag"]
+                "tags": ["tag"],
             }
             self.client.force_authenticate(self.user)
             response = self.client.post(
-                "/api/v1/campaigns/",
-                format="multipart",
-                data=data,
+                "/api/v1/campaigns/", format="multipart", data=data
             )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(campaigns + 1, Campaign.objects.all().count())
@@ -45,13 +42,9 @@ class CampaignAPITests(APITestCase):
     def test_edit_campaign(self):
         campaign = CampaignFactory(user=self.user)
         self.client.force_authenticate(self.user)
-        data = {
-            "title": "new title",
-        }
+        data = {"title": "new title"}
         response = self.client.patch(
-            "/api/v1/campaigns/{}/".format(campaign.pk),
-            format="json",
-            data=data
+            "/api/v1/campaigns/{}/".format(campaign.pk), format="json", data=data
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         edited_campaign = Campaign.objects.get(pk=campaign.pk)
@@ -61,17 +54,9 @@ class CampaignAPITests(APITestCase):
     def test_edit_campaign_tags(self):
         campaign = CampaignFactory(user=self.user)
         self.client.force_authenticate(self.user)
-        data = {
-            "tags": [
-                "tag 1",
-                "tag 2",
-                "tag 3",
-            ],
-        }
+        data = {"tags": ["tag 1", "tag 2", "tag 3"]}
         response = self.client.patch(
-            "/api/v1/campaigns/{}/".format(campaign.pk),
-            format="json",
-            data=data
+            "/api/v1/campaigns/{}/".format(campaign.pk), format="json", data=data
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         edited_campaign = Campaign.objects.get(pk=campaign.pk)
@@ -80,82 +65,49 @@ class CampaignAPITests(APITestCase):
     def test_not_allow_edit_campaign(self):
         campaign = CampaignFactory(user=self.user)
         self.client.force_authenticate(UserFactory())
-        data = {
-            "title": "new title",
-        }
+        data = {"title": "new title"}
         response = self.client.patch(
-            "/api/v1/campaigns/{}/".format(campaign.pk),
-            format="json",
-            data=data
+            "/api/v1/campaigns/{}/".format(campaign.pk), format="json", data=data
         )
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_add_campaign_links(self):
         campaign = CampaignFactory(user=self.user)
-        data = {
-            "campaign": campaign.pk,
-            "name": "foo",
-            "url": "http://example.com",
-        }
+        data = {"campaign": campaign.pk, "name": "foo", "url": "http://example.com"}
         self.client.force_authenticate(self.user)
-        response = self.client.post(
-            "/api/v1/links/",
-            format="json",
-            data=data
-        )
+        response = self.client.post("/api/v1/links/", format="json", data=data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         campaign = Campaign.objects.get(pk=campaign.pk)
         self.assertEqual(1, campaign.links.count())
 
     def test_add_campaign_revenues(self):
         campaign = CampaignFactory(user=self.user)
-        data = {
-            "campaign": campaign.pk,
-            "year": 2014,
-            "amount": 100.0,
-        }
+        data = {"campaign": campaign.pk, "year": 2014, "amount": 100.0}
         self.client.force_authenticate(self.user)
-        response = self.client.post(
-            "/api/v1/revenues/",
-            format="json",
-            data=data
-        )
+        response = self.client.post("/api/v1/revenues/", format="json", data=data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         campaign = Campaign.objects.get(pk=campaign.pk)
         self.assertEqual(1, campaign.revenues.count())
 
     def test_add_campaign_incomes(self):
         campaign = CampaignFactory(user=self.user)
-        data = {
-            "campaign": campaign.pk,
-            "year": 2020,
-            "amount": 100.0,
-        }
+        data = {"campaign": campaign.pk, "year": 2020, "amount": 100.0}
         self.client.force_authenticate(self.user)
-        response = self.client.post(
-            "/api/v1/incomes/",
-            format="json",
-            data=data
-        )
+        response = self.client.post("/api/v1/incomes/", format="json", data=data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         campaign = Campaign.objects.get(pk=campaign.pk)
         self.assertEqual(1, campaign.incomes.count())
 
     def test_add_campaign_recommendations(self):
         campaign = CampaignFactory(user=self.user)
-        picture = Image.new('RGB', (100, 100))
-        picture_tmp_file = NamedTemporaryFile(suffix='.jpg')
+        picture = Image.new("RGB", (100, 100))
+        picture_tmp_file = NamedTemporaryFile(suffix=".jpg")
         picture.save(picture_tmp_file)
-        with open(picture_tmp_file.name, 'rb') as picture:
-            data = {
-                "campaign": campaign.pk,
-                "file": picture,
-            }
+        with open(picture_tmp_file.name, "rb") as picture:
+            data = {"campaign": campaign.pk, "file": picture}
             self.client.force_authenticate(self.user)
             response = self.client.post(
-                "/api/v1/recommendations/",
-                format="multipart",
-                data=data
+                "/api/v1/recommendations/", format="multipart", data=data
             )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         campaign = Campaign.objects.get(pk=campaign.pk)
@@ -164,18 +116,13 @@ class CampaignAPITests(APITestCase):
     def test_add_campaign_pictures(self):
         campaign = CampaignFactory(user=self.user)
         self.client.force_authenticate(self.user)
-        picture = Image.new('RGB', (100, 100))
-        picture_tmp_file = NamedTemporaryFile(suffix='.jpg')
+        picture = Image.new("RGB", (100, 100))
+        picture_tmp_file = NamedTemporaryFile(suffix=".jpg")
         picture.save(picture_tmp_file)
-        with open(picture_tmp_file.name, 'rb') as picture:
-            data = {
-                "campaign": campaign.pk,
-                "image": picture,
-            }
+        with open(picture_tmp_file.name, "rb") as picture:
+            data = {"campaign": campaign.pk, "image": picture}
             response = self.client.post(
-                "/api/v1/pictures/",
-                format="multipart",
-                data=data
+                "/api/v1/pictures/", format="multipart", data=data
             )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         campaign = Campaign.objects.get(pk=campaign.pk)
@@ -186,8 +133,7 @@ class CampaignAPITests(APITestCase):
         user = UserFactory()
         self.client.force_authenticate(user)
         response = self.client.post(
-            "/api/v1/campaigns/{}/follow/".format(campaign.pk),
-            format="json",
+            "/api/v1/campaigns/{}/follow/".format(campaign.pk), format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         user = User.objects.get(pk=user.pk)
@@ -200,12 +146,11 @@ class CampaignAPITests(APITestCase):
         user.follow(campaign)
         self.client.force_authenticate(user)
         response = self.client.get(
-            "/api/v1/campaigns/?followed_by={}".format(user.pk),
-            format="json",
+            "/api/v1/campaigns/?followed_by={}".format(user.pk), format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(1, data['count'])
+        self.assertEqual(1, data["count"])
 
     def test_followed_is_draft(self):
         user = UserFactory()
@@ -213,39 +158,31 @@ class CampaignAPITests(APITestCase):
         campaign = CampaignFactory(is_draft=False)
         user.follow(campaign)
         self.client.force_authenticate(user)
-        response = self.client.get(
-            "/api/v1/campaigns/?is_draft=False",
-            format="json",
-        )
+        response = self.client.get("/api/v1/campaigns/?is_draft=False", format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(1, data['count'])
+        self.assertEqual(1, data["count"])
 
     def test_list_search_campaigns(self):
-        other_campaigns = CampaignFactory.create_batch(title="other title", description="other description", size=10)
-        foo_campaigns = CampaignFactory.create_batch(title="foo title", description="foo description", size=5)
+        other_campaigns = CampaignFactory.create_batch(
+            title="other title", description="other description", size=10
+        )
+        foo_campaigns = CampaignFactory.create_batch(
+            title="foo title", description="foo description", size=5
+        )
         CampaignFactory(title="one title", description="one description")
-        response = self.client.get(
-            "/api/v1/campaigns/?search=other",
-            format="json",
-        )
+        response = self.client.get("/api/v1/campaigns/?search=other", format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(len(other_campaigns), data['count'])
-        response = self.client.get(
-            "/api/v1/campaigns/?search=foo",
-            format="json",
-        )
+        self.assertEqual(len(other_campaigns), data["count"])
+        response = self.client.get("/api/v1/campaigns/?search=foo", format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(len(foo_campaigns), data['count'])
-        response = self.client.get(
-            "/api/v1/campaigns/?search=one",
-            format="json",
-        )
+        self.assertEqual(len(foo_campaigns), data["count"])
+        response = self.client.get("/api/v1/campaigns/?search=one", format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(1, data['count'])
+        self.assertEqual(1, data["count"])
 
     def test_list_active_campaigns(self):
         active_campaigns = CampaignFactory.create_batch(is_draft=False, size=10)
@@ -259,17 +196,11 @@ class CampaignAPITests(APITestCase):
             campaign.started = datetime.date.today() - datetime.timedelta(days=10)
             campaign.finished = datetime.date.today() - datetime.timedelta(days=1)
             campaign.save()
-        response = self.client.get(
-            "/api/v1/campaigns/?active=True",
-            format="json",
-        )
+        response = self.client.get("/api/v1/campaigns/?active=True", format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(len(active_campaigns), data['count'])
-        response = self.client.get(
-            "/api/v1/campaigns/?active=False",
-            format="json",
-        )
+        self.assertEqual(len(active_campaigns), data["count"])
+        response = self.client.get("/api/v1/campaigns/?active=False", format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
-        self.assertEqual(len(inactive_campaigns), data['count'])
+        self.assertEqual(len(inactive_campaigns), data["count"])

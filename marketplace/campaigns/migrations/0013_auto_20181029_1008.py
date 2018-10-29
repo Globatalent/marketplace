@@ -5,19 +5,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0012_campaign_started'),
-    ]
+    dependencies = [("campaigns", "0012_campaign_started")]
 
     operations = [
         migrations.AddField(
-            model_name='campaign',
-            name='finished',
-            field=models.DateField(blank=True, help_text='Date when the campaign finished.', null=True),
+            model_name="campaign",
+            name="finished",
+            field=models.DateField(
+                blank=True, help_text="Date when the campaign finished.", null=True
+            ),
         ),
         migrations.AlterField(
-            model_name='campaign',
-            name='started',
-            field=models.DateField(blank=True, help_text='Date when the campaign started, automatically set when the campaign is approved.', null=True),
+            model_name="campaign",
+            name="started",
+            field=models.DateField(
+                blank=True,
+                help_text="Date when the campaign started, automatically set when the campaign is approved.",
+                null=True,
+            ),
         ),
     ]

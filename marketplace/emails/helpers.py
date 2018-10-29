@@ -22,10 +22,10 @@ class TemplateEmailMessage(object):
 
     def __init__(self, to, subject=None, context=None, from_email=None, attaches=None):
         if self.template_name is None:
-            warnings.warn('You have to specify the template_name')
+            warnings.warn("You have to specify the template_name")
         if not isinstance(to, list) and not isinstance(to, tuple):
             self.to = [to]
-        self.subject = '%s' % self.default_subject if subject is None else subject
+        self.subject = "%s" % self.default_subject if subject is None else subject
         self.from_email = self.default_from_email if from_email is None else from_email
         self.attaches = [] if attaches is None else attaches
         self.default_context = {} if context is None else context
@@ -34,16 +34,20 @@ class TemplateEmailMessage(object):
         """Hook to customize context."""
         # Add default context
         current_site = Site.objects.get_current()
-        self.default_context.update({
-            "site": current_site,
-            "frontend": Option.objects.get_value("FRONTEND_SITE_DOMAIN", current_site.domain)
-        })
+        self.default_context.update(
+            {
+                "site": current_site,
+                "frontend": Option.objects.get_value(
+                    "FRONTEND_SITE_DOMAIN", current_site.domain
+                ),
+            }
+        )
         return self.default_context
 
     def preview(self):
         """Renders the message for a preview."""
         context = self.get_context()
-        message = render_to_string(self.template_name, context, using='django')
+        message = render_to_string(self.template_name, context, using="django")
         return message
 
     def send(self, async=True):
@@ -51,7 +55,7 @@ class TemplateEmailMessage(object):
         if not settings.ENABLE_CUSTOM_EMAIL_SENDING:
             return
         context = self.get_context()
-        message = render_to_string(self.template_name, context, using='django')
+        message = render_to_string(self.template_name, context, using="django")
         message_txt = message.replace("\n", "")
         message_txt = message_txt.replace("</p>", "\n")
         message_txt = message_txt.replace("</h1>", "\n\n")
@@ -62,13 +66,15 @@ class TemplateEmailMessage(object):
                 self.subject, message_txt, message, self.from_email, self.to
             )
             if self.attaches:
-                warnings.warn('Attaches will not added to the email, use async=False to send attaches.')
+                warnings.warn(
+                    "Attaches will not added to the email, use async=False to send attaches."
+                )
         elif not self.fake:
             email = EmailMultiAlternatives(
                 subject=self.subject,
                 body=message_txt,
                 from_email=self.from_email,
-                to=self.to
+                to=self.to,
             )
             email.attach_alternative(message, "text/html")
             for attach in self.attaches:

@@ -20,11 +20,9 @@ class UserSerializer(serializers.ModelSerializer):
             "last_name",
             "password",
             "token",
-            "birth_date"
+            "birth_date",
         ]
-        extra_kwargs = {
-            "password": {"write_only": True, "required": False},
-        }
+        extra_kwargs = {"password": {"write_only": True, "required": False}}
 
     def get_token(self, obj):
         """Gets token information."""
@@ -65,8 +63,8 @@ class RestorePasswordSerializer(serializers.Serializer):
         return value
 
     def validate(self, attrs):
-        password = attrs.get('password')
-        repeat_password = attrs.get('repeat_password')
+        password = attrs.get("password")
+        repeat_password = attrs.get("repeat_password")
         if password and repeat_password and password != repeat_password:
             raise serializers.ValidationError(_("Passwords are not the same"))
         return attrs
