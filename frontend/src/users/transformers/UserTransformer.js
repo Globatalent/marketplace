@@ -9,6 +9,10 @@ class UserTransformer extends Transformer {
       lastName: user.last_name,
       password: user.password,
       email: user.email,
+      birthDate: user.birth_date,
+      avatar: user.avatar,
+      country: user.country,
+      citizenship: user.citizenship,
     }
   }
 
@@ -18,6 +22,10 @@ class UserTransformer extends Transformer {
       'first_name': user.firstName,
       'last_name': user.lastName,
       'email': user.email,
+      'birth_date': user.birthDate,
+      'avatar': user.avatar,
+      'country': user.country,
+      'citizenship': user.citizenship,
     }
     if (!!user.password && user.password !== "") {
       data['password'] = user.password
