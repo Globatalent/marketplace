@@ -64,7 +64,7 @@
             </el-row>
             <el-row>
               <el-col>
-                <div class="campaign-subtitle"><span v-if="campaign.give_back">{{campaign.give_back.substring(0,50)+" ..."}}</span></div>
+                <div class="campaign-subtitle"><span v-if="campaign.giveBack">{{campaign.giveBack.length > 50 ? campaign.giveBack.substring(0,50)+" ..." : campaign.giveBack}}</span></div>
               </el-col>
             </el-row>
           </div>
@@ -89,9 +89,9 @@
                 <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
               </router-link> -->
             <div class="timeLeft">
-              <i class="far fa-clock"></i><span class="timeLeft-text">90 days left</span>
+              <i class="far fa-clock"></i><span class="timeLeft-text">{{campaign.remaining}} days left</span>
             </div>
-            <div class="likeButton" v-if="isSupporter" @click="setFollowingCampaign(index, campaign)">
+            <div class="likeButton" v-if="isLogged" @click="setFollowingCampaign(index, campaign)">
               <el-tooltip class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom">
                 <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
                 <i class="far fa-heart likeIcon" v-else></i>
@@ -140,8 +140,8 @@ export default {
       pagination: 'campaigns/pagination',
       user: 'users/user'
     }),
-    isSupporter() {
-      return !!this.user && !!this.user.supporter
+    isLogged() {
+      return !!this.user
     }
   },
   created() {

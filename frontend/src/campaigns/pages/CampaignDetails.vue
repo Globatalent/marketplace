@@ -156,10 +156,10 @@
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50" v-if="campaign.give_back">
+        <el-row :gutter="50" v-if="campaign.giveBack">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.WhatWillYou") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            {{campaign.give_back}}
+            {{campaign.giveBack}}
             <span class="line"></span>
           </el-col>
         </el-row>
