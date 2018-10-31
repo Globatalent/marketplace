@@ -385,7 +385,10 @@ export default {
   vertical-align: top;
   text-align: right;
   padding-right: 20px;
+  padding-right: 0px;
   width: 70%;
+  width: 100%;
+  text-align: center;
 }
 
 .campaignList-startBlock-sentence1 {
@@ -408,5 +411,6 @@ export default {
   font-family: 'OpenSans SemiBold';
   position: relative;
   top: 6px;
+  display: none;
 }
 </style>

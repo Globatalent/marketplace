@@ -148,6 +148,10 @@ export const messages = {
       Revenue3years: 'Revenue for the last 3 years',
       IncomeForecastFor5: 'Income forecast for the next 5 years',
       ExamplesIncomeSimilar: 'Examples of income from similar players of the same sport',
+      DueToRegulations: 'Due to regulations we need to know some details about people using the platform. Information will be kept strictly confidential.',
+      CountryResidence: 'Country of residence',
+      Citizenship: 'Citizenship',
+      AcceptDataProtectionConditions: 'I accept data protection conditions',
     }
   },
   es: {

@@ -4,20 +4,39 @@
     <div class="form-lined">
       <el-form ref="form" label-position="top" class="text-left" :model="form" :rules="rules">
         <el-row :gutter="20">
-          <el-col :xs="24">
+          <el-col :xs="24" :lg="12">
+            <el-form-item required prop="firstName">
+              <el-input v-bind:placeholder="$tc('message.FirstName')" type="text" v-model="form.firstName"></el-input>
+            </el-form-item>
+            <el-form-item required prop="lastName">
+              <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.lastName"></el-input>
+            </el-form-item>
+            <el-form-item required prop="country">
+              <el-input v-bind:placeholder="$tc('message.CountryResidence')" type="text" v-model="form.country"></el-input>
+            </el-form-item>
+            <el-form-item required prop="citizenship">
+              <el-input v-bind:placeholder="$tc('message.Citizenship')" type="text" v-model="form.citizenship"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :xs="24" :lg="12">
             <el-form-item required prop="email">
               <el-input v-bind:placeholder="$tc('message.Email')" type="email" v-model="form.email"></el-input>
             </el-form-item>
             <el-form-item required prop="birthDate">
-              <el-date-picker v-bind:placeholder="$tc('message.DateFormat')" type="date" class="datepicker"
-                              v-model="form.birthDate"></el-date-picker>
+              <el-date-picker v-bind:placeholder="$tc('message.DateFormat')" type="date" class="datepicker" v-model="form.birthDate"></el-date-picker>
             </el-form-item>
             <el-form-item required prop="password">
               <el-input v-bind:placeholder="$tc('message.Password')" type="password" v-model="form.password"></el-input>
             </el-form-item>
             <el-form-item required prop="repeatPassword">
-              <el-input v-bind:placeholder="$tc('message.RepeatPassword')" type="password"
-                        v-model="form.repeatPassword"></el-input>
+              <el-input v-bind:placeholder="$tc('message.RepeatPassword')" type="password" v-model="form.repeatPassword"></el-input>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :xs="24">
+            <el-form-item class="text-left">
+              <el-checkbox class="registrationForm-accept" v-bind:label="$tc('message.AcceptDataProtectionConditions')"></el-checkbox>
             </el-form-item>
           </el-col>
         </el-row>
@@ -33,104 +52,130 @@
         </div>
       </el-row>
     </div>
+    <p class="registrationForm-infoRegulations">{{$tc('message.DueToRegulations')}}</p>
   </el-col>
 </template>
 
 <script>
-  import router from '@/router.js'
-  import { Message } from 'element-ui'
+import router from '@/router.js'
+import { Message } from 'element-ui'
 
-  export default {
-    name: 'RegistrationForm',
-    components: {},
-    data () {
-      return {
-        form: {
-          email: '',
-          password: '',
-          repeatPassword: '',
-          birthDate: '',
-        },
-        rules: {
-          email: [
-            {
-              required: true,
-              message: 'Please enter a valid email',
-              trigger: 'blur'
-            },
-            {
-              type: 'email',
-              message: 'Please enter a valid email',
-              trigger: ['blur', 'change']
-            }
-          ],
-          password: [{validator: this.validatePass, trigger: 'change'}],
-          repeatPassword: [{validator: this.validatePass2, trigger: 'change'}],
-          firstName: [
-            {
-              required: true,
-              message: 'Please input first name',
-              trigger: 'blur'
-            }
-          ],
-          lastName: [
-            {required: true, message: 'Please input last name', trigger: 'blur'}
-          ],
-          birthDate: [
-            {
-              required: true,
-              message: 'Please select your birth date',
-              trigger: 'blur',
-            }
-          ]
-        }
-      }
-    },
-    methods: {
-      validatePass (rule, value, callback) {
-        if (value === '') {
-          callback(new Error('Please input the password'))
-        } else {
-          callback()
-        }
+export default {
+  name: 'RegistrationForm',
+  components: {},
+  data() {
+    return {
+      form: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        repeatPassword: '',
+        birthDate: '',
+        country: '',
+        citizenship: '',
       },
-      validatePass2 (rule, value, callback) {
-        if (value === '') {
-          callback(new Error('Please input the password again'))
-        } else if (value !== this.form.password) {
-          callback(new Error('Two inputs don\'t match!'))
-        } else {
-          callback()
-        }
-      },
-      onSubmit (form) {
-        this.$refs[form].validate(valid => {
-          if (valid) {
-            const dataForm = Object.assign({}, this.form)
-            this.$store
-              .dispatch('auth/register', dataForm)
-              .then(data => {
-                router.push({name: 'campaign.list'})
-              })
-              .catch(error => {
-                if (!!error.response) {
-                  Message.error({message: error.response.data.error, center: true})
-                } else {
-                  console.error(error)
-                }
-              })
-          } else {
-            console.error('error submit!!')
-            return false
+      rules: {
+        email: [
+          {
+            required: true,
+            message: 'Please enter a valid email',
+            trigger: 'blur'
+          },
+          {
+            type: 'email',
+            message: 'Please enter a valid email',
+            trigger: ['blur', 'change']
           }
-        })
+        ],
+        password: [{ validator: this.validatePass, trigger: 'change' }],
+        repeatPassword: [{ validator: this.validatePass2, trigger: 'change' }],
+        firstName: [
+          {
+            required: true,
+            message: 'Please input first name',
+            trigger: 'blur'
+          }
+        ],
+        lastName: [
+          { required: true, message: 'Please input last name', trigger: 'blur' }
+        ],
+        birthDate: [
+          {
+            required: true,
+            message: 'Please select your birth date',
+            trigger: 'blur'
+          }
+        ],
+        country: [
+          { required: true, message: 'Please input country', trigger: 'blur' }
+        ],
+        citizenship: [
+          { required: true, message: 'Please input citizenship', trigger: 'blur' }
+        ],
       }
     }
+  },
+  methods: {
+    validatePass(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('Please input the password'))
+      } else {
+        callback()
+      }
+    },
+    validatePass2(rule, value, callback) {
+      if (value === '') {
+        callback(new Error('Please input the password again'))
+      } else if (value !== this.form.password) {
+        callback(new Error("Two inputs don't match!"))
+      } else {
+        callback()
+      }
+    },
+    onSubmit(form) {
+      this.$refs[form].validate(valid => {
+        if (valid) {
+          const dataForm = Object.assign({}, this.form)
+          this.$store
+            .dispatch('auth/register', dataForm)
+            .then(data => {
+              router.push({ name: 'campaign.list' })
+            })
+            .catch(error => {
+              if (!!error.response) {
+                Message.error({
+                  message: error.response.data.error,
+                  center: true
+                })
+              } else {
+                console.error(error)
+              }
+            })
+        } else {
+          console.error('error submit!!')
+          return false
+        }
+      })
+    }
   }
+}
 </script>
 
-<style type="scss" scoped>
-  .el-date-editor.el-input.datepicker {
-    width: 100%;
-  }
+<style lang="scss" scoped>
+@import '../../scss/variables.scss';
+
+.el-date-editor.el-input.datepicker {
+  width: 100%;
+}
+.registrationForm-infoRegulations {
+  margin-top: 5px;
+  font-size: 9px;
+  font-family: 'OpenSans Regular';
+  color: $--grey-text;
+}
+
+.el-checkbox .el-checkbox__label{
+  font-size: 12px;
+}
 </style>
