@@ -104,7 +104,9 @@
     <div class="campaignList-startBlock">
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
-          <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
+            <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+          </router-link>
           <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
         </div>
         <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button>
