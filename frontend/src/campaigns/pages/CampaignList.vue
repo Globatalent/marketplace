@@ -191,7 +191,7 @@ export default {
       }
     },
     getPrice(campaign) {
-      return campaign.token ? campaign.token.amount : 0
+      return campaign.funds
     },
     progress(campaign) {
       if (!!campaign.token) {
