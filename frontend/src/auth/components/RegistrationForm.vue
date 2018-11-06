@@ -43,13 +43,12 @@
         <el-row>
           <el-col :xs="24">
             <el-form-item class="text-left">
-              <el-checkbox class="registrationForm-accept" v-bind:label="$tc('message.AcceptDataProtectionConditions')"></el-checkbox>
+              <el-checkbox class="registrationForm-accept"><a href="http://www.globatalent.com/termsandconditions">{{$tc('message.AcceptDataProtectionConditions')}}</a></el-checkbox>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item class="text-center">
-          <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc('message.Register')
-            }}
+          <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc('message.Register')}}
           </el-button>
         </el-form-item>
       </el-form>
