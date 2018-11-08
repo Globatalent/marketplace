@@ -40,16 +40,16 @@
             <div class="campaignDetails-fundingDetails">
               <div class="campaignDetails-fundingDetails-numbers">
                 <div class="campaignDetails-fundingDetails-numbers-row">
-                  <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.Funding')}}:</span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number">${{campaign.funds}}</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-title">{{ $tc('message.Funding')}}: </span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
                 </div>
                 <div class="campaignDetails-fundingDetails-numbers-row">
-                  <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.M10Token')}} = </span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number">$5</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-title">1 {{ !!campaign.token ? campaign.token.code : '' }} token = </span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number">{{ $n(!!campaign.token ? campaign.token.unitPrice: 0, 'currency') }}</span>
                 </div>
                 <div class="campaignDetails-fundingDetails-numbers-row">
-                  <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.SoftCapt')}}:</span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number">$150,000</span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.SoftCapt')}}: </span>
+                  <span class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
                 </div>
               </div>
               <div class="campaignDetails-fundingDetails-rating">
@@ -131,7 +131,7 @@
         <el-row :gutter="50" v-if="campaign.funds">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.FundsRequierement") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            <div class="fundsQty"><span class="fundsQty-currency">$</span>{{campaign.funds}}</div> {{ $tc("message.LookingToRaise") }}
+            <div class="fundsQty"><span class="fundsQty-currency">$</span>{{ $n(campaign.funds) }}</div> {{ $tc("message.LookingToRaise") }}
             <span class="line"></span>
           </el-col>
         </el-row>
@@ -163,7 +163,7 @@
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50" v-if="campaign.revenues.length > 0">
+        <el-row :gutter="50" v-if="!!campaign.revenues && campaign.revenues.length > 0">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Revenue3years") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
@@ -172,7 +172,7 @@
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50" v-if="campaign.incomes.length > 0">
+        <el-row :gutter="50" v-if="!!campaign.revenues && campaign.incomes.length > 0">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.IncomeForecastFor5") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
@@ -181,7 +181,7 @@
             <span class="line"></span>
           </el-col>
         </el-row>
-        <el-row :gutter="50" v-if="campaign.examples.length > 0">
+        <el-row :gutter="50" v-if="!!campaign.revenues && campaign.examples.length > 0">
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.ExamplesIncomeSimilar") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             {{campaign.examples}}
@@ -239,7 +239,6 @@ export default {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
-      console.log(this.campaign)
     })
   },
   methods: {

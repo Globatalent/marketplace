@@ -26,7 +26,7 @@
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
           <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport">
-            <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+            <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
             </el-option>
           </el-select>
           <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country">
@@ -73,8 +73,8 @@
             <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) | localeString  }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) | localeString }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
                   <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>

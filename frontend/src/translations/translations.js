@@ -1,5 +1,5 @@
 export const messages = {
-  en: {
+  'en-US': {
     message: {
       SignIn: 'Sign In',
       Email: 'Email',
@@ -131,7 +131,7 @@ export const messages = {
       Favorite: 'Favorite',
       DaysLeft: 'days left',
       M10Token: '1 M10 token',
-      SoftCapt: 'Soft Capt',
+      SoftCapt: 'Soft Cap',
       ExpertsRating: 'Experts Rating',
       FundsRequierement: 'Funds requirement',
       LookingToRaise: 'Looking to raise',
@@ -154,7 +154,7 @@ export const messages = {
       AcceptDataProtectionConditions: 'I accept data protection conditions',
     }
   },
-  es: {
+  'es-ES': {
     message: {
       SignIn: 'Sign In',
       Email: 'Email',
