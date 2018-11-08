@@ -147,6 +147,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit('campaigns/sports', [])
     this.$store.dispatch('campaigns/sports')
     this.initial()
   },
