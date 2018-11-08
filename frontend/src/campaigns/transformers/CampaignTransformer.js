@@ -40,6 +40,7 @@ class CampaignTransformer extends Transformer {
       started: campaign.started,
       finished: campaign.finished,
       history: campaign.history,
+      players: campaign.players,
       token: !!campaign.token? TokenTransformer.fetch(campaign.token) : null,
     })
   }
@@ -70,6 +71,7 @@ class CampaignTransformer extends Transformer {
       'give_back': campaign.giveBack,
       'examples': campaign.examples,
       'history': campaign.history,
+      'players': campaign.players,
     }
     if (!!campaign.tags) {
       data.tags = campaign.tags
