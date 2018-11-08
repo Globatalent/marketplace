@@ -37,7 +37,7 @@
       <el-form-item required :label="$tc('message.Sport')">
         <p class="formSteps-inputText">Provide a short description that best describes your campaign to your audience.</p>
         <el-select v-model="form.sport" placeholder="Select">
-          <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+          <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
           </el-option>
         </el-select>
       </el-form-item>
@@ -101,6 +101,7 @@ export default {
     })
   },
   created() {
+    this.$store.commit('campaigns/sports', [])
     this.$store.dispatch('campaigns/sports')
     this.$store
       .dispatch('campaigns/fetch', this.$route.params.campaignId)
