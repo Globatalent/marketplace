@@ -302,7 +302,7 @@ export default {
       })
     })
   },
-  sports({commit, state}, payload={}) {
+  sports({commit, state, dispatch}, payload={}) {
     return new Promise((resolve, reject) => {
       const { url, filters } = payload
       let endpoint = state.endpoints.sports
@@ -313,9 +313,12 @@ export default {
         endpoint = [endpoint, query].join('?')
       }
       Vue.axios.get(endpoint).then((response) => {
-        const { results } = response.data;
+        const { results, count, next, previous } = response.data;
         const sports = results;
-        commit('sports', sports)
+        commit('pushSports', sports)
+        if (!!next) {
+          dispatch('sports', {url: next}).then(response => resolve(response))
+        }
         resolve(sports)
       }).catch((error) => {
         reject(error)
