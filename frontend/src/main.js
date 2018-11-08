@@ -28,12 +28,6 @@ Vue.use(vue2Dropzone)
 Vue.use(VueAxios, axios)
 Vue.use(vueSmoothScroll)
 
-// Filters
-Vue.filter('localeString', (value) => {
-  if (!value) return value
-  return value.toLocaleString()
-})
-
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL
 Vue.axios.defaults.headers.common['Content-Type'] = 'application/json'

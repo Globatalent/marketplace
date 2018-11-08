@@ -73,8 +73,8 @@
             <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) | localeString  }} USD</span></div>
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) | localeString }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
                   <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
