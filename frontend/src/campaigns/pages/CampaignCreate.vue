@@ -85,17 +85,39 @@ export default {
         } else {
           const campaign = campaigns[0]
           this.$store.commit('campaigns/campaign', campaign)
-          router.push({
-            name: 'campaign.edit',
-            params: {
-              campaignId: campaign.id,
-              step: 'card'
+          // Show modal to load draft or discard it
+          this.$confirm(
+            'There is a draft campaign, please select:',
+            'Warning',
+            {
+              confirmButtonText: 'Continue',
+              cancelButtonText: 'Discard draft',
+              type: 'warning'
             }
-          })
+          )
+            .then(() => {
+              router.push({
+                name: 'campaign.edit',
+                params: {
+                  campaignId: campaign.id,
+                  step: 'card'
+                }
+              })
+            })
+            .catch(() => {
+              const payload = { id: campaign.id }
+              this.$store.dispatch('campaigns/delete', payload).then(() => {
+                this.$message({
+                  type: 'info',
+                  message: 'Draft deleted'
+                })
+              })
+            })
         }
       })
   },
   methods: {
+    draftConfirm() {},
     create(kind) {
       this.$store
         .dispatch('campaigns/create', { kind: kind })
@@ -152,10 +174,10 @@ export default {
   margin: 0 auto;
 }
 
-.campaignProfile-boxCol{
+.campaignProfile-boxCol {
   display: flex;
   justify-content: flex-end;
-  &:nth-child(2){
+  &:nth-child(2) {
     justify-content: flex-start;
   }
 }

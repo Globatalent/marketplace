@@ -152,6 +152,7 @@ export const messages = {
       CountryResidence: 'Country of residence',
       Citizenship: 'Citizenship',
       AcceptDataProtectionConditions: 'I accept data protection conditions',
+      PurchaseGBTTokens: 'Purchase GBT Tokens',
     }
   },
   'es-ES': {
