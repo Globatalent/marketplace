@@ -2,7 +2,9 @@
   <div class="header">
     <el-row type="flex" justify="left">
       <el-col :xs="24" class="menuContainer">
-        <img class="logoHeader" src="~@/assets/img/logo-header.png" />
+        <a href="/">
+          <img class="logoHeader" src="~@/assets/img/logo-header.png" />
+        </a>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router>
           <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->
           <el-menu-item index="campaigns" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
@@ -85,7 +87,7 @@ export default {
             message: 'Logout canceled'
           })
         })
-    },
+    }
   }
 }
 </script>
@@ -118,7 +120,7 @@ export default {
 }
 .el-menu-right {
   float: right;
-  .el-select{
+  .el-select {
     float: left;
   }
 }

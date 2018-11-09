@@ -5,19 +5,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0010_auto_20181017_1029'),
-    ]
+    dependencies = [("campaigns", "0010_auto_20181017_1029")]
 
     operations = [
         migrations.AddField(
-            model_name='campaign',
-            name='history',
+            model_name="campaign",
+            name="history",
             field=models.TextField(blank=True, null=True),
         ),
         migrations.AddField(
-            model_name='campaign',
-            name='players',
+            model_name="campaign",
+            name="players",
             field=models.TextField(blank=True, null=True),
         ),
     ]

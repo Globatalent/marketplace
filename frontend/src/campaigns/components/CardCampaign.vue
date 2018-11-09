@@ -1,14 +1,13 @@
 <template>
   <el-col :xs="24" class="formSteps-container">
-    <div class="infoTag">Draft Campaign</div>
+    <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/campaigns/create">Card campaign</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
-      <el-button type="danger" class="" @click.prevent="onDiscard()">{{ $tc('message.DiscardCampaign') }}</el-button>
-      <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc('message.ReviewLaunch') }}
-      </el-button>
+      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
+      <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
       <h2 class="formSteps-title">{{ $tc('message.CardCampaign') }}</h2>
@@ -54,7 +53,7 @@
         <p class="formSteps-inputText">Provide a short description that best describes your campaign to your
           audience.</p>
         <el-select v-model="form.sport" placeholder="Select">
-          <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+          <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
           </el-option>
         </el-select>
       </el-form-item>
@@ -87,108 +86,106 @@
   import router from '@/router.js'
   import ImageUpload from '@/campaigns/components/ImageUpload.vue'
 
-  export default {
-    name: 'CardCampaign',
+export default {
+  name: 'CardCampaign',
     components: {
       'gb-image-upload': ImageUpload
     },
-    data () {
-      return {
-        // Form
-        form: {
-          title: null,
-          description: null,
-          image: null,
-          gender: null,
-          sport: null,
-          tags: []
+  data() {
+    return {
+      // Form
+      form: {
+        title: null,
+        description: null,
+        image: null,
+        gender: null,
+        sport: null,
+        tags: []
+      },
+      // Tags
+      tagInputVisible: false,
+      tagInput: '',
+      // Card Image
+      options: {
+        name: 'image',
+        headers: {
+          Authorization: this.$store.getters['auth/header'],
         },
-        // Tags
-        tagInputVisible: false,
-        tagInput: '',
-        // Card Image
-        options: {
-          name: 'image',
-          headers: {
-            Authorization: this.$store.getters['auth/header'],
-          },
-          httpRequest: ajax,
-          action: ''
-        }
-      }
-    },
-    computed: {
-      ...mapGetters({
-        campaign: 'campaigns/campaign',
-        sports: 'campaigns/sports',
-        user: 'users/user'
-      })
-    },
-    created () {
-      this.$store.dispatch('campaigns/sports')
-      this.$store
-        .dispatch('campaigns/fetch', this.$route.params.campaignId)
-        .then(() => {
-          if (!!this.campaign && !!this.campaign.id) {
-            this.options.action = `${
-              Vue.axios.defaults.baseURL
-              }/api/v1/campaigns/${this.campaign.id}/`
-            this.form = {...this.campaign}
-            if (!!this.form.sport) {
-              this.form.sport = this.form.sport.id
-            }
-          }
-        }).catch(() => router.push({name: 'campaign.create'}))
-    },
-    methods: {
-      handleTagClose (tag) {
-        this.campaign.tags.splice(this.campaign.tags.indexOf(tag), 1)
-      },
-      showTagInput () {
-        this.tagInputVisible = true
-        this.$nextTick(_ => {
-          this.$refs.saveTagInput.$refs.input.focus()
-        })
-      },
-      handleTagInputConfirm () {
-        let tagInput = this.tagInput
-        if (tagInput) {
-          this.campaign.tags.push(tagInput)
-        }
-        this.tagInputVisible = false
-        this.tagInput = ''
-      },
-      onDiscard () {
-        const payload = {id: this.campaign.id}
-        this.$store.dispatch('campaigns/delete', payload).then(() => {
-          router.push({name: 'campaign.create'})
-        })
-      },
-      updateImage (fieldName, newURL) {
-        debugger
-        this.form[fieldName] = newURL
-      },
-      onSaveAndContinue () {
-        const payload = {
-          id: this.campaign.id,
-          title: this.form.title,
-          description: this.form.description,
-          gender: this.form.gender,
-          sport: !!this.form.sport ? this.form.sport : null,
-          tags: this.form.tags
-        }
-        this.$store.dispatch('campaigns/update', payload).then(() => {
-          router.push({
-            name: 'campaign.edit',
-            params: {
-              campaignId: this.campaign.id,
-              step: 'content'
-            }
-          })
-        })
+        httpRequest: ajax,
+        action: ''
       }
     }
+  },
+  computed: {
+    ...mapGetters({
+      campaign: 'campaigns/campaign',
+      sports: 'campaigns/sports',
+      user: 'users/user'
+    })
+  },
+  created() {
+    this.$store.commit('campaigns/sports', [])
+    this.$store.dispatch('campaigns/sports')
+    this.$store
+      .dispatch('campaigns/fetch', this.$route.params.campaignId)
+      .then(() => {
+        if (!!this.campaign && !!this.campaign.id) {
+          this.options.action = `${
+            Vue.axios.defaults.baseURL
+          }/api/v1/campaigns/${this.campaign.id}/`
+          this.form = { ...this.campaign }
+          if (!!this.form.sport) {
+            this.form.sport = this.form.sport.id
+          }
+        }
+      }).catch(()=> router.push({name: 'campaign.create'}))
+  },
+  methods: {
+    handleTagClose(tag) {
+      this.campaign.tags.splice(this.campaign.tags.indexOf(tag), 1)
+    },
+    showTagInput() {
+      this.tagInputVisible = true
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
+    },
+    handleTagInputConfirm() {
+      let tagInput = this.tagInput
+      if (tagInput) {
+        this.campaign.tags.push(tagInput)
+      }
+      this.tagInputVisible = false
+      this.tagInput = ''
+    },
+    onDiscard() {
+      const payload = { id: this.campaign.id }
+      this.$store.dispatch('campaigns/delete', payload).then( () => {
+        router.push({name: 'campaign.create'})
+      })
+    },
+    onSaveAndContinue() {
+      const payload = {
+        id: this.campaign.id,
+        title: this.form.title,
+        description: this.form.description,
+        gender: this.form.gender,
+        sport: !!this.form.sport ? this.form.sport : null,
+        tags: this.form.tags
+      }
+      this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.form = { ...this.campaign }
+        router.push({
+          name: 'campaign.edit',
+          params: {
+            campaignId: this.campaign.id,
+            step: 'content'
+          }
+        })
+      })
+    }
   }
+}
 </script>
 
 <style type="scss" scoped>

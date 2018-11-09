@@ -7,29 +7,37 @@ import marketplace.core.files
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0002_auto_20181011_0834'),
-    ]
+    dependencies = [("campaigns", "0002_auto_20181011_0834")]
 
     operations = [
         migrations.AlterField(
-            model_name='campaign',
-            name='description',
+            model_name="campaign",
+            name="description",
             field=models.TextField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='campaign',
-            name='image',
-            field=easy_thumbnails.fields.ThumbnailerImageField(blank=True, max_length=250, null=True, upload_to=marketplace.core.files.UploadToDir('campaigns', random_name=True), verbose_name='image'),
+            model_name="campaign",
+            name="image",
+            field=easy_thumbnails.fields.ThumbnailerImageField(
+                blank=True,
+                max_length=250,
+                null=True,
+                upload_to=marketplace.core.files.UploadToDir(
+                    "campaigns", random_name=True
+                ),
+                verbose_name="image",
+            ),
         ),
         migrations.AlterField(
-            model_name='campaign',
-            name='is_draft',
-            field=models.BooleanField(default=True, help_text="If the campaign is a draft it isn't complete"),
+            model_name="campaign",
+            name="is_draft",
+            field=models.BooleanField(
+                default=True, help_text="If the campaign is a draft it isn't complete"
+            ),
         ),
         migrations.AlterField(
-            model_name='campaign',
-            name='title',
+            model_name="campaign",
+            name="title",
             field=models.CharField(blank=True, max_length=250, null=True),
         ),
     ]

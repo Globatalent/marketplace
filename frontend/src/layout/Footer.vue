@@ -12,6 +12,8 @@
           <el-menu-item class="el-menu-demo-item" index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
+          <el-menu-item class="el-menu-demo-item" index="about" :route="{name:'about'}">{{ $tc("message.About") }}</el-menu-item>
+          <el-menu-item class="el-menu-demo-item" index="contact" :route="{name:'contact'}">{{ $tc("message.ContactUs") }}</el-menu-item>
         </el-menu>
       </el-col>
     </el-row>

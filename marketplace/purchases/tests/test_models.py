@@ -34,4 +34,3 @@ class PurchasesTests(TestCase):
         except IntegrityError:
             raised_exception = True
         self.assertTrue(raised_exception)
-

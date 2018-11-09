@@ -2,6 +2,5 @@ from django.apps import AppConfig
 
 
 class TokensConfig(AppConfig):
-    name = 'marketplace.tokens'
+    name = "marketplace.tokens"
     verbose_name = "Tokens"
-

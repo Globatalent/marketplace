@@ -36,6 +36,12 @@ class CampaignTransformer extends Transformer {
       revenues: campaign.revenues,
       incomes: campaign.incomes,
       recommendations: campaign.recommendations,
+      remaining: campaign.remaining,
+      started: campaign.started,
+      finished: campaign.finished,
+      history: campaign.history,
+      players: campaign.players,
+      rating: campaign.rating,
       token: !!campaign.token? TokenTransformer.fetch(campaign.token) : null,
     })
   }
@@ -63,6 +69,8 @@ class CampaignTransformer extends Transformer {
       'use': campaign.use,
       'give_back': campaign.giveBack,
       'examples': campaign.examples,
+      'history': campaign.history,
+      'players': campaign.players,
     }
     if (!!campaign.tags) {
       data.tags = campaign.tags

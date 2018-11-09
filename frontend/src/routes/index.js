@@ -90,6 +90,15 @@ export default [
     },
   },
 
+  {
+    path: '/purchase',
+    name: 'purchase',
+    component: resolve => require(['@/pages/Purchase.vue'], resolve),
+    meta: {
+      auth: true,
+    },
+  },
+
   // 404
   {
     path: '/404',

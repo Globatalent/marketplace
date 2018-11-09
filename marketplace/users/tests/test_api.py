@@ -8,7 +8,6 @@ from marketplace.users.tests.factories import UserFactory
 
 
 class UserAPITests(APITestCase):
-
     def setUp(self):
         self.user = UserFactory()
 
@@ -22,7 +21,11 @@ class UserAPITests(APITestCase):
 
     def test_register_user(self):
         users = User.objects.all().count()
-        data = {"email": "new@example.com", "password": "secure", "birth_date": "2000-01-02"}
+        data = {
+            "email": "new@example.com",
+            "password": "secure",
+            "birth_date": "2000-01-02",
+        }
         response = self.client.post("/api/v1/users/", data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(users + 1, User.objects.all().count())
@@ -39,10 +42,7 @@ class UserAPITests(APITestCase):
 
     def test_update_me(self):
         self.client.force_authenticate(self.user)
-        data = {
-            "email": "client1@example.com",
-            "password": "new_password",
-        }
+        data = {"email": "client1@example.com", "password": "new_password"}
         response = self.client.patch("/api/v1/users/me/", data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         user = User.objects.get(pk=self.user.pk)
@@ -51,7 +51,6 @@ class UserAPITests(APITestCase):
 
 
 class VerifyEmailAPITests(APITestCase):
-
     def setUp(self):
         self.user = UserFactory()
 
@@ -59,33 +58,22 @@ class VerifyEmailAPITests(APITestCase):
         self.user.is_email_verified = False
         self.user.save()
         self.assertFalse(self.user.is_email_verified)
-        data = {
-            "verification_code": self.user.verification_code,
-        }
-        response = self.client.post(
-            "/api/v1/verify_email/",
-            data=data,
-            format="json"
-        )
+        data = {"verification_code": self.user.verification_code}
+        response = self.client.post("/api/v1/verify_email/", data=data, format="json")
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         user = User.objects.get(pk=self.user.pk)
         self.assertTrue(user.is_email_verified)
 
 
 class RestorePasswordAPITests(APITestCase):
-
     def setUp(self):
         self.user = UserFactory()
 
     def test_request_restore_code(self):
         self.assertIsNone(self.user.restore_password_code)
-        data = {
-            "email": self.user.email,
-        }
+        data = {"email": self.user.email}
         response = self.client.post(
-            "/api/v1/request_restore_code/",
-            data=data,
-            format="json"
+            "/api/v1/request_restore_code/", data=data, format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         user = User.objects.get(pk=self.user.pk)
@@ -99,9 +87,7 @@ class RestorePasswordAPITests(APITestCase):
             "restore_password_code": self.user.restore_password_code,
         }
         response = self.client.post(
-            "/api/v1/restore_password/",
-            data=data,
-            format="json"
+            "/api/v1/restore_password/", data=data, format="json"
         )
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         user = User.objects.get(pk=self.user.pk)

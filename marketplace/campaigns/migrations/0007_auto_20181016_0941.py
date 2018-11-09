@@ -5,14 +5,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0006_auto_20181016_0941'),
-    ]
+    dependencies = [("campaigns", "0006_auto_20181016_0941")]
 
     operations = [
         migrations.RenameField(
-            model_name='recommendation',
-            old_name='image',
-            new_name='file',
-        ),
+            model_name="recommendation", old_name="image", new_name="file"
+        )
     ]

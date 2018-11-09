@@ -9,24 +9,66 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Token',
+            name="Token",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('name', models.CharField(blank=True, max_length=100, null=True)),
-                ('code', models.CharField(blank=True, max_length=16, null=True)),
-                ('amount', models.PositiveIntegerField(help_text='amount of tokens issued by the athlete')),
-                ('price', models.FloatField(help_text='total price for the amount of tokens issued')),
-                ('currency', models.CharField(blank=True, choices=[('EUR', 'EUR'), ('USD', 'USD'), ('ETH', 'ETH'), ('BTC', 'BTC')], default='USD', max_length=3)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                ("name", models.CharField(blank=True, max_length=100, null=True)),
+                ("code", models.CharField(blank=True, max_length=16, null=True)),
+                (
+                    "amount",
+                    models.PositiveIntegerField(
+                        help_text="amount of tokens issued by the athlete"
+                    ),
+                ),
+                (
+                    "price",
+                    models.FloatField(
+                        help_text="total price for the amount of tokens issued"
+                    ),
+                ),
+                (
+                    "currency",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("EUR", "EUR"),
+                            ("USD", "USD"),
+                            ("ETH", "ETH"),
+                            ("BTC", "BTC"),
+                        ],
+                        default="USD",
+                        max_length=3,
+                    ),
+                ),
             ],
-            options={
-                'ordering': ('created',),
-            },
-        ),
+            options={"ordering": ("created",)},
+        )
     ]

@@ -1,5 +1,5 @@
 export const messages = {
-  en: {
+  'en-US': {
     message: {
       SignIn: 'Sign In',
       Email: 'Email',
@@ -131,14 +131,31 @@ export const messages = {
       Favorite: 'Favorite',
       DaysLeft: 'days left',
       M10Token: '1 M10 token',
-      SoftCapt: 'Soft Capt',
+      SoftCapt: 'Soft Cap',
       ExpertsRating: 'Experts Rating',
       FundsRequierement: 'Funds requirement',
       LookingToRaise: 'Looking to raise',
       PlayerPoweredBy: 'Player powered by',
+      ContactUs: 'Contact us',
+      StartFreeTrial: 'Start free trial',
+      StartCampaignNow: '<span class="is-bold">Start</span> a campaign now',
+      AlsoGift: 'Also, we have a gift for you!',
+      AddFavorites: 'Add to favorites',
+      InvestIn: 'Invest in',
+      ExpectedSportAchievements: 'Expected Sport Achievements',
+      HowYouWillUse: 'How you will use the funds',
+      WhatWillYou: 'What will you give back to your supporters?',
+      Revenue3years: 'Revenue for the last 3 years',
+      IncomeForecastFor5: 'Income forecast for the next 5 years',
+      ExamplesIncomeSimilar: 'Examples of income from similar players of the same sport',
+      DueToRegulations: 'Due to regulations we need to know some details about people using the platform. Information will be kept strictly confidential.',
+      CountryResidence: 'Country of residence',
+      Citizenship: 'Citizenship',
+      AcceptDataProtectionConditions: 'I accept data protection conditions',
+      PurchaseGBTTokens: 'Purchase GBT Tokens',
     }
   },
-  es: {
+  'es-ES': {
     message: {
       SignIn: 'Sign In',
       Email: 'Email',

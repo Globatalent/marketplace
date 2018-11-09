@@ -8,9 +8,7 @@ from marketplace.alerts.models import Alert
 class AlertViewSet(viewsets.ModelViewSet):
     serializer_class = AlertSerializer
     queryset = Alert.objects.all()
-    permissions_classes = [
-        IsAuthenticated
-    ]
+    permissions_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = super().get_queryset()

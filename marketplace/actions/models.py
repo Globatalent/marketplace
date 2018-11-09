@@ -25,41 +25,38 @@ class Action(TimeStampedModel):
     """
 
     actor_content_type = models.ForeignKey(
-        ContentType,
-        related_name='actor_actions',
-        null=True,
-        on_delete=models.CASCADE,
+        ContentType, related_name="actor_actions", null=True, on_delete=models.CASCADE
     )
     actor_object_id = models.PositiveIntegerField(null=True)
-    actor = GenericForeignKey('actor_content_type', 'actor_object_id')
+    actor = GenericForeignKey("actor_content_type", "actor_object_id")
 
     verb = models.CharField(max_length=255, null=True)
 
     trigger_content_type = models.ForeignKey(
         ContentType,
-        related_name='trigger_actions',
+        related_name="trigger_actions",
         blank=True,
         null=True,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     trigger_object_id = models.PositiveIntegerField(blank=True, null=True)
-    trigger = GenericForeignKey('trigger_content_type', 'trigger_object_id')
+    trigger = GenericForeignKey("trigger_content_type", "trigger_object_id")
 
     target_content_type = models.ForeignKey(
         ContentType,
-        related_name='target_actions',
+        related_name="target_actions",
         blank=True,
         null=True,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
     )
     target_object_id = models.PositiveIntegerField(blank=True, null=True)
-    target = GenericForeignKey('target_content_type', 'target_object_id')
+    target = GenericForeignKey("target_content_type", "target_object_id")
 
     sent = models.BooleanField(default=False)
 
     class Meta:
-        verbose_name = _('action')
-        verbose_name_plural = _('actions')
+        verbose_name = _("action")
+        verbose_name_plural = _("actions")
 
     def __str__(self):
         return self.text()
@@ -76,10 +73,11 @@ class Action(TimeStampedModel):
         # If the actor is an athlete
         if self.actor_content_type == ContentType.objects.get_for_model(Campaign):
             followers = self.actor.followers.all()
-            return User.objects.filter(pk__in=followers.values_list('pk', flat=True))
+            return User.objects.filter(pk__in=followers.values_list("pk", flat=True))
         # If the actor is an user and the trigger is and campaign
-        if self.actor_content_type == ContentType.objects.get_for_model(User) and \
-           self.trigger_content_type == ContentType.objects.get_for_model(Campaign):
+        if self.actor_content_type == ContentType.objects.get_for_model(
+            User
+        ) and self.trigger_content_type == ContentType.objects.get_for_model(Campaign):
             return User.objects.filter(pk=self.trigger.user.pk)
         return User.objects.none()
 
@@ -100,25 +98,26 @@ class Action(TimeStampedModel):
 
 class Notification(TimeStampedModel):
     """A 'notification' is a specific action that should be notified to an user."""
+
     action = models.ForeignKey(
         "actions.Action",
         on_delete=models.CASCADE,
-        related_name='notifications',
+        related_name="notifications",
         null=True,
     )
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        verbose_name=_('user'),
-        related_name='notifications',
+        verbose_name=_("user"),
+        related_name="notifications",
         on_delete=models.CASCADE,
     )
     read = models.BooleanField(default=False)
     read_at = models.DateTimeField(blank=True, null=True)
 
     class Meta:
-        verbose_name = _('notification')
-        verbose_name_plural = _('notifications')
-        ordering = ('-created', )
+        verbose_name = _("notification")
+        verbose_name_plural = _("notifications")
+        ordering = ("-created",)
 
     def __str__(self):
         return "{}: ".format(str(self.user), str(self.action))

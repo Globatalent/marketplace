@@ -1,12 +1,12 @@
 <template>
   <el-col :xs="24" class="formSteps-container">
-    <div class="infoTag">Draft Campaign</div>
+    <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/campaigns/create">Funding</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
-      <el-button type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
+      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
       <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
@@ -24,11 +24,11 @@
       </el-form-item>
       <el-form-item required :label="$tc('message.HowYouUseFunds')">
         <p class="formSteps-inputText">(Hire a trainer, equipment, travel)</p>
-        <el-input type="text" v-model="form.use"></el-input>
+        <el-input type="textarea" v-model="form.use"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.GiveBack')">
         <p class="formSteps-inputText">Express the magnitude of what contributors will help you achieve.</p>
-        <el-input type="text" v-model="form.giveBack"></el-input>
+        <el-input type="textarea" v-model="form.giveBack"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.RevenueFor')">
         <p class="formSteps-inputText">Express the magnitude of what contributors will help you achieve.</p>
@@ -58,7 +58,7 @@
       </el-form-item>
       <el-form-item required :label="$tc('message.Examples')">
         <p class="formSteps-inputText">Examples of income of other similar professionals of the same sport</p>
-        <el-input type="text" v-model="form.examples"></el-input>
+        <el-input type="textarea" v-model="form.examples"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.Recommendations')">
         <p class="formSteps-inputText">Upload recommendation /reference letters from coaches/experts</p>
@@ -191,7 +191,9 @@ export default {
         incomes: this.form.incomes,
         examples: this.form.examples
       }
-      this.$store.dispatch('campaigns/update', payload)
+      this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.form = { ...this.campaign }
+      })
     },
     onDiscard() {
       const payload = { id: this.campaign.id }

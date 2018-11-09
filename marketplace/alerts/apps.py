@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class AlertsConfig(AppConfig):
-    name = 'marketplace.alerts'
+    name = "marketplace.alerts"
     verbose_name = "Alerts"

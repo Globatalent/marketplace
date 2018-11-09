@@ -11,6 +11,9 @@ export default {
   pushCampaigns (state, campaigns) {
     state.campaigns = state.campaigns.concat(campaigns)
   },
+  pushSports (state, sports) {
+    state.sports = state.sports.concat(sports)
+  },
   pagination(state, pagination) {
     state.pagination.count = pagination.count;
     state.pagination.next = pagination.next;

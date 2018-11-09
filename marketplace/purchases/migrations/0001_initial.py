@@ -12,25 +12,81 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('tokens', '0001_initial'),
+        ("tokens", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Purchase',
+            name="Purchase",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', model_utils.fields.AutoCreatedField(default=django.utils.timezone.now, editable=False, verbose_name='created')),
-                ('modified', model_utils.fields.AutoLastModifiedField(default=django.utils.timezone.now, editable=False, verbose_name='modified')),
-                ('amount', models.PositiveIntegerField(help_text='amount of tokens purchased by the supporter')),
-                ('total', models.FloatField(blank=True, help_text='total paid for the amount of tokens')),
-                ('status', models.CharField(blank=True, choices=[('paid', 'Paid'), ('pending', 'Pending'), ('canceled', 'Cancelled')], default='pending', max_length=8)),
-                ('token', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='purchases', to='tokens.Token')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='purchases', to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    model_utils.fields.AutoCreatedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="created",
+                    ),
+                ),
+                (
+                    "modified",
+                    model_utils.fields.AutoLastModifiedField(
+                        default=django.utils.timezone.now,
+                        editable=False,
+                        verbose_name="modified",
+                    ),
+                ),
+                (
+                    "amount",
+                    models.PositiveIntegerField(
+                        help_text="amount of tokens purchased by the supporter"
+                    ),
+                ),
+                (
+                    "total",
+                    models.FloatField(
+                        blank=True, help_text="total paid for the amount of tokens"
+                    ),
+                ),
+                (
+                    "status",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("paid", "Paid"),
+                            ("pending", "Pending"),
+                            ("canceled", "Cancelled"),
+                        ],
+                        default="pending",
+                        max_length=8,
+                    ),
+                ),
+                (
+                    "token",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="purchases",
+                        to="tokens.Token",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="purchases",
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
-            options={
-                'ordering': ('created',),
-            },
-        ),
+            options={"ordering": ("created",)},
+        )
     ]

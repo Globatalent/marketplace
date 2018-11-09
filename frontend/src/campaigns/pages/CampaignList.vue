@@ -22,14 +22,14 @@
     <el-row>
       <el-col :xs="24">
         <div class="searchList">
-          <el-input :placeholder='$tc("message.Search")' class="searchList-input">
+          <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search" @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <el-select :placeholder='$tc("message.BySport")' class="searchList-option">
-            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option> -->
+          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport">
+            <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
+            </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option">
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country">
             <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option> -->
           </el-select>
@@ -44,10 +44,10 @@
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(campaign, index) in campaigns" :key="index">
         <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
           <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
-            <div class="campaign-sport" v-if="campaign.sport">{{campaign.sport.name}}</div>
+            <div class="campaign-sport" v-if="campaign.sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
           </div>
           <div class="campaign-image is-placeholder-image" v-else>
-            <div class="campaign-sport" v-if="campaign.sport">{{campaign.sport.name}}</div>
+            <div class="campaign-sport" v-if="campaign.sport" :style="'background-color:'+getRandomSportColor(campaign.sport.id)">{{campaign.sport.name}}</div>
           </div>
         </router-link>
         <div class="campaign-info">
@@ -64,7 +64,7 @@
             </el-row>
             <el-row>
               <el-col>
-                <div class="campaign-subtitle"><span v-if="campaign.description">{{campaign.description.substring(0,50)+" ..."}}</span></div>
+                <div class="campaign-subtitle"><span v-if="campaign.giveBack">{{campaign.giveBack.length > 50 ? campaign.giveBack.substring(0,50)+" ..." : campaign.giveBack}}</span></div>
               </el-col>
             </el-row>
           </div>
@@ -73,11 +73,11 @@
             <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} GBT</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
-                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" star-size="15" :round-start-rating="false"></star-rating>
+                  <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
                 </div>
               </div>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(campaign)" v-if="progress(campaign) < 100"></el-progress>
@@ -88,17 +88,30 @@
             <!-- <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
                 <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
               </router-link> -->
-            <!-- <div class="timeLeft">
-              <i class="far fa-clock"></i><span class="timeLeft-text">30 days left</span>
-            </div> -->
-            <div class="likeButton" v-if="isSupporter" @click="setFollowingCampaign(index, campaign)">
-              <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
-              <i class="far fa-heart likeIcon" v-else></i>
+            <div class="timeLeft">
+              <i class="far fa-clock"></i><span class="timeLeft-text">{{campaign.remaining}} days left</span>
+            </div>
+            <div class="likeButton" v-if="isLogged" @click="setFollowingCampaign(index, campaign)">
+              <el-tooltip class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom">
+                <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
+                <i class="far fa-heart likeIcon" v-else></i>
+              </el-tooltip>
             </div>
           </div>
         </div>
       </el-card>
     </masonry>
+    <div class="campaignList-startBlock">
+      <div class="campaignList-startBlock-container">
+        <div class="campaignList-startBlock-sentence">
+          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
+            <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+          </router-link>
+          <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
+        </div>
+        <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button>
+      </div>
+    </div>
   </gb-base-layout>
 </template>
 
@@ -116,20 +129,26 @@ export default {
   },
   data() {
     return {
+      search: null,
+      sport: null,
+      country: null,
       errorMessage: ''
     }
   },
   computed: {
     ...mapGetters({
+      sports: 'campaigns/sports',
       campaigns: 'campaigns/campaigns',
       pagination: 'campaigns/pagination',
       user: 'users/user'
     }),
-    isSupporter() {
-      return !!this.user && !!this.user.supporter
+    isLogged() {
+      return !!this.user
     }
   },
   created() {
+    this.$store.commit('campaigns/sports', [])
+    this.$store.dispatch('campaigns/sports')
     this.initial()
   },
   methods: {
@@ -139,19 +158,28 @@ export default {
       if (!!this.user) {
         this.$store.dispatch('users/fetchUser').then(() => {
           this.$store.dispatch('campaigns/list', {
-            filters: { is_draft: 'False', state: 'approved' }
+            filters: { active: 'True' }
           })
         })
       } else {
         this.$store.dispatch('campaigns/list', {
           filters: {
-            is_draft: 'False',
-            state: 'approved'
+            active: 'True'
           }
         })
         // .then(() => {
         //   console.log(this.campaigns)
         // })
+      }
+    },
+    onSearch(event) {
+      // Update the campaign list using the search
+      if (event.keyCode === 13) {
+        let filters = {
+          active: 'True'
+        }
+        if (!!this.search && this.search !== "") filters.search = this.search
+        this.$store.dispatch('campaigns/list', {filters: filters})
       }
     },
     scroll() {
@@ -164,7 +192,7 @@ export default {
       }
     },
     getPrice(campaign) {
-      return campaign.token ? campaign.token.amount : 0
+      return campaign.funds
     },
     progress(campaign) {
       if (!!campaign.token) {
@@ -180,12 +208,29 @@ export default {
     },
     getRandomRating() {
       const precision = 10 // 1 decimals
-      return (
-        Math.floor(
-          Math.random() * (10 * precision - 1 * precision) + 1 * precision
-        ) /
-        (1 * precision)
-      )
+      let randomResult = 0
+      while (randomResult < 4 || randomResult > 5) {
+        randomResult =
+          Math.floor(
+            Math.random() * (10 * precision - 1 * precision) + 1 * precision
+          ) /
+          (1 * precision)
+      }
+      return randomResult
+    },
+    getRandomSportColor(sport) {
+      let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+      let localSportsColors
+      if (localStorage.sportsColors === undefined) {
+        localSportsColors = []
+        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      }
+      localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+      if (!localSportsColors[sport]) {
+        localSportsColors[sport] = randomColor
+      }
+      localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+      return localSportsColors[sport]
     }
   }
 }
@@ -195,7 +240,7 @@ export default {
 @import '../../scss/variables.scss';
 .el-card {
   border-radius: 8px;
-  height: 445px;
+  height: 470px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
   margin-bottom: 35px;
   &:hover {
@@ -320,5 +365,55 @@ export default {
 }
 .searchList-option {
   margin-left: 30px;
+}
+
+.campaignList-startBlock {
+  margin: 30px auto;
+  border-top: 1px solid $--grey-detailCampaign-border;
+  padding-top: 40px;
+  display: block;
+  width: 100%;
+  max-width: 895px;
+  font-size: 0px;
+}
+
+.campaignList-startBlock-container {
+  max-width: 585px;
+  display: block;
+  margin: 0 auto;
+}
+
+.campaignList-startBlock-sentence {
+  display: inline-block;
+  vertical-align: top;
+  text-align: right;
+  padding-right: 20px;
+  padding-right: 0px;
+  width: 70%;
+  width: 100%;
+  text-align: center;
+}
+
+.campaignList-startBlock-sentence1 {
+  font-weight: normal;
+  font-family: 'OpenSans Regular';
+  font-size: 36px;
+  line-height: 36px;
+  margin: 0;
+}
+
+.campaignList-startBlock-sentence2 {
+  font-size: 14px;
+}
+
+.startFreeButton {
+  display: inline-block;
+  vertical-align: top;
+  width: 30%;
+  font-size: 14px;
+  font-family: 'OpenSans SemiBold';
+  position: relative;
+  top: 6px;
+  display: none;
 }
 </style>

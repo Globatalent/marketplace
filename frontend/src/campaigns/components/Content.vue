@@ -1,12 +1,12 @@
 <template>
   <el-col :xs="24" class="formSteps-container">
-    <div class="infoTag">Draft Campaign</div>
+    <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/campaigns/create">Content</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
-      <el-button type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
+      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
       <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
@@ -18,7 +18,7 @@
           <el-input type="text" v-model="link.url" placeholder="http://"></el-input>
         </div>
       </el-form-item>
-      <el-form-item required :label="$tc('message.BasicInformation')">
+      <el-form-item required :label="$tc('message.BasicInformation')" v-if="form.kind==='athlete'">
         <el-input type="text" :placeholder="$tc('message.Height')" v-model="form.height"></el-input>
         <el-input type="text" :placeholder="$tc('message.Weight')" v-model="form.weight"></el-input>
       </el-form-item>
@@ -118,7 +118,8 @@ export default {
         'youtube',
         'linkedin',
         'whatsapp',
-        'flickr'
+        'flickr',
+        'web',
       ]
       const socialLinks = networks.map(network => {
         const links = campaign.links.filter(item => item.network == network)
@@ -147,6 +148,7 @@ export default {
         pitchImage: this.form.pitchImage
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.form = { ...this.campaign }
         router.push({
           name: 'campaign.edit',
           params: {

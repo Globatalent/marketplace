@@ -5,20 +5,10 @@ from marketplace.tokens.api.v1.serializers import TokenSerializer
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Purchase
-        fields = [
-            "id",
-            "token",
-            "amount",
-            "status",
-            "total",
-        ]
-        extra_kwargs = {
-            "total": {"read_only": True},
-            "status": {"read_only": True}
-        }
+        fields = ["id", "token", "amount", "status", "total"]
+        extra_kwargs = {"total": {"read_only": True}, "status": {"read_only": True}}
 
 
 class PurchaseReadSerializer(PurchaseSerializer):

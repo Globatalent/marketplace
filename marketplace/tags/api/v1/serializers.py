@@ -1,4 +1,3 @@
-
 from rest_framework import serializers
 
 from marketplace.tags.models import Tag
