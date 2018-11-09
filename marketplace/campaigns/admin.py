@@ -51,7 +51,7 @@ def approve_campaigns(modeladmin, request, queryset):
     messages.success(request, _("Campaigns approved!"))
 
 
-approve_campaigns.short_description = _("Regenerate token code")
+approve_campaigns.short_description = _("Approve campaigns")
 
 
 @admin.register(Campaign)
