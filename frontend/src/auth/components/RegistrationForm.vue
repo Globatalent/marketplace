@@ -12,7 +12,14 @@
               <el-input v-bind:placeholder="$tc('message.LastName')" type="text" v-model="form.lastName"></el-input>
             </el-form-item>
             <el-form-item required prop="country">
-              <el-input v-bind:placeholder="$tc('message.CountryResidence')" type="text" v-model="form.country"></el-input>
+              <el-select v-model="form.country" filterable v-bind:placeholder="$tc('message.CountryResidence')">
+                <el-option
+                  v-for="(code, index) in Object.keys(countries)"
+                  :key="index"
+                  :label="countries[code]"
+                  :value="code">
+                </el-option>
+              </el-select>
             </el-form-item>
             <el-form-item required prop="citizenship">
               <el-input v-bind:placeholder="$tc('message.Citizenship')" type="text" v-model="form.citizenship"></el-input>
@@ -36,13 +43,12 @@
         <el-row>
           <el-col :xs="24">
             <el-form-item class="text-left">
-              <el-checkbox class="registrationForm-accept" v-bind:label="$tc('message.AcceptDataProtectionConditions')"></el-checkbox>
+              <el-checkbox class="registrationForm-accept"><a href="http://www.globatalent.com/termsandconditions">{{$tc('message.AcceptDataProtectionConditions')}}</a></el-checkbox>
             </el-form-item>
           </el-col>
         </el-row>
         <el-form-item class="text-center">
-          <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc('message.Register')
-            }}
+          <el-button type="primary" class="is-uppercase" @click.prevent="onSubmit('form')">{{ $tc('message.Register')}}
           </el-button>
         </el-form-item>
       </el-form>
@@ -59,12 +65,15 @@
 <script>
 import router from '@/router.js'
 import { Message } from 'element-ui'
+import countries from '@/base/helpers/countries'
+
 
 export default {
   name: 'RegistrationForm',
   components: {},
   data() {
     return {
+      countries: countries,
       form: {
         firstName: '',
         lastName: '',
@@ -115,6 +124,9 @@ export default {
         ],
       }
     }
+  },
+  created() {
+    console.log(countries)
   },
   methods: {
     validatePass(rule, value, callback) {
@@ -168,13 +180,15 @@ export default {
 .el-date-editor.el-input.datepicker {
   width: 100%;
 }
+.el-select {
+  width: 100%;
+}
 .registrationForm-infoRegulations {
   margin-top: 5px;
   font-size: 9px;
   font-family: 'OpenSans Regular';
   color: $--grey-text;
 }
-
 .el-checkbox .el-checkbox__label{
   font-size: 12px;
 }

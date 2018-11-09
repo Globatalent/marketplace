@@ -19,7 +19,7 @@ MALE = "male"
 FEMALE = "female"
 SEX_CHOICES = ((MALE, _("Male")), (FEMALE, _("Female")))
 
-FACEBOOK, INSTAGRAM, TWITTER, YOUTUBE, LINKEDIN, WHATSAPP, FLICKR = (
+FACEBOOK, INSTAGRAM, TWITTER, YOUTUBE, LINKEDIN, WHATSAPP, FLICKR, WEB = (
     "facebook",
     "instagram",
     "twitter",
@@ -27,6 +27,7 @@ FACEBOOK, INSTAGRAM, TWITTER, YOUTUBE, LINKEDIN, WHATSAPP, FLICKR = (
     "linkedin",
     "whatsapp",
     "flickr",
+    "web",
 )
 SOCIAL_NETWORKS = (
     (FACEBOOK, _("Facebook")),
@@ -36,4 +37,5 @@ SOCIAL_NETWORKS = (
     (LINKEDIN, _("LinkedIn")),
     (WHATSAPP, _("WhatsApp")),
     (FLICKR, _("Flickr")),
+    (WEB, _("Web")),
 )

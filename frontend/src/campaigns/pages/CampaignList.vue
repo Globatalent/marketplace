@@ -26,7 +26,7 @@
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
           <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport">
-            <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+            <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
             </el-option>
           </el-select>
           <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country">
@@ -73,8 +73,8 @@
             <div>
               <div class="campaign-progress-info">
                 <div class="campaign-progress-info-funding">
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
-                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ getPrice(campaign) }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
+                  <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
                   <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
@@ -104,7 +104,9 @@
     <div class="campaignList-startBlock">
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
-          <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
+            <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+          </router-link>
           <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
         </div>
         <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button>
@@ -145,6 +147,7 @@ export default {
     }
   },
   created() {
+    this.$store.commit('campaigns/sports', [])
     this.$store.dispatch('campaigns/sports')
     this.initial()
   },
@@ -189,7 +192,7 @@ export default {
       }
     },
     getPrice(campaign) {
-      return campaign.token ? campaign.token.amount : 0
+      return campaign.funds
     },
     progress(campaign) {
       if (!!campaign.token) {

@@ -319,6 +319,11 @@ CONFIGURATION_DEFAULT_OPTIONS = {
         "type": 1,
         "public_name": "Default campaign lifetime",
     },
+    "DEFAULT_TOKEN_PRICE": {
+        "value": 5.0,
+        "type": 0,
+        "public_name": "Default token price",
+    },
 }
 
 # SENTRY

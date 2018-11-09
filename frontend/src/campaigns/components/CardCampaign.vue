@@ -1,12 +1,12 @@
 <template>
   <el-col :xs="24" class="formSteps-container">
-    <div class="infoTag">Draft Campaign</div>
+    <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
       <el-breadcrumb-item><a href="/campaigns/create">Card campaign</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
-      <el-button type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
+      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
       <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
@@ -37,7 +37,7 @@
       <el-form-item required :label="$tc('message.Sport')">
         <p class="formSteps-inputText">Provide a short description that best describes your campaign to your audience.</p>
         <el-select v-model="form.sport" placeholder="Select">
-          <el-option v-for="sport in sports" :key="sport.id" :label="sport.name" :value="sport.id">
+          <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
           </el-option>
         </el-select>
       </el-form-item>
@@ -101,6 +101,7 @@ export default {
     })
   },
   created() {
+    this.$store.commit('campaigns/sports', [])
     this.$store.dispatch('campaigns/sports')
     this.$store
       .dispatch('campaigns/fetch', this.$route.params.campaignId)

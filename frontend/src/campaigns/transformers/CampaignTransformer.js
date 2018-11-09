@@ -39,6 +39,8 @@ class CampaignTransformer extends Transformer {
       remaining: campaign.remaining,
       started: campaign.started,
       finished: campaign.finished,
+      history: campaign.history,
+      players: campaign.players,
       token: !!campaign.token? TokenTransformer.fetch(campaign.token) : null,
     })
   }
@@ -68,6 +70,8 @@ class CampaignTransformer extends Transformer {
       'use': campaign.use,
       'give_back': campaign.giveBack,
       'examples': campaign.examples,
+      'history': campaign.history,
+      'players': campaign.players,
     }
     if (!!campaign.tags) {
       data.tags = campaign.tags
