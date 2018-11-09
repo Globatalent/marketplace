@@ -5,14 +5,26 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0014_auto_20181029_1008'),
-    ]
+    dependencies = [("campaigns", "0014_auto_20181029_1008")]
 
     operations = [
         migrations.AlterField(
-            model_name='link',
-            name='network',
-            field=models.CharField(blank=True, choices=[('facebook', 'Facebook'), ('instagram', 'Instagram'), ('twitter', 'Twitter'), ('youtube', 'YouTube'), ('linkedin', 'LinkedIn'), ('whatsapp', 'WhatsApp'), ('flickr', 'Flickr'), ('web', 'Web')], max_length=32, null=True),
-        ),
+            model_name="link",
+            name="network",
+            field=models.CharField(
+                blank=True,
+                choices=[
+                    ("facebook", "Facebook"),
+                    ("instagram", "Instagram"),
+                    ("twitter", "Twitter"),
+                    ("youtube", "YouTube"),
+                    ("linkedin", "LinkedIn"),
+                    ("whatsapp", "WhatsApp"),
+                    ("flickr", "Flickr"),
+                    ("web", "Web"),
+                ],
+                max_length=32,
+                null=True,
+            ),
+        )
     ]

@@ -1,6 +1,7 @@
-from django.contrib import admin
+from django.contrib import admin, messages
 from django.utils.translation import ugettext_lazy as _
 
+from marketplace.campaigns.constants import APPROVED
 from marketplace.campaigns.models import (
     Campaign,
     Sport,
@@ -43,6 +44,16 @@ class ReviewInLine(admin.TabularInline):
     model = Review
 
 
+def approve_campaigns(modeladmin, request, queryset):
+    for campaign in queryset:
+        campaign.status = APPROVED
+        campaign.save()
+    messages.success(request, _("Campaigns approved!"))
+
+
+approve_campaigns.short_description = _("Regenerate token code")
+
+
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
     list_display = ["id", "kind", "title", "is_draft", "state", "user", "created"]
@@ -57,46 +68,55 @@ class CampaignAdmin(admin.ModelAdmin):
         RecommendationInline,
         ReviewInLine,
     ]
+    actions = [approve_campaigns]
     fieldsets = [
-        (None, {'fields': [
-            'user',
-            'is_draft',
-            'kind',
-            'state',
-            'rating',
-            'token',
-            'started',
-            'finished',
-        ]}),
-        (_('Card'), {'fields': [
-            'title',
-            'description',
-            'image',
-            'gender',
-            'sport',
-            'tags',
-        ]}),
-        (_('Content'), {'fields': [
-            'height',
-            'weight',
-            'club',
-            'coach',
-            'pitch_url',
-            'pitch_image',
-        ]}),
-        (_('Career & club'), {'fields': [
-            'ranking',
-            'biography',
-            'achievements',
-            'history',
-            'players',
-            'expected',
-        ]}),
-        (_('Founding'), {'fields': [
-            'currency',
-            'funds',
-            'use',
-            'give_back',
-            'examples',
-        ]}),
+        (
+            None,
+            {
+                "fields": [
+                    "user",
+                    "is_draft",
+                    "kind",
+                    "state",
+                    "rating",
+                    "token",
+                    "started",
+                    "finished",
+                ]
+            },
+        ),
+        (
+            _("Card"),
+            {"fields": ["title", "description", "image", "gender", "sport", "tags"]},
+        ),
+        (
+            _("Content"),
+            {
+                "fields": [
+                    "height",
+                    "weight",
+                    "club",
+                    "coach",
+                    "pitch_url",
+                    "pitch_image",
+                ]
+            },
+        ),
+        (
+            _("Career & club"),
+            {
+                "fields": [
+                    "ranking",
+                    "biography",
+                    "achievements",
+                    "history",
+                    "players",
+                    "expected",
+                ]
+            },
+        ),
+        (
+            _("Founding"),
+            {"fields": ["currency", "funds", "use", "give_back", "examples"]},
+        ),
     ]

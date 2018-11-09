@@ -11,6 +11,7 @@ def regenerate_token_code(modeladmin, request, queryset):
         token.save()
     messages.success(request, _("Codes regenerated!"))
 
+
 regenerate_token_code.short_description = _("Regenerate token code")
 
 

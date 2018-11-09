@@ -5,14 +5,10 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('campaigns', '0015_auto_20181108_1552'),
-    ]
+    dependencies = [("campaigns", "0015_auto_20181108_1552")]
 
     operations = [
         migrations.AddField(
-            model_name='campaign',
-            name='rating',
-            field=models.FloatField(default=4.0),
-        ),
+            model_name="campaign", name="rating", field=models.FloatField(default=4.0)
+        )
     ]

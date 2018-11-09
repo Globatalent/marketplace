@@ -2,8 +2,11 @@ from options.models import Option
 
 from marketplace.tokens.models import Token
 
+
 def generate_token_code(string):
-    code = "{}T".format("".join(list(map(lambda x: x[:1], string.upper().split(" ")[:2]))))
+    code = "{}T".format(
+        "".join(list(map(lambda x: x[:1], string.upper().split(" ")[:2])))
+    )
     return "{}{}".format(code[0] * (3 - len(code)), code)
 
 
