@@ -77,7 +77,7 @@
                   <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span class="campaign-progress-info-funding-qty"> {{ $n(campaign.funds) }} USD</span></div>
                 </div>
                 <div class="campaign-progress-rating">
-                  <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
+                  <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="15" :round-start-rating="false"></star-rating>
                 </div>
               </div>
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress(campaign)" v-if="progress(campaign) < 100"></el-progress>

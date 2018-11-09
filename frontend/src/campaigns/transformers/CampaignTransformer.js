@@ -41,6 +41,7 @@ class CampaignTransformer extends Transformer {
       finished: campaign.finished,
       history: campaign.history,
       players: campaign.players,
+      rating: campaign.rating,
       token: !!campaign.token? TokenTransformer.fetch(campaign.token) : null,
     })
   }

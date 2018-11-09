@@ -11,6 +11,7 @@
     "build": "node webpack/build.js"
   },
   "dependencies": {
+    "autonumeric": "^4.5.1",
     "axios": "^0.18.0",
     "element-ui": "^2.4.1",
     "jwt-decode": "^2.2.0",

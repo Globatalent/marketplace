@@ -54,7 +54,7 @@
               </div>
               <div class="campaignDetails-fundingDetails-rating">
                 <div class="campaignDetails-fundingDetails-rating-experts"><span class="is-marked is-mark-down">73</span><span class="campaignDetails-fundingDetails-rating-experts-text"> {{$tc('message.ExpertsRating')}}</span></div>
-                <star-rating :rating="getRandomRating()" inline read-only :show-rating="false" :star-size="16" :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
+                <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="16" :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
             <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>

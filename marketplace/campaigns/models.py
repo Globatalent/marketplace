@@ -1,4 +1,5 @@
 import datetime
+import random
 
 from django.conf import settings
 from django.db import models
@@ -61,6 +62,10 @@ class Campaign(TimeStampedModel):
         max_length=20,
         verbose_name=_("state"),
     )
+
+    # Temporal field for rating
+    rating = models.FloatField(default=random.choices([4.0, 5.0])[0])
+
     token = models.OneToOneField(
         "tokens.Token",
         related_name="campaign",

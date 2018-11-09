@@ -121,6 +121,7 @@ class CampaignSerializer(serializers.ModelSerializer):
             "started",
             "finished",
             "remaining",
+            "rating",
         ]
         extra_kwargs = {
             "created": {"read_only": True},
