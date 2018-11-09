@@ -81,7 +81,6 @@
 <script>
   import Vue from 'vue'
   import { mapGetters } from 'vuex'
-  import Campaign from '@/campaigns/models/Campaign'
   import ajax from '@/base/helpers/ajax'
   import router from '@/router.js'
   import ImageUpload from '@/campaigns/components/ImageUpload.vue'
@@ -163,6 +162,9 @@ export default {
       this.$store.dispatch('campaigns/delete', payload).then( () => {
         router.push({name: 'campaign.create'})
       })
+    },
+    updateImage (fieldName, newURL) {
+      this.form[fieldName] = newURL
     },
     onSaveAndContinue() {
       const payload = {

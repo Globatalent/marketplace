@@ -153,6 +153,7 @@ export const messages = {
       Citizenship: 'Citizenship',
       AcceptDataProtectionConditions: 'I accept data protection conditions',
       PurchaseGBTTokens: 'Purchase GBT Tokens',
+      DeleteImage: 'Delete image'
     }
   },
   'es-ES': {
