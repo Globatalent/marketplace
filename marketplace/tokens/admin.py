@@ -18,3 +18,4 @@ regenerate_token_code.short_description = _("Regenerate token code")
 class TokenAdmin(admin.ModelAdmin):
     list_display = ["id", "campaign", "amount", "price", "created"]
     actions = [regenerate_token_code]
+    search_fields = ["name", "code"]
