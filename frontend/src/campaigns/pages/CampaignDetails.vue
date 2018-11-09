@@ -264,6 +264,10 @@ export default {
         name: 'campaign.invest',
         params: { campaigneId: campaign.id }
       })
+      // router.push({
+      //   name: 'purchase',
+      //   params: { campaigneId: campaign.id }
+      // })
     },
     getRandomRating() {
       const precision = 10 // 1 decimals
