@@ -191,7 +191,9 @@ export default {
         incomes: this.form.incomes,
         examples: this.form.examples
       }
-      this.$store.dispatch('campaigns/update', payload)
+      this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.form = { ...this.campaign }
+      })
     },
     onDiscard() {
       const payload = { id: this.campaign.id }

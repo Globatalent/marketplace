@@ -116,6 +116,7 @@ export default {
         players: this.form.players
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.form = { ...this.campaign }
         router.push({
           name: 'campaign.edit',
           params: {

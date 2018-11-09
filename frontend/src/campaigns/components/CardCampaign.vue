@@ -151,6 +151,7 @@ export default {
         tags: this.form.tags
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.form = { ...this.campaign }
         router.push({
           name: 'campaign.edit',
           params: {

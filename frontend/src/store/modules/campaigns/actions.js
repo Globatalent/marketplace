@@ -62,7 +62,7 @@ export default {
       })
     })
   },
-  update({commit, state}, data) {
+  update({commit, state, dispatch}, data) {
     return new Promise((resolve, reject) => {
       const { links, revenues, incomes } = data
       const payload = CampaignTransformer.send(data)
@@ -114,8 +114,10 @@ export default {
         // If there are some external requests, wait for all of them
         if (requests.length > 0) {
           Vue.axios.all(requests).then( () => {
-            commit('campaign', campaign)
-            resolve(campaign)
+            dispatch('fetch', data.id).then( (campaign) => {
+              commit('campaign', campaign)
+              resolve(campaign)
+            })
           })
         } else {
           commit('campaign', campaign)

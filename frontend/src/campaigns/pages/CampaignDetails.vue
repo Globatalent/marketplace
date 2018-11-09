@@ -239,6 +239,8 @@ export default {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
+      this.campaign.incomes.sort((x, y) => x.year - y.year)
+      this.campaign.revenues.sort((x, y) => x.year - y.year)
     })
   },
   methods: {
@@ -395,7 +397,6 @@ a:hover {
   font-size: 14px;
   color: $--black;
   display: inline-block;
-  float: right;
   font-family: 'OpenSans SemiBold';
 }
 
@@ -499,7 +500,6 @@ a:hover {
   padding: 5px 10px;
   border-radius: 5px;
   max-width: 180px;
-  float: right;
 }
 
 .campaignDetails-fundingDetails-rating-experts {
