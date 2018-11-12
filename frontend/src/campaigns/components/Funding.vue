@@ -202,10 +202,6 @@ export default {
       })
     },
     onLaunch(save=true) {
-      if (save) {
-        this.onSaveAndContinue()
-        router.push({name: 'campaign.success', params: {campaignId: this.campaign.id}})
-      }
       // Check if the campaign has all the data
       const required = ['title', 'image', 'sport', 'funds']
       const errors = required.filter(field => !this.campaign[field])
@@ -214,6 +210,10 @@ export default {
           id: this.campaign.id,
           isDraft: false
         })
+        if (save) {
+          this.onSaveAndContinue()
+          router.push({name: 'campaign.success', params: {campaignId: this.campaign.id}})
+        }
       } else {
         Message.error({ message: "You must complete the missing mandatory fields", center: true })
         console.error(errors)
