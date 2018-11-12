@@ -26,21 +26,9 @@
       <el-form-item required :label="$tc('message.CampaignCardImage')">
         <p class="formSteps-inputText">Upload a square image that represents your campaign.<br/>
           640 x 640 recommended resolution, 220 x 220 minimum resolution.</p>
-
-
-
         <gb-image-upload field-name="image" :campaign-id="campaign.id" v-if="campaign" :image-url="form.image"
-                         @image-changed="updateImage">
+                         @image-changed="updateImage('image', $event)">
         </gb-image-upload>
-
-
-
-
-        <!--<el-upload class="campaign-upload" drag :limit="1" :action="options.action" :headers="options.headers"-->
-                   <!--:name="options.name" :http-request="options.httpRequest" list-type="picture-card" :multiple="false">-->
-          <!--<i class="el-icon-upload" style="padding: 0"></i>-->
-          <!--<div class="el-upload__text">Upload Image</div>-->
-        <!--</el-upload>-->
       </el-form-item>
       <el-form-item required v-bind:label="$tc('message.Gender')" class="text-left sexFormElement"
                     v-if="form.kind==='athlete'">

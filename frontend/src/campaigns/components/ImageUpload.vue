@@ -81,7 +81,7 @@
             }
           }
         ).then(({data}) => {
-          this.$emit('image-changed', this.fieldName, data[this.fieldName])
+          this.$emit('image-changed', data[this.fieldName])
           this.uploading = false
         }).catch((error) => {
           console.log('FAILURE!!')
