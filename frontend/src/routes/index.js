@@ -98,7 +98,16 @@ export default [
       auth: true,
     },
   },
-
+  {
+    path: '/faq',
+    name: 'faq',
+    component: resolve => require(['@/pages/Faq.vue'], resolve),
+  },
+  {
+    path: '/news',
+    name: 'news',
+    component: resolve => require(['@/pages/News.vue'], resolve),
+  },
   // 404
   {
     path: '/404',
