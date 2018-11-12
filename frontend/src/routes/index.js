@@ -67,6 +67,15 @@ export default [
     },
   },
   {
+    path: '/campaigns/:campaignId/success',
+    name: 'campaign.success',
+    component: resolve => require(['@/campaigns/pages/CampaignSuccess.vue'], resolve),
+    props: true,
+    meta: {
+      auth: true,
+    },
+  },
+  {
     path: '/campaigns/:campaignId',
     name: 'campaign.details',
     component: resolve => require(['@/campaigns/pages/CampaignDetails.vue'], resolve),

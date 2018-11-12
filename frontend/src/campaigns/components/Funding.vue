@@ -204,6 +204,7 @@ export default {
     onLaunch(save=true) {
       if (save) {
         this.onSaveAndContinue()
+        router.push({name: 'campaign.success', params: {campaignId: this.campaign.id}})
       }
       // Check if the campaign has all the data
       const required = ['title', 'image', 'sport', 'funds']
