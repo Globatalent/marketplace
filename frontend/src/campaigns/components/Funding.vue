@@ -15,7 +15,7 @@
       <el-form-item required :label="$tc('message.FundsRequirement')">
         <p class="formSteps-inputText">How much money you need?</p>
         <div class="formSteps-inputSelect">
-          <el-input type="text" v-model="form.funds"></el-input>
+          <vue-autonumeric class="autonumeric" :options="''" v-model="form.funds"></vue-autonumeric>
           <el-select v-model="form.currency" placeholder="Select">
             <el-option v-for="item in currencies" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
@@ -75,16 +75,18 @@
   </el-col>
 </template>
 
-<script>
+<script type="text/babel">
 import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import { Message } from 'element-ui'
 import router from '@/router.js'
-
+import VueAutonumeric from 'vue-autonumeric/src/components/VueAutonumeric.vue'
 
 export default {
   name: 'Funding',
-  components: {},
+  components: {
+    VueAutonumeric
+  },
   data() {
     return {
       // Form
@@ -139,7 +141,8 @@ export default {
             this.form.currency = 'USD'
           }
         }
-      }).catch(()=> router.push({name: 'campaign.create'}))
+      })
+      .catch(() => router.push({ name: 'campaign.create' }))
   },
   methods: {
     initialRevenues(campaign) {
@@ -197,11 +200,11 @@ export default {
     },
     onDiscard() {
       const payload = { id: this.campaign.id }
-      this.$store.dispatch('campaigns/delete', payload).then( () => {
-        router.push({name: 'campaign.create'})
+      this.$store.dispatch('campaigns/delete', payload).then(() => {
+        router.push({ name: 'campaign.create' })
       })
     },
-    onLaunch(save=true) {
+    onLaunch(save = true) {
       // Check if the campaign has all the data
       const required = ['title', 'image', 'sport', 'funds']
       const errors = required.filter(field => !this.campaign[field])
@@ -212,10 +215,16 @@ export default {
         })
         if (save) {
           this.onSaveAndContinue()
-          router.push({name: 'campaign.success', params: {campaignId: this.campaign.id}})
+          router.push({
+            name: 'campaign.success',
+            params: { campaignId: this.campaign.id }
+          })
         }
       } else {
-        Message.error({ message: "You must complete the missing mandatory fields", center: true })
+        Message.error({
+          message: 'You must complete the missing mandatory fields',
+          center: true
+        })
         console.error(errors)
       }
     }
@@ -224,4 +233,24 @@ export default {
 </script>
 
 <style type="scss" scoped>
+.autonumeric {
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 4px;
+  border: 1px solid #dcdfe6;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  font-size: inherit;
+  height: 40px;
+  line-height: 40px;
+  outline: none;
+  padding: 0 15px;
+  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  width: 100%;
+  max-width: 210px;
+}
 </style>
