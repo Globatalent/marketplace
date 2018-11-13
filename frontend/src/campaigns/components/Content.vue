@@ -27,10 +27,10 @@
         <el-input type="text" :placeholder="$tc('message.Height')" v-model="form.height"></el-input>
         <el-input type="text" :placeholder="$tc('message.Weight')" v-model="form.weight"></el-input>
       </el-form-item>
-      <el-form-item required :label="$tc('message.ActualClub')" v-if="form.kind==='athlete'">
+      <el-form-item required :label="$tc('message.CurrentClub')" v-if="form.kind==='athlete'">
         <el-input type="text" v-model="form.club"></el-input>
       </el-form-item>
-      <el-form-item required :label="$tc('message.ActualCoach')" v-if="form.kind==='athlete'">
+      <el-form-item required :label="$tc('message.CurrentCoach')" v-if="form.kind==='athlete'">
         <el-input type="text" v-model="form.coach"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.PitchVideoorImage')">
