@@ -53,14 +53,14 @@
         <div class="campaign-info">
           <div class="clearfix campaign-nameBlock">
             <el-row>
-              <el-col :span="20">
+              <el-col :span="24">
                 <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
                   <span class="campaign-name">{{campaign.title}}</span>
                 </router-link>
               </el-col>
-              <el-col :span="4" class="text-right">
-                <!-- <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag"> -->
-              </el-col>
+              <!-- <el-col :span="4" class="text-right">
+                <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
+              </el-col> -->
             </el-row>
             <el-row>
               <el-col>
