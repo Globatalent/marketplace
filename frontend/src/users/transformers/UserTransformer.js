@@ -18,11 +18,10 @@ class UserTransformer extends Transformer {
 
   static send(user) {
     let data = {
-      'id': user.id,
       'first_name': user.firstName,
       'last_name': user.lastName,
       'email': user.email,
-      'birth_date': user.birthDate,
+      'birth_date': user.birthDate.toISOString().split('T')[0],
       'avatar': user.avatar,
       'country': user.country,
       'citizenship': user.citizenship,
