@@ -167,7 +167,7 @@
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Revenue3years") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
-              {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+              {{item.year}} - {{item.currency}} <span class="is-bold">{{$n(item.amount)}}</span>
             </div>
             <span class="line"></span>
           </el-col>
@@ -176,7 +176,7 @@
           <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.IncomeForecastFor5") }}</el-col>
           <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
             <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
-              {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+              {{item.year}} - {{item.currency}} <span class="is-bold">{{$n(item.amount)}}</span>
             </div>
             <span class="line"></span>
           </el-col>
