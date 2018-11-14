@@ -12,11 +12,10 @@ import { messages } from './translations/translations'
 import ElementUI from 'element-ui'
 import locale from 'element-ui/lib/locale/lang/en'
 import VueMasonry from 'vue-masonry-css'
-import vue2Dropzone from 'vue2-dropzone'
 /** Axios **/
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import vueSmoothScroll from 'vue-smooth-scroll'
+import VueScrollTo from 'vue-scrollto'
 
 Vue.config.productionTip = false
 
@@ -24,9 +23,8 @@ Vue.use(VueMoment)
 Vue.use(VueI18n)
 Vue.use(ElementUI, { locale })
 Vue.use(VueMasonry)
-Vue.use(vue2Dropzone)
 Vue.use(VueAxios, axios)
-Vue.use(vueSmoothScroll)
+Vue.use(VueScrollTo)
 
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL
