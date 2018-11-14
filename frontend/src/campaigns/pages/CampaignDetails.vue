@@ -33,8 +33,8 @@
             </el-carousel>
           </el-col>
           <el-col :xs="24" :md="8" class="campaignDetails-col">
-            <div class="campaignDetails-collected">{{collected()}} <span
-              class="campaignDetails-collected-currency">USD</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span>
+            <div class="campaignDetails-collected"><span
+              class="campaignDetails-collected-currency">$</span> {{$n(collected())}} <span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span>
             </div>
             <div class="progress m-b-15 clearfix">
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
@@ -194,14 +194,14 @@
         <gb-campaign-info-row v-if="!!campaign.revenues && campaign.revenues.length > 0" id="revenueSection"
                               :title="$tc('message.Revenue3years')">
           <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
-            {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+            {{item.year}} - {{item.currencySymbol}} <span class="is-bold">{{$n(item.amount)}}</span>
           </div>
         </gb-campaign-info-row>
 
         <gb-campaign-info-row v-if="!!campaign.incomes && campaign.incomes.length > 0" id="incomeForecastSection"
                               :title="$tc('message.Revenue3years')">
             <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
-              {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+              {{item.year}} - {{item.currencySymbol}} <span class="is-bold">{{$n(item.amount)}}</span>
             </div>
         </gb-campaign-info-row>
 
@@ -299,7 +299,7 @@ export default {
     goToInvest (campaign) {
       router.push({
         name: 'campaign.invest',
-        params: {campaigneId: campaign.id}
+        params: {campaignId: campaign.id}
       })
       // router.push({
       //   name: 'purchase',
@@ -338,10 +338,6 @@ export default {
         return localSportsColors[sport.id]
       }
       return ''
-    },
-    formatPrice (value) {
-      let val = (value / 1).toFixed(0).replace('.', ',')
-      return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
   }
 }
@@ -462,10 +458,6 @@ a:hover {
   font-size: 14px;
   font-family: 'OpenSans Regular';
   color: $--black;
-}
-
-.campaignDetails-collected-currency {
-  margin-right: 5px;
 }
 
 .campaign-details-container {

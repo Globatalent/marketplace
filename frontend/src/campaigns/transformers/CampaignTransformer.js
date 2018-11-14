@@ -1,8 +1,9 @@
 import Transformer from '../../base/transformers/BaseTransformer'
 import Campaign from '../models/Campaign'
-import Vue from 'vue'
 import TokenTransformer from '@/tokens/transformers/TokenTransformer'
-
+import getCurrencySymbol from '@/base/helpers/currencies'
+import IncomeTransformer from './IncomeTransformer'
+import RevenueTransformer from './RevenueTransformer'
 
 class CampaignTransformer extends Transformer {
   static fetch (campaign) {
@@ -27,14 +28,15 @@ class CampaignTransformer extends Transformer {
       achievements: campaign.achievements,
       expected: campaign.expected,
       currency: campaign.currency,
+      currencySymbol: getCurrencySymbol(campaign.currency),
       funds: campaign.funds,
       use: campaign.use,
       giveBack: campaign.give_back,
       examples: campaign.examples,
       following: campaign.following,
       links: campaign.links,
-      revenues: campaign.revenues,
-      incomes: campaign.incomes,
+      revenues: campaign.revenues.map(x => RevenueTransformer.fetch(x)),
+      incomes: campaign.incomes.map(x => IncomeTransformer.fetch(x)),
       recommendations: campaign.recommendations,
       remaining: campaign.remaining,
       started: campaign.started,
@@ -42,11 +44,11 @@ class CampaignTransformer extends Transformer {
       history: campaign.history,
       players: campaign.players,
       rating: campaign.rating,
-      token: !!campaign.token? TokenTransformer.fetch(campaign.token) : null,
+      token: !!campaign.token ? TokenTransformer.fetch(campaign.token) : null,
     })
   }
 
-  static send(campaign) {
+  static send (campaign) {
     let data = {
       'id': campaign.id,
       'is_draft': campaign.isDraft,
