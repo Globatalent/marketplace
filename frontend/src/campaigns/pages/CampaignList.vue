@@ -25,17 +25,20 @@
           <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search" @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
-          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport">
+          <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport" @change="filter()">
+            <el-option :label="$tc('message.BySport')" :value="null"></el-option>
             <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
             </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country">
-            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option> -->
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country" @change="filter()">
+            <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
+            <el-option v-for="(item, index) in countries" :key="index" :label="allCountries[item]" :value="item">
+            </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option" v-model="type">
-            <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-            </el-option> -->
+          <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option" v-model="kind" @change="filter()">
+            <el-option :label="$tc('message.AllTypes')" :value="null"></el-option>
+            <el-option :label="$tc('message.Athletes')" :value="'athlete'"></el-option>
+            <el-option :label="$tc('message.Clubs')" :value="'club'"></el-option>
           </el-select>
         </div>
       </el-col>
@@ -123,6 +126,8 @@ import BaseLayout from '@/layout/BaseLayout.vue'
 import { mapGetters } from 'vuex'
 import router from '@/router.js'
 import StarRating from 'vue-star-rating'
+import countries from '@/base/helpers/countries'
+
 
 export default {
   name: 'CampaignList',
@@ -132,10 +137,11 @@ export default {
   },
   data() {
     return {
+      allCountries: countries,
       search: null,
       sport: null,
       country: null,
-      type: null,
+      kind: null,
       errorMessage: ''
     }
   },
@@ -143,6 +149,7 @@ export default {
     ...mapGetters({
       sports: 'campaigns/sports',
       campaigns: 'campaigns/campaigns',
+      countries: 'campaigns/countries',
       pagination: 'campaigns/pagination',
       user: 'users/user'
     }),
@@ -153,6 +160,7 @@ export default {
   created() {
     this.$store.commit('campaigns/sports', [])
     this.$store.dispatch('campaigns/sports')
+    this.$store.dispatch('campaigns/countries')
     this.initial()
   },
   methods: {
@@ -179,12 +187,18 @@ export default {
     onSearch(event) {
       // Update the campaign list using the search
       if (event.keyCode === 13) {
-        let filters = {
-          active: 'True'
-        }
-        if (!!this.search && this.search !== "") filters.search = this.search
-        this.$store.dispatch('campaigns/list', {filters: filters})
+        this.filter()
       }
+    },
+    filter() {
+      let filters = {
+        active: 'True'
+      }
+      if (!!this.search && this.search !== "") filters.search = this.search
+      if (!!this.sport && this.sport !== "") filters.sport = this.sport
+      if (!!this.country && this.country !== "") filters.country = this.country
+      if (!!this.kind && this.kind !== "") filters.kind = this.kind
+      this.$store.dispatch('campaigns/list', {filters: filters})
     },
     scroll() {
       // Gets a new page of campaigns and push them to the current list

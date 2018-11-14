@@ -204,3 +204,12 @@ class CampaignAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(len(inactive_campaigns), data["count"])
+
+    def test_list_countries(self):
+        CampaignFactory.create_batch(is_draft=False, country="ES", size=11)
+        CampaignFactory.create_batch(is_draft=False, country="US", size=3)
+        CampaignFactory.create_batch(is_draft=False, country="FR", size=7)
+        response = self.client.get("/api/v1/countries/", format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(3, len(data))

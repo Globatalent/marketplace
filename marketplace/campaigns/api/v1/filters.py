@@ -15,7 +15,9 @@ class CampaignFilter(django_filters.rest_framework.FilterSet):
     state = django_filters.CharFilter(
         field_name="state", help_text=_("Filter campaigns by state.")
     )
-
+    country = django_filters.CharFilter(
+        field_name="country", help_text=_("Filter campaigns by country.")
+    )
     user = django_filters.NumberFilter(
         field_name="user__id", help_text=_("Filter campaigns by given user.")
     )

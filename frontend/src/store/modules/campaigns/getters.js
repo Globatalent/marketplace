@@ -8,6 +8,9 @@ export default {
   sports (state) {
     return state.sports
   },
+  countries (state) {
+    return state.countries
+  },
   pagination(state) {
     return state.pagination
   },

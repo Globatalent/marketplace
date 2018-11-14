@@ -30,6 +30,13 @@
                          @image-changed="updateImage('image', $event)">
         </gb-image-upload>
       </el-form-item>
+      <el-form-item required :label="$tc('message.Country')">
+        <p class="formSteps-inputText"></p>
+        <el-select v-model="form.country" placeholder="Select">
+          <el-option v-for="(code, index) in Object.keys(countries)" :key="index" :label="countries[code]" :value="code">
+          </el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item required v-bind:label="$tc('message.Gender')" class="text-left sexFormElement"
                     v-if="form.kind==='athlete'">
         <el-radio-group v-model="form.gender">
@@ -67,11 +74,12 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import { mapGetters } from 'vuex'
-  import ajax from '@/base/helpers/ajax'
-  import router from '@/router.js'
-  import ImageUpload from '@/campaigns/components/ImageUpload.vue'
+import Vue from 'vue'
+import { mapGetters } from 'vuex'
+import ajax from '@/base/helpers/ajax'
+import router from '@/router.js'
+import ImageUpload from '@/campaigns/components/ImageUpload.vue'
+import countries from '@/base/helpers/countries'
 
 export default {
   name: 'CardCampaign',
@@ -80,6 +88,7 @@ export default {
     },
   data() {
     return {
+      countries: countries,
       // Form
       form: {
         title: null,
@@ -87,6 +96,7 @@ export default {
         image: null,
         gender: null,
         sport: null,
+        country: null,
         tags: []
       },
       // Tags
@@ -161,7 +171,8 @@ export default {
         description: this.form.description,
         gender: this.form.gender,
         sport: !!this.form.sport ? this.form.sport : null,
-        tags: this.form.tags
+        tags: this.form.tags,
+        country: this.form.country,
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {
         this.form = { ...this.campaign }

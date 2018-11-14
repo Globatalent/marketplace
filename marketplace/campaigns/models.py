@@ -28,6 +28,7 @@ from marketplace.campaigns.emails import (
 )
 from marketplace.campaigns.helpers import create_token
 from marketplace.campaigns.managers import CampaignManager
+from marketplace.core.fields import CountryCodeField
 from marketplace.core.files import UploadToDir
 from marketplace.purchases.constants import CURRENCY_CHOICES, USD
 
@@ -62,6 +63,7 @@ class Campaign(TimeStampedModel):
         max_length=20,
         verbose_name=_("state"),
     )
+    country = CountryCodeField(null=True, blank=True)
 
     # Temporal field for rating
     rating = models.FloatField(default=random.choices([4.0, 5.0])[0])

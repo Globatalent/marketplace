@@ -98,3 +98,14 @@ class ReviewViewSet(ReadOnlyModelViewSet):
     serializer_class = ReviewSerializer
     queryset = Review.objects.all()
     filter_class = ReviewFilter
+
+
+class CountryViewSet(viewsets.ViewSet):
+    """List all the countries with campaigns."""
+    permission_classes = []
+
+    @staticmethod
+    def list(request):
+        countries = Campaign.objects.filter(country__isnull=False).values_list("country", flat=True)
+        data = list(set(countries))
+        return Response(data=data)
