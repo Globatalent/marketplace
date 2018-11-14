@@ -33,14 +33,14 @@
             <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option> -->
           </el-select>
-          <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option">
+          <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option" v-model="type">
             <!-- <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
             </el-option> -->
           </el-select>
         </div>
       </el-col>
     </el-row>
-    <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
+    <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}" v-if="campaigns.length > 0">
       <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" v-for="(campaign, index) in campaigns" :key="index">
         <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
           <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
@@ -101,6 +101,9 @@
         </div>
       </el-card>
     </masonry>
+    <div class="campaignList-noResults text-center" v-else>
+      <h2>{{ $tc('message.NoResults') }}</h2>
+    </div>
     <div class="campaignList-startBlock">
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
@@ -132,6 +135,7 @@ export default {
       search: null,
       sport: null,
       country: null,
+      type: null,
       errorMessage: ''
     }
   },

@@ -156,6 +156,7 @@ export const messages = {
       DeleteImage: 'Delete image',
       Download: 'Download',
       History: 'History',
+      NoResults: 'There are no results',
     }
   },
   'es-ES': {
