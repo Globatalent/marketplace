@@ -199,7 +199,7 @@ export default {
         gender: this.form.gender,
         sport: !!this.form.sport ? this.form.sport : null,
         tags: this.form.tags,
-        country: this.country,
+        country: this.form.country,
       }
       this.$refs[form].validate(valid => {
         if (valid) {
