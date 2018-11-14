@@ -60,7 +60,7 @@
         <p class="formSteps-inputText">Examples of income of other similar professionals of the same sport</p>
         <el-input type="textarea" v-model="form.examples"></el-input>
       </el-form-item>
-      <el-form-item required :label="$tc('message.Recommendations')">
+      <el-form-item :label="$tc('message.Recommendations')">
         <p class="formSteps-inputText">Upload recommendation /reference letters from coaches/experts</p>
         <el-upload :action="options.action" :name="options.name" :headers="options.headers" :data="options.data" :file-list="form.recommendations">
           <el-button size="small" type="secondary">Upload</el-button>

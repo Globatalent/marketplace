@@ -13,11 +13,7 @@
             </el-form-item>
             <el-form-item required prop="country">
               <el-select v-model="form.country" filterable v-bind:placeholder="$tc('message.CountryResidence')">
-                <el-option
-                  v-for="(code, index) in Object.keys(countries)"
-                  :key="index"
-                  :label="countries[code]"
-                  :value="code">
+                <el-option v-for="(code, index) in Object.keys(countries)" :key="index" :label="countries[code]" :value="code">
                 </el-option>
               </el-select>
             </el-form-item>
@@ -42,8 +38,8 @@
         </el-row>
         <el-row>
           <el-col :xs="24">
-            <el-form-item class="text-left">
-              <el-checkbox class="registrationForm-accept"><a href="http://www.globatalent.com/termsandconditions">{{$tc('message.AcceptDataProtectionConditions')}}</a></el-checkbox>
+            <el-form-item class="text-left" required prop="conditions" style="padding-bottom:20px;">
+              <el-checkbox class="registrationForm-accept" v-model="form.conditions"><a href="http://www.globatalent.com/termsandconditions">{{$tc('message.AcceptDataProtectionConditions')}}</a></el-checkbox>
             </el-form-item>
           </el-col>
         </el-row>
@@ -67,7 +63,6 @@ import router from '@/router.js'
 import { Message } from 'element-ui'
 import countries from '@/base/helpers/countries'
 
-
 export default {
   name: 'RegistrationForm',
   components: {},
@@ -83,6 +78,7 @@ export default {
         birthDate: '',
         country: '',
         citizenship: '',
+        conditions: ''
       },
       rules: {
         email: [
@@ -120,8 +116,19 @@ export default {
           { required: true, message: 'Please input country', trigger: 'blur' }
         ],
         citizenship: [
-          { required: true, message: 'Please input citizenship', trigger: 'blur' }
+          {
+            required: true,
+            message: 'Please input citizenship',
+            trigger: 'blur'
+          }
         ],
+        conditions: [
+          {
+            required: true,
+            message: 'Please accept the conditions',
+            trigger: 'blur'
+          }
+        ]
       }
     }
   },
@@ -156,10 +163,17 @@ export default {
             })
             .catch(error => {
               if (!!error.response) {
-                Message.error({
-                  message: error.response.data.error,
-                  center: true
-                })
+                if (error.response.data.email) {
+                  Message.error({
+                    message: error.response.data.email[0],
+                    center: true
+                  })
+                } else {
+                  Message.error({
+                    message: error.response.data.error,
+                    center: true
+                  })
+                }
               } else {
                 console.error(error)
               }
@@ -189,7 +203,7 @@ export default {
   font-family: 'OpenSans Regular';
   color: $--grey-text;
 }
-.el-checkbox .el-checkbox__label{
+.el-checkbox .el-checkbox__label {
   font-size: 12px;
 }
 </style>
