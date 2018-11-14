@@ -81,7 +81,7 @@
                 <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
               </div>
               <div class="socialLinksDetail">
-                <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url">
+                <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url" target="_blank">
                   <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                 </a>
               </div>
