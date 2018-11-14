@@ -30,16 +30,16 @@
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
         <el-menu class="el-menu-footer-bottom" mode="horizontal" router>
-          <el-menu-item class="el-menu-footer-bottom-item" index="sports" :route="{name:'athlete.list'}">{{ $tc("message.Press",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-footer-bottom-item" index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.About",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-footer-bottom-item" index="news" :route="{name:'news'}">{{ $tc("message.Careers") }}</el-menu-item>
+          <el-menu-item class="el-menu-footer-bottom-item" index="sports" :route="{name:'press'}">{{ $tc("message.Press",2) }}</el-menu-item>
+          <el-menu-item class="el-menu-footer-bottom-item" index="athletes" :route="{name:'about'}">{{ $tc("message.About",2) }}</el-menu-item>
+          <el-menu-item class="el-menu-footer-bottom-item" index="news" :route="{name:'careers'}">{{ $tc("message.Careers") }}</el-menu-item>
         </el-menu>
         <ul class="socialList">
           <li class="socialList-item">
-            <a href="" class="socialList-item-link"><img src="~@/assets/img/facebook-icon.png" alt="" class="socialList-item-link-icon"></a>
+            <a href="https://www.facebook.com/globatalent.official" target="_blank" class="socialList-item-link"><img src="~@/assets/img/facebook-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
           <li class="socialList-item">
-            <a href="" class="socialList-item-link"><img src="~@/assets/img/twitter-icon.png" alt="" class="socialList-item-link-icon"></a>
+            <a href="https://twitter.com/globatalent" target="_blank" class="socialList-item-link"><img src="~@/assets/img/twitter-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
           <li class="socialList-item">
             <a href="" class="socialList-item-link"><img src="~@/assets/img/pinterest-icon.png" alt="" class="socialList-item-link-icon"></a>

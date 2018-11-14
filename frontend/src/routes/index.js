@@ -132,6 +132,16 @@ export default [
     name: 'contact',
     component: resolve => require(['@/pages/Contact.vue'], resolve),
   },
+  {
+    path: '/press',
+    name: 'press',
+    component: resolve => require(['@/pages/Press.vue'], resolve),
+  },
+  {
+    path: '/careers',
+    name: 'careers',
+    component: resolve => require(['@/pages/Careers.vue'], resolve),
+  },
   // 404
   {
     path: '/404',

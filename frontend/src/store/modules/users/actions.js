@@ -16,7 +16,7 @@ export default {
   },
   update({commit, state}, data) {
     return new Promise((resolve, reject) => {
-      const payload = UserTransformer.send(data)
+      const payload = UserTransformer.sendPartial(data)
       Vue.axios.patch(`${state.endpoints.users}me/`, payload).then( response => {
         const supporter = UserTransformer.fetch(response.data);
         resolve(supporter)
