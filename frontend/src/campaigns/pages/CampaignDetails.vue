@@ -108,25 +108,25 @@
       <div class="campaignDetails-infoContainer-data">
         <ul class="campaignDetails-infoContainer-data-miniMenu">
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.description">
-            <a href="#storySection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#storySection'">
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc('message.Story') }}</span>
             </a>
           </li>
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.biography">
-            <a href="#biographySection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#biographySection'">
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc('message.Biography') }}</span>
             </a>
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.funds">
-            <a href="#fundsSection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#fundsSection'">
               <span class="menuLine"></span>
               <span
                 class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc('message.FundsRequierement') }}</span>
             </a>
           </li>
           <li class="campaignDetails-infoContainer-data-miniMenu-item">
-            <a href="#buyTokenSection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#buyTokenSection'">
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{$tc('message.BuyTokens')}}</span>
             </a>
@@ -149,7 +149,7 @@
         <gb-campaign-info-row v-if="campaign.biography" id="biographySection" :title="$tc('message.Biography')">
           {{campaign.biography}}
         </gb-campaign-info-row>
-        <gb-campaign-info-row v-if="campaign.history" id="historySection" :title="$tc('message.History')">
+        <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
           {{campaign.history}}
         </gb-campaign-info-row>
 
