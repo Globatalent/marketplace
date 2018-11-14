@@ -44,6 +44,7 @@ class CampaignTransformer extends Transformer {
       history: campaign.history,
       players: campaign.players,
       rating: campaign.rating,
+      country: campaign.country,
       token: !!campaign.token ? TokenTransformer.fetch(campaign.token) : null,
     })
   }
@@ -73,6 +74,7 @@ class CampaignTransformer extends Transformer {
       'examples': campaign.examples,
       'history': campaign.history,
       'players': campaign.players,
+      'country': campaign.country,
     }
     if (!!campaign.tags) {
       data.tags = campaign.tags

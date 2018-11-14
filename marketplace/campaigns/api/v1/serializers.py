@@ -122,6 +122,7 @@ class CampaignSerializer(serializers.ModelSerializer):
             "finished",
             "remaining",
             "rating",
+            "country",
         ]
         extra_kwargs = {
             "created": {"read_only": True},

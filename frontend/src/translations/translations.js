@@ -157,6 +157,8 @@ export const messages = {
       Download: 'Download',
       History: 'History',
       NoResults: 'There are no results',
+      Athletes: 'Athletes',
+      Clubs: 'Clubs',
     }
   },
   'es-ES': {

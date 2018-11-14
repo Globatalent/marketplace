@@ -29,6 +29,13 @@
           <gb-image-upload field-name="image" :campaign-id="campaign.id" v-if="campaign" :image-url="form.image" @image-changed="updateImage('image', $event)">
           </gb-image-upload>
         </el-form-item>
+        <el-form-item required :label="$tc('message.Country')">
+          <p class="formSteps-inputText"></p>
+          <el-select v-model="form.country" placeholder="Select">
+            <el-option v-for="(code, index) in Object.keys(countries)" :key="index" :label="countries[code]" :value="code">
+            </el-option>
+          </el-select>
+        </el-form-item>
         <el-form-item required v-bind:label="$tc('message.Gender')" class="text-left sexFormElement" v-if="form.kind==='athlete'" prop="gender">
           <el-radio-group v-model="form.gender">
             <el-radio label="male">{{ $tc('message.Male') }}</el-radio>
@@ -70,6 +77,8 @@ import { mapGetters } from 'vuex'
 import ajax from '@/base/helpers/ajax'
 import router from '@/router.js'
 import ImageUpload from '@/campaigns/components/ImageUpload.vue'
+import countries from '@/base/helpers/countries'
+
 
 export default {
   name: 'CardCampaign',
@@ -78,6 +87,7 @@ export default {
   },
   data() {
     return {
+      countries: countries,
       // Form
       form: {
         title: null,
@@ -85,7 +95,8 @@ export default {
         image: null,
         gender: null,
         sport: null,
-        tags: []
+        tags: [],
+        country: null,
       },
       rules: {
 
@@ -187,7 +198,8 @@ export default {
         description: this.form.description,
         gender: this.form.gender,
         sport: !!this.form.sport ? this.form.sport : null,
-        tags: this.form.tags
+        tags: this.form.tags,
+        country: this.form.country,
       }
       this.$refs[form].validate(valid => {
         if (valid) {

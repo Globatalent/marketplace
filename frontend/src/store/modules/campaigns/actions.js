@@ -327,4 +327,15 @@ export default {
       })
     })
   },
+  countries({commit, state}) {
+    return new Promise((resolve, reject) => {
+      Vue.axios.get(state.endpoints.countries).then((response) => {
+        const countries = response.data
+        commit('countries', countries)
+        resolve(countries)
+      }).catch( (error) => {
+        reject(error)
+      })
+    })
+  }
 }

@@ -46,7 +46,7 @@ class ReviewInLine(admin.TabularInline):
 
 def approve_campaigns(modeladmin, request, queryset):
     for campaign in queryset:
-        campaign.status = APPROVED
+        campaign.state = APPROVED
         campaign.save()
     messages.success(request, _("Campaigns approved!"))
 
@@ -56,8 +56,8 @@ approve_campaigns.short_description = _("Approve campaigns")
 
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
-    list_display = ["id", "kind", "title", "is_draft", "state", "user", "created"]
-    list_filter = ["is_draft", "kind", "state", "sport"]
+    list_display = ["id", "kind", "title", "is_draft", "state", "user", "country", "created"]
+    list_filter = ["is_draft", "kind", "state", "sport", "country"]
     autocomplete_fields = ["sport", "user", "tags", "token"]
     search_fields = ["user__email", "title", "description", "tags__name", "sport__name"]
     inlines = [
@@ -82,6 +82,7 @@ class CampaignAdmin(admin.ModelAdmin):
                     "token",
                     "started",
                     "finished",
+                    "country",
                 ]
             },
         ),

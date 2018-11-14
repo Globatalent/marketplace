@@ -2,6 +2,7 @@ export default {
   campaign: {},
   campaigns: [],
   sports: [],
+  countries: [],
   pagination: {
     count: 0,
     next: null,
@@ -15,5 +16,6 @@ export default {
     revenues: '/api/v1/revenues/',
     incomes: '/api/v1/incomes/',
     recommendations: '/api/v1/recommendations/',
+    countries: '/api/v1/countries/',
   },
 }
