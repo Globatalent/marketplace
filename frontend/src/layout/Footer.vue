@@ -8,8 +8,8 @@
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerMenu">
         <el-menu class="el-menu-demo" mode="horizontal" router>
-          <el-menu-item class="el-menu-demo-item" index="sports" :route="{name:'athlete.list'}">{{ $tc("message.Sport",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-demo-item" index="athletes" :route="{name:'athlete.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
+          <el-menu-item class="el-menu-demo-item" index="sports" :route="{name:'sport'}">{{ $tc("message.Sport",2) }}</el-menu-item>
+          <el-menu-item class="el-menu-demo-item" index="athletes" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
           <el-menu-item class="el-menu-demo-item" index="about" :route="{name:'about'}">{{ $tc("message.About") }}</el-menu-item>

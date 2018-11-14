@@ -17,10 +17,13 @@
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
               <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-              <div class="campaign-sport" :style="'background-color:' + getRandomSportColor(campaign.sport)">{{!!campaign.sport ? campaign.sport.name : ''}}</div>
+              <div class="campaign-sport" :style="'background-color:' + getRandomSportColor(campaign.sport)">
+                {{!!campaign.sport ? campaign.sport.name : ''}}
+              </div>
               <div class="campaignDetails-timeRemaining">
                 <i class="el-icon-time"></i>
-                <span class="campaignDetails-timeRemaining-text">{{campaign.remaining}} {{$tc('message.DaysLeft')}}</span>
+                <span
+                  class="campaignDetails-timeRemaining-text">{{campaign.remaining}} {{$tc('message.DaysLeft')}}</span>
               </div>
             </div>
             <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside">
@@ -30,10 +33,14 @@
             </el-carousel>
           </el-col>
           <el-col :xs="24" :md="8" class="campaignDetails-col">
-            <div class="campaignDetails-collected">{{collected()}} <span class="campaignDetails-collected-currency">USD</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span></div>
+            <div class="campaignDetails-collected">{{collected()}} <span
+              class="campaignDetails-collected-currency">USD</span><span class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span>
+            </div>
             <div class="progress m-b-15 clearfix">
-              <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" v-if="progress < 100"></el-progress>
-              <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694" :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
+              <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
+                           :percentage="progress" v-if="progress < 100"></el-progress>
+              <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
+                           :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
             </div>
             <div class="campaignDetails-invest">{{$tc('message.InvestIn')}} {{campaign.title}}</div>
             <p class="campaignDetails-description">{{campaign.description}}</p>
@@ -41,7 +48,8 @@
               <div class="campaignDetails-fundingDetails-numbers">
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{ $tc('message.Funding')}}: </span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
+                  <span
+                    class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
                 </div>
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">1 {{ !!campaign.token ? campaign.token.code : '' }} token = </span>
@@ -49,15 +57,22 @@
                 </div>
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.SoftCapt')}}: </span>
-                  <span class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
+                  <span
+                    class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
                 </div>
               </div>
               <div class="campaignDetails-fundingDetails-rating">
-                <div class="campaignDetails-fundingDetails-rating-experts"><span class="is-marked is-mark-down">73</span><span class="campaignDetails-fundingDetails-rating-experts-text"> {{$tc('message.ExpertsRating')}}</span></div>
-                <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="16" :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
+                <div class="campaignDetails-fundingDetails-rating-experts"><span
+                  class="is-marked is-mark-down">73</span><span
+                  class="campaignDetails-fundingDetails-rating-experts-text"> {{$tc('message.ExpertsRating')}}</span>
+                </div>
+                <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="16"
+                             :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
-            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
+            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">
+              {{$tc('message.BuyTokens')}}
+            </el-button>
             <div class="campaignDetails-favoriteSocial">
               <div class="favoriteLink" v-if="campaign.following" type="primary" @click="setFollowingCampaign()">
                 <i class="fas fa-heart"></i> {{$tc('message.Favorite')}}
@@ -66,7 +81,7 @@
                 <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
               </div>
               <div class="socialLinksDetail">
-                <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url">
+                <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url" target="_blank">
                   <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                 </a>
               </div>
@@ -79,34 +94,39 @@
       <el-row>
         <el-col :xs="24">
           <ul class="campaignsFilter">
-            <li class="campaignsFilter-item is-active"><span class="campaignsFilter-item-number">45</span><span class="campaignsFilter-item-text">{{ $tc("message.Story") }}</span></li>
-            <li class="campaignsFilter-item"><span class="campaignsFilter-item-text">{{ $tc("message.Faq") }}</span></li>
-            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">12</span><span class="campaignsFilter-item-text">{{ $tc("message.Updates") }}</span></li>
-            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span class="campaignsFilter-item-text">{{ $tc("message.Ratings") }}</span></li>
+            <li class="campaignsFilter-item is-active"><span class="campaignsFilter-item-number">45</span><span
+              class="campaignsFilter-item-text">{{ $tc('message.Story') }}</span></li>
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-text">{{ $tc('message.Faq') }}</span>
+            </li>
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">12</span><span
+              class="campaignsFilter-item-text">{{ $tc('message.Updates') }}</span></li>
+            <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span
+              class="campaignsFilter-item-text">{{ $tc('message.Ratings') }}</span></li>
           </ul>
         </el-col>
       </el-row>
       <div class="campaignDetails-infoContainer-data">
         <ul class="campaignDetails-infoContainer-data-miniMenu">
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.description">
-            <a href="#storySection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#storySection'">
               <span class="menuLine"></span>
-              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.Story") }}</span>
+              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc('message.Story') }}</span>
             </a>
           </li>
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.biography">
-            <a href="#biographySection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#biographySection'">
               <span class="menuLine"></span>
-              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.Biography") }}</span>
+              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc('message.Biography') }}</span>
             </a>
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.funds">
-            <a href="#fundsSection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#fundsSection'">
               <span class="menuLine"></span>
-              <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc("message.FundsRequierement") }}</span>
+              <span
+                class="campaignDetails-infoContainer-data-miniMenu-item-text">{{ $tc('message.FundsRequierement') }}</span>
             </a>
           </li>
           <li class="campaignDetails-infoContainer-data-miniMenu-item">
-            <a href="#buyTokenSection" v-smooth-scroll>
+            <a href="#" v-scroll-to="'#buyTokenSection'">
               <span class="menuLine"></span>
               <span class="campaignDetails-infoContainer-data-miniMenu-item-text">{{$tc('message.BuyTokens')}}</span>
             </a>
@@ -114,90 +134,104 @@
         </ul>
         <el-row :gutter="50">
           <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title">&nbsp;</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text"><span class="campaignDetails-infoContainer-data-text-title">{{campaign.title}}</span></el-col>
+          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text"><span
+            class="campaignDetails-infoContainer-data-text-title">{{campaign.title}}</span></el-col>
         </el-row>
-        <el-row :gutter="50" v-if="campaign.description">
-          <el-col :xs="24" :md="8" id="storySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Story") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">{{campaign.description}}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="campaign.biography">
-          <el-col :xs="24" :md="8" id="biographySection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Biography") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">{{campaign.biography}}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="campaign.funds">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.FundsRequierement") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            <div class="fundsQty"><span class="fundsQty-currency">$</span>{{ $n(campaign.funds) }}</div> {{ $tc("message.LookingToRaise") }}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="campaign.achievements">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Achievements") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            {{campaign.achievements}}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="campaign.expected">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.ExpectedSportAchievements") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            {{campaign.expected}}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="campaign.use">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.HowYouWillUse") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            {{campaign.use}}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="campaign.giveBack">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.WhatWillYou") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            {{campaign.giveBack}}
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="!!campaign.revenues && campaign.revenues.length > 0">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.Revenue3years") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
-              {{item.year}} - {{item.currency}} <span class="is-bold">{{$n(item.amount)}}</span>
-            </div>
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="!!campaign.revenues && campaign.incomes.length > 0">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.IncomeForecastFor5") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+
+        <gb-campaign-info-row v-if="campaign.biography" id="storySection" :title="$tc('message.Story')">
+          {{campaign.description}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.ranking" :title="$tc('message.Ranking')">
+          {{campaign.ranking}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.biography" id="biographySection" :title="$tc('message.Biography')">
+          {{campaign.biography}}
+        </gb-campaign-info-row>
+        <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
+          {{campaign.history}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.height" :title="$tc('message.Height')">
+          {{campaign.height}} cm
+        </gb-campaign-info-row>
+        <gb-campaign-info-row v-if="campaign.weight" :title="$tc('message.Weight')">
+          {{campaign.weight}} cm
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.club" :title="$tc('message.CurrentClub')">
+          {{campaign.club}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.funds" id="fundsSection" :title="$tc('message.FundsRequierement')">
+          <div class="fundsQty"><span class="fundsQty-currency">$</span>{{ $n(campaign.funds) }}</div>
+          {{ $tc('message.LookingToRaise') }}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.achievements" :title="$tc('message.Achievements')">
+          {{campaign.achievements}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
+                              :title="$tc('message.ExpectedSportAchievements')">
+          {{campaign.expected}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.players" id="playersSection"
+                              :title="$tc('message.Players')">
+          {{campaign.players}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.use" id="useSection" :title="$tc('message.HowYouWillUse')">
+          {{campaign.use}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="campaign.giveBack" id="giveBackSection" :title="$tc('message.WhatWillYou')">
+          {{campaign.giveBack}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="!!campaign.revenues && campaign.revenues.length > 0" id="revenueSection"
+                              :title="$tc('message.Revenue3years')">
+          <div class="incomeRow" v-for="item in campaign.revenues" :key="item.id">
+            {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
+          </div>
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="!!campaign.incomes && campaign.incomes.length > 0" id="incomeForecastSection"
+                              :title="$tc('message.Revenue3years')">
             <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
-              {{item.year}} - {{item.currency}} <span class="is-bold">{{$n(item.amount)}}</span>
-            </div>
-            <span class="line"></span>
-          </el-col>
-        </el-row>
-        <el-row :gutter="50" v-if="!!campaign.revenues && campaign.examples.length > 0">
-          <el-col :xs="24" :md="8" id="fundsSection" class="campaignDetails-infoContainer-data-title text-right">{{ $tc("message.ExamplesIncomeSimilar") }}</el-col>
-          <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
-            {{campaign.examples}}
-            <!-- <div class="incomeRow" v-for="item in campaign.examples" :key="item.id" >
               {{item.year}} - {{item.currency}} <span class="is-bold">{{formatPrice(item.amount)}}</span>
-            </div> -->
-            <span class="line"></span>
-          </el-col>
-        </el-row>
+            </div>
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="!!campaign.examples && campaign.examples.length > 0" id="examplesSection"
+                              :title="$tc('message.ExamplesIncomeSimilar')">
+            {{campaign.examples}}
+        </gb-campaign-info-row>
+
+        <gb-campaign-info-row v-if="!!campaign.recommendations && campaign.recommendations.length > 0" id="recommendationsSection"
+                              :title="$tc('message.Recommendations')">
+            <el-row v-for="recommendation in campaign.recommendations" :key="recommendation.id">
+              <el-col>
+                <a :href="recommendation.file" target="_blank"><i class="el-icon-document"></i> {{ $tc('message.Download') }}</a>
+              </el-col>
+            </el-row>
+        </gb-campaign-info-row>
+
+
         <el-row :gutter="50">
           <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">&nbsp;</el-col>
-          <el-col :xs="24" :md="16" id="buyTokenSection" class="campaignDetails-infoContainer-data-text is-last-block">
-            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">{{$tc('message.BuyTokens')}}</el-button>
+          <el-col :xs="24" :md="16" id="buyTokenSection"
+                  class="campaignDetails-infoContainer-data-text is-last-block">
+            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">
+              {{$tc('message.BuyTokens')}}
+            </el-button>
             <div class="campaignDetails-infoContainer-campaignCopyright">
-              <img src="~@/assets/img/logo-only.png" alt="" class="campaignDetails-infoContainer-campaignCopyright-img">
-              <div class="campaignDetails-infoContainer-campaignCopyright-text">{{ $tc("message.PlayerPoweredBy") }} <span class="campaignDetails-infoContainer-campaignCopyright-text-name">GlobaTalent</span></div>
+              <img src="~@/assets/img/logo-only.png" alt=""
+                   class="campaignDetails-infoContainer-campaignCopyright-img">
+              <div class="campaignDetails-infoContainer-campaignCopyright-text">{{ $tc('message.PlayerPoweredBy') }}
+                <span class="campaignDetails-infoContainer-campaignCopyright-text-name">GlobaTalent</span></div>
             </div>
           </el-col>
         </el-row>
@@ -211,14 +245,16 @@ import BaseLayout from '@/layout/BaseLayout.vue'
 import { mapGetters } from 'vuex'
 import router from '@/router.js'
 import StarRating from 'vue-star-rating'
+import CampaignInfoRow from '@/campaigns/components/CampaignInfoRow.vue'
 
 export default {
   name: 'CampaignDetails',
   components: {
     'gb-base-layout': BaseLayout,
+    'gb-campaign-info-row': CampaignInfoRow,
     StarRating
   },
-  data() {
+  data () {
     return {
       token: {}
     }
@@ -228,14 +264,14 @@ export default {
       campaign: 'campaigns/campaign',
       user: 'users/user'
     }),
-    progress() {
+    progress () {
       if (!!this.token) {
         return Math.round(this.token.progression * 100)
       }
       return 0
     }
   },
-  created() {
+  created () {
     const id = this.$route.params.campaignId
     this.$store.dispatch('campaigns/fetch', id).then(() => {
       this.token = !!this.campaign.token ? this.campaign.token : {}
@@ -244,7 +280,7 @@ export default {
     })
   },
   methods: {
-    setFollowingCampaign() {
+    setFollowingCampaign () {
       if (!!this.user) {
         this.campaign.following = !this.campaign.following
         this.$store
@@ -254,23 +290,23 @@ export default {
           })
       }
     },
-    collected() {
+    collected () {
       if (!!this.token) {
         return this.token.amount - this.token.remaining
       }
       return 0
     },
-    goToInvest(campaign) {
+    goToInvest (campaign) {
       router.push({
         name: 'campaign.invest',
-        params: { campaigneId: campaign.id }
+        params: {campaigneId: campaign.id}
       })
       // router.push({
       //   name: 'purchase',
       //   params: { campaigneId: campaign.id }
       // })
     },
-    getRandomRating() {
+    getRandomRating () {
       const precision = 10 // 1 decimals
       let randomResult = 0
       while (randomResult < 4 || randomResult > 5) {
@@ -282,7 +318,7 @@ export default {
       }
       return randomResult
     },
-    getRandomSportColor(sport) {
+    getRandomSportColor (sport) {
       if (!!sport) {
         let randomColor =
           '#' + Math.floor(Math.random() * 16777215).toString(16)
@@ -303,7 +339,7 @@ export default {
       }
       return ''
     },
-    formatPrice(value) {
+    formatPrice (value) {
       let val = (value / 1).toFixed(0).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.')
     }
@@ -333,6 +369,7 @@ a:hover {
   font-size: 12px;
   padding: 0 3px;
 }
+
 .is-mark-down {
   &::after {
     content: '<';
@@ -342,6 +379,7 @@ a:hover {
     margin-left: 3px;
   }
 }
+
 .el-carousel__item {
   border-radius: 5px;
 }
@@ -373,9 +411,11 @@ a:hover {
     top: -100px;
   }
 }
+
 .campaignDetails-title {
   margin-bottom: 20px;
 }
+
 .campaign-name {
   display: inline-block;
   font-size: 28px;
@@ -490,6 +530,7 @@ a:hover {
   font-size: 14px;
   color: $--grey-title;
 }
+
 .campaignDetails-fundingDetails-numbers-row-number {
   font-size: 14px;
   color: $--green-numbers;
@@ -589,19 +630,23 @@ a:hover {
     margin-right: 3px;
   }
 }
+
 .campaignDetails-infoContainer-campaignCopyright {
   text-align: center;
   margin: 30px auto 0 auto;
 }
+
 .campaignDetails-infoContainer-campaignCopyright-img {
   max-width: 23px;
   display: inline-block;
   margin-right: 10px;
 }
+
 .campaignDetails-infoContainer-campaignCopyright-text {
   display: inline-block;
   color: black;
 }
+
 .campaignDetails-infoContainer-campaignCopyright-text-name {
   font-weight: bold;
   color: $--blue-dark;
@@ -613,10 +658,12 @@ a:hover {
   right: 50px;
   max-width: 130px;
 }
+
 .campaignDetails-favoriteSocial {
   margin-top: 30px;
   text-align: center;
 }
+
 .favoriteLink {
   font-size: 14px;
   font-family: 'OpenSans Regular';

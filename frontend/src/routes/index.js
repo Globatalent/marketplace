@@ -108,6 +108,11 @@ export default [
     },
   },
   {
+    path: '/sport',
+    name: 'sport',
+    component: resolve => require(['@/pages/Sport.vue'], resolve),
+  },
+  {
     path: '/faq',
     name: 'faq',
     component: resolve => require(['@/pages/Faq.vue'], resolve),
@@ -116,6 +121,16 @@ export default [
     path: '/news',
     name: 'news',
     component: resolve => require(['@/pages/News.vue'], resolve),
+  },
+  {
+    path: '/about',
+    name: 'about',
+    component: resolve => require(['@/pages/About.vue'], resolve),
+  },
+  {
+    path: '/contact',
+    name: 'contact',
+    component: resolve => require(['@/pages/Contact.vue'], resolve),
   },
   // 404
   {

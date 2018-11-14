@@ -46,7 +46,6 @@
 <script>
 import Vue from 'vue'
 import BaseLayout from '@/layout/BaseLayout.vue'
-import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 import { mapGetters } from 'vuex'
 import router from '@/router.js'
 

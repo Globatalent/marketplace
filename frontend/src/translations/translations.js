@@ -84,8 +84,8 @@ export const messages = {
       Height: 'Height',
       Weight: 'Weight',
       SaveContinue: 'Save & Continue',
-      ActualClub: 'Actual Club',
-      ActualCoach: 'Actual Coach',
+      CurrentClub: 'Current Club',
+      CurrentCoach: 'Current Coach',
       PitchVideoorImage: 'Pitch Video or Image',
       Funding: 'Funding',
       FundsRequirement: 'Funds requirement',
@@ -153,7 +153,10 @@ export const messages = {
       Citizenship: 'Citizenship',
       AcceptDataProtectionConditions: 'I accept data protection conditions',
       PurchaseGBTTokens: 'Purchase GBT Tokens',
-      DeleteImage: 'Delete image'
+      DeleteImage: 'Delete image',
+      Download: 'Download',
+      History: 'History',
+      NoResults: 'There are no results',
     }
   },
   'es-ES': {
@@ -234,7 +237,7 @@ export const messages = {
       Height: 'Height',
       Weight: 'Weight',
       SaveContinute: 'Save & Continute',
-      ActualClub: 'Actual Club',
+      CurrentClub: 'Current Club',
       ActualCoach: 'Actual Coach',
       PitchVideoorImage: 'Pitch Video or Image',
       Funding: 'Funding',
