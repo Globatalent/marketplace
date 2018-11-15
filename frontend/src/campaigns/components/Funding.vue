@@ -206,7 +206,7 @@ export default {
     },
     onLaunch(save = true) {
       // Check if the campaign has all the data
-      const required = ['title', 'image', 'sport', 'funds']
+      const required = ['title', 'description', 'image', 'country', 'gender', 'sport', 'tags', 'height', 'weight', 'club', 'coach', 'activePitch', 'ranking', 'funds', 'use', 'giveBack', 'revenues', 'incomes', 'examples']
       const errors = required.filter(field => !this.campaign[field])
       if (errors.length == 0) {
         this.$store.dispatch('campaigns/update', {
