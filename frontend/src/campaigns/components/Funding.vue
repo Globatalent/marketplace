@@ -218,7 +218,7 @@ export default {
       const errors = required.filter(field => !this.campaign[field])
       // Campaign must have either a pitch image or a pitch video
       if (!this.campaign.pitchImage && !this.campaign.pitchUrl) {
-        this.errors.push('pitch')
+        errors.push('pitch')
       }
       if (errors.length === 0) {
         this.$store.dispatch('campaigns/update', {
