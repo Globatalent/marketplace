@@ -1,0 +1,241 @@
+<template>
+  <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
+    <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
+      <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
+        <div class="campaign-sport" v-if="campaign.sport"
+             :style="'background-color:'+randomSportColor">{{campaign.sport.name}}
+        </div>
+      </div>
+      <div class="campaign-image is-placeholder-image" v-else>
+        <div class="campaign-sport" v-if="campaign.sport"
+             :style="'background-color:'+randomSportColor">{{campaign.sport.name}}
+        </div>
+      </div>
+    </router-link>
+    <div class="campaign-info">
+      <div class="clearfix campaign-nameBlock">
+        <el-row>
+          <el-col :span="24">
+            <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
+              <span class="campaign-name">{{campaign.title}}</span>
+            </router-link>
+          </el-col>
+          <!-- <el-col :span="4" class="text-right">
+            <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
+          </el-col> -->
+        </el-row>
+        <el-row>
+          <el-col>
+            <div class="campaign-subtitle"><span v-if="campaign.giveBack">{{campaign.giveBack.length > 50 ? campaign.giveBack.substring(0,50)+' ...' : campaign.giveBack}}</span>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+
+      <div class="campaign-progress">
+        <div>
+          <div class="campaign-progress-info">
+            <div class="campaign-progress-info-funding">
+              <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span
+                class="campaign-progress-info-funding-qty"> $ {{ $n(campaign.funds) }}</span></div>
+              <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span
+                class="campaign-progress-info-funding-qty"> $ {{ $n(campaign.funds) }}</span></div>
+            </div>
+            <div class="campaign-progress-rating">
+              <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="15"
+                           :round-start-rating="false"></star-rating>
+            </div>
+          </div>
+          <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
+                       :percentage="progress" v-if="progress < 100"></el-progress>
+          <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
+                       :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
+        </div>
+      </div>
+      <div class="clearfix campaign-footer">
+        <!-- <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
+            <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
+          </router-link> -->
+        <div class="timeLeft">
+          <i class="far fa-clock"></i>
+          <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
+          <span class="timeLeft-text is-uppercase" v-else>{{ $tc('message.ComingSoon') }}</span>
+        </div>
+        <div class="likeButton" v-if="isLogged" @click="setFollowingCampaign">
+          <el-tooltip class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom">
+            <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
+            <i class="far fa-heart likeIcon" v-else></i>
+          </el-tooltip>
+        </div>
+      </div>
+    </div>
+  </el-card>
+</template>
+
+<script>
+  import { mapGetters } from 'vuex'
+  import StarRating from 'vue-star-rating'
+
+  export default {
+    name: 'CampaignListCard',
+    props: ['campaign'],
+    components: {
+      StarRating
+    },
+    computed: {
+      ...mapGetters({
+        user: 'users/user'
+      }),
+      isLogged () {
+        return !!this.user
+      },
+      progress () {
+        if (!!this.campaign.token) {
+          return Math.round(this.campaign.token.progression * 100)
+        }
+        return 0
+      },
+      randomSportColor () {
+        const sport = this.campaign.sport
+        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
+        let localSportsColors
+        if (localStorage.sportsColors === undefined) {
+          localSportsColors = []
+          localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+        }
+        localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
+        if (!localSportsColors[sport]) {
+          localSportsColors[sport] = randomColor
+        }
+        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
+        return localSportsColors[sport]
+      }
+    },
+    methods: {
+      setFollowingCampaign () {
+        this.$store.dispatch('campaign/follow', this.campaign.id).catch(error => {
+          console.log(error)
+        })
+      },
+    }
+  }
+</script>
+
+<style lang="scss" scoped>
+.el-card {
+  border-radius: 8px;
+  height: 470px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+  margin-bottom: 35px;
+  &:hover {
+    box-shadow: 0 5px 16px 0 rgba(0, 0, 0, 0.2);
+  }
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.likeButton {
+  margin-left: 15px;
+  float: right;
+  cursor: pointer;
+}
+
+.likeIcon {
+  font-size: 18px;
+  transition: all 0.2s ease-in;
+  color: #aaa;
+  position: relative;
+  top: 2px;
+  &.is-following {
+    transform: scale(1.2);
+    color: #a0a8ab;
+  }
+}
+
+
+.campaign-image {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  &.is-placeholder-image {
+    background-image: url('../../assets/img/user-placeholder-circle.png');
+    background-size: 60%;
+    background-position: center;
+  }
+}
+
+.campaign-progress {
+  overflow: hidden;
+  flex-grow: 1;
+}
+
+.el-progress {
+  margin-top: 10px;
+}
+
+.goal {
+  color: #999;
+  font-size: 1em;
+  line-height: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 15px;
+}
+
+.timeLeft {
+  display: inline-block;
+  font-size: 13px;
+  .far {
+    margin-right: 10px;
+  }
+}
+
+.campaign-subtitle {
+  font-family: 'OpenSans Regular';
+  height: 50px;
+}
+.campaign-info {
+  color: #687173;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+.campaign-nameBlock {
+  padding: 25px 20px 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  min-height: 130px;
+}
+.campaign-progress {
+  padding: 12px 20px 12px 20px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.campaign-footer {
+  padding: 10px 20px 10px 20px;
+}
+.campaign-flag {
+  width: 30px;
+  height: auto;
+  display: inline-block;
+}
+.campaign-progress-info {
+  display: flex;
+  flex-direction: row;
+}
+.campaign-progress-info-funding {
+  width: 65%;
+}
+.campaign-progress-rating {
+  width: 35%;
+  text-align: right;
+}
+.campaign-progress-info-funding-text {
+  font-family: 'OpenSans Bold';
+}
+.campaign-progress-info-funding-qty {
+  font-family: 'OpenSans Regular';
+}
+</style>
