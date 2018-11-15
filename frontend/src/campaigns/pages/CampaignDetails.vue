@@ -22,9 +22,12 @@
               </div>
               <div class="campaignDetails-timeRemaining">
                 <i class="el-icon-time"></i>
-                <span
+                <span v-if="hasStarted"
                   class="campaignDetails-timeRemaining-text">{{campaign.remaining}} {{$tc('message.DaysLeft')}}</span>
+                <span v-else
+                  class="campaignDetails-timeRemaining-text is-uppercase">{{$tc('message.ComingSoon')}}</span>
               </div>
+
             </div>
             <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside">
               <el-carousel-item>
@@ -70,8 +73,11 @@
                              :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
-            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">
+            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)" v-if="hasStarted">
               {{$tc('message.BuyTokens')}}
+            </el-button>
+            <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" @click="goToInvest(campaign)" v-else>
+              {{$tc('message.ComingSoon')}}
             </el-button>
             <div class="campaignDetails-favoriteSocial">
               <div class="favoriteLink" v-if="campaign.following" type="primary" @click="setFollowingCampaign()">
@@ -224,8 +230,11 @@
           <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">&nbsp;</el-col>
           <el-col :xs="24" :md="16" id="buyTokenSection"
                   class="campaignDetails-infoContainer-data-text is-last-block">
-            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">
+            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)" v-if="hasStarted">
               {{$tc('message.BuyTokens')}}
+            </el-button>
+            <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" @click="goToInvest(campaign)" v-else>
+              {{$tc('message.ComingSoon')}}
             </el-button>
             <div class="campaignDetails-infoContainer-campaignCopyright">
               <img src="~@/assets/img/logo-only.png" alt=""
@@ -269,6 +278,10 @@ export default {
         return Math.round(this.token.progression * 100)
       }
       return 0
+    },
+    hasStarted () {
+      console.log(this.campaign.started)
+      return this.campaign.started < new Date()
     }
   },
   created () {

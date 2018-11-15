@@ -92,7 +92,9 @@
                 <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
               </router-link> -->
             <div class="timeLeft">
-              <i class="far fa-clock"></i><span class="timeLeft-text">{{campaign.remaining}} days left</span>
+              <i class="far fa-clock"></i>
+              <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
+              <span class="timeLeft-text is-uppercase" v-else>{{ $tc('message.ComingSoon') }}</span>
             </div>
             <div class="likeButton" v-if="isLogged" @click="setFollowingCampaign(index, campaign)">
               <el-tooltip class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom">
