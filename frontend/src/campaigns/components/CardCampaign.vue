@@ -1,5 +1,5 @@
 <template>
-  <el-col :xs="24" class="formSteps-container">
+  <el-col :xs="24" class="formSteps-container" v-loading.fullscreen.lock="loading">
     <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
@@ -107,7 +107,9 @@ export default {
         },
         httpRequest: ajax,
         action: ''
-      }
+      },
+      loadingSports: false,
+      loadingCampaign: false
     }
   },
   computed: {
@@ -115,11 +117,18 @@ export default {
       campaign: 'campaigns/campaign',
       sports: 'campaigns/sports',
       user: 'users/user'
-    })
+    }),
+    loading () {
+      return this.loadingSports || this.loadingCampaign
+    }
   },
   created() {
+    this.loadingSports = true
+    this.loadingCampaign = true
     this.$store.commit('campaigns/sports', [])
     this.$store.dispatch('campaigns/sports')
+      .then(() => {this.loadingSports = false})
+      .catch(() => {this.loadingSports = false})
     this.$store
       .dispatch('campaigns/fetch', this.$route.params.campaignId)
       .then(() => {
@@ -131,9 +140,13 @@ export default {
           if (!!this.form.sport) {
             this.form.sport = this.form.sport.id
           }
+          this.loadingCampaign = false
         }
       })
-      .catch(() => router.push({ name: 'campaign.create' }))
+      .catch(() => {
+        this.loadingCampaign = false
+        router.push({ name: 'campaign.create' })
+      })
   },
   methods: {
     handleTagClose(tag) {
@@ -154,8 +167,10 @@ export default {
       this.tagInput = ''
     },
     onDiscard() {
+      this.loadingCampaign = true
       const payload = { id: this.campaign.id }
       this.$store.dispatch('campaigns/delete', payload).then(() => {
+        this.loadingCampaign = false
         router.push({ name: 'campaign.create' })
       })
     },
@@ -163,6 +178,7 @@ export default {
       this.form[fieldName] = newURL
     },
     onSaveAndContinue() {
+      this.loadingCampaign = true
       const payload = {
         id: this.campaign.id,
         title: this.form.title,
@@ -175,6 +191,7 @@ export default {
 
           this.$store.dispatch('campaigns/update', payload).then(() => {
             this.form = { ...this.campaign }
+            this.loadingCampaign = false
             router.push({
               name: 'campaign.edit',
               params: {
@@ -182,7 +199,7 @@ export default {
                 step: 'content'
               }
             })
-          })
+          }).catch(() => {this.loadingCampaign = false})
 
     }
   }

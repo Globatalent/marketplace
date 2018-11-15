@@ -1,5 +1,5 @@
 <template>
-  <el-col :xs="24" class="formSteps-container">
+  <el-col :xs="24" class="formSteps-container" v-loading.fullscreen.lock="loading">
     <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
@@ -95,7 +95,8 @@
           httpRequest: ajax,
           action: ''
         },
-        activePitch: 'video'
+        activePitch: 'video',
+        loading: false
       }
     },
     computed: {
@@ -105,6 +106,7 @@
       })
     },
     created () {
+      this.loading = true
       this.$store
         .dispatch('campaigns/fetch', this.$route.params.campaignId)
         .then(() => {
@@ -114,8 +116,12 @@
               }/api/v1/campaigns/${this.campaign.id}/`
             this.form = {...this.campaign}
             this.form.links = this.initialSocialLinks(this.campaign)
+            this.loading = false
           }
-        }).catch(() => router.push({name: 'campaign.create'}))
+        }).catch(() => {
+
+          router.push({name: 'campaign.create'})
+        })
     },
     methods: {
       handleClick (tab, event) {
@@ -142,8 +148,10 @@
         return socialLinks
       },
       onDiscard () {
+        this.loading = true
         const payload = {id: this.campaign.id}
         this.$store.dispatch('campaigns/delete', payload).then(() => {
+          this.loading = false
           router.push({name: 'campaign.create'})
         })
       },
@@ -152,6 +160,7 @@
         this.form[fieldName] = newURL
       },
       onSaveAndContinue () {
+        this.loading = true
         const payload = {
           id: this.campaign.id,
           links: this.form.links,
@@ -164,6 +173,7 @@
         }
         this.$store.dispatch('campaigns/update', payload).then(() => {
           this.form = {...this.campaign}
+          this.loading = false
           router.push({
             name: 'campaign.edit',
             params: {

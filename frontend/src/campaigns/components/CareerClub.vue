@@ -1,5 +1,5 @@
 <template>
-  <el-col :xs="24" class="formSteps-container">
+  <el-col :xs="24" class="formSteps-container"  v-loading.fullscreen.lock="loading">
     <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
@@ -80,7 +80,8 @@ export default {
         history: null,
         expected: null,
         players: null
-      }
+      },
+      loading: false
     }
   },
   computed: {
@@ -90,22 +91,30 @@ export default {
     })
   },
   created() {
+    this.loading = true
     this.$store
       .dispatch('campaigns/fetch', this.$route.params.campaignId)
       .then(() => {
         if (!!this.campaign && !!this.campaign.id) {
           this.form = { ...this.campaign }
+          this.loading = false
         }
-      }).catch(()=> router.push({name: 'campaign.create'}))
+      }).catch(()=> {
+        this.loading = false
+        router.push({name: 'campaign.create'})
+      })
   },
   methods: {
     onDiscard() {
+      this.loading = true
       const payload = { id: this.campaign.id }
       this.$store.dispatch('campaigns/delete', payload).then( () => {
+        this.loading = false
         router.push({name: 'campaign.create'})
       })
     },
     onSaveAndContinue() {
+      this.loading = true
       const payload = {
         id: this.campaign.id,
         ranking: this.form.ranking,
@@ -117,6 +126,7 @@ export default {
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {
         this.form = { ...this.campaign }
+        this.loading = false
         router.push({
           name: 'campaign.edit',
           params: {
@@ -124,6 +134,8 @@ export default {
             step: 'funding'
           }
         })
+      }).catch(() => {
+        this.loading = false
       })
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <el-col :xs="24" class="formSteps-container">
+  <el-col :xs="24" class="formSteps-container" v-loading.fullscreen.lock="loading">
     <div class="infoTag" v-if="campaign.isDraft">Draft Campaign</div>
     <el-breadcrumb separator=">">
       <el-breadcrumb-item :to="{ path: '/campaigns' }">Campaign</el-breadcrumb-item>
@@ -107,7 +107,8 @@ export default {
         headers: {
           Authorization: this.$store.getters['auth/header']
         }
-      }
+      },
+      loading: false
     }
   },
   computed: {
@@ -117,6 +118,7 @@ export default {
     })
   },
   created() {
+    this.loading = true
     this.$store
       .dispatch('campaigns/fetch', this.$route.params.campaignId)
       .then(() => {
@@ -141,6 +143,7 @@ export default {
             this.form.currency = 'USD'
           }
         }
+        this.loading = false
       })
       .catch(() => router.push({ name: 'campaign.create' }))
   },
@@ -184,6 +187,7 @@ export default {
       })
     },
     onSaveAndContinue() {
+      this.loading = true
       const payload = {
         id: this.campaign.id,
         currency: this.form.currency,
@@ -196,15 +200,19 @@ export default {
       }
       this.$store.dispatch('campaigns/update', payload).then(() => {
         this.form = { ...this.campaign }
+        this.loading = false
       })
     },
     onDiscard() {
+      this.loading = true
       const payload = { id: this.campaign.id }
       this.$store.dispatch('campaigns/delete', payload).then(() => {
         router.push({ name: 'campaign.create' })
+        this.loading = false
       })
     },
     onLaunch(save = true) {
+      this.loading = true
       // Check if the campaign has all the data
       const required = ['title', 'description', 'image', 'country', 'gender', 'sport', 'tags', 'height', 'weight', 'club', 'coach', 'ranking', 'funds', 'use', 'giveBack', 'revenues', 'incomes', 'examples']
       const errors = required.filter(field => !this.campaign[field])
@@ -230,6 +238,7 @@ export default {
           center: true
         })
         console.error(errors)
+        this.loading = false
       }
     }
   }
