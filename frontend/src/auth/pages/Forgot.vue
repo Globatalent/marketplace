@@ -22,6 +22,7 @@
 <script>
 import router from '@/router.js'
 import MinimalLayout from '@/layout/MinimalLayout.vue'
+import { Message } from 'element-ui'
 
 export default {
   name: 'Forgot',
@@ -56,7 +57,6 @@ export default {
           const dataForm = Object.assign({}, this.form)
           this.forgotUser(dataForm)
         } else {
-          console.log('error submit!!')
           return false
         }
       })
@@ -65,9 +65,13 @@ export default {
       this.$store
         .dispatch('auth/forgot', this.form)
         .then(data => {
+          Message.success(this.$tc('message.ForgotEmailSent'))
           router.push({ name: 'login' })
         })
         .catch(error => {
+          if(error.response.data.hasOwnProperty('email')) {
+            Message.error(error.response.data.email[0])
+          }
           console.log(error)
         })
     }

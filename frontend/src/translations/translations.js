@@ -10,6 +10,7 @@ export const messages = {
       LogIn: 'Log in',
       ForgotYourPassword: 'Forgot your password?',
       RecoverPassword: 'Recover password',
+      ForgotEmailSent: 'A restoration link was sent to your email address',
       Recover: 'Recover',
       DontHaveAccount: 'Don\'t have an account?',
       AlreadyAccount: 'Already have an account?',
