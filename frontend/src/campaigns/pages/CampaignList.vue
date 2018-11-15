@@ -32,7 +32,7 @@
           </el-select>
           <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country" @change="filter()">
             <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
-            <el-option v-for="(item, index) in countries" :key="index" :label="allCountries[item]" :value="item">
+            <el-option v-for="item in countries" :label="item.name" :value="item.code" :key="item.code">
             </el-option>
           </el-select>
           <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option" v-model="kind" @change="filter()">
@@ -151,12 +151,22 @@ export default {
     ...mapGetters({
       sports: 'campaigns/sports',
       campaigns: 'campaigns/campaigns',
-      countries: 'campaigns/countries',
+      countryCodes: 'campaigns/countries',
       pagination: 'campaigns/pagination',
       user: 'users/user'
     }),
     isLogged() {
       return !!this.user
+    },
+    countries () {
+      let countriesWithLabels = []
+      this.countryCodes.forEach(country => {
+        countriesWithLabels.push({
+          code: country,
+          name: this.allCountries[country]
+        })
+      })
+      return countriesWithLabels.sort((a, b) => (a.name > b.name ? 1 : (b.name > a.name) ? -1 : 0))
     }
   },
   created() {
