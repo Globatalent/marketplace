@@ -131,7 +131,7 @@ export const messages = {
       Ratings: 'Ratings',
       Favorite: 'Favorite',
       DaysLeft: 'days left',
-      ComingSoon: 'Coming soon',
+      ComingSoon: 'Starting soon',
       M10Token: '1 M10 token',
       SoftCapt: 'Soft Cap',
       ExpertsRating: 'Experts Rating',
