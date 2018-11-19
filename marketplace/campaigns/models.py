@@ -37,6 +37,7 @@ class Sport(TimeStampedModel):
     """List of available sports in the platform."""
 
     name = models.CharField(max_length=100, unique=True)
+    color = models.CharField(max_length=6, verbose_name=_("color"))
 
     class Meta:
         ordering = ["name"]

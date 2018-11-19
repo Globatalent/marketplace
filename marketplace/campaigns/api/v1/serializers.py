@@ -19,7 +19,7 @@ from marketplace.users.helpers import is_following
 class SportSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sport
-        fields = ["id", "name"]
+        fields = ["id", "name", "color"]
 
 
 class PictureSerializer(serializers.ModelSerializer):
