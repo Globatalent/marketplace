@@ -3,7 +3,7 @@
     <el-row>
       <el-col :xs="24">
         <div class="beginBlock text-center">
-          <h3 class="beginBlock-title">{{ $tc("message.WeBringTheTalent") }}</h3>
+          <h3 class="beginBlock-title">{{ $tc('message.WeBringTheTalent') }}</h3>
           <h4 class="beginBlock-subTitle" v-html="$t('message.TheFirstSportsCryptoExchange')"></h4>
         </div>
       </el-col>
@@ -11,18 +11,24 @@
     <el-row>
       <el-col :xs="24">
         <ul class="campaignsFilter">
-          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">54</span><span class="campaignsFilter-item-text">{{ $tc("message.AllCampaigns") }}</span></li>
-          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">21</span><span class="campaignsFilter-item-text">{{ $tc("message.LaunchingSoon") }}</span></li>
-          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">44</span><span class="campaignsFilter-item-text">{{ $tc("message.New") }}</span></li>
-          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span class="campaignsFilter-item-text">{{ $tc("message.Ending") }}</span></li>
-          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span class="campaignsFilter-item-text">{{ $tc("message.Hot") }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">54</span><span
+            class="campaignsFilter-item-text">{{ $tc('message.AllCampaigns') }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">21</span><span
+            class="campaignsFilter-item-text">{{ $tc('message.LaunchingSoon') }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">44</span><span
+            class="campaignsFilter-item-text">{{ $tc('message.New') }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span
+            class="campaignsFilter-item-text">{{ $tc('message.Ending') }}</span></li>
+          <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span
+            class="campaignsFilter-item-text">{{ $tc('message.Hot') }}</span></li>
         </ul>
       </el-col>
     </el-row>
     <el-row>
       <el-col :xs="24">
         <div class="searchList">
-          <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search" @keyup.native="onSearch">
+          <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search"
+                    @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
           <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport" @change="filter()">
@@ -30,7 +36,8 @@
             <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
             </el-option>
           </el-select>
-          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country" @change="filter()">
+          <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country"
+                     @change="filter()">
             <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
             <el-option v-for="item in countries" :label="item.name" :value="item.code" :key="item.code">
             </el-option>
@@ -43,9 +50,14 @@
         </div>
       </el-col>
     </el-row>
-    <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}" v-if="campaigns.length > 0">
-      <gb-campaign-list-card v-for="campaign in campaigns" :key="campaign.id" :campaign="campaign"></gb-campaign-list-card>
-    </masonry>
+    <el-row v-loading.fullscreen="loadingCampaigns" v-if="campaigns.length > 0">
+      <el-col>
+        <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
+          <gb-campaign-list-card v-for="campaign in campaigns" :key="campaign.id"
+                                 :campaign="campaign"></gb-campaign-list-card>
+        </masonry>
+      </el-col>
+    </el-row>
     <div class="campaignList-noResults text-center" v-else>
       <h2>{{ $tc('message.NoResults') }}</h2>
     </div>
@@ -64,168 +76,183 @@
 </template>
 
 <script>
-import BaseLayout from '@/layout/BaseLayout.vue'
-import { mapGetters } from 'vuex'
-import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
-import countries from '@/base/helpers/countries'
+  import BaseLayout from '@/layout/BaseLayout.vue'
+  import { mapGetters } from 'vuex'
+  import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
+  import countries from '@/base/helpers/countries'
 
-
-export default {
-  name: 'CampaignList',
-  components: {
-    'gb-base-layout': BaseLayout,
-    'gb-campaign-list-card': CampaignListCard
-  },
-  data() {
-    return {
-      allCountries: countries,
-      search: null,
-      sport: null,
-      country: null,
-      kind: null,
-      errorMessage: ''
-    }
-  },
-  computed: {
-    ...mapGetters({
-      sports: 'campaigns/sports',
-      campaigns: 'campaigns/campaigns',
-      countryCodes: 'campaigns/countries',
-      pagination: 'campaigns/pagination',
-      user: 'users/user'
-    }),
-    countries () {
-      let countriesWithLabels = []
-      this.countryCodes.forEach(country => {
-        countriesWithLabels.push({
-          code: country,
-          name: this.allCountries[country]
-        })
-      })
-      return countriesWithLabels.sort((a, b) => (a.name > b.name ? 1 : (b.name > a.name) ? -1 : 0))
-    }
-  },
-  created() {
-    this.$store.commit('campaigns/sports', [])
-    this.$store.dispatch('campaigns/sports')
-    this.$store.dispatch('campaigns/countries')
-    this.initial()
-  },
-  methods: {
-    initial() {
-      // Load initial page of campaigns
-      this.$store.commit('campaigns/campaigns', [])
-      if (!!this.user) {
-        this.$store.dispatch('users/fetchUser').then(() => {
-          this.$store.dispatch('campaigns/list', {
-            filters: { active: 'True' }
+  export default {
+    name: 'CampaignList',
+    components: {
+      'gb-base-layout': BaseLayout,
+      'gb-campaign-list-card': CampaignListCard
+    },
+    data () {
+      return {
+        allCountries: countries,
+        search: null,
+        sport: null,
+        country: null,
+        kind: null,
+        errorMessage: '',
+        loadingCampaigns: false
+      }
+    },
+    computed: {
+      ...mapGetters({
+        sports: 'campaigns/sports',
+        campaigns: 'campaigns/campaigns',
+        countryCodes: 'campaigns/countries',
+        pagination: 'campaigns/pagination',
+        user: 'users/user'
+      }),
+      countries () {
+        let countriesWithLabels = []
+        this.countryCodes.forEach(country => {
+          countriesWithLabels.push({
+            code: country,
+            name: this.allCountries[country]
           })
         })
-      } else {
-        this.$store.dispatch('campaigns/list', {
-          filters: {
-            active: 'True'
+        return countriesWithLabels.sort((a, b) => (a.name > b.name ? 1 : (b.name > a.name) ? -1 : 0))
+      }
+    },
+    created () {
+      this.$store.commit('campaigns/sports', [])
+      this.$store.dispatch('campaigns/sports')
+      this.$store.dispatch('campaigns/countries')
+      this.initial()
+    },
+    mounted () {
+      this.checkScroll()
+    },
+    methods: {
+      initial () {
+        // Load initial page of campaigns
+        this.$store.commit('campaigns/campaigns', [])
+        if (!!this.user) {
+          this.$store.dispatch('users/fetchUser').then(() => {
+            this.$store.dispatch('campaigns/list', {
+              filters: {active: 'True'}
+            })
+          })
+        } else {
+          this.$store.dispatch('campaigns/list', {
+            filters: {
+              active: 'True'
+            }
+          })
+          // .then(() => {
+          //   console.log(this.campaigns)
+          // })
+        }
+      },
+      onSearch (event) {
+        // Update the campaign list using the search
+        if (event.keyCode === 13) {
+          this.filter()
+        }
+      },
+      filter () {
+        let filters = {
+          active: 'True'
+        }
+        if (!!this.search && this.search !== '') filters.search = this.search
+        if (!!this.sport && this.sport !== '') filters.sport = this.sport
+        if (!!this.country && this.country !== '') filters.country = this.country
+        if (!!this.kind && this.kind !== '') filters.kind = this.kind
+        this.$store.dispatch('campaigns/list', {filters: filters})
+      },
+      checkScroll () {
+        window.onscroll = () => {
+          let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 500
+
+          if (bottomOfWindow && !this.loadingCampaigns) {
+            this.loadingCampaigns = true
+            // Gets a new page of campaigns and push them to the current list
+            if (!!this.pagination.next) {
+              this.$store.dispatch('campaigns/list', {
+                filters: {active: 'True'},
+                url: this.pagination.next,
+                push: true
+              }).then(() => {this.loadingCampaigns = false})
+            } else {
+              this.loadingCampaigns = false
+            }
           }
-        })
-        // .then(() => {
-        //   console.log(this.campaigns)
-        // })
+        }
       }
-    },
-    onSearch(event) {
-      // Update the campaign list using the search
-      if (event.keyCode === 13) {
-        this.filter()
-      }
-    },
-    filter() {
-      let filters = {
-        active: 'True'
-      }
-      if (!!this.search && this.search !== "") filters.search = this.search
-      if (!!this.sport && this.sport !== "") filters.sport = this.sport
-      if (!!this.country && this.country !== "") filters.country = this.country
-      if (!!this.kind && this.kind !== "") filters.kind = this.kind
-      this.$store.dispatch('campaigns/list', {filters: filters})
-    },
-    scroll() {
-      // Gets a new page of campaigns and push them to the current list
-      if (!!this.pagination.next) {
-        this.$store.dispatch('campaigns/list', {
-          url: this.pagination.next,
-          push: true
-        })
-      }
-    },
+    }
+
   }
-}
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/variables.scss';
+  @import '../../scss/variables.scss';
 
-.beginBlock {
-  background: url('../../assets/img/background-list-title.png');
-  background-repeat: no-repeat;
-  background-position: center;
-}
+  .beginBlock {
+    background: url('../../assets/img/background-list-title.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 
-.searchList {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 35px;
-}
-.searchList-option {
-  margin-left: 30px;
-}
+  .searchList {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 35px;
+  }
 
-.campaignList-startBlock {
-  margin: 30px auto;
-  border-top: 1px solid $--grey-detailCampaign-border;
-  padding-top: 40px;
-  display: block;
-  width: 100%;
-  max-width: 895px;
-  font-size: 0px;
-}
+  .searchList-option {
+    margin-left: 30px;
+  }
 
-.campaignList-startBlock-container {
-  max-width: 585px;
-  display: block;
-  margin: 0 auto;
-}
+  .campaignList-startBlock {
+    margin: 30px auto;
+    border-top: 1px solid $--grey-detailCampaign-border;
+    padding-top: 40px;
+    display: block;
+    width: 100%;
+    max-width: 895px;
+    font-size: 0px;
+  }
 
-.campaignList-startBlock-sentence {
-  display: inline-block;
-  vertical-align: top;
-  text-align: right;
-  padding-right: 20px;
-  padding-right: 0px;
-  width: 70%;
-  width: 100%;
-  text-align: center;
-}
+  .campaignList-startBlock-container {
+    max-width: 585px;
+    display: block;
+    margin: 0 auto;
+  }
 
-.campaignList-startBlock-sentence1 {
-  font-weight: normal;
-  font-family: 'OpenSans Regular';
-  font-size: 36px;
-  line-height: 36px;
-  margin: 0;
-}
+  .campaignList-startBlock-sentence {
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 20px;
+    padding-right: 0px;
+    width: 70%;
+    width: 100%;
+    text-align: center;
+  }
 
-.campaignList-startBlock-sentence2 {
-  font-size: 14px;
-}
+  .campaignList-startBlock-sentence1 {
+    font-weight: normal;
+    font-family: 'OpenSans Regular';
+    font-size: 36px;
+    line-height: 36px;
+    margin: 0;
+  }
 
-.startFreeButton {
-  display: inline-block;
-  vertical-align: top;
-  width: 30%;
-  font-size: 14px;
-  font-family: 'OpenSans SemiBold';
-  position: relative;
-  top: 6px;
-  display: none;
-}
+  .campaignList-startBlock-sentence2 {
+    font-size: 14px;
+  }
+
+  .startFreeButton {
+    display: inline-block;
+    vertical-align: top;
+    width: 30%;
+    font-size: 14px;
+    font-family: 'OpenSans SemiBold';
+    position: relative;
+    top: 6px;
+    display: none;
+  }
 </style>
