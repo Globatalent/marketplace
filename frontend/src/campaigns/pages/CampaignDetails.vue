@@ -17,7 +17,7 @@
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
               <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-              <div class="campaign-sport" :style="'background-color:' + getRandomSportColor(campaign.sport)">
+              <div class="campaign-sport" :style="`background-color:#${campaign.sport.color}`" v-if="campaign.sport">
                 {{!!campaign.sport ? campaign.sport.name : ''}}
               </div>
               <div class="campaignDetails-timeRemaining">
@@ -280,7 +280,6 @@ export default {
       return 0
     },
     hasStarted () {
-      console.log(this.campaign.started)
       return this.campaign.started < new Date()
     }
   },
@@ -319,39 +318,6 @@ export default {
       //   params: { campaigneId: campaign.id }
       // })
     },
-    getRandomRating () {
-      const precision = 10 // 1 decimals
-      let randomResult = 0
-      while (randomResult < 4 || randomResult > 5) {
-        randomResult =
-          Math.floor(
-            Math.random() * (10 * precision - 1 * precision) + 1 * precision
-          ) /
-          (1 * precision)
-      }
-      return randomResult
-    },
-    getRandomSportColor (sport) {
-      if (!!sport) {
-        let randomColor =
-          '#' + Math.floor(Math.random() * 16777215).toString(16)
-        let localSportsColors
-        if (localStorage.sportsColors === undefined) {
-          localSportsColors = []
-          localStorage.setItem(
-            'sportsColors',
-            JSON.stringify(localSportsColors)
-          )
-        }
-        localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
-        if (!localSportsColors[sport.id]) {
-          localSportsColors[sport] = randomColor
-        }
-        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
-        return localSportsColors[sport.id]
-      }
-      return ''
-    }
   }
 }
 </script>

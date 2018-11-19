@@ -3,12 +3,12 @@
     <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
       <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
         <div class="campaign-sport" v-if="campaign.sport"
-             :style="'background-color:'+randomSportColor">{{campaign.sport.name}}
+             :style="'background-color:#'+campaign.sport.color">{{campaign.sport.name}}
         </div>
       </div>
       <div class="campaign-image is-placeholder-image" v-else>
         <div class="campaign-sport" v-if="campaign.sport"
-             :style="'background-color:'+randomSportColor">{{campaign.sport.name}}
+             :style="'background-color:#'+campaign.sport.color">{{campaign.sport.name}}
         </div>
       </div>
     </router-link>
@@ -95,21 +95,6 @@
         }
         return 0
       },
-      randomSportColor () {
-        const sport = this.campaign.sport
-        let randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16)
-        let localSportsColors
-        if (localStorage.sportsColors === undefined) {
-          localSportsColors = []
-          localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
-        }
-        localSportsColors = JSON.parse(localStorage.getItem('sportsColors'))
-        if (!localSportsColors[sport]) {
-          localSportsColors[sport] = randomColor
-        }
-        localStorage.setItem('sportsColors', JSON.stringify(localSportsColors))
-        return localSportsColors[sport]
-      }
     },
     methods: {
       setFollowingCampaign () {
