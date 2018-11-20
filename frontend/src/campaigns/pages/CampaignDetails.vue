@@ -382,6 +382,10 @@
 
   .el-carousel__item {
     border-radius: 5px;
+    img {
+      object-fit: cover;
+      height: 100%;
+    }
   }
 
   .el-carousel__item h3 {
