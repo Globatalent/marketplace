@@ -3,7 +3,7 @@
     <el-row type="flex" justify="left">
       <el-col :xs="24" class="menuContainer">
         <a href="/">
-          <img class="logoHeader" src="~@/assets/img/logo-header.png" />
+          <img class="logoHeader" src="@/assets/img/logo-header.png" />
         </a>
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router>
           <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->

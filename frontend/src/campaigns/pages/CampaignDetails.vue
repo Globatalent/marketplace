@@ -10,13 +10,13 @@
         </el-col>
       </el-row>
     </div>
-    <div class="campaignDetails-detailBox">
+    <div class="campaignDetails-detailBox" v-if="campaign">
       <div class="is-padding-boxed">
         <el-row :gutter="40">
           <el-col :xs="24" :md="16" class="campaignDetails-col">
             <div class="campaignDetails-title">
               <h1 class="campaign-name">{{campaign.title}}</h1>
-              <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
+              <img :src="countryFlag" alt="" class="image campaign-flag" v-if="campaign.country">
               <div class="campaign-sport" :style="`background-color:#${campaign.sport.color}`" v-if="campaign.sport">
                 {{!!campaign.sport ? campaign.sport.name : ''}}
               </div>
@@ -29,9 +29,9 @@
               </div>
 
             </div>
-            <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside">
-              <el-carousel-item>
-                <img :src="campaign.image" alt="">
+            <el-carousel :interval="4000" trigger="click" height="400px" indicator-position="outside" v-if="campaign">
+              <el-carousel-item v-for="(picture, index) in carouselImages" :key="index">
+                <img :src="picture" alt="">
               </el-carousel-item>
             </el-carousel>
           </el-col>
@@ -273,7 +273,8 @@
     },
     data () {
       return {
-        token: {}
+        token: {},
+        pictures: []
       }
     },
     computed: {
@@ -289,6 +290,12 @@
       },
       hasStarted () {
         return this.campaign.started < new Date()
+      },
+      countryFlag () {
+        return require(`../../assets/img/flags/${this.campaign.country.toLowerCase()}.png`)
+      },
+      carouselImages () {
+        return [this.campaign.image].concat(this.pictures)
       }
     },
     created () {
@@ -297,6 +304,9 @@
         this.token = !!this.campaign.token ? this.campaign.token : {}
         this.campaign.incomes.sort((x, y) => x.year - y.year)
         this.campaign.revenues.sort((x, y) => x.year - y.year)
+      })
+      this.$store.dispatch('campaigns/listPictures', {campaign: id}).then((pictures) => {
+        this.pictures = pictures.map(picture => picture.image)
       })
     },
     methods: {
