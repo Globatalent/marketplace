@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import CampaignTransformer from '../../../campaigns/transformers/CampaignTransformer'
+import CampaignTransformer from '@/campaigns/transformers/CampaignTransformer'
+import CampaignPictureTransformer from '@/campaigns/transformers/CampaignPictureTransformer'
 
 
 export default {
@@ -132,6 +133,21 @@ export default {
     return new Promise((resolve, reject) => {
       Vue.axios.post(`${state.endpoints.campaigns}${id}/follow/`).then((response) => {
         resolve(response)
+      }).catch((error) => {
+        reject(error)
+      })
+    })
+  },
+  listPictures({state}, params) {
+    if (!params.page_size) {
+      params.page_size = 1000
+    }
+    return new Promise((resolve, reject) => {
+      let endpoint = state.endpoints.pictures
+      Vue.axios.get(endpoint, {params}).then((response) => {
+        const { results, count, next, previous } = response.data;
+        const pictures = results.map(item => CampaignPictureTransformer.fetch(item));
+        resolve(pictures)
       }).catch((error) => {
         reject(error)
       })
