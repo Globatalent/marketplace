@@ -6,8 +6,8 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 from marketplace.campaigns.constants import ATHLETE, APPROVED
-from marketplace.campaigns.models import Campaign
-from marketplace.campaigns.tests.factories import CampaignFactory
+from marketplace.campaigns.models import Campaign, Picture
+from marketplace.campaigns.tests.factories import CampaignFactory, PictureFactory
 from marketplace.users.models import User
 from marketplace.users.tests.factories import UserFactory
 
@@ -213,3 +213,20 @@ class CampaignAPITests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         data = response.json()
         self.assertEqual(3, len(data))
+
+
+    def test_list_pictures(self):
+        campaigns = CampaignFactory.create_batch(2)
+        PictureFactory.create_batch(2, campaign=campaigns[0])
+        PictureFactory.create_batch(2, campaign=campaigns[1])
+
+        response = self.client.get("/api/v1/pictures/", format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(4, data['count'])
+
+        response = self.client.get(f"/api/v1/pictures/?campaign={campaigns[0].id}", format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        data = response.json()
+        self.assertEqual(2, data['count'])
+

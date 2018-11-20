@@ -14,3 +14,12 @@ class CampaignFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = "campaigns.Campaign"
+
+
+class PictureFactory(factory.django.DjangoModelFactory):
+
+    campaign = factory.SubFactory(CampaignFactory)
+    image = factory.django.ImageField()
+
+    class Meta:
+        model = "campaigns.Picture"

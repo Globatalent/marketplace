@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from marketplace.campaigns.api.v1.filters import CampaignFilter, ReviewFilter
+from marketplace.campaigns.api.v1.filters import CampaignFilter, ReviewFilter, PictureFilter
 from marketplace.campaigns.api.v1.permissions import (
     OnlyOwnerUpdates,
     IsAuthenticatedForCreate,
@@ -43,7 +43,8 @@ class SportViewSet(viewsets.ReadOnlyModelViewSet):
 class PictureViewSet(viewsets.ModelViewSet):
     serializer_class = PictureSerializer
     queryset = Picture.objects.all()
-    permission_classes = [IsAuthenticated, OnlyCampaignOwnerUpdates]
+    permission_classes = [OnlyCampaignOwnerUpdates]
+    filter_class = PictureFilter
 
 
 class LinkViewSet(viewsets.ModelViewSet):

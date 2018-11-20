@@ -1,7 +1,7 @@
 import django_filters
 from django.utils.translation import ugettext_lazy as _
 
-from marketplace.campaigns.models import Campaign, Review
+from marketplace.campaigns.models import Campaign, Review, Picture
 
 
 class CampaignFilter(django_filters.rest_framework.FilterSet):
@@ -70,3 +70,14 @@ class ReviewFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = Review
         fields = ["state", "campaign"]
+
+
+class PictureFilter(django_filters.rest_framework.FilterSet):
+
+    campaign = django_filters.NumberFilter(
+        field_name="campaign__id", help_text=_("Filter pictures by campaign.")
+    )
+
+    class Meta:
+        model = Picture
+        fields = ["campaign"]
