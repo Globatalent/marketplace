@@ -295,7 +295,8 @@
         return require(`../../assets/img/flags/${this.campaign.country.toLowerCase()}.png`)
       },
       carouselImages () {
-        return [this.campaign.image].concat(this.pictures)
+        const initialImages = this.campaign.pitchImage ? [this.campaign.pitchImage] : []
+        return initialImages.concat(this.pictures)
       }
     },
     created () {
