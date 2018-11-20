@@ -209,7 +209,7 @@
         </gb-campaign-info-row>
 
         <gb-campaign-info-row v-if="!!campaign.incomes && campaign.incomes.length > 0" id="incomeForecastSection"
-                              :title="$tc('message.Revenue3years')">
+                              :title="$tc('message.IncomeForecastFor5')">
           <div class="incomeRow" v-for="item in campaign.incomes" :key="item.id">
             {{item.year}} - {{item.currencySymbol}} <span class="is-bold">{{$n(item.amount)}}</span>
           </div>
