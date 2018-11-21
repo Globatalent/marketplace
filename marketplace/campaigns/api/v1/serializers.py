@@ -107,6 +107,7 @@ class CampaignSerializer(serializers.ModelSerializer):
             "achievements",
             "expected",
             "funds",
+            "soft_cap",
             "use",
             "give_back",
             "examples",
@@ -129,6 +130,7 @@ class CampaignSerializer(serializers.ModelSerializer):
             "token": {"read_only": True},
             "finished": {"read_only": True},
             "started": {"read_only": True},
+            "soft_cap": {"read_only": True},
         }
 
     def get_following(self, obj):

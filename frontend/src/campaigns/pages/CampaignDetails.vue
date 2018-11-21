@@ -62,7 +62,7 @@
                 <div class="campaignDetails-fundingDetails-numbers-row">
                   <span class="campaignDetails-fundingDetails-numbers-row-title">{{$tc('message.SoftCapt')}}: </span>
                   <span
-                    class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.funds, 'currency') }}</span>
+                    class="campaignDetails-fundingDetails-numbers-row-number"> {{ $n(campaign.softCap, 'currency') }}</span>
                 </div>
               </div>
               <div class="campaignDetails-fundingDetails-rating">

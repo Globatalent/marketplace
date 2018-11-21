@@ -118,6 +118,6 @@ class CampaignAdmin(admin.ModelAdmin):
         ),
         (
             _("Founding"),
-            {"fields": ["currency", "funds", "use", "give_back", "examples"]},
+            {"fields": ["currency", "funds", "soft_cap", "use", "give_back", "examples"]},
         ),
     ]

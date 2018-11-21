@@ -30,6 +30,7 @@ class CampaignTransformer extends Transformer {
       currency: campaign.currency,
       currencySymbol: getCurrencySymbol(campaign.currency),
       funds: campaign.funds,
+      softCap: campaign.soft_cap,
       use: campaign.use,
       giveBack: campaign.give_back,
       examples: campaign.examples,

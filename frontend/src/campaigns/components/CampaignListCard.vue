@@ -32,7 +32,7 @@
               <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.Funding')}}:<span
                 class="campaign-progress-info-funding-qty"> $ {{ $n(campaign.funds) }}</span></div>
               <div v-if="!!campaign.token" class="campaign-progress-info-funding-text">{{$tc('message.SoftCapt')}}:<span
-                class="campaign-progress-info-funding-qty"> $ {{ $n(campaign.funds) }}</span></div>
+                class="campaign-progress-info-funding-qty"> $ {{ $n(campaign.softCap) }}</span></div>
             </div>
             <div class="campaign-progress-rating">
               <star-rating :rating="campaign.rating" inline read-only :show-rating="false" :star-size="15"

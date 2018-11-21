@@ -133,6 +133,7 @@ class Campaign(TimeStampedModel):
     # Founding
     currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default=USD)
     funds = models.FloatField(null=True, blank=True)
+    soft_cap = models.FloatField(null=True, blank=True)
     use = models.TextField(null=True, blank=True)
     give_back = models.TextField(null=True, blank=True)
     examples = models.TextField(null=True, blank=True)
