@@ -6,7 +6,7 @@
       <el-breadcrumb-item><a href="/campaigns/create">Card campaign</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
-      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="onDiscard()">{{ $tc("message.DiscardCampaign") }}</el-button>
+      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="$emit('discard')">{{ $tc("message.DiscardCampaign") }}</el-button>
       <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
     </div>
     <div class="formSteps">
@@ -105,14 +105,6 @@ export default {
       })
   },
   methods: {
-    onDiscard() {
-      this.loading = true
-      const payload = { id: this.campaign.id }
-      this.$store.dispatch('campaigns/delete', payload).then( () => {
-        this.loading = false
-        router.push({name: 'campaign.create'})
-      })
-    },
     onSaveAndContinue() {
       this.loading = true
       const payload = {
