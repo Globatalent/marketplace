@@ -1,17 +1,11 @@
 <template>
   <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
     <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
-      <div class="campaign-image" v-if="campaign.image" :style="{backgroundImage:'url('+campaign.image+')'}">
+      <div :class="['campaign-image', {'is-placeholder-image': !campaign.image}]" :style="campaign.image ? {backgroundImage:'url('+campaign.image+')'} : {}">
         <div class="campaign-sport" v-if="campaign.sport"
              :style="'background-color:#'+campaign.sport.color">{{campaign.sport.name}}
         </div>
-        <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
-      </div>
-      <div class="campaign-image is-placeholder-image" v-else>
-        <div class="campaign-sport" v-if="campaign.sport"
-             :style="'background-color:#'+campaign.sport.color">{{campaign.sport.name}}
-        </div>
-        <img src="~@/assets/img/bandera.png" alt="" class="image campaign-flag">
+        <img :src="countryFlag" alt="" class="image campaign-flag">
       </div>
     </router-link>
     <div class="campaign-info">
@@ -93,6 +87,13 @@
           return Math.round(this.campaign.token.progression * 100)
         }
         return 0
+      },
+      countryFlag () {
+        try {
+          return require(`../../assets/img/flags/${this.campaign.country.toLowerCase()}.png`)
+        } catch(error) {
+          return null
+        }
       },
     },
     methods: {

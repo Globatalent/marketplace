@@ -292,7 +292,11 @@
         return this.campaign.started < new Date()
       },
       countryFlag () {
-        return require(`../../assets/img/flags/${this.campaign.country.toLowerCase()}.png`)
+        try {
+          return require(`../../assets/img/flags/${this.campaign.country.toLowerCase()}.png`)
+        } catch(error) {
+          return null
+        }
       },
       carouselImages () {
         const initialImages = this.campaign.pitchImage ? [this.campaign.pitchImage] : []
@@ -382,6 +386,7 @@
 
   .el-carousel__item {
     border-radius: 5px;
+
     img {
       object-fit: cover;
       height: 100%;

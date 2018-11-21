@@ -156,7 +156,6 @@
         })
       },
       updateImage (fieldName, newURL) {
-        debugger
         this.form[fieldName] = newURL
       },
       onSaveAndContinue () {
