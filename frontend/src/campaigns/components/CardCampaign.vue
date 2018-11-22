@@ -16,7 +16,7 @@
         and in searches.</p>
         <el-form-item required :label="$tc('message.CampaignTitle')">
           <p class="formSteps-inputText">What is the title of you campaign?</p>
-          <el-input v-bind:placeholder="$tc('message.EnterExcitingTitle')" type="text" v-model="form.title"></el-input>
+          <el-input v-bind:placeholder="$tc('message.EnterExcitingTitle')" type="text" v-model="form.title" :maxlength="250"></el-input>
         </el-form-item>
         <el-form-item required :label="$tc('message.CampaignTagline')">
           <p class="formSteps-inputText">Provide a short description that best describes your campaign</p>

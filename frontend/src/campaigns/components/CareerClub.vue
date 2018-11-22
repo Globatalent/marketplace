@@ -15,7 +15,7 @@
         <p class="formSteps-text">Introduce your Career and entice people to learn more.</p>
         <el-form-item required :label="$tc('message.Ranking')">
           <p class="formSteps-inputText">Enter your actual ranking. (If is applicable)</p>
-          <el-input type="textarea" v-model="form.ranking"></el-input>
+          <el-input type="textarea" v-model="form.ranking" :maxlength="128"></el-input>
         </el-form-item>
         <el-form-item :label="$tc('message.Biography')">
           <p class="formSteps-inputText">Tell potential contributors more about your campaign. Provide details that will motivate people

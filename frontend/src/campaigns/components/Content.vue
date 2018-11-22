@@ -28,10 +28,10 @@
         <el-input type="text" :placeholder="$tc('message.Weight')" v-model="form.weight"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.CurrentClub')" v-if="form.kind==='athlete'">
-        <el-input type="text" v-model="form.club"></el-input>
+        <el-input type="text" v-model="form.club" :maxlength="128"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.CurrentCoach')" v-if="form.kind==='athlete'">
-        <el-input type="text" v-model="form.coach"></el-input>
+        <el-input type="text" v-model="form.coach" :maxlength="128"></el-input>
       </el-form-item>
       <el-form-item required :label="$tc('message.PitchVideoorImage')">
         <p class="formSteps-inputText">Add a video or image to appear on the top of your campaign page. Campaigns with
