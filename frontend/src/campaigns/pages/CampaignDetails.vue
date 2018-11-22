@@ -162,6 +162,9 @@
         <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
           <pre>{{campaign.history}}</pre>
         </gb-campaign-info-row>
+        <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" :title="$tc('message.Video')">
+          <a :href="campaign.pitchUrl" target="_blank">{{campaign.pitchUrl}}</a>
+        </gb-campaign-info-row>
 
         <gb-campaign-info-row v-if="campaign.height" :title="$tc('message.Height')">
           {{campaign.height}} cm

@@ -82,6 +82,7 @@ export const messages = {
       Content: 'Content',
       SocialMedia: 'Social Media',
       BasicInformation: 'Basic Information',
+      Video: 'Video',
       Height: 'Height',
       Weight: 'Weight',
       SaveContinue: 'Save & Continue',
