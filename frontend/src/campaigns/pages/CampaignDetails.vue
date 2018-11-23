@@ -302,7 +302,10 @@
         }
       },
       carouselImages () {
-        const initialImages = this.campaign.pitchImage ? [this.campaign.pitchImage] : []
+        let initialImages = [this.campaign.image]
+        if (this.campaign.pitchImage){
+          initialImages.push(this.campaign.pitchImage)
+        }
         return initialImages.concat(this.pictures)
       }
     },
