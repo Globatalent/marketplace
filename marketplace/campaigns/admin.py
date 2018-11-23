@@ -56,7 +56,7 @@ approve_campaigns.short_description = _("Approve campaigns")
 
 @admin.register(Campaign)
 class CampaignAdmin(admin.ModelAdmin):
-    list_display = ["id", "kind", "title", "is_draft", "state", "user", "country", "created"]
+    list_display = ["id", "kind", "title", "is_draft", "state", "user", "country", "created", "started", "finished"]
     list_filter = ["is_draft", "kind", "state", "sport", "country"]
     autocomplete_fields = ["sport", "user", "tags", "token"]
     search_fields = ["user__email", "title", "description", "tags__name", "sport__name"]
