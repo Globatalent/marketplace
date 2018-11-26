@@ -336,7 +336,8 @@ SENTRY_DSN = env('DJANGO_SENTRY_DSN', default=None)
 CORS_ORIGIN_WHITELIST = (
     'localhost:8000',
     'localhost:8080',
-    'market.dekaside.com'
+    'market.dekaside.com',
+    'market.globatalent.com'
 )
 from corsheaders.defaults import default_headers
 CORS_ALLOW_HEADERS = default_headers + (
