@@ -11,7 +11,7 @@
 
     <el-row>
       <el-col :xs="24" :sm="{span: 12, offset: 6}">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis urna eu venenatis feugiat. Curabitur eu leo condimentum, posuere velit id, volutpat quam. Nulla vitae metus suscipit, elementum ligula eget, finibus mauris. Duis egestas tortor quis iaculis auctor. Suspendisse sit amet laoreet dui. Cras venenatis neque a venenatis euismod. Proin vitae sagittis elit. Vestibulum feugiat est non mauris accumsan ornare. Donec euismod in eros id ullamcorper. Aliquam at augue risus.</p>
+        <p>Coming soon!</p>
       </el-col>
     </el-row>
 
