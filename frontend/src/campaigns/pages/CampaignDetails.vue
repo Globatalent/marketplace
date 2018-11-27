@@ -101,7 +101,7 @@
       </div>
     </div>
     <div class="campaignDetails-infoContainer is-padding-boxed">
-      <el-row>
+      <!-- <el-row>
         <el-col :xs="24">
           <ul class="campaignsFilter">
             <li class="campaignsFilter-item is-active"><span class="campaignsFilter-item-number">45</span><span
@@ -114,7 +114,7 @@
               class="campaignsFilter-item-text">{{ $tc('message.Ratings') }}</span></li>
           </ul>
         </el-col>
-      </el-row>
+      </el-row> -->
       <div class="campaignDetails-infoContainer-data">
         <ul class="campaignDetails-infoContainer-data-miniMenu">
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.description">
