@@ -10,7 +10,11 @@
 
     <el-row>
       <el-col :xs="24" :sm="{span: 12, offset: 6}">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce iaculis urna eu venenatis feugiat. Curabitur eu leo condimentum, posuere velit id, volutpat quam. Nulla vitae metus suscipit, elementum ligula eget, finibus mauris. Duis egestas tortor quis iaculis auctor. Suspendisse sit amet laoreet dui. Cras venenatis neque a venenatis euismod. Proin vitae sagittis elit. Vestibulum feugiat est non mauris accumsan ornare. Donec euismod in eros id ullamcorper. Aliquam at augue risus.</p>
+      <p>Globatalent is a global marketplace that allows people all over the world to fund and trade in their favorite athletes, clubs and sports idols.</p>
+      <p>We give everyone the chance to have a stake in athletes and idols, and even bet on future talent. We have made it our goal to bring the best sports idols in the world to this platform.</p>
+      <p>We’ve created an ecosystem based on blockchain technology that allows people to seamlessly and transparently trade and exchange tokens. Our revolutionary product is available and it is backed by some of the greatest sporting talent in the world.</p>
+      <p><b>Athletes</b> can get funds to focus on developing their career and give back to supporters part of their revenues. </p>
+      <p><b>Clubs and sports institutions</b> can obtain ﬁnance in exchange to a percentage of their ticketing, sponsorship, TV rights and more, in a transparent way. We also provide tools to notably increase fan engagement.</p>
       </el-col>
     </el-row>
 

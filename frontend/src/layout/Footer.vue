@@ -1,40 +1,10 @@
 <template>
   <div class="footer">
     <el-row type="flex" justify="center">
-      <el-col :xs="24" class="text-center">
-        <img class="logoFooter" src="~@/assets/img/logo-footer.png" />
-      </el-col>
-    </el-row>
-    <el-row type="flex" justify="center">
-      <el-col :xs="24" class="text-center footerMenu">
-        <el-menu class="el-menu-demo" mode="horizontal" router>
-          <el-menu-item class="el-menu-demo-item" index="sports" :route="{name:'sport'}">{{ $tc("message.Sport",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-demo-item" index="athletes" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-demo-item" index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
-          <el-menu-item class="el-menu-demo-item" index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
-          <el-menu-item class="el-menu-demo-item" index="about" :route="{name:'about'}">{{ $tc("message.About") }}</el-menu-item>
-          <el-menu-item class="el-menu-demo-item" index="contact" :route="{name:'contact'}">{{ $tc("message.ContactUs") }}</el-menu-item>
-        </el-menu>
-      </el-col>
-    </el-row>
-    <el-row type="flex" justify="center">
-      <el-col :xs="24" class="text-center subscribeCol">
-        <div class="subscribe-text">{{ $tc("message.SubscribeToUs") }}</div>
-        <div class="subscribeBox">
-          <input class="subscribeBox-input" type="text" :placeholder="$tc('message.InputEmail')">
-          <button class="subscribeBox-button">{{ $tc("message.SignUp") }}</button>
-        </div>
-        <img class="subscribe-image" src="~@/assets/img/etherum-foundation.png" />
-      </el-col>
-    </el-row>
-    <el-row type="flex" justify="center">
-      <el-col :xs="24" class="text-center footerBottom">
-        <el-menu class="el-menu-footer-bottom" mode="horizontal" router>
-          <el-menu-item class="el-menu-footer-bottom-item" index="sports" :route="{name:'press'}">{{ $tc("message.Press",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-footer-bottom-item" index="athletes" :route="{name:'about'}">{{ $tc("message.About",2) }}</el-menu-item>
-          <el-menu-item class="el-menu-footer-bottom-item" index="news" :route="{name:'careers'}">{{ $tc("message.Careers") }}</el-menu-item>
-        </el-menu>
-        <ul class="socialList">
+      <el-col class="text-center">
+      <h4>Social</h4>
+      <p>Join our conversations.</p>
+              <ul class="socialList">
           <li class="socialList-item">
             <a href="https://www.facebook.com/globatalent.official" target="_blank" class="socialList-item-link"><img src="~@/assets/img/facebook-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
@@ -45,6 +15,35 @@
             <a href="" class="socialList-item-link"><img src="~@/assets/img/pinterest-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
         </ul>
+      </el-col>
+      <el-col>
+      <h4>About</h4>
+      <p>Globatalent is the the first sports crypto exchange where you can tokenize, trade and support your favorite clubs and sports idols.</p>
+      </el-col>
+      <el-col>
+      <h4>Location</h4>
+      <p>London</p>
+      <p>Buenos aires</p>
+      <address>
+      <span>Hong Kong</span>
+      <span>1/F Knowles Building, HKU, Pokfulam Road, Hong Kong</span>
+      </address>
+      </el-col>
+    </el-row>
+    <el-row type="flex" justify="center">
+      <el-col :xs="24" class="text-center subscribeCol">
+        <div class="subscribe-text">{{ $tc("message.SubscribeToUs") }}</div>
+        <div class="subscribeBox">
+          <input class="subscribeBox-input" type="text" :placeholder="$tc('message.InputEmail')">
+          <button class="subscribeBox-button">{{ $tc("message.SignUp") }}</button>
+        </div>
+      </el-col>
+      <el-col class="text-center">
+      <img class="subscribe-image" src="~@/assets/img/etherum-foundation.png" />
+      </el-col>
+    </el-row>
+    <el-row type="flex" justify="center">
+      <el-col :xs="24" class="text-center footerBottom">
         <div class="copy">Ⓒ All rights reserved 2018.</div>
       </el-col>
     </el-row>
