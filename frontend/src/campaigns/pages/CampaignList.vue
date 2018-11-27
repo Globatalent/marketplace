@@ -8,7 +8,7 @@
         </div>
       </el-col>
     </el-row>
-    <el-row>
+    <!-- <el-row>
       <el-col :xs="24">
         <ul class="campaignsFilter">
           <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">54</span><span
@@ -23,7 +23,7 @@
             class="campaignsFilter-item-text">{{ $tc('message.Hot') }}</span></li>
         </ul>
       </el-col>
-    </el-row>
+    </el-row> -->
     <el-row>
       <el-col :xs="24">
         <div class="searchList">
