@@ -1,5 +1,5 @@
 <template>
-  <el-col :xs="24" :sm="12" :md="12" :lg="10" :xl="6" class="text-center">
+  <el-col class="text-center">
     <h2 class="form-lined-title">{{ $tc('message.RegisterNewUser') }}</h2>
     <div class="form-lined">
       <el-form ref="form" label-position="top" class="text-left" :model="form" :rules="rules">

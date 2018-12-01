@@ -25,8 +25,8 @@
       <p>London</p>
       <p>Buenos aires</p>
       <address>
-      <span>Hong Kong</span>
-      <span>1/F Knowles Building, HKU, Pokfulam Road, Hong Kong</span>
+      <p>Hong Kong</p>
+      <p>1/F Knowles Building, HKU, Pokfulam Road, Hong Kong</p>
       </address>
       </el-col>
     </el-row>
