@@ -115,7 +115,7 @@ export const messages = {
       ReviewLaunch: 'Review & Launch',
       DiscardCampaign: 'Discard Campaign',
       WeBringTheTalent: 'We bring the talent to you',
-      TheFirstSportsCryptoExchange: 'The <span class="is-bold">first sports crypto exchange</span> where you can <span class="is-marked is-blue">tokenize</span><br/><span class="is-marked is-green">trade</span> and support your favorite clubs and sports idols',
+      TheFirstSportsCryptoExchange: 'The <span class="is-bold">first sports crypto exchange</span> where you can <span class="is-marked is-green">trade</span><br/> and <span class="is-marked is-blue">support</span> your favorite clubs and sports idols',
       AllCampaigns: 'All Campaigns',
       LaunchingSoon: 'Launching Soon',
       New: 'New',
