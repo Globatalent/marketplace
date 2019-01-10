@@ -2,8 +2,8 @@
   <div class="footer">
     <el-row type="flex" justify="center">
       <el-col class="text-center">
-      <h4>Social</h4>
-      <p>Join our conversations.</p>
+      <h4>{{ $t("message.Social") }}</h4>
+      <p>{{ $t("message.JoinOurConv") }}</p>
               <ul class="socialList">
           <li class="socialList-item">
             <a href="https://www.facebook.com/globatalent.official" target="_blank" class="socialList-item-link"><img src="~@/assets/img/facebook-icon.png" alt="" class="socialList-item-link-icon"></a>
@@ -17,25 +17,25 @@
         </ul>
       </el-col>
       <el-col>
-      <h4>About</h4>
-      <p>Globatalent is the the first sports crypto exchange where you can tokenize, trade and support your favorite clubs and sports idols.</p>
+      <h4>{{ $t("message.About") }}</h4>
+      <p>{{ $t("message.AboutTxt") }}</p>
       </el-col>
       <el-col>
-      <h4>Location</h4>
-      <p>London</p>
-      <p>Buenos aires</p>
+      <h4>{{ $t("message.Location") }}</h4>
+      <p>{{ $t("message.London") }}</p>
+      <p>{{ $t("message.BuenosAires") }}</p>
       <address>
-      <p>Hong Kong</p>
-      <p>1/F Knowles Building, HKU, Pokfulam Road, Hong Kong</p>
+      <p>{{ $t("message.HongKong") }}</p>
+      <p>{{ $t("message.HongKongAdd") }}</p>
       </address>
       </el-col>
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center subscribeCol">
-        <div class="subscribe-text">{{ $tc("message.SubscribeToUs") }}</div>
+        <div class="subscribe-text">{{ $t("message.SubscribeToUs") }}</div>
         <div class="subscribeBox">
-          <input class="subscribeBox-input" type="text" :placeholder="$tc('message.InputEmail')">
-          <button class="subscribeBox-button">{{ $tc("message.SignUp") }}</button>
+          <input class="subscribeBox-input" type="text" :placeholder="$t('message.InputEmail')">
+          <button class="subscribeBox-button">{{ $t("message.SignUp") }}</button>
         </div>
       </el-col>
       <el-col class="text-center">
@@ -44,13 +44,14 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
-        <div class="copy">Ⓒ All rights reserved 2018.</div>
+        <div class="copy">Ⓒ {{ $t("message.AllRightsReserved") }}</div>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
+import VueI18n from 'vue-i18n'
 export default {
   name: 'gb-footer'
 }
