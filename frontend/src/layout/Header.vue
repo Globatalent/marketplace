@@ -10,7 +10,10 @@
           <el-menu-item index="campaigns" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
           <el-menu-item index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
           <el-menu-item index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
+           <el-menu-item ><a href="https://new.globatalent.com">Corporate</a></el-menu-item>
         </el-menu>
+        
+
         <el-menu :default-active="activeIndex" class="el-menu-right" mode="horizontal" router>
           <!-- <el-select v-model="$i18n.locale">
             <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</el-option>
