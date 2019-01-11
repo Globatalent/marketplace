@@ -133,6 +133,11 @@ export default [
     component: resolve => require(['@/pages/Contact.vue'], resolve),
   },
   {
+    path: '/athletesandorganizations',
+    name: 'organizations',
+    component: resolve => require(['@/pages/Organizations.vue'], resolve),
+  },
+  {
     path: '/press',
     name: 'press',
     component: resolve => require(['@/pages/Press.vue'], resolve),
