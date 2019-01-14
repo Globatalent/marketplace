@@ -12,13 +12,45 @@
             <a href="https://twitter.com/globatalent" target="_blank" class="socialList-item-link"><img src="~@/assets/img/twitter-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
           <li class="socialList-item">
-            <a href="" class="socialList-item-link"><img src="~@/assets/img/pinterest-icon.png" alt="" class="socialList-item-link-icon"></a>
+            <a href="https://t.me/globatalent" class="socialList-item-link" target="_blank" style="width:14px"><img src="~@/assets/img/icon-telegram.png" style="width:14px" alt="" class="socialList-item-link-icon"></a>
           </li>
         </ul>
       </el-col>
       <el-col>
       <h4>{{ $t("message.About") }}</h4>
       <p>{{ $t("message.AboutTxt") }}</p>
+      </el-col>
+      <el-col>
+      <h4>Contact us</h4>
+<div id='crmWebToEntityForm' style='width:600px;margin:auto;'>
+   <META HTTP-EQUIV ='content-type' CONTENT='text/html;charset=UTF-8'/>
+   <form action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads3718183000000307001 method='POST' onSubmit='javascript:document.charset="UTF-8";' accept-charset='UTF-8'>
+
+	 <!-- Do not remove this code. -->
+	<input type='text' style='display:none;' name='xnQsjsdp' value='26ded01eee3cbb74693abaeee34e2f8acbb50ca314ea68813ba8b57665b4dc48'/>
+	<input type='hidden' name='zc_gad' id='zc_gad' value=''/>
+	<input type='text' style='display:none;' name='xmIwtLD' value='902ae1508809b664f4a8880feb722643fe2db5ba1a2f62a32a61306421cf8410'/>
+	<input type='text' style='display:none;'  name='actionType' value='TGVhZHM='/>
+
+	<input type='text' style='display:none;' name='returnURL' value='https://market.globatalent.com' /> 
+	 <!-- Do not remove this code. -->
+	<table>
+	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >First Name<span style='color:red;'>*</span></td><td style='width:250px;' ><input type='text' style='width:250px;'  maxlength='40' name='First Name' /></td></tr>
+
+	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >Last Name<span style='color:red;'>*</span></td><td style='width:250px;' ><input type='text' style='width:250px;'  maxlength='80' name='Last Name' /></td></tr>
+
+	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >Email<span style='color:red;'>*</span></td><td style='width:250px;' ><input type='text' style='width:250px;'  maxlength='100' name='Email' /></td></tr>
+
+	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >Comments<span style='color:red;'>*</span> </td><td> <textarea name='Description' maxlength='32000'>&nbsp;</textarea></td></tr>
+
+	<tr><td colspan='2' style='text-align:center; padding-top:15px;font-size:12px;'>
+		<input style='font-size:12px;color:black'  type='submit' value='Submit' />
+		<input  type='reset' style='font-size:12px;color:black' value='Reset' />
+	    </td>
+	</tr>
+   </table>
+	</form>
+</div>
       </el-col>
       <el-col>
       <h4>{{ $t("message.Location") }}</h4>

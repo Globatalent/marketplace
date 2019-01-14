@@ -52,6 +52,7 @@
             <li>3. Press the “buy tokens” button.</li>
             <li>4. Enter the amount of tokens you want to buy.</li>
           </ul>
+          <br>
           <h4 class="campaign-name" style="color:	#0375B2">Can you buy tokens with your credit card?</h4>
           <p style="color: #647585">
             Currently you can buy with your credit card.
