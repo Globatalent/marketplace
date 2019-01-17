@@ -3,37 +3,46 @@
     <el-row type="flex" justify="left">
       <el-col :xs="24" class="menuContainer">
         <a href="/">
-          <img class="logoHeader" src="@/assets/img/logo-header.png" style="max-width: 240px;" />
+          <img class="logoHeader" src="@/assets/img/logo-header.png" />
         </a>
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" router>
-          <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->
-          <el-menu-item index="campaigns" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
-          <el-menu-item index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
-          <el-menu-item index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
-           <el-menu-item ><a href="https://web.globatalent.com">Corporate</a></el-menu-item>
-        </el-menu>
-        
-
-        <el-menu :default-active="activeIndex" class="el-menu-right" mode="horizontal" router>
-          <!-- <el-select v-model="$i18n.locale">
-            <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">{{ lang }}</el-option>
-          </el-select> -->
-          <el-submenu index="3" v-if="!!user">
-            <template slot="title">{{email()}}</template>
-            <el-menu-item index="campaign.create" :route="{name: 'campaign.create'}">{{ $tc("message.CreateCampaign") }}</el-menu-item>
-            <el-menu-item index="profile" :route="{name: 'profile'}">{{ $tc("message.Profile") }}</el-menu-item>
-            <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
-          </el-submenu>
-          <el-menu-item class="el-menu-item" index="login" :route="{name:'login'}" v-else>{{ $tc("message.SignIn") }}</el-menu-item>
-          <el-menu-item class="el-menu-item" index="registration" :route="{name:'registration'}" v-if="!user">
-            <span class="btn">{{ $tc("message.SignUp") }}</span></el-menu-item>
-          <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}" v-if="!!user">
-            <el-badge :value="unread" :max="99" class="item" v-if="unread > 0">
-              <el-button size="small" icon="el-icon-bell" circle></el-button>
-            </el-badge>
-            <el-button size="small" icon="el-icon-bell" circle v-else></el-button>
-          </el-menu-item>
-        </el-menu>
+        <div id="menu" :class="{ active: isActive }">
+          <el-menu @select="handleSelect" class="el-menu-demo" mode="horizontal" router>
+            <!-- <el-menu-item index="home" :route="{path: '/'}">{{ $tc("message.Home") }}</el-menu-item> -->
+            <el-menu-item index="campaigns" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
+            <el-menu-item index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
+            <el-menu-item index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
+            <el-menu-item ><a href="https://web.globatalent.com">Corporate</a></el-menu-item>
+          </el-menu>  
+          <el-menu class="el-menu-right" mode="horizontal" router>
+            <!-- <el-select v-model="$i18n.locale">
+              <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.value">{{ lang.title }}</el-option>
+            </el-select> -->
+            <el-submenu class="submenu" index="3" v-if="!!user">
+              <template slot="title">{{email()}}</template>
+              <el-menu-item index="campaign.create" :route="{name: 'campaign.create'}">{{ $tc("message.CreateCampaign") }}</el-menu-item>
+              <el-menu-item index="profile" :route="{name: 'profile'}">{{ $tc("message.Profile") }}</el-menu-item>
+              <el-menu-item class="el-menu-item" index="" @click="logout()">{{ $tc('message.Logout') }}</el-menu-item>
+            </el-submenu>
+            <el-menu-item class="el-menu-item" index="login" :route="{name:'login'}" v-if="!user">{{ $tc("message.SignIn") }}</el-menu-item>
+            <el-menu-item class="el-menu-item" index="registration" :route="{name:'registration'}" v-if="!user">
+              <span class="btn">{{ $tc("message.SignUp") }}</span>
+            </el-menu-item>
+            <el-menu-item class="el-menu-item submenu-collapsed" index="campaign.create" :route="{name: 'campaign.create'}" v-if="!!user">{{ $tc("message.CreateCampaign") }}</el-menu-item>
+            <el-menu-item class="el-menu-item submenu-collapsed" index="profile" :route="{name: 'profile'}" v-if="!!user">{{ $tc("message.Profile") }}</el-menu-item>
+            <el-menu-item class="el-menu-item submenu-collapsed" @click="logout()" v-if="!!user">{{ $tc('message.Logout') }}</el-menu-item>
+            <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}" v-if="!!user">
+              <el-badge :value="unread" :max="99" class="item" v-if="unread > 0">
+                <el-button size="small" icon="el-icon-bell" circle></el-button>
+              </el-badge>
+              <el-button size="small" icon="el-icon-bell" circle v-else></el-button>
+            </el-menu-item>
+          </el-menu>
+        </div>
+        <div id="toggle" @click="select()">
+          <div class="span" id="top" :class="{ active: isActive }"></div>
+          <div class="span" id="middle" :class="{ active: isActive }"></div>
+          <div class="span" id="bottom" :class="{ active: isActive }"></div>
+        </div>
       </el-col>
     </el-row>
   </div>
@@ -48,9 +57,11 @@ export default {
   name: 'gb-header',
   data() {
     return {
-      activeIndex: '1',
-      activeIndex2: '1',
-      langs: ['en', 'es']
+      langs: [
+        {'title': this.$t("message.English"), 'value': 'en-US'},
+        {'title': this.$t("message.Spanish"), 'value': 'es-ES'},
+      ],
+      isActive: false,
     }
   },
   computed: {
@@ -90,6 +101,12 @@ export default {
             message: 'Logout canceled'
           })
         })
+    },
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    select: function() {
+      this.isActive = !this.isActive;
     }
   }
 }
@@ -101,25 +118,17 @@ export default {
   padding: 20px 20px;
 }
 .logoHeader {
-  max-width: 200px;
-  margin: 0 auto;
-  display: inline-block;
+  max-width: 240px;
+  float: left;
   vertical-align: bottom;
 }
-
 .el-menu--horizontal {
-  display: inline-block;
-  width: auto;
   border: none;
-}
-.el-menu-demo,
-.el-menu-right {
   font-family: 'OpenSans SemiBold';
   font-size: 16px;
   color: #888893;
-}
-.el-menu-demo {
   margin-left: 20px;
+  display: inline-block;
 }
 .el-menu-right {
   float: right;
@@ -127,21 +136,103 @@ export default {
     float: left;
   }
 }
-
+.el-menu-item a {
+  text-decoration: none;
+}
 .el-menu-item {
   &:hover,
   &.is-active {
     color: #2b7cba !important;
   }
 }
-
-@media (min-width: 768px) {
+.submenu-collapsed {
+  display: none;
+}
+#toggle {
+  position: absolute;
+  right: 20px;
+  top: 14px;
+  z-index: 999;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  float: right;
+  transition: all .3s ease-out;
+  visibility: hidden;
+  opacity: 0;
+}
+#toggle .span {
+  border-radius: 10px;
+  background: #2b7cba;
+  transition: all 0.3s ease-out;
+  backface-visibility: hidden;
+}
+#top.span.active {
+  transform: rotate(45deg) translateX(3px) translateY(5px);
+}
+#middle.span.active {
+  opacity: 0;
+}
+#bottom.span.active {
+  transform: rotate(-45deg) translateX(8px) translateY(-10px);
+}
+@media only screen and (max-width: 768px) {
   .logoHeader {
-    margin: 0;
+    display: block;
   }
   .el-menu--horizontal {
-    position: relative;
-    top: 15px;
+    width: 100%;
+    margin-left: 0;
+    margin: 80px 0 30px 0;
+    display: block;
+  }
+  .el-menu-demo {
+    margin: 80px 0 0 0;
+  }
+  .el-menu-right {
+    margin: 0 0 30px 0;
+  }
+  .submenu {
+    display: none;
+  }
+  .submenu-collapsed {
+    display: block;
+  }
+  #toggle {
+    visibility: visible;
+    opacity: 1;
+    margin-top: 6px;
+  }
+  #toggle .span {
+    height: 4px;
+    margin: 5px 0;
+    transition: all .3s ease-out;
+    backface-visibility: visible;
+    visibility: visible;
+    opacity: 1;
+  }
+  #menu .el-menu-item {
+    display: none;
+  }
+  #menu ul {
+    display: none;
+  }
+  #menu.active {    
+    visibility: visible;
+    opacity: 0.98;
+    transition: all .5s ease-out;
+    .el-menu--horizontal .el-menu-item {
+      text-align: center;
+      float: none;
+      display: block;
+      height: 100%;
+      width: 100%;
+      border-top: 1px solid #EAEAEB;
+      font-size: 18px;
+    }
+    ul {
+      display: block;
+    }
   }
 }
 </style>

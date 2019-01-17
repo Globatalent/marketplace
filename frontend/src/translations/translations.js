@@ -171,6 +171,8 @@ export const messages = {
       HongKong: 'Hong Kong',
       HongKongAdd: '1/F Knowles Building, HKU, Pokfulam Road, Hong Kong',
       AllRightsReserved: 'All rights reserved 2019.',
+      English: 'English',
+      Spanish: 'Spanish',
     }
   },
   'es-ES': {
@@ -345,6 +347,8 @@ export const messages = {
       HongKong: 'Hong Kong',
       HongKongAdd: '1/F Knowles Building, HKU, Pokfulam Road, Hong Kong',
       AllRightsReserved: 'Todos los derechos reservados 2019.',
+      English: 'Inglés',
+      Spanish: 'Español',
     }
   }
 }
