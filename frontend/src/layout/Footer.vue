@@ -1,10 +1,12 @@
 <template>
   <div class="footer">
-    <el-row type="flex" justify="center">
+
+
+    <el-row class="el-row--flex" type="flex" justify="center" gutter="15">
       <el-col class="text-center">
-      <h4>{{ $t("message.Social") }}</h4>
-      <p>{{ $t("message.JoinOurConv") }}</p>
-              <ul class="socialList">
+        <h4>{{ $t("message.Social") }}</h4>
+        <p>{{ $t("message.JoinOurConv") }}</p>
+        <ul class="socialList">
           <li class="socialList-item">
             <a href="https://www.facebook.com/globatalent.official" target="_blank" class="socialList-item-link"><img src="~@/assets/img/facebook-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
@@ -17,49 +19,56 @@
         </ul>
       </el-col>
       <el-col>
-      <h4>{{ $t("message.About") }}</h4>
-      <p>{{ $t("message.AboutTxt") }}</p>
+        <h4>{{ $t("message.About") }}</h4>
+        <p>{{ $t("message.AboutTxt") }}</p>
       </el-col>
       <el-col>
-      <h4>Contact us</h4>
-<div id='crmWebToEntityForm' style='width:600px;margin:auto;'>
-   <META HTTP-EQUIV ='content-type' CONTENT='text/html;charset=UTF-8'/>
-   <form action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads3718183000000307001 method='POST' onSubmit='javascript:document.charset="UTF-8";' accept-charset='UTF-8'>
+        <h4>Contact us</h4>
+        <div id='crmWebToEntityForm'>
+          <META HTTP-EQUIV ='content-type' CONTENT='text/html;charset=UTF-8'/>
+          <form action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads3718183000000307001 method='POST' onSubmit='javascript:document.charset="UTF-8";' accept-charset='UTF-8'>
+            <!-- Do not remove this code. -->
+            <input type='text' style='display:none;' name='xnQsjsdp' value='26ded01eee3cbb74693abaeee34e2f8acbb50ca314ea68813ba8b57665b4dc48'/>
+            <input type='hidden' name='zc_gad' id='zc_gad' value=''/>
+            <input type='text' style='display:none;' name='xmIwtLD' value='902ae1508809b664f4a8880feb722643fe2db5ba1a2f62a32a61306421cf8410'/>
+            <input type='text' style='display:none;'  name='actionType' value='TGVhZHM='/>
+            <input type='text' style='display:none;' name='returnURL' value='https://market.globatalent.com' /> 
+            <!-- Do not remove this code. -->
 
-	 <!-- Do not remove this code. -->
-	<input type='text' style='display:none;' name='xnQsjsdp' value='26ded01eee3cbb74693abaeee34e2f8acbb50ca314ea68813ba8b57665b4dc48'/>
-	<input type='hidden' name='zc_gad' id='zc_gad' value=''/>
-	<input type='text' style='display:none;' name='xmIwtLD' value='902ae1508809b664f4a8880feb722643fe2db5ba1a2f62a32a61306421cf8410'/>
-	<input type='text' style='display:none;'  name='actionType' value='TGVhZHM='/>
+            <div class="contact-form">
+              <div>
+                <label>Fist Name<span>*</span></label>
+                <input type='text' maxlength='40' name='First Name' />
+              </div>
+              <div>
+                <label>Last Name<span>*</span></label>
+                <input type='text' maxlength='80' name='Last Name' />
+              </div>
+              <div>
+                <label>Email<span>*</span></label>
+                <input type='text' maxlength='100' name='Email' />
+              </div>
+              <div>
+                <label>Comments<span>*</span></label>
+                <textarea name='Description' maxlength='32000'>&nbsp;</textarea>
+              </div>
+              <div>
+                <input style='font-size:12px;color:black'  type='submit' value='Submit' />
+                <input  type='reset' style='font-size:12px;color:black' value='Reset' />
+              </div>
+            </div>
 
-	<input type='text' style='display:none;' name='returnURL' value='https://market.globatalent.com' /> 
-	 <!-- Do not remove this code. -->
-	<table>
-	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >First Name<span style='color:red;'>*</span></td><td style='width:250px;' ><input type='text' style='width:250px;'  maxlength='40' name='First Name' /></td></tr>
-
-	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >Last Name<span style='color:red;'>*</span></td><td style='width:250px;' ><input type='text' style='width:250px;'  maxlength='80' name='Last Name' /></td></tr>
-
-	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >Email<span style='color:red;'>*</span></td><td style='width:250px;' ><input type='text' style='width:250px;'  maxlength='100' name='Email' /></td></tr>
-
-	<tr style="padding:6px;border-spacing:0px;border-width:0px;"><td style="padding:6px;border-spacing:0px;border-width:0px;" >Comments<span style='color:red;'>*</span> </td><td> <textarea name='Description' maxlength='32000'>&nbsp;</textarea></td></tr>
-
-	<tr><td colspan='2' style='text-align:center; padding-top:15px;font-size:12px;'>
-		<input style='font-size:12px;color:black'  type='submit' value='Submit' />
-		<input  type='reset' style='font-size:12px;color:black' value='Reset' />
-	    </td>
-	</tr>
-   </table>
-	</form>
-</div>
+          </form>
+        </div>
       </el-col>
       <el-col>
-      <h4>{{ $t("message.Location") }}</h4>
-      <p>{{ $t("message.London") }}</p>
-      <p>{{ $t("message.BuenosAires") }}</p>
-      <address>
-      <p>{{ $t("message.HongKong") }}</p>
-      <p>{{ $t("message.HongKongAdd") }}</p>
-      </address>
+        <h4>{{ $t("message.Location") }}</h4>
+        <p>{{ $t("message.London") }}</p>
+        <p>{{ $t("message.BuenosAires") }}</p>
+        <address>
+          <p>{{ $t("message.HongKong") }}</p>
+          <p>{{ $t("message.HongKongAdd") }}</p>
+        </address>
       </el-col>
     </el-row>
     <el-row type="flex" justify="center">
@@ -164,7 +173,6 @@ export default {
   max-width: 115px;
   margin-left: 20px;
 }
-
 .el-menu-footer-bottom {
   background: transparent;
   width: auto;
@@ -181,7 +189,6 @@ export default {
     }
   }
 }
-
 .socialList{
   margin: 0;
   padding: 0;
@@ -193,6 +200,20 @@ export default {
   display: inline-block;
   margin: 0 10px;
 }
+.contact-form {
+  width: 100%;
+}
+.contact-form label {
+  width: 100px;
+  text-align: left;
+}
+.contact-form label span {
+  color: #f00;
+}
+.contact-form input[type="text"] {
+  width: 100%;
+  max-width: 200px;
+}
 .copy{
   display: inline-block;
   margin-left: 20px;
@@ -200,5 +221,15 @@ export default {
 }
 .footerBottom{
   margin: 15px 0;
+}
+@media only screen and (max-width: 768px) {
+  .el-row--flex {
+    display: block;
+  }
+  .el-col {
+    float: none;
+    text-align: center;
+    margin-bottom: 20px;
+  }
 }
 </style>
