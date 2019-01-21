@@ -627,6 +627,7 @@
 
     &.is-last-block {
       max-width: 383px;
+      text-align: center;
     }
   }
 
@@ -675,7 +676,6 @@
 
   .campaignDetails-favoriteSocial {
     margin-top: 30px;
-    text-align: center;
   }
 
   .favoriteLink {
