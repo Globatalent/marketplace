@@ -8,6 +8,15 @@
         </div>
       </el-col>
     </el-row>
+        <div class="campaignList-startBlock" style="padding-top:0px;border-top:hidden;">
+      <div class="campaignList-startBlock-container">
+        <div class="campaignList-startBlock-sentence">
+          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
+            <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartCampaignNow')}}</el-button>
+          </router-link>
+        </div>
+      </div>
+    </div>
     <!-- <el-row>
       <el-col :xs="24">
         <ul class="campaignsFilter">
@@ -65,11 +74,9 @@
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
           <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
-            <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+            <el-button type="primary" class="startFreeButton" size="big">{{$t('message.StartCampaignNow')}}</el-button>
           </router-link>
-          <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
         </div>
-        <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button>
       </div>
     </div>
   </gb-base-layout>
@@ -235,7 +242,7 @@
 
   .campaignList-startBlock-sentence1 {
     font-weight: normal;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller';
     font-size: 36px;
     line-height: 36px;
     margin: 0;
@@ -248,11 +255,11 @@
   .startFreeButton {
     display: inline-block;
     vertical-align: top;
-    width: 30%;
+    width: auto;
     font-size: 14px;
-    font-family: 'OpenSans SemiBold';
+    font-family: 'Aller';
+    font-weight: bold;
     position: relative;
     top: 6px;
-    display: none;
   }
 </style>
