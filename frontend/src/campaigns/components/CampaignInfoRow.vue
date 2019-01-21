@@ -1,5 +1,5 @@
 <template>
-  <el-row :gutter="50">
+  <el-row>
     <el-col :xs="24" :md="8" :id="id" class="campaignDetails-infoContainer-data-title text-right">
       {{ title }}
     </el-col>
@@ -41,11 +41,10 @@
     font-family: 'OpenSans Regular';
     margin-bottom: 40px;
     .line {
-      margin-top: 20px;
       display: block;
-      width: 100%;
-      max-width: 400px;
+      width: 75%;
       border-top: 1px solid $--grey-detailCampaign-border;
+      margin: auto;
     }
     &.is-last-block {
       max-width: 383px;

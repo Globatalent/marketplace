@@ -590,7 +590,6 @@
   .campaignDetails-infoContainer-data {
     position: relative;
     padding: 40px 85px;
-    margin-top: 30px;
     background-color: white;
     border: 2px solid $--grey-detailCampaign-border;
     background-image: url('~@/assets/img/logo-translucent.png');
@@ -638,12 +637,12 @@
     color: $--green-numbers;
     display: inline-block;
 
-    .fundsQty-currency {
-      font-size: 18px;
-      position: relative;
-      top: -13px;
-      margin-right: 3px;
-    }
+    // .fundsQty-currency {
+    //   font-size: 18px;
+    //   position: relative;
+    //   top: -13px;
+    //   margin-right: 3px;
+    // }
   }
 
   .campaignDetails-infoContainer-campaignCopyright {
@@ -720,10 +719,6 @@
   }
 
   .campaignDetails-infoContainer-data-miniMenu {
-    position: absolute;
-    left: 30px;
-    top: 50px;
-    z-index: 1;
     width: 200px;
   }
 

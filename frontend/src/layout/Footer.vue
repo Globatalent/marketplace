@@ -1,8 +1,7 @@
 <template>
   <div class="footer">
 
-
-    <el-row class="el-row--flex" type="flex" justify="center" gutter="15">
+    <el-row class="el-row--flex" type="flex" justify="center">
       <el-col class="text-center">
         <h4>{{ $t("message.Social") }}</h4>
         <p>{{ $t("message.JoinOurConv") }}</p>
