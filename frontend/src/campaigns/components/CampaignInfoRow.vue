@@ -1,6 +1,6 @@
 <template>
   <el-row>
-    <el-col :xs="24" :md="8" :id="id" class="campaignDetails-infoContainer-data-title text-right">
+    <el-col :xs="24" :md="8" :id="id" class="campaignDetails-infoContainer-data-title">
       {{ title }}
     </el-col>
     <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
