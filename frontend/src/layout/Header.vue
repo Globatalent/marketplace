@@ -179,6 +179,8 @@ export default {
 @media only screen and (max-width: 768px) {
   .logoHeader {
     display: block;
+    max-width: 170px;
+    margin-top: 15px;
   }
   .el-menu--horizontal {
     width: 100%;

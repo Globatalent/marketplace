@@ -33,30 +33,34 @@
         </ul>
       </el-col>
     </el-row> -->
-    <el-row>
-      <el-col :xs="24">
-        <div class="searchList">
+    <el-row class="el-row--flex" type="flex">
+      <el-col :xm="12">
           <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search"
                     @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
           </el-input>
+      </el-col>
+      <el-col :xm="4">
           <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport" @change="filter()">
             <el-option :label="$tc('message.BySport')" :value="null"></el-option>
             <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
             </el-option>
           </el-select>
+      </el-col>
+      <el-col :xm="4">
           <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country"
                      @change="filter()">
             <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
             <el-option v-for="item in countries" :label="item.name" :value="item.code" :key="item.code">
             </el-option>
           </el-select>
+      </el-col>
+      <el-col :xm="4">
           <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option" v-model="kind" @change="filter()">
             <el-option :label="$tc('message.AllTypes')" :value="null"></el-option>
             <el-option :label="$tc('message.Athletes')" :value="'athlete'"></el-option>
             <el-option :label="$tc('message.Clubs')" :value="'club'"></el-option>
           </el-select>
-        </div>
       </el-col>
     </el-row>
     <el-row v-loading.fullscreen="loadingCampaigns" v-if="campaigns.length > 0">
@@ -211,6 +215,7 @@
 
   .searchList-option {
     margin-left: 30px;
+    width: 100%;
   }
 
   .campaignList-startBlock {
@@ -261,5 +266,18 @@
     font-weight: bold;
     position: relative;
     top: 6px;
+  }
+  @media only screen and (max-width: 768px) {
+    .el-row--flex {
+      display: block;
+    }
+    .el-col {
+      float: none;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .searchList-option {
+      margin-left: 0;
+    }
   }
 </style>
