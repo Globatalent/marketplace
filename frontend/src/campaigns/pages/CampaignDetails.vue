@@ -46,7 +46,7 @@
               <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
                            :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
             </div>
-            <div class="campaignDetails-invest">{{$tc('message.InvestIn')}} {{campaign.title}}</div>
+            <div class="campaignDetails-invest"> {{campaign.title}}</div>
             <p class="campaignDetails-description">{{campaign.description}}</p>
             <div class="campaignDetails-fundingDetails">
               <div class="campaignDetails-fundingDetails-numbers">

@@ -66,7 +66,6 @@
         <p>{{ $t("message.BuenosAires") }}</p>
         <address>
           <p>{{ $t("message.HongKong") }}</p>
-          <p>{{ $t("message.HongKongAdd") }}</p>
         </address>
       </el-col>
     </el-row>
