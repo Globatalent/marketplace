@@ -170,7 +170,8 @@ export const messages = {
       London: 'London',
       BuenosAires: 'Buenos aires',
       HongKong: 'Hong Kong - 1/F Knowles Building, HKU, Pokfulam Road, Hong Kong',
-      AllRightsReserved: 'All rights reserved 2019.',
+      AllRightsReserved: 'Globatalent. All rights reserved 2019.',
+      incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
       English: 'English',
       Spanish: 'Spanish',
     }
@@ -346,7 +347,8 @@ export const messages = {
       London: 'Londres',
       BuenosAires: 'Buenos aires',
       HongKong: 'Hong Kong - 1/F Knowles Building, HKU, Pokfulam Road, Hong Kong',
-      AllRightsReserved: 'Todos los derechos reservados 2019.',
+      AllRightsReserved: 'Globatalent.Todos los derechos reservados 2019.',
+      incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
       English: 'Inglés',
       Spanish: 'Español',
     }

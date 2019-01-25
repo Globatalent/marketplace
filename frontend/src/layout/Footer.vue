@@ -83,7 +83,12 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
+        <el-row>
         <div class="copy">Ⓒ {{ $t("message.AllRightsReserved") }}</div>
+        </el-row>
+        <el-row>
+        <div class="copy">{{$t("message.incorporation")}}</div>
+        </el-row>
       </el-col>
     </el-row>
   </div>
