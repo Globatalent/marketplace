@@ -163,7 +163,8 @@
           <pre>{{campaign.history}}</pre>
         </gb-campaign-info-row>
         <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" :title="$tc('message.Video')">
-          <a :href="campaign.pitchUrl" target="_blank">{{campaign.pitchUrl}}</a>
+          <iframe v-if="campaign.pitchUrl.includes('youtube')" width="560" height="315" src="https://www.youtube.com/embed/kJ3sxh-bHJs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <a v-else :href="campaign.pitchUrl" target="_blank">{{campaign.pitchUrl}}</a>
         </gb-campaign-info-row>
 
         <gb-campaign-info-row v-if="campaign.height" :title="$tc('message.Height')">
