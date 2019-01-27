@@ -63,7 +63,7 @@ export const messages = {
       Close: 'Close',
       News: 'News',
       Faq: 'F.A.Q.',
-      English: 'English',
+      Corporate: 'Corporate',
       RegisterNewUser: 'Register new user',
       Club: 'Club',
       SubscribeToUs: 'Subscribe to us',
@@ -174,6 +174,8 @@ export const messages = {
       incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
       English: 'English',
       Spanish: 'Spanish',
+      Chinese: 'Chinese',
+      Russian: 'Russian',
     }
   },
   'es-ES': {
@@ -240,7 +242,7 @@ export const messages = {
       Close: 'Close',
       News: 'Noticias',
       Faq: 'Preguntas frecuentes',
-      English: 'Inglés',
+      Corporate: 'Web coporativa',
       RegisterNewUser: 'Registrar nuevo usuario',
       Club: 'Club',
       SubscribeToUs: 'Suscríbete',
@@ -351,6 +353,8 @@ export const messages = {
       incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
       English: 'Inglés',
       Spanish: 'Español',
+      Chinese: 'Chino',
+      Russian: 'Ruso',
     }
   },
   'zh-CN': {
@@ -417,7 +421,7 @@ export const messages = {
       Close: '关闭',
       News: '新闻资讯',
       Faq: '常见问题解答',
-      English: '英文',
+      Corporate: '企業網站',
       RegisterNewUser: '注册新用户',
       Club: '俱乐部',
       SubscribeToUs: '从我们这里订购',
@@ -525,6 +529,11 @@ export const messages = {
       HongKong: '香港',
       HongKongAdd: '香港薄扶林道，香港大学，诺尔斯大厦，1楼',
       AllRightsReserved: '2019版权所有',
+      incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
+      English: '英文',
+      Spanish: 'Spanish',
+      Chinese: 'Chinese',
+      Russian: 'Russian',
     }
   },
   'ru-RU': {
@@ -591,7 +600,7 @@ export const messages = {
       Close: 'Закрыть',
       News: 'Новости',
       Faq: 'F.A.Q.',
-      English: 'Английский',
+      Corporate: 'корпоративная сеть',
       RegisterNewUser: 'Регистрация нового пользователя',
       Club: 'Клуб',
       SubscribeToUs: 'Подпишитесь на нас',
@@ -699,6 +708,11 @@ export const messages = {
       HongKong: 'Гонконг',
       HongKongAdd: '1/F Knowles Building, HKU, Pokfulam Road, Гонконг',
       AllRightsReserved: 'Все права защищены 2019.',
+      incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
+      English: 'Английский',
+      Spanish: 'Spanish',
+      Chinese: 'Chinese',
+      Russian: 'Russian',
     }
   },
   'pt-PT': {
@@ -765,7 +779,7 @@ export const messages = {
       Close: 'Fechar',
       News: 'Novidades',
       Faq: 'Perguntas Frequentes',
-      English: 'Inglês',
+      Corporate: 'Teia corporativa',
       RegisterNewUser: 'Registar novo utilizador',
       Club: 'Clube',
       SubscribeToUs: 'Subscrever-nos',
@@ -873,6 +887,11 @@ export const messages = {
       HongKong: 'Hong Kong',
       HongKongAdd: '1/F Knowles Building, HKU, Pokfulam Road, Hong Kong',
       AllRightsReserved: 'Todos os direitos reservados, 2019.',
+      incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
+      English: 'Inglês',
+      Spanish: 'Spanish',
+      Chinese: 'Chinese',
+      Russian: 'Russian',
     }
   }
 }

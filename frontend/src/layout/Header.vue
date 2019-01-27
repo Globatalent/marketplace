@@ -11,12 +11,14 @@
             <el-menu-item index="campaigns" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
             <el-menu-item index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
             <el-menu-item index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
-            <el-menu-item ><a href="https://web.globatalent.com">Corporate</a></el-menu-item>
+            <el-menu-item><a href="https://web.globatalent.com">{{ $tc("message.Corporate") }}</a></el-menu-item>
           </el-menu>  
           <el-menu class="el-menu-right" mode="horizontal" router>
-            <!-- <el-select v-model="$i18n.locale">
-              <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.value">{{ lang.title }}</el-option>
-            </el-select> -->
+            <el-menu-item class="el-menu-item lang-switcher">
+              <el-select v-model="$i18n.locale">
+                <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.value">{{ lang.title }}</el-option>
+              </el-select>
+            </el-menu-item>
             <el-submenu class="submenu" index="3" v-if="!!user">
               <template slot="title">{{email()}}</template>
               <el-menu-item index="campaign.create" :route="{name: 'campaign.create'}">{{ $tc("message.CreateCampaign") }}</el-menu-item>
@@ -29,13 +31,14 @@
             </el-menu-item>
             <el-menu-item class="el-menu-item submenu-collapsed" index="campaign.create" :route="{name: 'campaign.create'}" v-if="!!user">{{ $tc("message.CreateCampaign") }}</el-menu-item>
             <el-menu-item class="el-menu-item submenu-collapsed" index="profile" :route="{name: 'profile'}" v-if="!!user">{{ $tc("message.Profile") }}</el-menu-item>
-            <el-menu-item class="el-menu-item submenu-collapsed" @click="logout()" v-if="!!user">{{ $tc('message.Logout') }}</el-menu-item>
+            <el-menu-item class="el-menu-item submenu-collapsed" index="" @click="logout()" v-if="!!user">{{ $tc('message.Logout') }}</el-menu-item>
             <el-menu-item class="el-menu-item" index="notifications" :route="{name:'notifications'}" v-if="!!user">
               <el-badge :value="unread" :max="99" class="item" v-if="unread > 0">
                 <el-button size="small" icon="el-icon-bell" circle></el-button>
               </el-badge>
               <el-button size="small" icon="el-icon-bell" circle v-else></el-button>
             </el-menu-item>
+            <el-menu-item class="el-menu-item submenu-collapsed" v-for="(lang, i) in langs" :key="`Lang${i}`" @click="pickLanguage(lang.value)">{{ lang.title }}</el-menu-item>
           </el-menu>
         </div>
         <div id="toggle" @click="select()">
@@ -58,8 +61,11 @@ export default {
   data() {
     return {
       langs: [
-        {'title': this.$t("message.English"), 'value': 'en-US'},
-        {'title': this.$t("message.Spanish"), 'value': 'es-ES'},
+        {'title': this.$tc("message.English"), 'value': 'en-US'},
+        {'title': this.$tc("message.Spanish"), 'value': 'es-ES'},
+        {'title': this.$tc("message.Chinese"), 'value': 'zh-CN'},
+        {'title': this.$tc("message.Russian"), 'value': 'ru-RU'},
+        {'title': this.$tc("message.Portuguese"), 'value': 'pt-PT'},
       ],
       isActive: false,
     }
@@ -101,6 +107,9 @@ export default {
             message: 'Logout canceled'
           })
         })
+    },
+    pickLanguage(lang) {
+      this.$i18n.locale = lang;
     },
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
@@ -194,8 +203,8 @@ export default {
   .el-menu-right {
     margin: 0 0 30px 0;
   }
-  .submenu {
-    display: none;
+  .submenu, .lang-switcher {
+    display: none !important;
   }
   .submenu-collapsed {
     display: block;
