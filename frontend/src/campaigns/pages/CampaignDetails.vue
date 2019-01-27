@@ -162,9 +162,13 @@
         <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
           <pre>{{campaign.history}}</pre>
         </gb-campaign-info-row>
-        <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" class="videoWrapper" :title="$tc('message.Video')">
-          <iframe v-if="campaign.pitchUrl.includes('youtube')" width="560" height="315" v-bind:src="'https://www.youtube.com/embed/' + campaign.pitchUrl.split('?').slice(-1)[0].split('&').filter(param => param.includes('v=')).slice(-1)[0].split('v=').slice(-1)[0]" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <iframe v-if="campaign.pitchUrl.includes('vimeo')" v-bind:src="'https://player.vimeo.com/video/' + campaign.pitchUrl.split('/').slice(-1)[0]" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" :title="$tc('message.Video')">
+          <div v-if="campaign.pitchUrl.includes('youtube')" class="videoWrapper">
+            <iframe width="560" height="315" v-bind:src="'https://www.youtube.com/embed/' + campaign.pitchUrl.split('?').slice(-1)[0].split('&').filter(param => param.includes('v=')).slice(-1)[0].split('v=').slice(-1)[0]" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div v-if="campaign.pitchUrl.includes('vimeo')" class="videoWrapper">
+            <iframe v-bind:src="'https://player.vimeo.com/video/' + campaign.pitchUrl.split('/').slice(-1)[0]" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
         </gb-campaign-info-row>
 
         <gb-campaign-info-row v-if="campaign.height" :title="$tc('message.Height')">

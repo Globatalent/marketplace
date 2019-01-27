@@ -175,6 +175,7 @@ export const messages = {
       incorporation: "Globatalent, with Authorisation Code: 426519153438, and registered office in 36A Dr. Roy's Drive. P.0 Box 2510. Grand Cayman. KY1-1104 .Cayman Islands",
       English: 'English',
       Spanish: 'Spanish',
+      cancel: 'Cancel'
     }
   },
   'es-ES': {
