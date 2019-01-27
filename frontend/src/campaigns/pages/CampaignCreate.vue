@@ -191,13 +191,13 @@ export default {
 .campaignProfile-box-linkText-title {
   font-size: 31px;
   margin: 20px 0;
-  font-family: 'OpenSans Bold';
+  font-family: 'Aller Bold';
   color: $--black-subtitle;
 }
 
 .campaignProfile-box-linkText-subTitle {
   font-size: 14px;
   color: $--black-subtitle;
-  font-family: 'OpenSans Regular';
+  font-family: 'Aller Regular';
 }
 </style>

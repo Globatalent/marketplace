@@ -54,7 +54,7 @@
     margin: 20px auto;
     padding: 20px;
     text-align: center;
-    font-family: 'Source Sans', 'Aller', Arial, SansSerif;
+    font-family: 'Aller', Arial, SansSerif;
   }
 
   .title {

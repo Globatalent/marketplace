@@ -397,7 +397,7 @@ submitbutton.removeAttribute('style','opacity: none;');
 
   .campaignList-startBlock-sentence1 {
     font-weight: normal;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     font-size: 36px;
     line-height: 36px;
     margin: 0;
@@ -412,7 +412,7 @@ submitbutton.removeAttribute('style','opacity: none;');
     vertical-align: top;
     width: 30%;
     font-size: 14px;
-    font-family: 'OpenSans SemiBold';
+    font-family: 'Aller Bold';
     position: relative;
     top: 6px;
     display: none;
