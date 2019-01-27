@@ -185,7 +185,7 @@
   }
 
   .campaign-subtitle {
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     height: 50px;
   }
 
@@ -236,10 +236,10 @@
   }
 
   .campaign-progress-info-funding-text {
-    font-family: 'OpenSans Bold';
+    font-family: 'Aller Bold';
   }
 
   .campaign-progress-info-funding-qty {
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
   }
 </style>

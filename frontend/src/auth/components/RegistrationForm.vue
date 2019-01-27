@@ -200,7 +200,7 @@ export default {
 .registrationForm-infoRegulations {
   margin-top: 5px;
   font-size: 9px;
-  font-family: 'OpenSans Regular';
+  font-family: 'Aller Regular';
   color: $--grey-text;
 }
 .el-checkbox .el-checkbox__label {

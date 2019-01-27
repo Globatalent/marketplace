@@ -162,9 +162,13 @@
         <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
           <pre>{{campaign.history}}</pre>
         </gb-campaign-info-row>
-        <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" class="videoWrapper" :title="$tc('message.Video')">
-          <iframe v-if="campaign.pitchUrl.includes('youtube')" width="560" height="315" v-bind:src="'https://www.youtube.com/embed/' + campaign.pitchUrl.split('?').slice(-1)[0].split('&').filter(param => param.includes('v=')).slice(-1)[0].split('v=').slice(-1)[0]" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <iframe v-if="campaign.pitchUrl.includes('vimeo')" v-bind:src="'https://player.vimeo.com/video/' + campaign.pitchUrl.split('/').slice(-1)[0]" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" :title="$tc('message.Video')">
+          <div v-if="campaign.pitchUrl.includes('youtube')" class="videoWrapper">
+            <iframe width="560" height="315" v-bind:src="'https://www.youtube.com/embed/' + campaign.pitchUrl.split('?').slice(-1)[0].split('&').filter(param => param.includes('v=')).slice(-1)[0].split('v=').slice(-1)[0]" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div v-if="campaign.pitchUrl.includes('vimeo')" class="videoWrapper">
+            <iframe v-bind:src="'https://player.vimeo.com/video/' + campaign.pitchUrl.split('/').slice(-1)[0]" width="640" height="360" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+          </div>
         </gb-campaign-info-row>
 
         <gb-campaign-info-row v-if="campaign.height" :title="$tc('message.Height')">
@@ -376,7 +380,7 @@
     border-radius: 5px;
     background-color: $--pink;
     color: white;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     font-size: 12px;
     padding: 0 3px;
   }
@@ -436,7 +440,7 @@
   .campaign-name {
     display: inline-block;
     font-size: 28px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     color: $--black;
     vertical-align: middle;
   }
@@ -458,7 +462,7 @@
     font-size: 14px;
     color: $--black;
     display: inline-block;
-    font-family: 'OpenSans SemiBold';
+    font-family: 'Aller Bold';
   }
 
   .el-carousel__indicators {
@@ -470,14 +474,14 @@
     font-size: 32px;
     line-height: 32px;
     color: $--black;
-    font-family: 'OpenSans SemiBold';
+    font-family: 'Aller Bold';
     margin-bottom: 20px;
   }
 
   .campaignDetails-collected-currency,
   .campaignDetails-collected-text {
     font-size: 14px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     color: $--black;
   }
 
@@ -511,13 +515,13 @@
 
   .campaignDetails-invest {
     font-size: 20px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     color: $--black;
     margin-bottom: 10px;
   }
 
   .campaignDetails-description {
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     color: $--grey-title;
     font-size: 14px;
   }
@@ -543,7 +547,7 @@
   .campaignDetails-fundingDetails {
     border-top: 1px solid $--grey-detailCampaign-border;
     padding-top: 20px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     font-size: 0;
   }
 
@@ -582,7 +586,7 @@
     color: $--pink;
     text-decoration: underline;
     font-size: 14px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     display: inline-block;
     margin-left: 10px;
   }
@@ -614,7 +618,7 @@
 
   .campaignDetails-infoContainer-data-text-title {
     font-size: 25px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     color: $--black;
     margin-bottom: 20px;
   }
@@ -623,13 +627,13 @@
     color: black;
     font-size: 20px;
     line-height: 25px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
   }
 
   .campaignDetails-infoContainer-data-text {
     font-size: 14px;
     color: $--grey-text;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     margin-bottom: 40px;
 
     .line {
@@ -647,7 +651,7 @@
   }
 
   .fundsQty {
-    font-family: 'OpenSans SemiBold';
+    font-family: 'Aller Bold';
     font-size: 28px;
     line-height: 28px;
     color: $--green-numbers;
@@ -695,7 +699,7 @@
 
   .favoriteLink {
     font-size: 14px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     cursor: pointer;
     display: inline-block;
     width: auto;

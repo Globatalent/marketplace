@@ -32,13 +32,13 @@
     color: black;
     font-size: 20px;
     line-height: 25px;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
   }
 
   .campaignDetails-infoContainer-data-text {
     font-size: 14px;
     color: $--grey-text;
-    font-family: 'OpenSans Regular';
+    font-family: 'Aller Regular';
     margin-bottom: 40px;
     .line {
       display: block;

@@ -133,7 +133,7 @@ export default {
 }
 .el-menu--horizontal {
   border: none;
-  font-family: 'OpenSans SemiBold';
+  font-family: 'Aller Bold';
   font-size: 16px;
   color: #888893;
   margin-left: 20px;

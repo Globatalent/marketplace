@@ -65,7 +65,11 @@
         <p>{{ $t("message.London") }}</p>
         <p>{{ $t("message.BuenosAires") }}</p>
         <address>
-          <p>{{ $t("message.HongKong") }}</p>
+        <p>
+          {{ $t("message.HongKong") }}
+          <br>
+          <small>{{ $t("message.HongKongAdd") }}</small>
+        </p>
         </address>
       </el-col>
     </el-row>
@@ -108,7 +112,7 @@ export default {
   margin-top: 20px;
   background: $--black;
   color: $--grey;
-  font-family: 'OpenSans Regular';
+  font-family: 'Aller Regular';
 }
 .logoFooter {
   width: 100%;
@@ -129,7 +133,7 @@ export default {
   .el-menu-demo-item {
     color: white;
     text-transform: uppercase;
-    font-family: 'OpenSans Bold';
+    font-family: 'Aller Bold';
   }
 }
 .subscribeCol {
@@ -139,7 +143,7 @@ export default {
   display: inline-block;
   text-transform: uppercase;
   font-size: 18px;
-  font-family: 'OpenSans Bold';
+  font-family: 'Aller Bold';
 }
 .subscribeBox {
   display: inline-block;
@@ -165,7 +169,7 @@ export default {
   color: white;
   text-transform: uppercase;
   font-size: 12px;
-  font-family: 'OpenSans SemiBold';
+  font-family: 'Aller Bold';
   border: none;
   height: 40px;
   width: 100px;
@@ -184,7 +188,7 @@ export default {
     border: none;
     .el-menu-footer-bottom-item{
       font-size: 11px;
-      font-family: 'OpenSans SemiBold';
+      font-family: 'Aller Bold';
       height: auto;
       line-height: inherit;
       border: none;
