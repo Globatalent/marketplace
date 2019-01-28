@@ -19,7 +19,9 @@
         </el-row>
         <el-row>
           <el-col>
-            <div class="campaign-subtitle"><span v-if="campaign.giveBack">{{campaign.giveBack.length > 50 ? 	<div class="fulltext" id="more-1"><a class="more" href="#more-1">Show more</a><span>campaign.giveBack.substring(50,campaign.giveBack.length)</span><a class="less" href="#less-1">Show less</a></div> : campaign.giveBack}}</span>
+            <div class="campaign-subtitle">
+              {{getDescription()}}
+              <a class="show-more-msg" @click="showMore()">{{showMoreMsg()}}</a>
             </div>
             
           </el-col>
@@ -76,6 +78,11 @@
     components: {
       StarRating
     },
+    data () {
+      return {
+        isExtended: false
+      }
+    },
     computed: {
       ...mapGetters({
         user: 'users/user'
@@ -103,6 +110,30 @@
           console.log(error)
         })
       },
+      showMore() {
+        this.isExtended = !this.isExtended;
+      },
+      showMoreMsg() {
+        let text;
+        if(this.isExtended) {
+          text = this.$tc('message.Showless');
+        }
+        else {
+          text = this.$tc('message.Showmore');
+        }
+        return text;
+      },
+      getDescription() {
+        let description = this.campaign.giveBack;
+        let text = '';
+        if(this.isExtended) {
+          text = description;
+        }
+        else {
+          text = description.length > 50 ? description.substring(0,50)+' ...' : description;
+        }
+        return text;
+      }
     }
   }
 </script>

@@ -179,6 +179,8 @@ export const messages = {
       Russian: 'Russian',
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
+      showMore: 'Show more',
+      showLess: 'Show less',
     }
   },
   'es-ES': {
@@ -361,6 +363,8 @@ export const messages = {
       Russian: 'Ruso',
       Portuguese: 'Portuguese',
       cancel: 'Cancelar',
+      showMore: 'Show more',
+      showLess: 'Show less',
     }
   },
   'zh-CN': {
@@ -542,6 +546,8 @@ export const messages = {
       Russian: 'Russian',
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
+      showMore: 'Show more',
+      showLess: 'Show less',
     }
   },
   'ru-RU': {
@@ -723,6 +729,8 @@ export const messages = {
       Russian: 'Russian',
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
+      showMore: 'Show more',
+      showLess: 'Show less',
     }
   },
   'pt-PT': {
@@ -904,6 +912,8 @@ export const messages = {
       Russian: 'Russian',
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
+      showMore: 'Show more',
+      showLess: 'Show less',
     }
   }
 }
