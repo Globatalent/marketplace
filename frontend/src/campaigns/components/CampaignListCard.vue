@@ -21,7 +21,7 @@
           <el-col>
             <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
               <span v-if="campaign.giveBack">{{getDescription()}}</span>
-              <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack">{{showMoreMsg()}}</a>
+              <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack"> {{tc(showMoreMsg())}}</a>
             </div>
             
           </el-col>
@@ -117,10 +117,10 @@
       showMoreMsg() {
         let text;
         if(this.isExtended) {
-          text = this.$tc('message.Showless');
+          text = 'message.Showless';
         }
         else {
-          text = this.$tc('message.Showmore');
+          text = 'message.Showmore';
         }
         return text;
       },

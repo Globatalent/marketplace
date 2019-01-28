@@ -88,6 +88,10 @@
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
         <el-row>
+        <a class="copy"> {{ $t("message.privacy") }}</a>
+        <a class="copy"> {{ $t("message.terms") }}</a>
+        </el-row>
+        <el-row>
         <div class="copy">Ⓒ {{ $t("message.AllRightsReserved") }}</div>
         </el-row>
         <el-row>

@@ -118,6 +118,11 @@ export default [
     component: resolve => require(['@/pages/Faq.vue'], resolve),
   },
   {
+    path: '/terms',
+    name: 'terms',
+    component: resolve => require(['@/pages/Terms.vue'], resolve),
+  },
+  {
     path: '/news',
     name: 'news',
     component: resolve => require(['@/pages/News.vue'], resolve),

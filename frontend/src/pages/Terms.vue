@@ -1,0 +1,229 @@
+<template>
+  <gb-base-layout>
+    <el-row>
+      <el-col :xs="24" :sm="{span: 12, offset: 6}">
+        <div class="beginBlock text-center">
+          <h3 class="beginBlock-title">{{ $tc("message.WeBringTheTalent") }}</h3>
+          <h3 class="beginBlock-subTitle">Terms of use</h3>
+        </div>
+      </el-col>
+    </el-row>
+<el-row>
+      <el-col :xs="24" :sm="{span: 12, offset: 6}">
+      This website <a href="https://market.globatalent.com/">https://market.globatalent.com/</a> (the <strong>"Website"</strong>), is a Website of Globatalent, an exempted company incorporated with limited liability in the Cayman Islands, whose registered address is P.O. Box 2510, 4th floor, Cayman Financial Centre, 36ª Dr Roy’s Drive, Grand Cayman KY1-1104, Cayman Islands (<strong>"Globatalent"</strong>, <strong>"we"</strong>, <strong>"us"</strong>, or <strong>"our"</strong>).
+These Terms of Service (<strong>"Terms"</strong>) constitute a legally binding agreement (<strong>"Agreement"</strong>) between you and Globatalent governing your access to, registration and use of the Website, including any subdomains thereof, and any other websites through which Globatalent makes its services available (collectively, <strong>"Site"</strong>), our mobile, tablet and other smart device applications, and application program interfaces (collectively, <strong>"Application"</strong>) and all associated services (collectively, <strong>"Globatalent Services"</strong>). The Site, Application and Globatalent Services together are hereinafter collectively referred to as the <strong>"Globatalent Marketplace"</strong>.
+Our collection and use of personal information in connection with your access to and use of the Globatalent Marketplace is described in our <a href="/privacy" target="_blank">Privacy Policy</a>.
+Issuers alone are responsible for identifying, understanding, and complying with all laws, rules and regulations that apply to their Listings. For example, some countries have laws that set certain thresholds to the obligation to register a prospectus for the issue of tokens or as to whether those tokens are to be considered as financial instruments or not. In some countries, Issuers may have to register or obtain a license before carrying out any Listings or comply with specific requirements prior to the commercialisation of any tokens. Issuers are alone responsible for identifying and obtaining the relevant permits and authorisations. Certain types of Listings may be prohibited altogether. Penalties may include fines or other enforcement. If you have questions about how local laws apply to your Listing(s) on the Global Marketplace, you should always seek legal guidance.
+
+<h2>1. Scope of Globatalent Services</h2>
+1.1 The Globatalent Marketplace is an online marketplace that enables registered users (<strong>"Members"</strong>) and certain third parties who offer tokens (<strong>"Tokens"</strong>) and perks (Members and third parties who offer Tokens are <strong>"Issuers"</strong>) to publish such tokens on the Globatalent Marketplace (<strong>"Listings"</strong>) and to communicate and transact directly with Members that are seeking to buy such Tokens (Members buying Tokens are <strong>"Purchasers"</strong>).
+1.2 As the provider of the Globatalent Marketplace, Globatalent does not own, sell, resell, provide, control, manage, offer, deliver, or supply any Listings. Issuers alone are responsible for their Listings. When Members offer or acquire a token, they are entering into a contract directly with each other. Globatalent is not and does not become a party to or other participant in any contractual relationship between Members, nor is Globatalent a broker or insurer. Globatalent is not acting as an agent in any capacity for any Member, except in case of winding-up or insolvency of the relevant Issuer in respect of the Purchasers of the relevant Token and in relation to the enforcement of any agreements where Globatalent is a party, when applicable, upon breach by any of the parties to them (in accordance with this Terms).
+1.3 While we may help facilitate the resolution of disputes, Globatalent has no control over and does not guarantee (i) the existence, quality, or legality of any Listings, (ii) the truth or accuracy of any Listing descriptions, ratings, reviews, or other Member Content (as defined below), or (iii) the performance or conduct of any Member or third party. Globatalent does not endorse any Member or Listing. Any references to a Member being "verified" (or similar language) only indicate that the Member has completed a relevant verification or identification process and nothing else. Any such description is not an endorsement, certification or guarantee by Globatalent about any Member, including of the Member's identity or background or whether the Member is trustworthy, safe or suitable. You should always exercise due diligence and care when deciding whether to support any Listings, or communicate and interact with other Members, whether online or in person.
+1.4 If you choose to use the Globatalent Marketplace as an Issuer, your relationship with Globatalent is limited to being an independent, third-party contractor, and not an employee, agent, joint venturer or partner of Globatalent for any reason, and you act exclusively on your own behalf and for your own benefit, and not on behalf, or for the benefit, of Globatalent. Globatalent does not, and shall not be deemed to, direct or control you generally or in your performance under these Terms. You acknowledge and agree that you have complete discretion whether to carry out any Listings or otherwise engage in other business activities. 
+1.5 To promote the Globatalent Marketplace and to increase the exposure of Listings to potential Purchasers and other Members, certain information referred to such Listings may be displayed on other websites, in applications, within emails, and in online and offline advertisements. To assist Members who speak different languages, Listings and other content may be translated, in whole or in part, into other languages. Globatalent cannot guarantee the accuracy or quality of such translations and Members are responsible for reviewing and verifying the accuracy of such translations.
+1.6 The Globatalent Marketplace may contain links to third-party websites or resources (<strong>"Third-Party Services"</strong>). Such Third-Party Services may be subject to different terms and conditions and privacy practices. Globatalent is not responsible or liable for the availability or accuracy of such Third-Party Services, or the content, products, or services available from such Third-Party Services. Links to such Third-Party Services are not an endorsement by Globatalent of such Third-Party Services.
+1.7 Globatalent is not responsible for outages or disruptions of the internet and telecommunications infrastructure which are beyond our control and can lead to interruptions in the availability of the Globatalent Marketplace. Globatalent may, temporarily and under consideration of the Members’ legitimate interests (e.g. by providing prior notice), restrict the availability of the Globatalent Marketplace or certain areas or features thereof, if this is necessary in view of capacity limits, the security or integrity of our servers, or to carry out maintenance measures that ensure the proper or improved functioning of the Globatalent Marketplace. Globatalent may improve, enhance and modify the Globatalent Marketplace and introduce new services from time to time.
+<h2>2. Eligibility, Using the Globatalent Marketplace, Member Verification</h2>
+2.1 You must be at least 18 years old and able to enter into legally binding contracts to access and use the Globatalent Marketplace or register an account (otherwise, you must be duly represented by a person who complies with the aforementioned requirements). By accessing or using the Globatalent Marketplace you represent and warrant that you are 18 or older and have the legal capacity and authority to enter into a contract.
+2.2 You will comply with any applicable laws in your local jurisdiction. You also represent and warrant that (i) you are not located in a country that is subject to a U.S. Government embargo, or that has been designated by the U.S. Government as a "terrorist supporting" country, and (ii) you are not listed on any U.S. Government list of prohibited, sanctioned or restricted parties.
+2.3 Globatalent may make access to and use of the Globatalent Marketplace, or certain areas or features of the Globatalent Marketplace, subject to certain conditions or requirements, such as completing a verification process, meeting specific quality or eligibility criteria, meeting ratings or reviews thresholds, or a Member’s track record.
+2.4 Globatalent and the Globatalent Marketplace (i) do not accept any Members (including residents and citizens, or through agency or representation) in the following jurisdictions: Afghanistan, Bosnia And Herzegovina, Cayman Islands, Democratic People's Republic of Korea (DPRK), Ethiopia, Iran, Iraq, Pakistan, Syria, Sri Lanka, Trinidad and Tobago, Tunisia, Uganda, United States and Yemen, and (ii) may restrict trading activity for investors (including residents and citizens, or through agency or representation) in the following jurisdictions: United States, Canada, UK, Australia, France, South Africa, New Zealand, Japan, People’s Republic of China, Singapore, South Korea, Israel, Cayman Islands (all of the countries listed in this paragraph, the <strong>"Restricted Countries"</strong>) . If a Member is not a resident or citizen of a Restricted Country but is travelling to any of these countries, such Member should acknowledge that (i) he shall not use Globatalent’s services while in any of the restricted countries, and (ii) Globatalent’s services may be unavailable and/or blocked in such countries.
+2.5 By using the services, you represent that you are not a resident of the Restricted Countries and you are not accessing to the services from jurisdictions where their content or function may be illegal or is otherwise prohibited. You acknowledge that you are aware of the rules of your jurisdiction and will not use the services if such use is prohibited or otherwise violates the laws of your state, province, country, or other jurisdiction, and that you are solely responsible for determining compliance with all applicable local laws in your jurisdiction. We reserve the right to suspend or terminate your access to the services without prior notice if we determine, in our judgment, that you reside in a jurisdiction that prohibits the use of the services.
+2.6 User verification on the Internet is difficult and we do not assume any responsibility for the confirmation of any Member’s identity. Notwithstanding the above, for transparency and fraud prevention purposes, and as permitted by applicable laws, we may, but have no obligation to (i) ask Members to provide a form of government identification or other information or undertake additional checks designed to help verify the identities or backgrounds of Members, (ii) screen Members against third party databases or other sources and request reports from service providers, and (iii) where we have sufficient information to identify a Member, obtain reports from public records of criminal convictions or sex offender registrations or an equivalent version of background or registered sex offender checks in your local jurisdiction (if available).
+2.7 The access to or use of certain areas and features of the Globatalent Marketplace may be subject to separate policies, standards or guidelines, or may require that you accept additional terms and conditions,before you can access the relevant areas or features of the Globatalent Marketplace. If there is a conflict between these Terms and terms and conditions applicable to a specific area or feature of the Globatalent Marketplace, the latter terms and conditions will take precedence with respect to your access to or use of that area or feature, unless specified otherwise in the latter terms and conditions.
+<h2>3. Modification of these Terms</h2>
+Globatalent reserves the right to modify these Terms at any time in accordance with this provision. If we make changes to these Terms, we will post the revised Terms on the Globatalent Marketplace and update the "Last Updated" date at the top of these Terms. We will also provide you with notice of the modifications by email at least thirty (30) days before the date they become effective. If you disagree with the revised Terms, you may terminate this Agreement with immediate effect. We will inform you about your right to terminate the Agreement in the notification email. If you do not terminate your Agreement before the date the revised Terms become effective, your continued access to or use of the Globatalent Marketplace will constitute acceptance of the revised Terms.
+<h2>4. Account Registration</h2>
+4.1 You must register an account (<strong>"Globatalent Account"</strong>) to access and use certain features of the Globatalent Marketplace, such as publishing a Listing. If you are registering a Globatalent Account for a company or other legal entity, you represent and warrant that you have the authority to legally bind that entity and grant us all permissions and licenses provided in these Terms.
+4.2 You can register a Globatalent Account using an email address and creating a password.
+4.3 You must provide accurate, current and complete information during the registration process and keep your Globatalent Account and public Globatalent Account profile page information up-to-date at all times.
+4.4 You may not register more than one (1) Globatalent Account unless Globatalent authorizes you to do so. You may not assign or otherwise transfer your Globatalent Account to another party.
+4.5 You are responsible for maintaining the confidentiality and security of your Globatalent Account credentials and may not disclose your credentials to any third party. You must immediately notify Globatalent if you know or have any reason to suspect that your credentials have been lost, stolen, misappropriated, or otherwise compromised or in case of any actual or suspected unauthorized use of your Globatalent Account. You are liable for any and all activities conducted through your Globatalent Account, unless such activities are not authorized by you and you are not otherwise negligent (such as failing to report the unauthorized use or loss of your credentials).
+4.6 We have the right to disable any user identification code or password, whether chosen by you or allocated by us, at any time, if in our reasonable opinion you have failed to comply with any of the provisions of these Terms.
+4.7 Globatalent may enable features that allow you to authorize other Members or certain third parties to take certain actions that affect your Globatalent Account. For example, we may enable eligible Members or certain third parties to create Listings on behalf of other Members. These features do not require that you share your credentials with any other person. No third party is authorized by Globatalent to ask for your credentials, and you shall not request the credentials of another Member.
+<h2>5. Content</h2>
+5.1 Globatalent may enable Members to (i) create, upload, post, send, receive and store content, such as text, photos, audio, video, or other materials and information on or through the Globatalent Marketplace (<strong>"Member Content"</strong>); and (ii) access and view Member Content and any content that Globatalent itself makes available on or through the Globatalent Marketplace, including proprietary Globatalent content and any content licensed or authorized for use by or through Globatalent from a third party (<strong>"Globatalent Content"</strong> and together with Member Content, <strong>"Collective Content"</strong>).
+5.2 The Globatalent Marketplace, Globatalent Content, and Member Content may in its entirety or in part be protected by copyright, trademark, and/or other laws of the United States and other countries. You acknowledge and agree that the Globatalent Marketplace and Globatalent Content, including all associated intellectual property rights, are the exclusive property of Globatalent and/or its licensors or authorizing third-parties. You will not remove, alter or obscure any copyright, trademark, service mark or other proprietary rights notices incorporated in or accompanying the Globatalent Marketplace, Globatalent Content or Member Content. All trademarks, service marks, logos, trade names, and any other source identifiers of Globatalent used on or in connection with the Globatalent Marketplace and Globatalent Content are trademarks or registered trademarks of Globatalent in the United States and abroad. Trademarks, service marks, logos, trade names and any other proprietary designations of third parties used on or in connection with the Globatalent Marketplace, Globatalent Content, and/or Collective Content are used for identification purposes only and may be the property of their respective owners.
+5.3 You will not use, copy, adapt, modify, prepare derivative works of, distribute, license, sell, transfer, publicly display, publicly perform, transmit, broadcast or otherwise exploit the Globatalent Marketplace or Collective Content, except to the extent you are the legal owner of certain Member Content or as expressly permitted in these Terms. No licenses or rights are granted to you by implication or otherwise under any intellectual property rights owned or controlled by Globatalent or its licensors, except for the licenses and rights expressly granted in these Terms.
+5.4 By uploading, posting or otherwise making available any Member Content on or through the Globatalent Marketplace, you grant to Globatalent a non-exclusive, worldwide, royalty-free, irrevocable, perpetual (or for the term of the protection), sub-licensable and transferable license to such Member Content to access, use, store, copy, modify, prepare derivative works of, distribute, publish, transmit, stream, broadcast, and otherwise exploit in any manner such Member Content to provide and/or promote the Globatalent Marketplace, in any media or platform. Insofar as Member Content includes personal information, such Member Content will only be used for these purposes if such use complies with applicable data protection laws in accordance with our Privacy Policy. Unless you provide specific consent, Globatalent does not claim any ownership rights in any Member Content and nothing in these Terms will be deemed to restrict any rights that you may have to use or exploit your Member Content.
+5.5 You are solely responsible for all Member Content that you make available on or through the Globatalent Marketplace. Accordingly, you represent and warrant that: (i) you either are the sole and exclusive owner of all Member Content that you make available on or through the Globatalent Marketplace or you have all rights, licenses, consents and releases that are necessary to grant to Globatalent the rights in and to such Member Content, as contemplated under these Terms; and (ii) neither the Member Content nor your posting, uploading, publication, submission or transmittal of the Member Content or Globatalent’s use of the Member Content (or any portion thereof) as contemplated under these Terms will infringe, misappropriate or violate a third party's patent, copyright, trademark, trade secret, moral rights or other proprietary or intellectual property rights, or rights of publicity or privacy, or result in the violation of any applicable law or regulation.
+5.5 You will not post, upload, publish, submit or transmit any Member Content that: (i) is fraudulent, false, misleading (directly or by omission or failure to update information) or deceptive; (ii) is defamatory, libelous, obscene, pornographic, vulgar or offensive; (iii) promotes discrimination, bigotry, racism, hatred, harassment or harm against any individual or group; (iv) is violent or threatening or promotes violence or actions that are threatening to any other person or animal; or (v) promotes illegal or harmful activities or substances. Globatalent may remove or disable access to any Member Content that is in violation of applicable law or these Terms, or otherwise may be harmful or objectionable to Globatalent, its Members, third parties, or property. Where Globatalent removes or disables Member Content, Globatalent will notify a Member and provide the reasons for such a measure, unless such notification would (i) prevent or impede the detection or prevention of fraud or other illegal activities, (ii) harm the legitimate interests of other Members or third parties, or (ii) contravene applicable laws. You may appeal such a decision by contacting customer service.
+5.6 Globatalent respects copyright law and expects its Members to do the same. If you believe that any content on the Globatalent Marketplace infringes copyrights you own, please notify us through customer service..
+<h2>6. Service Fees</h2>
+6.1 Globatalent may charge fees to Issuers (<strong>"Issuers Fees"</strong>) and/or Purchasers (<strong>"Purchasers Fees"</strong>) (collectively, <strong>"Service Fees"</strong>) in consideration for the use of the Globatalent Marketplace. 
+Issuers’ service fees
+
+The Issuers’ service fees for each Listing is a minimum of 3%. This fee is calculated from the aggregate value of the tokens issued as a result of the Listing and is automatically deducted from the amount received after the tokenization has taken place.
+
+Purchasers’ service fees
+The Purchasers’ service fee for the purchase of Tokens ranges between 0% and 0.4% of the value of each transaction (sell and/or purchase).
+6.2 In addition to the Service Fees, Issuers and Purchasers may be required to use a variable amount of GBT tokens, issued by Globatalent, in order to carry out any transactions in the Globatalent Marketplace.
+6.3 Any applicable Service Fees (including any applicable taxes) will be displayed to an Issuer or Purchaser prior to publishing of a Listing. Globatalent reserves the right to change the Service Fees at any time, and will provide Members adequate notice of any fee changes before they become effective.
+6.4 You are responsible for paying any Service Fees that you owe to Globatalent. Service Fees are not refundable.
+<h2>7. Terms specific for Issuers</h2>
+7.1 Terms applicable to all Listings
+7.1.1 When creating a Listing through the Globatalent Marketplace you must (i) provide complete and accurate information about your Listing and Tokens, (ii) disclose any limitations, restrictions, charges and requirements that apply and (iii) provide any other pertinent information requested by Globatalent. You are responsible for keeping your Listing information accurate and up-to-date at all times.
+7.1.2 You are solely responsible for setting an initial price for your Listing (<strong>"Listing Fee"</strong>). Thereafter, the price of the Tokens will be determined by market conditions.
+7.1.3 Any terms and conditions included in your Listing must not conflict with these Terms.
+7.1.4 Pictures, animations or videos (collectively, <strong>"Images"</strong>) used in your Listings must accurately reflect and describe the business or professional activity of the Issuer. Globatalent reserves the right to require that Listings have a minimum number of Images of a certain format, size and resolution, as well as to request the Issuer to include further information.
+7.1.5 The placement and ranking of Listings in search results on the Globatalent Marketplace may vary and depend on a variety of factors, such as Purchasers search parameters and preferences, Issuers requirements, price and categories, reviews and ratings, type of sport, and/or any other elements Globatalent deems appropriate.
+7.1.6 When you post a Listing, you are entering into a legally binding agreement with the Purchasers acquiring the relevant Tokens and are required to comply with your obligations as described in your Listing. You also agree to pay the applicable Issuer’s Fee and any applicable taxes.
+7.1.7 The Issuer acknowledges that Globatalent is duly authorised, mandated and empowered to act on behalf of the Purchasers under the circumstances set out in paragraph 8.1.3 below, and undertakes to carry out any actions required to recognise such mandate and empowerment in an enforcement process or before any courts. The Issuer shall hold Globatalent harmless from any claims of the Purchasers filed as a result of the Issuer refusing to accept Globatalent as representative of the Purchasers.
+7.2 Listing Tokens
+7.2.1 Unless expressly allowed by Globatalent, you may not list more than one set of Tokens per Listing. The aggregate value of the Tokens issued as a result of the Listing shall be previously approved by Globatalent.
+7.2.3 Any Listing you post shall (i) not breach any agreements you have entered into with any third parties, such as creditors, shareholders, or other agreements, and (ii) comply with all applicable laws (such as securities laws), tax requirements, and other rules and regulations.
+<h2>8. Terms specific for Purchasers</h2>
+8.1 Terms applicable to all Token purchases
+8.1.1 Subject to meeting any requirements (such as completing any verification processes) set by Globatalent, you can purchase Tokens from a Listing available on the Globatalent Marketplace by following the respective purchasing process. The Listing Fee and any applicable taxes (collectively, <strong>"Total Fees"</strong>) will be presented to you prior to purchasing the Tokens. You agree to pay the Total Fees for any purchases requested in connection with your Globatalent Account.
+8.1.2 Upon receipt of a purchase confirmation from Globatalent, a legally binding agreement is formed between you and the relevant Issuer, subject to any additional terms and conditions of the Issuer that apply.
+8.1.3 The Purchaser mandates Globatalent to act on its behalf in case of enforcement against the Issuer due to a breach of the agreements binding the Issuer to the Purchaser and/or this Terms, or upon insolvency of the Issuer. Notwithstanding the foregoing Globatalent shall have total discretion whether to act on behalf of the Purchaser and whether to initiate any enforcement actions against the Issuer, being Globatalent free of any liabilities whatsoever arising in connection with its actions pursuant to the provisions of this paragraph.   
+<h2>9. Ratings and Reviews</h2>
+9.1 Within a certain time frame before and/or after posting a Listing, Members approved by Globatalent as reviewers (the <strong>"Validators"</strong>) can leave a public review (<strong>"Review"</strong>) and submit a rating (<strong>"Rating"</strong>) about each Listing. Ratings or Reviews reflect the opinions of individual Members and do not reflect the opinion of Globatalent. Ratings and Reviews are not verified by Globatalent for accuracy and may be incorrect or misleading.
+9.2 Ratings and Reviews by Validators must be accurate and may not contain any offensive or defamatory language.
+9.3 Members are prohibited from manipulating the Ratings and Reviews system in any manner, such as instructing a third party to write a positive or negative Review about another Member.
+9.4 Ratings and Reviews are part of a Member’s public profile and may also be surfaced elsewhere on the Globatalent Marketplace (such as the Listing page) together with other relevant information such as number of Listings, description and updates on the business or professional activity of the Issuer and other information.
+9.5 Validators shall receive an incentive from Globatalent dependent on the number and quality of their Reviews or Ratings. Such incentive will be determined by Globatalent unilaterally and shall be disclosed.
+<h2>10. Prohibited Activities</h2>
+10.1 You are solely responsible for compliance with any and all laws, rules, regulations, and tax obligations that may apply to your use of the Globatalent Marketplace. In connection with your use of the Globatalent Marketplace, you will not and will not assist or enable others to:
+breach or circumvent any applicable laws or regulations, agreements with third-parties, third-party rights, or our Terms;
+use the Globatalent Marketplace or Collective Content for any commercial or other purposes that are not expressly permitted by these Terms or in a manner that falsely implies Globatalent endorsement, partnership or otherwise misleads others as to your affiliation with Globatalent;
+copy, store or otherwise access or use any information, including personally identifiable information about any other Member, contained on the Globatalent Marketplace in any way that is inconsistent with Globatalents Privacy Policy or these Terms or that otherwise violates the privacy rights of Members or third parties;
+use the Globatalent Marketplace in connection with the distribution of unsolicited commercial messages (<strong>"spam"</strong>);
+offer, as an Issuer, any Listings that you do not yourself own or have permission to make available through the Globatalent Marketplace;
+contact another Member for any purpose other than asking a question related to your own Listing, or the Member's use of the Globatalent Marketplace, including, but not limited to, recruiting or otherwise soliciting any Member to join third-party services, applications or websites, without our prior written approval;
+request, accept or make any payment for Listing Fees outside of the Globatalent Marketplace. If you do so, you: (i) accept all risks and responsibility for such payment, and (ii) hold Globatalent harmless from any liability for such payment;
+discriminate against or harass anyone on the basis of race, national origin, religion, gender, gender identity, physical or mental disability, medical condition, marital status, age or sexual orientation, or otherwise engage in any violent, harmful, abusive or disruptive behavior;
+use, display, mirror or frame the Globatalent Marketplace, or any individual element within the Globatalent Marketplace, Globatalent’s name, any Globatalent trademark, logo or other proprietary information, or the layout and design of any page or form contained on a page in the Globatalent Marketplace, without Globatalent’s express written consent;
+dilute, tarnish or otherwise harm the Globatalent brand in any way, including through unauthorized use of Collective Content, registering and/or using Globatalent or derivative terms in domain names, trade names, trademarks or other source identifiers, or registering and/or using domains names, trade names, trademarks or other source identifiers that closely imitate or are confusingly similar to Globatalent domains, trademarks, taglines, promotional campaigns or Collective Content;
+use any robots, spider, crawler, scraper or other automated means or processes to access, collect data or other content from or otherwise interact with the Globatalent Marketplace for any purpose;
+avoid, bypass, remove, deactivate, impair, descramble, or otherwise attempt to circumvent any technological measure implemented by Globatalent or any of Globatalent’s providers or any other third party to protect the Globatalent Marketplace;
+attempt to decipher, decompile, disassemble or reverse engineer any of the software used to provide the Globatalent Marketplace;
+take any action that damages or adversely affects, or could damage or adversely affect the performance or proper functioning of the Globatalent Marketplace;
+violate or infringe anyone else’s rights or otherwise cause harm to anyone.
+10.2 You acknowledge that Globatalent has no general obligation to monitor Member Content nor to actively seek facts or circumstances indicating illegal activity, but has the right to review, disable access to, or edit any Member Content, in order to (i) operate, secure and improve the security of the Globatalent Marketplace (including without limitation for fraud prevention, risk assessment, investigation and customer support purposes); (ii) ensure Members’ compliance with these Terms; (iii) comply with applicable law or the order or requirement of a court, law enforcement or other administrative agency or governmental body; (iv) respond to Member Content that it determines is harmful or objectionable; or (v) as otherwise set forth in these Terms. Members agree to cooperate with and assist Globatalent in good faith, and to provide Globatalent with such information and take such actions as may be reasonably requested by Globatalent with respect to any investigation undertaken by Globatalent or a representative of Globatalent regarding the use or abuse of the Globatalent Marketplace.
+10.3 If you feel that any Member you interact with, whether online or in person, is acting or has acted inappropriately, including but not limited to anyone who (i) engages in offensive, violent or sexually inappropriate behavior, (ii) you suspect of stealing from you, or (iii) engages in any other disturbing conduct, you should immediately report such person to the appropriate authorities and then to Globatalent by contacting us with your police station and report number (if available). You agree that any report you make will not obligate us to take any action (beyond that required by law, if any).
+<h2>11. Term and Termination, Suspension and other Measures</h2>
+11.1 This Agreement shall be effective until such time when you or Globatalent terminate the Agreement in accordance with this provision.
+11.2 You may terminate this Agreement at any time by sending us an email. Issuers may only cancel their Globatalent Account once all their obligations under the Agreement, the Terms and any other agreement binding the Issuer with the Purchasers and/or Globatalent. Purchasers may only cancel their Globatalent Marketplace in case no Tokens remain deposited in their Globatalent Account.
+11.3 Without limiting our rights specified below, Globatalent may terminate this Agreement for convenience at any time by giving you thirty (30) days' notice via email to your registered email address.
+11.4 Globatalent may immediately, without notice, terminate this Agreement and/or stop providing access to the Globatalent Marketplace if (i) you have materially breached your obligations under these Terms, (ii) you have violated applicable laws, regulations or third party rights, or (iii) such action is reasonably necessary to protect the personal safety or property of Globatalent, its Members, or third parties (for example in the case of fraudulent behavior of a Member).
+11.5 In addition, Globatalent may take any of the following measures (i) to comply with applicable law, or the order or request of a court, law enforcement or other administrative agency or governmental body, or if (ii) you have breached these Terms or applicable laws, regulations, or third party rights, (iii) you have provided inaccurate, fraudulent, outdated or incomplete information during the Globatalent Account registration, Listing process or thereafter, (iv) you and/or your Listings at any time fail to meet any eligibility criteria, (v) you have repeatedly received poor Ratings or Reviews or Globatalent otherwise becomes aware of or has received complaints about your performance or conduct, (vi) you have repeatedly breached any obligations under your Listing (in particular, any payment obligations), or (vii) such action is reasonably necessary to protect the personal safety or property of Globatalent, its Members, or third parties, or to prevent fraud or other illegal activity:
+refuse to surface, delete or delay any Listings, Ratings, Reviews, or other Member Content;
+limit your access to or use of the Globatalent Marketplace;
+temporarily or permanently revoke any special status associated with your Globatalent Account; 
+temporarily or in case of severe or repeated offenses permanently suspend your Globatalent Account and stop providing access to the Globatalent Marketplace.
+In case of non-material breaches and where appropriate, you will be given notice of any intended measure by Globatalent and an opportunity to resolve the issue to Globatalent’s reasonable satisfaction.
+11.6 When this Agreement has been terminated, you are not entitled to a restoration of your Globatalent Account or any of your Member Content. If your access to or use of the Globatalent Marketplace has been limited or your Globatalent Account has been suspended or this Agreement has been terminated by us, you may not register a new Globatalent Account or access and use the Globatalent Marketplace through an Globatalent Account of another Member.
+11.7 If Globatalent takes any of the measures described in this Section 11 you may appeal such a decision by contacting our customer service.
+<h2>12. Appointment of Globatalent as Agent</h2>
+12.1 Each Purchaser acquiring Tokens via the Globatalent Marketplace hereby appoints Globatalent as its agent solely for the limited purpose of representing the Purchaser upon the enforcement of this Terms or any other agreement binding the Issuer, the Purchaser and/or Globatalent, or upon the insolvency of the Issuer (the <strong>"Agent"</strong>).
+9.3 Each Member acknowledges and agrees that, notwithstanding the fact that Globatalent is not a party to the agreement between the Issuer and the Purchaser, Globatalent acts as the Agent in accordance with the provisions set out in the previous paragraph.
+<h2>13. Rounding off</h2>
+Globatalent generally supports payment amounts that are payable from or to Issuers or Purchasers to the smallest unit supported by a given currency (i.e., U.S. cents, Euro cents or other supported currencies). Where Globatalent’s third-party payment services provider does not support payments in the smaller unit supported by a given currency, Globatalent may, in its sole discretion, round up or round down the displayed amounts that are payable from or to Issuers or Purchasers to the nearest whole functional base unit in which the currency is denominated (i.e. to the nearest dollar, Euro or other supported currency); for example, Globatalent may round up an amount of $101.50 to $102.00, and round down an amount of $101.49 to $101.00.
+<h2>14. Liability</h2>
+All implied conditions, warranties and/or representations, including but not limited to the implied conditions, warranties and/or representations of satisfactory quality, fitness for a particular purpose, non-infringement, compatibility, security and accuracy are excluded from these Terms to the extent that they may be excluded as a matter of applicable law. Further, Globatalent does not warrant that the Site will be uninterrupted or error free or that any defects will be corrected.
+To the extent permitted by applicable law, Globatalent expressly disclaims all liability howsoever arising whether in contract, tort (or deceit), breach of statutory duty, or otherwise (including, but not limited to, liability for any negligent acts or omissions), even if foreseeable, to any person in respect of any claims or losses of any nature, arising directly or indirectly from or in connection with: (i) anything done or the consequences of anything done or omitted to be done wholly or partly in reliance upon the whole or any part of the contents of this Site; and (ii) the use of any data or materials on this Site or unauthorised access to this Site or otherwise.
+Globatalent will not be responsible for any breach of these Terms caused by circumstances beyond its reasonable control.
+<h2>15. Advice</h2>
+Information on the Site is not offered as advice on any particular matter and must not be treated as a substitute for specific advice. In particular Information on the Site does not constitute professional, financial or investment advice and must not be used as a basis for making investment decisions and is in no way intended, directly or indirectly, as an attempt to market or sell any type of financial instrument. Advice from a suitably qualified professional should always be sought in relation to any particular matter or circumstances.
+The contents of this Site do not constitute an invitation to invest in, or constitute or form a part of any offer for the sale or subscription of, or any invitation to offer to buy or subscribe for, any securities or other financial instruments, nor should it or any part of it form the basis of, or be relied upon in any connection with any contract or commitment whatsoever.
+<h2>16. Severability</h2>
+If these Terms or any part of them should be determined to be illegal, invalid or otherwise unenforceable under the laws of any state or country in which these Terms are intended to be effective, then to the extent that they are so illegal, invalid or unenforceable, they shall in that state or country be treated as severed and deleted from these Terms and the remaining Terms shall survive and remain in full force and effect and continue to be binding and enforceable in that state or country.
+<h2>17. Governing Law</h2>
+These Terms shall be governed by, and construed in accordance with, the laws of the Cayman Islands. Each party irrevocably agrees to submit to the exclusive jurisdiction of the courts of the Cayman Islands over any claim or matter arising under or in connection with these Terms or the legal relationship established by them.
+      </el-col>
+    </el-row>
+
+    <div class="campaignList-startBlock">
+      <div class="campaignList-startBlock-container">
+        <div class="campaignList-startBlock-sentence">
+          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
+            <el-button type="primary" class="startFreeButton" size="big" v-html="$tc('message.StartCampaignNow')"></el-button>
+          </router-link>
+        </div>
+        <!-- <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button> -->
+      </div>
+    </div>
+  </gb-base-layout>
+</template>
+
+<script>
+import BaseLayout from '@/layout/BaseLayout.vue'
+
+export default {
+  name: 'FaqPage',
+  components: {
+    'gb-base-layout': BaseLayout
+  },
+  data() {
+    return {}
+  },
+
+  created() {},
+  methods: {}
+}
+</script>
+
+<style lang="scss" scoped>
+  @import '../scss/variables.scss';
+
+  .beginBlock {
+    background: url('../assets/img/background-list-title.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .campaignList-startBlock {
+    margin: 30px auto;
+    border-top: 1px solid $--grey-detailCampaign-border;
+    padding-top: 40px;
+    display: block;
+    width: 100%;
+    max-width: 895px;
+    font-size: 0px;
+  }
+
+  .campaignList-startBlock-container {
+    max-width: 585px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .campaignList-startBlock-sentence {
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 20px;
+    padding-right: 0px;
+    width: 70%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .campaignList-startBlock-sentence1 {
+    font-weight: normal;
+    font-family: 'Aller';
+    font-size: 36px;
+    line-height: 36px;
+    margin: 0;
+  }
+
+  .campaignList-startBlock-sentence2 {
+    font-size: 14px;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  .startFreeButton {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    font-size: 14px;
+    font-family: 'Aller';
+    font-weight: bold;
+    position: relative;
+    top: 6px;
+  }
+</style>

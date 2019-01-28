@@ -204,7 +204,9 @@ export const messages = {
       campaignFailTitle: 'What happens to my money if a campaign fails?',
       campaignFail: '<p style="color: #647585">If the campaign you buy tokens for does not reach the soft cap defined, your money will be reimbursed. </p>',
       showMore: 'Show more',
-      showLess: 'Show less'
+      showLess: 'Show less',
+      terms: 'Terms',
+      privacy: 'privacy'
     }
   },
   'es-ES': {
@@ -388,7 +390,7 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancelar',
       showMore: 'Show more',
-      showLess: 'Show less',
+      showLess: 'Show less'
     }
   },
   'zh-CN': {
@@ -571,7 +573,7 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
       showMore: 'Show more',
-      showLess: 'Show less',
+      showLess: 'Show less'
     }
   },
   'ru-RU': {
@@ -754,7 +756,7 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
       showMore: 'Show more',
-      showLess: 'Show less',
+      showLess: 'Show less'
     }
   },
   'pt-PT': {
@@ -937,7 +939,7 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
       showMore: 'Show more',
-      showLess: 'Show less',
+      showLess: 'Show less'
     }
   }
 }
