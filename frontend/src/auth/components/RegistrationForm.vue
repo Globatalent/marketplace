@@ -13,12 +13,16 @@
             </el-form-item>
             <el-form-item required prop="country">
               <el-select v-model="form.country" filterable v-bind:placeholder="$tc('message.CountryResidence')">
-                <el-option v-for="(code, index) in Object.keys(countries)" :key="index" :label="countries[code]" :value="code">
+                <el-option v-for="(code, index) in Object.keys(countries).filter(country => false === ['UM', 'AS', 'VI', 'US'].includes(country))" :key="index" :label="countries[code]" :value="code">
                 </el-option>
               </el-select>
             </el-form-item>
             <el-form-item required prop="citizenship">
-              <el-input v-bind:placeholder="$tc('message.Citizenship')" type="text" v-model="form.citizenship"></el-input>
+              <!-- <el-input v-bind:placeholder="$tc('message.Citizenship')" type="text" v-model="form.citizenship"></el-input> -->
+              <el-select v-model="form.citizenship" filterable v-bind:placeholder="$tc('message.Citizenship')">
+                <el-option v-for="(code, index) in Object.keys(countries).filter(country => false === ['UM', 'AS', 'VI', 'US'].includes(country))" :key="index" :label="countries[code]" :value="code">
+                </el-option>
+              </el-select>
             </el-form-item>
           </el-col>
           <el-col :xs="24" :lg="12">
@@ -155,7 +159,25 @@ export default {
     onSubmit(form) {
       this.$refs[form].validate(valid => {
         if (valid) {
-          const dataForm = Object.assign({}, this.form)
+          const dataForm = Object.assign({}, this.form);
+          const formToSend = new FormData();
+
+          formToSend.append('xnQsjsdp','26ded01eee3cbb74693abaeee34e2f8acbb50ca314ea68813ba8b57665b4dc48');  
+          formToSend.append('zc_gad','');
+          formToSend.append('xmIwtLD','902ae1508809b664f4a8880feb72264315a8f92dcadde00bd65c96b2b9cbbafb');
+          formToSend.append('actionType', 'Q29udGFjdHM=');
+          formToSend.append('returnURL','https&#x3a;&#x2f;&#x2f;market.globatalent.com');
+          formToSend.append('First Name', dataForm.firstName);
+          formToSend.append('Last Name', dataForm.lastName);
+          formToSend.append('Date of Birth', (dataForm.birthDate.getMonth() + 1).toString().padStart(2, 0) + '/' + dataForm.birthDate.getDate().toString().padStart(2, 0) + '/' + dataForm.birthDate.getFullYear().toString());
+          formToSend.append('Email', dataForm.email);
+          formToSend.append('Mailing Country', dataForm.country); 
+          formToSend.append('Other Country', dataForm.citizenship);
+
+          const request = new XMLHttpRequest();
+          request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
+          request.send(formToSend);
+
           this.$store
             .dispatch('auth/register', dataForm)
             .then(data => {
