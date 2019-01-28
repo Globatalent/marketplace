@@ -65,9 +65,9 @@ export default {
   data() {
     return {
       langs: [
-        {'flag': 'us', 'title': this.$tc("message.English"), 'value': 'en-US'},
+        {'flag': 'gb', 'title': this.$tc("message.English"), 'value': 'en-US'},
         {'flag': 'es', 'title': this.$tc("message.Spanish"), 'value': 'es-ES'},
-        {'flag': 'ch', 'title': this.$tc("message.Chinese"), 'value': 'zh-CN'},
+        {'flag': 'cn', 'title': this.$tc("message.Chinese"), 'value': 'zh-CN'},
         {'flag': 'ru', 'title': this.$tc("message.Russian"), 'value': 'ru-RU'},
         {'flag': 'pt', 'title': this.$tc("message.Portuguese"), 'value': 'pt-PT'},
       ],
