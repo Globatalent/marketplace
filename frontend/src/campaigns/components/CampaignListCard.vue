@@ -173,6 +173,21 @@
     }
   }
 
+  .show-more-msg{
+    background: white;
+    position: absolute;
+    bottom: 30px;
+    color: white;
+    left: 10px;
+  }
+  .show-more-container {
+    max-height: 40px;
+    overflow: hidden;
+    transition: all .3s ease-out;
+  }
+  .show-more-container.extended {
+    max-height: 100%;
+  }
 
   .campaign-image {
     height: 200px;
