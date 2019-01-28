@@ -11,7 +11,7 @@
             <el-menu-item index="campaigns" :route="{name:'campaign.list'}">{{ $tc("message.Campaign",2) }}</el-menu-item>
             <el-menu-item index="news" :route="{name:'news'}">{{ $tc("message.News") }}</el-menu-item>
             <el-menu-item index="faq" :route="{name:'faq'}">{{ $tc("message.Faq") }}</el-menu-item>
-            <el-menu-item><a href="https://web.globatalent.com">{{ $tc("message.Corporate") }}</a></el-menu-item>
+            <el-menu-item><a href="https://web.globatalent.com" target="_blank">{{ $tc("message.Corporate") }}</a></el-menu-item>
           </el-menu>  
           <el-menu class="el-menu-right" mode="horizontal" router>
             <!--<el-menu-item class="el-menu-item lang-switcher">
