@@ -105,9 +105,8 @@
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
           <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
-            <h4 class="campaignList-startBlock-sentence1" v-html="$t('message.StartCampaignNow')"></h4>
+            <el-button type="primary" class="startFreeButton" size="big" v-html="$tc('message.StartCampaignNow')"></el-button>
           </router-link>
-          <h5 class="campaignList-startBlock-sentence2">{{$t('message.AlsoGift')}}</h5>
         </div>
         <!-- <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button> -->
       </div>
@@ -133,5 +132,61 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/variables.scss';
+  @import '../scss/variables.scss';
+
+  .beginBlock {
+    background: url('../assets/img/background-list-title.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .campaignList-startBlock {
+    margin: 30px auto;
+    border-top: 1px solid $--grey-detailCampaign-border;
+    padding-top: 40px;
+    display: block;
+    width: 100%;
+    max-width: 895px;
+    font-size: 0px;
+  }
+
+  .campaignList-startBlock-container {
+    max-width: 585px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .campaignList-startBlock-sentence {
+    display: inline-block;
+    vertical-align: top;
+    text-align: right;
+    padding-right: 20px;
+    padding-right: 0px;
+    width: 70%;
+    width: 100%;
+    text-align: center;
+  }
+
+  .campaignList-startBlock-sentence1 {
+    font-weight: normal;
+    font-family: 'Aller';
+    font-size: 36px;
+    line-height: 36px;
+    margin: 0;
+  }
+
+  .campaignList-startBlock-sentence2 {
+    font-size: 14px;
+  }
+
+  .startFreeButton {
+    display: inline-block;
+    vertical-align: top;
+    width: auto;
+    font-size: 14px;
+    font-family: 'Aller';
+    font-weight: bold;
+    position: relative;
+    top: 6px;
+  }
 </style>

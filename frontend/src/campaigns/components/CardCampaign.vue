@@ -30,9 +30,9 @@
         </el-form-item>
         <el-form-item required :label="$tc('message.Country')">
           <p class="formSteps-inputText"></p>
-          <el-select v-model="form.country" placeholder="Select">
-            <el-option v-for="(code, index) in Object.keys(countries)" :key="index" :label="countries[code]" :value="code">
-            </el-option>
+          <el-select v-model="form.country" filterable placeholder="Select">
+            <el-option v-for="(code, index) in Object.keys(countries).filter(country => false === ['UM', 'AS', 'VI', 'US'].includes(country))" :key="index" :label="countries[code]" :value="code">
+          </el-option>
           </el-select>
         </el-form-item>
         <el-form-item required v-bind:label="$tc('message.Gender')" class="text-left sexFormElement" v-if="form.kind==='athlete'">
