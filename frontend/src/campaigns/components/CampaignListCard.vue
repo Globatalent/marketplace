@@ -71,6 +71,7 @@
 <script>
   import { mapGetters } from 'vuex'
   import StarRating from 'vue-star-rating'
+  import VueI18n from 'vue-i18n'
 
   export default {
     name: 'CampaignListCard',
@@ -141,7 +142,7 @@
 <style lang="scss" scoped>
   .el-card {
     border-radius: 8px;
-    height: 470px;
+    //height: 470px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     margin-bottom: 35px;
 
@@ -176,9 +177,9 @@
   .show-more-msg{
     background: white;
     position: absolute;
-    bottom: 30px;
-    color: white;
-    left: 10px;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
   }
   .show-more-container {
     max-height: 40px;
@@ -187,6 +188,7 @@
   }
   .show-more-container.extended {
     max-height: 100%;
+    padding-bottom: 30px;
   }
 
   .campaign-image {
@@ -233,7 +235,7 @@
 
   .campaign-subtitle {
     font-family: 'Aller Regular';
-    height: 50px;
+    min-height: 50px;
   }
 
   .campaign-info {
