@@ -19,8 +19,9 @@
         </el-row>
         <el-row>
           <el-col>
-            <div class="campaign-subtitle"><span v-if="campaign.giveBack">{{campaign.giveBack.length > 50 ? campaign.giveBack.substring(0,50)+' ...' : campaign.giveBack}}</span>
+            <div class="campaign-subtitle"><span v-if="campaign.giveBack">{{campaign.giveBack.length > 50 ? 	<div class="fulltext" id="more-1"><a class="more" href="#more-1">Show more</a><span>campaign.giveBack.substring(50,campaign.giveBack.length)</span><a class="less" href="#less-1">Show less</a></div> : campaign.giveBack}}</span>
             </div>
+            
           </el-col>
         </el-row>
       </div>
@@ -242,4 +243,18 @@
   .campaign-progress-info-funding-qty {
     font-family: 'Aller Regular';
   }
+
+  .fulltext p,
+.less {
+	display: none;
+}
+
+.fulltext:target p,
+.fulltext:target .less {
+	display: block;
+}
+
+.fulltext:target .more {
+	display: none;
+}
 </style>
