@@ -6,6 +6,7 @@ import router from './router'
 import { store } from './store/index'
 import VueMoment from 'vue-moment'
 import VueI18n from 'vue-i18n'
+import FlagIcon from 'vue-flag-icon';
 import './scss/theme.scss'
 import { messages } from './translations/translations'
 /** Theme & UI **/
@@ -21,6 +22,7 @@ Vue.config.productionTip = false
 
 Vue.use(VueMoment)
 Vue.use(VueI18n)
+Vue.use(FlagIcon);
 Vue.use(ElementUI, { locale })
 Vue.use(VueMasonry)
 Vue.use(VueAxios, axios)

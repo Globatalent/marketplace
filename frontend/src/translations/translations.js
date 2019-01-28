@@ -177,6 +177,7 @@ export const messages = {
       Spanish: 'Spanish',
       Chinese: 'Chinese',
       Russian: 'Russian',
+      Portuguese: 'Portuguese',
       cancel: 'Cancel',
     }
   },
@@ -297,7 +298,7 @@ export const messages = {
       DiscardCampaign: 'Descartar campaña',
       ConfirmDiscardCampaign: '¿Seguro que quieres descartar la campaña?',
       WeBringTheTalent: 'Te traemos el talento',
-      TheFirstSportsCryptoExchange: 'El <span class="is-bold">primer crypto exchange de deportes</span> donde puedes <span class="is-marked is-blue">tokenizar</span><br/><span class="is-marked is-violet">Ayuda a crecer</span> a tus idolos o clubs favoritos',
+      TheFirstSportsCryptoExchange: 'El <span class="is-bold">primer crypto exchange de deportes</span> donde puedes <span class="is-marked is-violet">tokenizar</span><br/><span class="is-marked is-blue">Ayuda a crecer</span> a tus idolos o clubs favoritos',
       AllCampaigns: 'Todas las campañas',
       LaunchingSoon: 'Lanzando pronto',
       New: 'Nuevo',
@@ -358,6 +359,8 @@ export const messages = {
       Spanish: 'Español',
       Chinese: 'Chino',
       Russian: 'Ruso',
+      Portuguese: 'Portuguese',
+      cancel: 'Cancelar',
     }
   },
   'zh-CN': {
@@ -537,6 +540,8 @@ export const messages = {
       Spanish: 'Spanish',
       Chinese: 'Chinese',
       Russian: 'Russian',
+      Portuguese: 'Portuguese',
+      cancel: 'Cancel',
     }
   },
   'ru-RU': {
@@ -716,6 +721,8 @@ export const messages = {
       Spanish: 'Spanish',
       Chinese: 'Chinese',
       Russian: 'Russian',
+      Portuguese: 'Portuguese',
+      cancel: 'Cancel',
     }
   },
   'pt-PT': {
@@ -895,6 +902,8 @@ export const messages = {
       Spanish: 'Spanish',
       Chinese: 'Chinese',
       Russian: 'Russian',
+      Portuguese: 'Portuguese',
+      cancel: 'Cancel',
     }
   }
 }

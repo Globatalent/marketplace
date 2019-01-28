@@ -12,7 +12,7 @@
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
           <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
-            <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartCampaignNow')}}</el-button>
+            <el-button type="primary" class="startFreeButton" size="big" v-html="$tc('message.StartCampaignNow')"></el-button>
           </router-link>
         </div>
       </div>
@@ -78,7 +78,7 @@
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
           <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
-            <el-button type="primary" class="startFreeButton" size="big">{{$t('message.StartCampaignNow')}}</el-button>
+            <el-button type="primary" class="startFreeButton" size="big" v-html="$tc('message.StartCampaignNow')"></el-button>
           </router-link>
         </div>
       </div>
@@ -215,7 +215,7 @@
 
   .searchList-option {
     margin-left: 30px;
-    width: 100%;
+    width: 93.4%;
   }
 
   .campaignList-startBlock {
@@ -278,6 +278,8 @@
     }
     .searchList-option {
       margin-left: 0;
+      width: 100%;
+      margin-bottom: 0;
     }
   }
 </style>

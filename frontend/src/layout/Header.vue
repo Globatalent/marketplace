@@ -14,11 +14,15 @@
             <el-menu-item><a href="https://web.globatalent.com">{{ $tc("message.Corporate") }}</a></el-menu-item>
           </el-menu>  
           <el-menu class="el-menu-right" mode="horizontal" router>
-            <el-menu-item class="el-menu-item lang-switcher">
+            <!--<el-menu-item class="el-menu-item lang-switcher">
               <el-select v-model="$i18n.locale">
-                <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.value">{{ lang.title }}</el-option>
+                <el-option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang.value"><flag :iso="lang.flag" v-bind:squared=false /></el-option>
               </el-select>
-            </el-menu-item>
+            </el-menu-item>-->
+            <el-submenu class="submenu lang-switcher">
+              <template slot="title"><flag :iso="getCurrentFlagKey()" v-bind:squared=false /></template>
+              <el-menu-item class="el-menu-item lang-switcher-item" v-for="(lang, i) in langs" :key="`Lang${i}`" @click="pickLanguage(lang.value)"><flag :iso="lang.flag" v-bind:squared=false /></el-menu-item>
+            </el-submenu>
             <el-submenu class="submenu" index="3" v-if="!!user">
               <template slot="title">{{email()}}</template>
               <el-menu-item index="campaign.create" :route="{name: 'campaign.create'}">{{ $tc("message.CreateCampaign") }}</el-menu-item>
@@ -38,7 +42,7 @@
               </el-badge>
               <el-button size="small" icon="el-icon-bell" circle v-else></el-button>
             </el-menu-item>
-            <el-menu-item class="el-menu-item submenu-collapsed" v-for="(lang, i) in langs" :key="`Lang${i}`" @click="pickLanguage(lang.value)">{{ lang.title }}</el-menu-item>
+            <el-menu-item class="el-menu-item submenu-collapsed" v-for="(lang, i) in langs" :key="`Lang${i}`" @click="pickLanguage(lang.value)"><flag :iso="lang.flag" v-bind:squared=false /></el-menu-item>
           </el-menu>
         </div>
         <div id="toggle" @click="select()">
@@ -61,11 +65,11 @@ export default {
   data() {
     return {
       langs: [
-        {'title': this.$tc("message.English"), 'value': 'en-US'},
-        {'title': this.$tc("message.Spanish"), 'value': 'es-ES'},
-        {'title': this.$tc("message.Chinese"), 'value': 'zh-CN'},
-        {'title': this.$tc("message.Russian"), 'value': 'ru-RU'},
-        {'title': this.$tc("message.Portuguese"), 'value': 'pt-PT'},
+        {'flag': 'us', 'title': this.$tc("message.English"), 'value': 'en-US'},
+        {'flag': 'es', 'title': this.$tc("message.Spanish"), 'value': 'es-ES'},
+        {'flag': 'ch', 'title': this.$tc("message.Chinese"), 'value': 'zh-CN'},
+        {'flag': 'ru', 'title': this.$tc("message.Russian"), 'value': 'ru-RU'},
+        {'flag': 'pt', 'title': this.$tc("message.Portuguese"), 'value': 'pt-PT'},
       ],
       isActive: false,
     }
@@ -108,6 +112,19 @@ export default {
           })
         })
     },
+    getCurrentFlagKey() {   
+      let results = this.langs.filter((lang) => { return lang.value == this.$i18n.locale; });
+      let firstObj = (results.length > 0) ? results[0] : null;
+
+      let flag = 'us'; // Set default flag
+      if(firstObj != null) {
+        flag = firstObj.flag;
+      }
+      return flag;
+    },
+    /*getCurrentFlagKey() {      
+      return this.$i18n.locale.substring(0, 2);
+    },*/
     pickLanguage(lang) {
       this.$i18n.locale = lang;
     },
@@ -157,6 +174,14 @@ export default {
 .submenu-collapsed {
   display: none;
 }
+.submenu.lang-switcher {
+  border-bottom: 2px solid transparent;
+}
+li.lang-switcher-item {
+  ul & {
+    text-align: center;
+  }
+}
 #toggle {
   position: absolute;
   right: 20px;
@@ -204,7 +229,7 @@ export default {
     margin: 0 0 30px 0;
   }
   .submenu, .lang-switcher {
-    display: none !important;
+    display: none;
   }
   .submenu-collapsed {
     display: block;
@@ -240,6 +265,7 @@ export default {
       width: 100%;
       border-top: 1px solid #EAEAEB;
       font-size: 18px;
+      border-bottom: 2px solid transparent;
     }
     ul {
       display: block;
