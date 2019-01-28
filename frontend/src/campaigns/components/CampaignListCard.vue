@@ -19,9 +19,9 @@
         </el-row>
         <el-row>
           <el-col>
-            <div class="campaign-subtitle">
-              {{getDescription()}}
-              <a class="show-more-msg" @click="showMore()">{{showMoreMsg()}}</a>
+            <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
+              <span v-if="campaign.giveBack">{{getDescription()}}</span>
+              <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack">{{showMoreMsg()}}</a>
             </div>
             
           </el-col>
