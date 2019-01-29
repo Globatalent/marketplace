@@ -145,7 +145,6 @@
           }
           return {id: null, campaign: campaign.id, network: network, url: null}
         })
-        console.log(networks,socialLinks,campaign.links)
         return socialLinks
       },
       updateImage (fieldName, newURL) {
