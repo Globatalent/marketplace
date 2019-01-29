@@ -154,7 +154,15 @@
         this.loading = true
         const payload = {
           id: this.campaign.id,
-          links: this.form.links,
+          links: this.form.links.map(link => {
+            if (link.startsWith('http') === false ) {
+              link = 'https://' + link
+            }
+            if (link.includes('.') === false) {
+              link = link + '.com'
+            }
+            return link
+          }),
           height: this.form.height,
           weight: this.form.weight,
           club: this.form.club,
