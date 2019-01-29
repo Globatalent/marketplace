@@ -21,7 +21,7 @@
           <el-col>
             <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
               <span v-if="campaign.giveBack">{{getDescription()}}</span>
-              <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack"> {{tc(showMoreMsg())}}</a>
+              <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack && this.campaign.giveBack.length > 50"> {{showMoreMsg()}}</a>
             </div>
             
           </el-col>
@@ -115,25 +115,10 @@
         this.isExtended = !this.isExtended;
       },
       showMoreMsg() {
-        let text;
-        if(this.isExtended) {
-          text = 'message.Showless';
-        }
-        else {
-          text = 'message.Showmore';
-        }
-        return text;
+        return this.isExtended ? this.$tc("message.showLess") : this.$tc("message.showMore");
       },
       getDescription() {
-        let description = this.campaign.giveBack;
-        let text = '';
-        if(this.isExtended) {
-          text = description;
-        }
-        else {
-          text = description.length > 50 ? description.substring(0,50)+' ...' : description;
-        }
-        return text;
+        return this.isExtended ? this.campaign.giveBack : (this.campaign.giveBack.length > 50 ? this.campaign.giveBack.substring(0,50)+' ...' : this.campaign.giveBack);
       }
     }
   }
@@ -182,13 +167,11 @@
     cursor: pointer;
   }
   .show-more-container {
-    max-height: 40px;
     overflow: hidden;
     transition: all .3s ease-out;
   }
   .show-more-container.extended {
     max-height: 100%;
-    padding-bottom: 30px;
   }
 
   .campaign-image {
@@ -235,7 +218,7 @@
 
   .campaign-subtitle {
     font-family: 'Aller Regular';
-    min-height: 50px;
+    padding-bottom: 30px;
   }
 
   .campaign-info {
@@ -248,7 +231,7 @@
   .campaign-nameBlock {
     padding: 25px 20px 15px 20px;
     border-bottom: 1px solid #f0f0f0;
-    min-height: 130px;
+    min-height: 170px;
   }
 
   .campaign-progress {
