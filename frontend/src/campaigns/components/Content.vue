@@ -145,13 +145,13 @@
           }
           return {id: null, campaign: campaign.id, network: network, url: null}
         })
+        console.log(networks,socialLinks,campaign.links)
         return socialLinks
       },
       updateImage (fieldName, newURL) {
         this.form[fieldName] = newURL
       },
       onSaveAndContinue () {
-        console.log(this.form.links)
         this.loading = true
         const payload = {
           id: this.campaign.id,
