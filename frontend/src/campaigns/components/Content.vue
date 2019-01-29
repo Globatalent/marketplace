@@ -151,18 +151,11 @@
         this.form[fieldName] = newURL
       },
       onSaveAndContinue () {
+        console.log(this.form.links)
         this.loading = true
         const payload = {
           id: this.campaign.id,
-          links: this.form.links.map(link => {
-            if (link.startsWith('http') === false ) {
-              link = 'https://' + link
-            }
-            if (link.includes('.') === false) {
-              link = link + '.com'
-            }
-            return link
-          }),
+          links: this.form.links,
           height: this.form.height,
           weight: this.form.weight,
           club: this.form.club,
