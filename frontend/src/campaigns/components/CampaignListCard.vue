@@ -125,6 +125,8 @@
 </script>
 
 <style lang="scss" scoped>
+  @import '../../scss/variables.scss';
+
   .el-card {
     border-radius: 8px;
     //height: 470px;
@@ -160,6 +162,7 @@
   }
 
   .show-more-msg{
+    color: $--color-primary !important;
     background: white;
     position: absolute;
     bottom: 0;
