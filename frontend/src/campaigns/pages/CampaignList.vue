@@ -33,8 +33,9 @@
         </ul>
       </el-col>
     </el-row> -->
-    <el-row class="el-row--flex" type="flex">
-      <el-col :xm="12">
+    <!--<el-row class="el-row--flex" type="flex">-->
+    <el-row>
+      <!--<el-col :xm="12">
           <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search"
                     @keyup.native="onSearch">
             <i slot="suffix" class="el-input__icon el-icon-search"></i>
@@ -61,6 +62,39 @@
             <el-option :label="$tc('message.Athletes')" :value="'athlete'"></el-option>
             <el-option :label="$tc('message.Clubs')" :value="'club'"></el-option>
           </el-select>
+      </el-col>-->
+      <el-col>
+        <masonry :cols="{default: 4, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
+          <div class="filter-box">
+            <el-input :placeholder='$tc("message.Search")' class="searchList-input" v-model="search"
+                      @keyup.native="onSearch">
+              <i slot="suffix" class="el-input__icon el-icon-search"></i>
+            </el-input>
+          </div>
+          <div class="filter-box">
+            <el-select :placeholder='$tc("message.BySport")' class="searchList-option" v-model="sport" @change="filter()">
+              <el-option :label="$tc('message.BySport')" :value="null"></el-option>
+              <el-option v-for="(sport, index) in sports" :key="index" :label="sport.name" :value="sport.id">
+              </el-option>
+            </el-select>
+          </div>
+          <div class="filter-box">
+            <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country"
+                      @change="filter()">
+              <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
+              <el-option v-for="item in countries" :label="item.name" :value="item.code" :key="item.code">
+              </el-option>
+            </el-select>
+          </div>
+          <div class="filter-box">
+            <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country"
+                      @change="filter()">
+              <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
+              <el-option v-for="item in countries" :label="item.name" :value="item.code" :key="item.code">
+              </el-option>
+            </el-select>
+          </div>
+        </masonry>
       </el-col>
     </el-row>
     <el-row v-loading.fullscreen="loadingCampaigns" v-if="campaigns.length > 0">
@@ -207,15 +241,12 @@
     background-position: center;
   }
 
-  .searchList {
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 35px;
+  .filter-box {
+    margin-bottom: 15px;
   }
 
   .searchList-option {
-    margin-left: 30px;
-    width: 93.4%;
+    width: 100%;
   }
 
   .campaignList-startBlock {
@@ -266,20 +297,5 @@
     font-weight: bold;
     position: relative;
     top: 6px;
-  }
-  @media only screen and (max-width: 768px) {
-    .el-row--flex {
-      display: block;
-    }
-    .el-col {
-      float: none;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .searchList-option {
-      margin-left: 0;
-      width: 100%;
-      margin-bottom: 0;
-    }
   }
 </style>
