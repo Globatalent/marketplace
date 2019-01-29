@@ -179,6 +179,10 @@ export const messages = {
       Russian: 'Russian',
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
+      showMore: 'Show more',
+      showLess: 'Show less',
+      cookiesAd: 'This website uses cookies to ensure you get the best experience on our website.',
+      cookiesLink: 'View cookies policy',
       whatAreTheBasicsTitle: 'What are the basics?',
       whatAreTheBasics: '<p style="color: #647585">The first sports crypto exchange where you can tokenize, trade and support your favorite clubs and sports idols. Although contributing to a campaign is not the same as purchasing a product or betting, when you support a campaign, you help your favorite clubs and sports idols and be part of them participating in their benefits.</p><p style="color: #647585">Although contributing to a campaign is not the same as purchasing a product or betting, when you support a campaign, you help your favorite clubs and sports idols and be part of them participating in their benefits.</p>',
       whatIsGlobatalentTitle: 'What is Globatalent?',
@@ -203,8 +207,6 @@ export const messages = {
       howDoIAsk: '<p style="color: #647585">Campaigns are run by their individual Campaign Owners, not by Globatalent. As such, they are best able to help answer any questions you might have about their project or perks they are offering!</p><p style="color: #647585">If you have any questions or concerns about a particular campaign, or perks offered in a campaign, or claims made in a campaign, we recommend that you get in touch with the campaign owner directly. </p><p style="color: #647585">If you have an Globatalent account and have contributed to the campaign, you can post a comment to the campaign page, or you can send a direct message to the campaign owner</p>',
       campaignFailTitle: 'What happens to my money if a campaign fails?',
       campaignFail: '<p style="color: #647585">If the campaign you buy tokens for does not reach the soft cap defined, your money will be reimbursed. </p>',
-      showMore: 'Show more',
-      showLess: 'Show less',
       terms: 'Terms',
       privacy: 'privacy'
     }
@@ -390,7 +392,9 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancelar',
       showMore: 'Show more',
-      showLess: 'Show less'
+      showLess: 'Show less',
+      cookiesAd: 'This website uses cookies to ensure you get the best experience on our website.',
+      cookiesLink: 'View cookies policy',
     }
   },
   'zh-CN': {
@@ -573,7 +577,9 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
       showMore: 'Show more',
-      showLess: 'Show less'
+      showLess: 'Show less',
+      cookiesAd: 'This website uses cookies to ensure you get the best experience on our website.',
+      cookiesLink: 'View cookies policy',
     }
   },
   'ru-RU': {
@@ -756,7 +762,9 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
       showMore: 'Show more',
-      showLess: 'Show less'
+      showLess: 'Show less',
+      cookiesAd: 'This website uses cookies to ensure you get the best experience on our website.',
+      cookiesLink: 'View cookies policy',
     }
   },
   'pt-PT': {
@@ -939,7 +947,9 @@ export const messages = {
       Portuguese: 'Portuguese',
       cancel: 'Cancel',
       showMore: 'Show more',
-      showLess: 'Show less'
+      showLess: 'Show less',
+      cookiesAd: 'This website uses cookies to ensure you get the best experience on our website.',
+      cookiesLink: 'View cookies policy',
     }
   }
 }

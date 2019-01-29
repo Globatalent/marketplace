@@ -99,13 +99,20 @@
         </el-row>
       </el-col>
     </el-row>
+    <cookie-law>
+      <div slot="message">
+        {{ $t("message.cookiesAd") }} <router-link to="legal-notes">{{ $t("message.cookiesLink") }}</router-link>
+      </div>
+    </cookie-law>
   </div>
 </template>
 
 <script>
 import VueI18n from 'vue-i18n'
+import CookieLaw from 'vue-cookie-law'
 export default {
-  name: 'gb-footer'
+  name: 'gb-footer',
+  components: { CookieLaw }
 }
 </script>
 
