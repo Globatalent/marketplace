@@ -163,7 +163,8 @@
           pitchUrl: this.form.pitchUrl,
           pitchImage: this.form.pitchImage
         }
-        this.$store.dispatch('campaigns/update', payload).then(() => {
+        this.$store.dispatch('campaigns/update', payload)
+        .then(() => {
           this.form = {...this.campaign}
           this.loading = false
           router.push({
@@ -173,6 +174,10 @@
               step: 'career'
             }
           })
+        })
+        .catch(error => {
+          console.log(error)
+          this.loading = false;
         })
       }
     }
