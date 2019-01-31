@@ -78,7 +78,7 @@
       return {
         // Form
         form: {
-          links: [],
+          links: null,
           height: null,
           weight: null,
           club: null,
@@ -116,6 +116,8 @@
               }/api/v1/campaigns/${this.campaign.id}/`
             this.form = {...this.campaign}
             this.form.links = this.initialSocialLinks(this.campaign)
+            
+            console.log(this.form.links)
             this.loading = false
           }
         }).catch(() => {
