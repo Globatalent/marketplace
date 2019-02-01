@@ -142,7 +142,26 @@
         const socialLinks = networks.map(network => {
           const links = campaign.links.filter(item => item.network == network)
           if (links.length > 0) {
-            return links[0]
+            let urlResponse = links[0];
+            let auxIndex = 0;
+
+            if(!urlResponse.includes('http')) {
+              urlResponse = 'http://' + urlResponse;
+              auxIndex = 2;
+            }
+            if(!urlResponse.includes('.')) {
+              let auxArr = urlResponse.split('/');
+              urlResponse = '';
+              let i = 0;
+              auxArr.forEach(element => {
+                urlResponse += element;
+                if(auxIndex == i) {
+                  urlResponse += '.com';
+                }
+                i++;
+              });
+            }
+            return urlResponse
           }
           return {id: null, campaign: campaign.id, network: network, url: null}
         })
