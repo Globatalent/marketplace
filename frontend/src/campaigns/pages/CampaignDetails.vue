@@ -74,14 +74,15 @@
                              :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
               </div>
             </div>
-            <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)"
-                       v-if="hasStarted">
-              {{$tc('message.BuyTokens')}}
-            </el-button>
-            <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big"
-                       @click="goToInvest(campaign)" v-else>
+            <template v-if="hasStarted">
+              <div id="bestrate-widget"></div>
+            </template>
+           <template v-else>
+            <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big">
               {{$tc('message.ComingSoon')}}
             </el-button>
+            </template>
+
             <div class="campaignDetails-favoriteSocial">
               <div class="favoriteLink" v-if="campaign.following" type="primary" @click="setFollowingCampaign()">
                 <i class="fas fa-heart"></i> {{$tc('message.Favorite')}}
@@ -354,7 +355,11 @@
       },
     }
   }
+  
 </script>
+
+<script src="https://bestrate.org/brw_v2/widget.bestrate.js"></script>
+<script>BRWidget.init("bestrate-widget", "d2227de858a70f877236bafdc751d0d9");</script
 
 <style lang="scss" scoped>
   @import '../../scss/variables.scss';
