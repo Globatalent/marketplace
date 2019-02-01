@@ -142,8 +142,7 @@
         const socialLinks = networks.map(network => {
           const links = campaign.links.filter(item => item.network == network)
           if (links.length > 0) {
-            return {id: null, campaign: campaign.id, network: network, url: links[0]}
-            // return links[0]
+            return links[0]
           }
           return {id: null, campaign: campaign.id, network: network, url: null}
         })
