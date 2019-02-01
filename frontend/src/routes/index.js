@@ -152,6 +152,11 @@ export default [
     name: 'careers',
     component: resolve => require(['@/pages/Careers.vue'], resolve),
   },
+  {
+    path: '/deck',
+    name: 'deck',
+    component: resolve => require(['@/pages/Deck.vue'], resolve),
+  },
   // 404
   {
     path: '/404',
