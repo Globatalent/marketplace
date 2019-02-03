@@ -266,6 +266,7 @@
 </template>
 
 <script>
+asdasa
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
   import router from '@/router.js'

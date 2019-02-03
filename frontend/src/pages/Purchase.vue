@@ -3,7 +3,6 @@
     <el-row>
       <el-col :xs="24" :sm="{span: 12, offset: 6}" :lg="{span: 8, offset: 8}">
         <h1 class="text-center">{{ $tc("message.PurchaseGBTTokens") }}</h1>
-        <div id="bestrate-widget"></div>
       </el-col>
     </el-row>
   </gb-base-layout>

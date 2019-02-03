@@ -7,7 +7,7 @@
     </el-breadcrumb>
     <div class="formSteps-actions">
       <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="$emit('discard')">{{ $tc("message.DiscardCampaign") }}</el-button>
-      <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button>
+      <!-- <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc("message.ReviewLaunch") }}</el-button> -->
     </div>
     <div class="formSteps">
       <h2 class="formSteps-title">{{ $tc('message.CardCampaign') }}</h2>

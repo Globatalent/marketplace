@@ -70,6 +70,7 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
 
