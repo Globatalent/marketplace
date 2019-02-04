@@ -117,20 +117,31 @@
         </div>
       </div>
     </div>
+    <el-row>
+      <el-col>
+        <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
+          <gb-news v-for="article in news" :key="article[0]"
+                                 :article="article"></gb-news>
+        </masonry>
+      </el-col>
+    </el-row>
   </gb-base-layout>
 </template>
 
 <script>
+import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
   import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
+    import newsCard from '@/campaigns/components/newsCard.vue'
   import countries from '@/base/helpers/countries'
 
   export default {
     name: 'CampaignList',
     components: {
       'gb-base-layout': BaseLayout,
-      'gb-campaign-list-card': CampaignListCard
+      'gb-campaign-list-card': CampaignListCard,
+      'gb-news': newsCard
     },
     data () {
       return {
@@ -140,7 +151,8 @@
         country: null,
         kind: null,
         errorMessage: '',
-        loadingCampaigns: false
+        loadingCampaigns: false,
+        news: null
       }
     },
     computed: {
@@ -170,6 +182,9 @@
     },
     mounted () {
       this.checkScroll()
+      Vue.axios
+      .get('https://web.globatalent.com/wp-json/wp/v2/posts')
+      .then(response => (this.news = response.data.map( post => [post.id, post.title.rendered, post.content.rendered])))
     },
     methods: {
       initial () {

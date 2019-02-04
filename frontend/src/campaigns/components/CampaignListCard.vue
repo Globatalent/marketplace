@@ -107,7 +107,7 @@
       },
     },
     methods: {
-      setFollowingCampaign () {
+      setFollowingCampaign() {
         this.$store.dispatch('campaign/follow', this.campaign.id).catch(error => {
           console.log(error)
         })
