@@ -132,13 +132,21 @@
 import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
-  import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
-    import newsCard from '@/campaigns/components/newsCard.vue'
+import twitter from 'vue-twitter'
+import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
+  import newsCard from '@/campaigns/components/newsCard.vue'
   import countries from '@/base/helpers/countries'
+
+    import {VueTabs, VTab} from 'vue-nav-tabs'
+  import 'vue-nav-tabs/themes/vue-tabs.css'
+
+  Vue.use(twitter)
 
   export default {
     name: 'CampaignList',
     components: {
+             VueTabs,
+       VTab,
       'gb-base-layout': BaseLayout,
       'gb-campaign-list-card': CampaignListCard,
       'gb-news': newsCard
