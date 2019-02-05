@@ -266,9 +266,8 @@
         </v-tab>
         <v-tab title="Feeds">
           <div v-if="campaign.links.length > 0">
-            {{campaign.links.filter(site => site.network == 'twitter')[0].url + '?ref_src=twsrc%5Etfw'}}
           <twitter>
-            <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="campaign.links.filter(site => site.network == 'twitter')[0].url + '?ref_src=twsrc%5Etfw'"></a> 
+            <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="campaign.links.filter(site => site.network == 'twitter')[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'"></a> 
           </twitter>
           </div>
         </v-tab>
