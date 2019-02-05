@@ -265,11 +265,11 @@
       </div>
         </v-tab>
         <v-tab title="Feeds">
-          <!-- <div v-if="campaign.links.length > 0"> -->
+          <div v-if="campaign.links.length > 0">
           <twitter>
-            <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="campaign.links.filter(site => site.network == 'twitter')[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'"></a> 
+            <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" href="campaign.links.filter(site => site.network == 'twitter')[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'"></a> 
           </twitter>
-          <!-- </div> -->
+          </div>
         </v-tab>
       </vue-tabs>
     </div>
