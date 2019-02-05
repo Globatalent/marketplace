@@ -119,6 +119,13 @@
     </div>
     <el-row>
       <el-col>
+        <div class="beginBlock text-center">
+          <h3 class="beginBlock-subTitle">{{$tc('message.campaignNewsTitle')}}</h3>
+        </div>
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col>
         <masonry :cols="{default: 4, 992: 3, 750: 2, 500: 1}" :gutter="{default: '40px', 750: '20px'}">
           <gb-news v-for="article in news" :key="article[0]"
                                  :article="article"></gb-news>
@@ -136,6 +143,7 @@ import twitter from 'vue-twitter'
 import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   import newsCard from '@/campaigns/components/newsCard.vue'
   import countries from '@/base/helpers/countries'
+  import VueI18n from 'vue-i18n'
 
     import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
@@ -191,8 +199,17 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
     mounted () {
       this.checkScroll()
       Vue.axios
-      .get('https://web.globatalent.com/wp-json/wp/v2/posts')
-      .then(response => (this.news = response.data.map( post => [post.id, post.title.rendered, post.content.rendered])))
+      .get('https://web.globatalent.com/wp-json/wp/v2/posts?_embed')
+      .then(response => (
+        this.news = response.data.map( 
+          post => [
+            post.id, 
+            post.title.rendered, 
+            post.content.rendered, 
+            post._embedded['wp:featuredmedia'][0]['source_url'], 
+          ]
+        )
+      ))
     },
     methods: {
       initial () {
