@@ -1,10 +1,25 @@
 <template>
   <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
+    
+    <div :class="['campaign-image', {'is-placeholder-image': !article[3]}]" :style="article[3] ? {backgroundImage:'url('+article[3]+')'} : {}">
+    </div>
+    
     <div class="campaign-info">
-    <el-col :span="24">
-         <h3 style="padding: 1rem;">{{article[1]}}</h3>
-         <div style="padding: 0.5rem 1rem 1rem 1rem;" v-html="article[2]" ></div>
-    </el-col>
+      <div class="clearfix campaign-nameBlock">
+        <el-row>
+          <el-col :span="24">
+              <span class="campaign-name">{{article[1]}}</span>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col>
+            <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
+              <span v-if="article[2]" v-html="getDescription()"></span>
+              <a class="show-more-msg" @click="showMore()" v-if="article[2] && this.article[2].length > 150"> {{showMoreMsg()}}</a>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
     </div>
   </el-card>
 </template>
@@ -28,7 +43,7 @@
         return this.isExtended ? this.$tc("message.showLess") : this.$tc("message.showMore");
       },
       getDescription() {
-        return this.isExtended ? this.campaign.giveBack : (this.campaign.giveBack.length > 50 ? this.campaign.giveBack.substring(0,50)+' ...' : this.campaign.giveBack);
+        return this.isExtended ? this.article[2] : (this.article[2].length > 150 ? this.article[2].substring(0,150)+' ...' : this.article[2]);
       }
     }
   }

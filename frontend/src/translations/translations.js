@@ -208,7 +208,8 @@ export const messages = {
       campaignFailTitle: 'What happens to my money if a campaign fails?',
       campaignFail: '<p style="color: #647585">If the campaign you buy tokens for does not reach the soft cap defined, your money will be reimbursed. </p>',
       terms: 'Terms',
-      privacy: 'privacy'
+      privacy: 'privacy',
+      campaignNewsTitle: 'Campaign news',
     }
   },
   'es-ES': {
