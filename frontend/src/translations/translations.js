@@ -209,7 +209,7 @@ export const messages = {
       campaignFail: '<p style="color: #647585">If the campaign you buy tokens for does not reach the soft cap defined, your money will be reimbursed. </p>',
       terms: 'Terms',
       privacy: 'privacy',
-      campaignNewsTitle: 'Campaign news',
+      campaignNewsTitle: 'Globatalent campaign news',
     }
   },
   'es-ES': {
