@@ -70,10 +70,12 @@
 
 <script>
   import { mapGetters } from 'vuex'
+  import Vuex from 'vuex'
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
   import ajax from '@/base/helpers/ajax'
+  
 
   export default {
     name: 'CampaignListCard',
