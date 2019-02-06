@@ -376,7 +376,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
     //height: 470px;
     margin: 0 20px;
     margin-bottom: 35px;
-    
+    box-shadow: none !important;
 
 
     a:hover {
