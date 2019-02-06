@@ -65,7 +65,7 @@ export default {
       this.$store
         .dispatch('auth/forgot', this.form)
         .then(data => {
-          Message.success(this.$tc('message.ForgotEmailSent'))
+          Message.success({message: this.$tc('message.ForgotEmailSent'), duration: 9000})
           router.push({ name: 'login' })
         })
         .catch(error => {
