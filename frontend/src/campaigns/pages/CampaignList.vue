@@ -118,15 +118,15 @@
       </div>
     </div>
     <el-row>
-      <el-col class="bck-grey news-title">
+      <el-col class="news-title">
         <div class="beginBlock text-center">
           <h3 class="beginBlock-subTitle">{{$tc('message.campaignNewsTitle')}}</h3>
         </div>
       </el-col>
     </el-row>
     <el-row>
-      <el-col class="bck-grey">
-        <carousel :autoplay=true :loop=true :per-page-custom="[[1280, 4], [992, 3], [750, 2], [50, 1]]">
+      <el-col>
+        <carousel :autoplay=true :loop=true :per-page-custom="[[1280, 4], [992, 3], [750, 2], [50, 1]]" :autoplay-timeout=6000>
           <slide v-for="article in news" :key="article[0]">
             <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
               <div :class="['campaign-image', {'is-placeholder-image': !article[3]}]" :style="article[3] ? {backgroundImage:'url('+article[3]+')'} : {}">
@@ -532,10 +532,6 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
 
 .fulltext:target .more {
 	display: none;
-}
-
-.bck-grey {
-  background-color: rgba(0,0,0,0.05)
 }
 .news-title {
   padding-top: 60px;
