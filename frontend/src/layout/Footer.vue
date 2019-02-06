@@ -56,7 +56,9 @@
                 <input  type='reset' style='font-size:12px;color:black' value='Reset' />
               </div>
             </div>
-
+            <p>
+              You can also reach us at <a href="tel:+44 (0)20 7504 1304">+44 (0)20 7504 1304</a> and <a href="mailto:contact@globatalent.com">contact@globatalent.com</a>
+            </p>
           </form>
         </div>
       </el-col>
