@@ -90,7 +90,7 @@
         <el-row>
         <a class="copy"> {{ $t("message.privacy") }}</a>
         <a class="copy" href="/terms"> {{ $t("message.terms") }}</a>
-        <a class="copy" href="/risk"> {{ $t("message.risk") }}</a>
+        <a class="copy" href="/risks"> {{ $t("message.risk") }}</a>
         <div class="copy">Ⓒ {{ $t("message.AllRightsReserved") }}</div>
 
         </el-row>

@@ -1,6 +1,8 @@
 <template>
   <gb-base-layout>
-    <div v-if="campaign.hasStarted">
+    <div v-if="campaign['is_draft']">
+    </div>
+    <div v-else>
     <div class="is-padding-boxed">
       <el-row>
         <el-col>
@@ -274,8 +276,6 @@
         </v-tab>
       </vue-tabs>
     </div>
-    </div>
-    <div v-else>
     </div>
   </gb-base-layout>
 </template>
