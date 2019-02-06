@@ -207,7 +207,8 @@ export const messages = {
       howDoIAsk: '<p style="color: #647585">Campaigns are run by their individual Campaign Owners, not by Globatalent. As such, they are best able to help answer any questions you might have about their project or perks they are offering!</p><p style="color: #647585">If you have any questions or concerns about a particular campaign, or perks offered in a campaign, or claims made in a campaign, we recommend that you get in touch with the campaign owner directly. </p><p style="color: #647585">If you have an Globatalent account and have contributed to the campaign, you can post a comment to the campaign page, or you can send a direct message to the campaign owner</p>',
       campaignFailTitle: 'What happens to my money if a campaign fails?',
       campaignFail: '<p style="color: #647585">If the campaign you buy tokens for does not reach the soft cap defined, your money will be reimbursed. </p>',
-      terms: 'Terms',
+      terms: 'Terms of Use',
+      risk: 'Risks Disclaimer',
       privacy: 'privacy',
       campaignNewsTitle: 'Globatalent campaign news',
     }
