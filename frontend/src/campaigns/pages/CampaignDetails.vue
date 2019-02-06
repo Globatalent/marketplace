@@ -115,6 +115,8 @@
           </ul>
         </el-col>
       </el-row> -->
+      <vue-tabs>
+        <v-tab title="Campaign insights">
       <div class="campaignDetails-infoContainer-data">
         <ul class="campaignDetails-infoContainer-data-miniMenu">
           <li class="campaignDetails-infoContainer-data-miniMenu-item" v-if="campaign.description">
@@ -261,6 +263,15 @@
           </el-col>
         </el-row>
       </div>
+        </v-tab>
+        <v-tab title="Feeds">
+          <div v-if="campaign.links.length > 0">
+          <twitter>
+            <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" href="campaign.links.filter(site => site.network == 'twitter')[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'"></a> 
+          </twitter>
+          </div>
+        </v-tab>
+      </vue-tabs>
     </div>
   </gb-base-layout>
 </template>
@@ -271,10 +282,14 @@
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import CampaignInfoRow from '@/campaigns/components/CampaignInfoRow.vue'
+  import {VueTabs, VTab} from 'vue-nav-tabs'
+  import 'vue-nav-tabs/themes/vue-tabs.css'
 
   export default {
     name: 'CampaignDetails',
     components: {
+       VueTabs,
+       VTab,
       'gb-base-layout': BaseLayout,
       'gb-campaign-info-row': CampaignInfoRow,
       StarRating
@@ -346,7 +361,7 @@
         let urls = {
           5: 'https://bestrate.org/payout/1c6611608de9eb0732c663ac8ad194b3'
         };
-        window.location.href = urls[campaign.id.toString()];
+        window.open = urls[campaign.id.toString()];
         // router.push({
         //   name: 'campaign.invest',
         //   params: {campaignId: campaign.id}
@@ -401,6 +416,7 @@
     img {
       object-fit: cover;
       height: 100%;
+      object-position: top;
     }
   }
 

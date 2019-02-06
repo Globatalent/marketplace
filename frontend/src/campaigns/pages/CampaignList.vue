@@ -160,14 +160,22 @@
 import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
-  import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
+import twitter from 'vue-twitter'
+import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   import countries from '@/base/helpers/countries'
   import VueI18n from 'vue-i18n'
   import { Carousel, Slide } from 'vue-carousel';
 
+    import {VueTabs, VTab} from 'vue-nav-tabs'
+  import 'vue-nav-tabs/themes/vue-tabs.css'
+
+  Vue.use(twitter)
+
   export default {
     name: 'CampaignList',
     components: {
+             VueTabs,
+       VTab,
       'gb-base-layout': BaseLayout,
       'gb-campaign-list-card': CampaignListCard,
        Carousel,
