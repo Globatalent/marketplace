@@ -4,7 +4,7 @@
       <div class="is-padding-boxed">
         <el-row>
           <el-col>
-
+            Not active
           </el-col>
         </el-row>
       </div>  
@@ -309,7 +309,7 @@
       return {
         token: {},
         pictures: [],
-        isDraft: !!this.campaign.is_draft
+        isDraft: !!this.campaign.isDraft
       }
     },
     computed: {
@@ -350,7 +350,7 @@
         this.campaign.revenues.sort((x, y) => x.year - y.year)
 
 
-      console.log('campaign ' + this.campaign.is_draft)
+      console.log('campaign ' + this.campaign.isDraft)
       console.log(this.campaign)
       console.log('id ' + id)
       })
