@@ -349,6 +349,12 @@
         this.campaign.incomes.sort((x, y) => x.year - y.year)
         this.campaign.revenues.sort((x, y) => x.year - y.year)
       })
+      .catch(() => {
+        console.log('catch');
+        console.log(this.campaign.isDraft);
+        console.log(this.campaing.id);
+        console.log('end catch');
+      })
       console.log('campaign ' + this.campaign.is_draft)
       console.log(this.campaign)
       console.log('id ' + id)
