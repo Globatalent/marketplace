@@ -1,6 +1,6 @@
 <template>
   <gb-base-layout>
-    <div v-if="this.isDraft">
+    <div v-if="!!campaign.isDraft">
       <div class="is-padding-boxed">
         <el-row>
           <el-col>
