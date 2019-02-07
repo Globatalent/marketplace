@@ -1,6 +1,13 @@
 <template>
   <gb-base-layout>
-    <div v-if="campaign['is_draft']">
+    <div v-if="this.isDraft">
+      <div class="is-padding-boxed">
+        <el-row>
+          <el-col>
+
+          </el-col>
+        </el-row>
+      </div>  
     </div>
     <div v-else>
       <div class="is-padding-boxed">
@@ -301,7 +308,8 @@
     data () {
       return {
         token: {},
-        pictures: []
+        pictures: [],
+        isDraft: !!this.campaign.is_draft
       }
     },
     computed: {
@@ -335,6 +343,10 @@
     },
     created () {
       const id = this.$route.params.campaignId
+
+      console.log('campaign ')
+      console.log(this.campaign)
+      console.log('id ' + id)
       if(!id) {
         router.push({
            name: 'not-found',
