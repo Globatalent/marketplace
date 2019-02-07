@@ -3,9 +3,11 @@
     <div v-if="!!campaign.isDraft">
       <div class="is-padding-boxed">
         <el-row>
-          <el-col>
-            Not active
-          </el-col>
+          <el-col :xs="24">
+        <div class="beginBlock text-center">
+          <h4 class="beginBlock-subTitle" v-html="$t('message.campaignDraft')"></h4>
+        </div>
+      </el-col>
         </el-row>
       </div>  
     </div>
@@ -309,7 +311,6 @@
       return {
         token: {},
         pictures: [],
-        isDraft: !!this.campaign.isDraft
       }
     },
     computed: {
@@ -348,11 +349,6 @@
         this.token = !!this.campaign.token ? this.campaign.token : {}
         this.campaign.incomes.sort((x, y) => x.year - y.year)
         this.campaign.revenues.sort((x, y) => x.year - y.year)
-
-
-      console.log('campaign ' + this.campaign.isDraft)
-      console.log(this.campaign)
-      console.log('id ' + id)
       })
       .catch(() => {
         router.push({

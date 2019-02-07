@@ -211,6 +211,7 @@ export const messages = {
       risk: 'Risks Disclaimer',
       privacy: 'privacy',
       campaignNewsTitle: 'Globatalent campaign news',
+      campaignDraft: 'Campaign not available. Check out active campaigns at <a href="/">www.globatalent.com</a>',
     }
   },
   'es-ES': {
