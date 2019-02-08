@@ -154,17 +154,15 @@ export default [
     name: 'manteninance',
     component: resolve => require(['@/pages/Manteinance.vue'], resolve)
   },
-
   // Redirects
-  // {
-  //   path: '/',
-  //   redirect: '/campaigns'
-  // },
   {
     path: '/',
-    redirect: '/manteinance'
+    redirect: '/campaigns'
   },
-
+  // {
+  //   path: '/',
+  //   redirect: '/manteinance'
+  // },
   {
     path: '/*',
     redirect: '/404'
