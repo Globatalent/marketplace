@@ -52,7 +52,7 @@
         <!-- <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
             <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
           </router-link> -->
-        <!-- <el-button type="primary" size="big" v-html="$tc('message.BuyTokens')"></el-button> -->
+        <el-button type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
