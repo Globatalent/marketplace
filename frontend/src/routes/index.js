@@ -108,11 +108,6 @@ export default [
     }
   },
   {
-    path: '/sport',
-    name: 'sport',
-    component: resolve => require(['@/pages/Sport.vue'], resolve)
-  },
-  {
     path: '/faq',
     name: 'faq',
     component: resolve => require(['@/pages/Faq.vue'], resolve)
@@ -127,11 +122,7 @@ export default [
     name: 'risks',
     component: resolve => require(['@/pages/Risks.vue'], resolve)
   },
-  {
-    path: '/news',
-    name: 'news',
-    component: resolve => require(['@/pages/News.vue'], resolve)
-  },
+
   {
     path: '/about',
     name: 'about',
@@ -143,19 +134,9 @@ export default [
     component: resolve => require(['@/pages/Contact.vue'], resolve)
   },
   {
-    path: '/athletesandorganizations',
-    name: 'organizations',
-    component: resolve => require(['@/pages/Organizations.vue'], resolve)
-  },
-  {
     path: '/press',
     name: 'press',
     component: resolve => require(['@/pages/Press.vue'], resolve)
-  },
-  {
-    path: '/careers',
-    name: 'careers',
-    component: resolve => require(['@/pages/Careers.vue'], resolve)
   },
   {
     path: '/deck',
