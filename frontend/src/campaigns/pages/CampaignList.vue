@@ -140,7 +140,7 @@
                   </el-row>
                   <el-row>
                     <el-col>
-                      <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
+                      <div class="campaign-subtitle news-content show-more-container" :class="{ extended: isExtended }">
                         <span v-if="article[2]" v-html="getDescription(article[0], article[2])"></span>
                         <a class="show-more-msg" @click="showMore(article[0])" v-if="article[2] && article[2].length > 150"> {{showMoreMsg(article[0])}}</a>
                       </div>
@@ -535,5 +535,8 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
 }
 .news-title {
   padding-top: 60px;
+}
+.news-content {
+  min-height: 120px;
 }
 </style>
