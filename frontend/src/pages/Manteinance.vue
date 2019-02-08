@@ -1,13 +1,5 @@
 <template>
   <gb-base-layout>
-    <el-row>
-      <el-col :xs="24" :sm="{span: 12, offset: 6}">
-        <div class="beginBlock text-center">
-          <h3 class="beginBlock-title">{{ $tc("message.WeBringTheTalent") }}</h3>
-          <h3 class="beginBlock-subTitle">Faq</h3>
-        </div>
-      </el-col>
-    </el-row>
 <el-row>
       <el-col :xs="24" :sm="{span: 12, offset: 6}">
         <!-- <div class="beginBlock text-center"> -->
