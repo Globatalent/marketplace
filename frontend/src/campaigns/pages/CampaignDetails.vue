@@ -391,8 +391,9 @@
         //return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
         console.log(links)
         console.log(network)
-        console.log(links.filter(site => site.network == network))
-        return true == true ? 'https://twitter.com/Alvaro_Avrorian' : '';
+        console.log(links.filter(site => site.network == network)[0].url)
+        console.log(links.filter(site => site.network == network)[0].url.split('?'))
+        return true == true ? 'https://twitter.com/Alvaro_Avrorian?ref_src=twsrc%5Etfw' : '';
       }
     }
   }
