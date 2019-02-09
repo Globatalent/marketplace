@@ -471,6 +471,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
     font-size: 13px;
     display: flex;
     flex-direction: column;
+    min-height: 220px;
   }
 
   .campaign-nameBlock {
