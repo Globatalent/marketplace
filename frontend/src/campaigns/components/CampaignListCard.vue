@@ -52,7 +52,7 @@
         <!-- <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
             <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
           </router-link> -->
-        <el-button type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')"></el-button>
+        <el-button type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign.id)"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
@@ -68,6 +68,7 @@
     </div>
   </el-card>
 </template>
+
 
 <script>
   import { mapGetters } from 'vuex'
@@ -115,6 +116,13 @@
         this.$store.dispatch('campaign/follow', this.campaign.id).catch(error => {
           console.log(error)
         })
+      },
+      goToInvest (campaign) {
+        let urls = {
+          5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
+        };
+       window.location.href = urls[campaign.id.toString()];
+
       },
       showMore() {
         this.isExtended = !this.isExtended;
