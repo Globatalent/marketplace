@@ -388,7 +388,10 @@
         // })
       },
       getSocialUrl(links, network) {
-        return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
+        //return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
+        console.log(links)
+        console.log(this.campaign)
+        return true == true ? '/campaigns' : '';
       }
     }
   }
