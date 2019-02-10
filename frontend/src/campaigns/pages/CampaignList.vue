@@ -250,9 +250,9 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
               active: 'True'
             }
           })
-          // .then(() => {
-          //   console.log(this.campaigns)
-          // })
+          .then(() => {
+            console.log(this.campaigns)
+          })
         }
       },
       onSearch (event) {
