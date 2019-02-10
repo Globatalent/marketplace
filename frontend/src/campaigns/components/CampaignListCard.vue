@@ -23,7 +23,6 @@
               <span v-if="campaign.giveBack">{{getDescription()}}</span>
               <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack && this.campaign.giveBack.length > 50"> {{showMoreMsg()}}</a>
             </div>
-            
           </el-col>
         </el-row>
       </div>
@@ -49,9 +48,13 @@
         </div>
       </div>
       <div class="clearfix campaign-footer">
-        <!-- <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
-            <el-button type="primary" class="is-full-width m-t-20">See details</el-button>
-          </router-link> -->
+        <div v-if="redirecting">
+          <div class="timeLeft">
+          <i class="far fa-clock"></i>
+          <span class="timeLeft-text" >Redirecting you towards our payment processor. Please wait...</span>
+        </div>
+        </div>
+        <div v-else>
         <el-button type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
@@ -64,6 +67,7 @@
             <i class="far fa-heart likeIcon" v-else></i>
           </el-tooltip>
         </div>
+        </d
       </div>
     </div>
   </el-card>
@@ -87,7 +91,8 @@
     },
     data () {
       return {
-        isExtended: false
+        isExtended: false,
+        redirecting: false
       }
     },
     computed: {
