@@ -381,20 +381,19 @@
         let urls = {
           5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
         };
-        window.location.hrefurls[campaign.id.toString()];
+        window.location.href = urls[campaign.id.toString()];
         // router.push({
         //   name: 'campaign.invest',
         //   params: {campaignId: campaign.id}
         // })
       },
       getSocialUrl(links, network) {
-        //return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
-        //console.log(links)
-        //console.log(network)
-        //console.log(links.filter(site => site.network == network))
-        //console.log(links.filter(site => site.network == network)[0].url)
-        //console.log(links.filter(site => site.network == network)[0].url.split('?'))
-        return '';
+        console.log(links)
+        console.log(network)
+        console.log(links.filter(site => site.network == network))
+        console.log(links.filter(site => site.network == network)[0].url)
+        console.log(links.filter(site => site.network == network)[0].url.split('?'))
+        return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
       }
     }
   }

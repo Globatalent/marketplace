@@ -120,7 +120,7 @@
     <el-row>
       <el-col class="news-title">
         <div class="beginBlock text-center">
-          <h3 class="beginBlock-subTitle">{{$tc('message.campaignNewsTitle')}}</h3>
+          <h3 id="news" class="beginBlock-subTitle">{{$tc('message.campaignNewsTitle')}}</h3>
         </div>
       </el-col>
     </el-row>
