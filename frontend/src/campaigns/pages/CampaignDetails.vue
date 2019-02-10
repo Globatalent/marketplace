@@ -363,6 +363,10 @@
         this.campaign.incomes.sort((x, y) => x.year - y.year)
         this.campaign.revenues.sort((x, y) => x.year - y.year)
       })
+      .then(() => {
+        console.log(this.campaign)
+
+      })
       .catch(() => {
         router.push({
            name: 'not-found',
