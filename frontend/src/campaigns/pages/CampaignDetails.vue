@@ -1,7 +1,13 @@
 <template>
   <gb-base-layout>
     <div v-if="redirecting === true">
-      We are redirecting you to our payment processor so you can complete your transaction. Please wait...
+      <el-row>
+      <el-col :xs="24" :sm="{span: 12, offset: 6}">
+        <div class="beginBlock text-center">
+          <h3 class="beginBlock-subTitle">We are redirecting you towards our payment processor to complete payment. Please wait...</h3>
+        </div>
+      </el-col>
+    </el-row>
     </div>
     <div v-else>
     <div v-if="!!campaign.isDraft">
@@ -316,7 +322,7 @@
       return {
         token: {},
         pictures: [],
-        redirecting: true
+        redirecting: false
       }
     },
     computed: {
@@ -384,11 +390,13 @@
         return 0
       },
       goToInvest (campaign) {
-        redirecting = true;
+        this.redirecting = true;
         let urls = {
           5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
         };
-        window.location.href = urls[campaign.id.toString()];
+        setTimeout(() => {
+          window.location.href = urls[campaign.id.toString()]
+        }, 5000);
         // router.push({
         //   name: 'campaign.invest',
         //   params: {campaignId: campaign.id}
