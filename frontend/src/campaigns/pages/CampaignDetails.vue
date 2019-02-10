@@ -290,7 +290,7 @@
             <div class="campaignDetails-infoContainer-data" v-if="campaign.links !== undefined">
             <twitter>
               <!-- <a class="twitter-timeline" data-width="320" data-height="480" data-dnt="true" data-theme="light" href="https://twitter.com/rubfergor?ref_src=twsrc%5Etfw">Tweets by rubfergor</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  -->
-              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="'https://twitter.com/rubfergor ?ref_src=twsrc%5Etfw'"></a> 
+              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="'https://twitter.com/rubfergor?ref_src=twsrc%5Etfw'"></a> 
             </twitter>
             </div>
             <div class="campaignDetails-infoContainer-data" v-if="campaign.links !== undefined">
