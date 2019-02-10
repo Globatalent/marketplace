@@ -364,7 +364,7 @@
         this.campaign.revenues.sort((x, y) => x.year - y.year)
       })
       .then(() => {
-        console.log(this.campaign)
+        console.log(this.campaign.links.urls)
 
       })
       .catch(() => {
