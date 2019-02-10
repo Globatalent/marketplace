@@ -43,7 +43,7 @@
         <el-row>
           <el-col :xs="24">
             <el-form-item class="text-left" required prop="conditions" style="padding-bottom:20px;">
-              <el-checkbox class="registrationForm-accept" v-model="form.conditions"><a href="/terms" target="_blank">{{$tc('message.AcceptDataProtectionConditions')}}</a></el-checkbox>
+              <el-checkbox class="registrationForm-accept" v-model="form.conditions"><a href="/privacy" target="_blank">{{$tc('message.AcceptDataProtectionConditions')}}</a></el-checkbox>
             </el-form-item>
           </el-col>
         </el-row>

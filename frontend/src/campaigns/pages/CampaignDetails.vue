@@ -363,10 +363,6 @@
         this.campaign.incomes.sort((x, y) => x.year - y.year)
         this.campaign.revenues.sort((x, y) => x.year - y.year)
       })
-      .then(() => {
-        twitter_url = this.campaign.links.filter(network => network.network === "twitter")[0].url
-
-      })
       .catch(() => {
         router.push({
            name: 'not-found',

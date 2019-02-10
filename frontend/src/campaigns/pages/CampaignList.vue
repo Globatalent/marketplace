@@ -87,12 +87,17 @@
             </el-select>
           </div>
           <div class="filter-box">
-            <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country"
+            <!-- <el-select :placeholder='$tc("message.ByCountry")' class="searchList-option" v-model="country"
                       @change="filter()">
               <el-option :label="$tc('message.ByCountry')" :value="null"></el-option>
               <el-option v-for="item in countries" :label="item.name" :value="item.code" :key="item.code">
               </el-option>
-            </el-select>
+            </el-select> -->
+              <el-select :placeholder='$tc("message.AllTypes")' class="searchList-option" v-model="kind" @change="filter()">
+            <el-option :label="$tc('message.AllTypes')" :value="null"></el-option>
+            <el-option :label="$tc('message.Athletes')" :value="'athlete'"></el-option>
+            <el-option :label="$tc('message.Clubs')" :value="'club'"></el-option>
+          </el-select>
           </div>
         </masonry>
       </el-col>
@@ -126,7 +131,7 @@
     </el-row>
     <el-row>
       <el-col>
-        <carousel :autoplay=true :loop=true :scroll-per-page="false" :per-page-custom="[[1280, 4], [992, 3], [750, 2], [320, 1]]" :autoplay-timeout=6000>
+        <carousel :autoplay="true" :loop="true" :scroll-per-page="false" :per-page-custom="[[1280, 4], [992, 3], [750, 2], [320, 1]]" :autoplay-timeout=6000>
           <slide v-for="article in news" :key="article[0]">
             <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
               <div :class="['campaign-image', {'is-placeholder-image': !article[3]}]" :style="article[3] ? {backgroundImage:'url('+article[3]+')'} : {}">
@@ -160,16 +165,10 @@
 import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
-import twitter from 'vue-twitter'
 import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   import countries from '@/base/helpers/countries'
   import VueI18n from 'vue-i18n'
   import { Carousel, Slide } from 'vue-carousel';
-
-    import {VueTabs, VTab} from 'vue-nav-tabs'
-  import 'vue-nav-tabs/themes/vue-tabs.css'
-
-  Vue.use(twitter)
 
   export default {
     name: 'CampaignList',
