@@ -1,5 +1,9 @@
 <template>
   <gb-base-layout>
+    <div v-if="redirecting === true">
+      We are redirecting you to our payment processor so you can complete your transaction. Please wait...
+    </div>
+    <div v-else>
     <div v-if="!!campaign.isDraft">
       <div class="is-padding-boxed">
         <el-row>
@@ -286,6 +290,7 @@
         </vue-tabs>
       </div>
     </div>
+    </div>
   </gb-base-layout>
 </template>
 
@@ -311,6 +316,7 @@
       return {
         token: {},
         pictures: [],
+        redirecting: true
       }
     },
     computed: {
@@ -378,6 +384,7 @@
         return 0
       },
       goToInvest (campaign) {
+        redirecting = true;
         let urls = {
           5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
         };
