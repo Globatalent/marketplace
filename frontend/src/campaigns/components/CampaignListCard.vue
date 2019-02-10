@@ -80,7 +80,7 @@
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
-  import { store } from '../../store/store/index.js' 
+  import { store } from '../../store/index.js' 
 
   export default {
     name: 'CampaignListCard',
