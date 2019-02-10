@@ -287,11 +287,11 @@
         </div>
           </v-tab>
           <v-tab title="Feeds">
-            <!-- <div v-if="campaign.links.length > 0"> -->
+            <div v-if="campaign.links.length > 0">
             <twitter>
               <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="getSocialUrl(campaign.links, 'twitter')"></a> 
             </twitter>
-            <!-- </div> -->
+            </div>
           </v-tab>
         </vue-tabs>
       </div>
@@ -403,6 +403,7 @@
         // })
       },
       getSocialUrl(links, network) {
+        console.log(links)
         if (links !== undefined) {
           return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
         }
