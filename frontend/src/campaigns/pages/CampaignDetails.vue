@@ -289,7 +289,8 @@
           <v-tab title="Feeds">
             <div class="campaignDetails-infoContainer-data">
             <twitter>
-              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="4" :href="this.twitter_url + '?ref_src=twsrc%5Etfw'"></a> 
+              <!-- <a class="twitter-timeline" data-width="320" data-height="480" data-dnt="true" data-theme="light" href="https://twitter.com/rubfergor?ref_src=twsrc%5Etfw">Tweets by rubfergor</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  -->
+              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="campaign.links === undefined ? '' : 'https://twitter.com/rubfergor' + '?ref_src=twsrc%5Etfw'"></a> 
             </twitter>
             </div>
           </v-tab>
@@ -322,8 +323,7 @@
       return {
         token: {},
         pictures: [],
-        redirecting: false,
-        twitter_url: 'https://twitter.com/rubfergor'
+        redirecting: false
       }
     },
     computed: {
