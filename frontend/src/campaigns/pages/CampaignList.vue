@@ -131,7 +131,7 @@
     </el-row>
     <el-row>
       <el-col>
-        <carousel :autoplay="true" :loop="false" :scroll-per-page="false" :per-page-custom="[[1280, 4], [992, 3], [750, 2], [320, 1]]" :autoplay-timeout=6000>
+        <carousel :autoplay="true" :loop="true" :scroll-per-page="false" :per-page-custom="[[1280, 4], [992, 3], [750, 2], [320, 1]]" :autoplay-timeout=6000>
           <slide v-for="article in news" :key="article[0]">
             <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
               <div :class="['campaign-image', {'is-placeholder-image': !article[3]}]" :style="article[3] ? {backgroundImage:'url('+article[3]+')'} : {}">

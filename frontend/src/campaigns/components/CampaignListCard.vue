@@ -80,9 +80,6 @@
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
-  import { store } from '../../store/index.js'
-  Vue.use(Vuex)
-  Vue.prototype.$store = store
 
   export default {
     name: 'CampaignListCard',
