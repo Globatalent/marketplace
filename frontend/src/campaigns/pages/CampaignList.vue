@@ -142,7 +142,7 @@
                     <el-col>
                       <div class="campaign-subtitle news-content show-more-container" :class="{ extended: isExtended }">
                         <span v-if="article[2]" v-html="getDescription(article[0], article[2])"></span>
-                        <a class="show-more-msg" @click="showMore(article[0])" v-if="article[2] && article[2].length > 150"> {{showMoreMsg(article[0])}}</a>
+                        <a class="show-more-msg" @click="showMore(article[0])" v-if="article[2] && article[2].length > 140"> {{showMoreMsg(article[0])}}</a>
                       </div>
                     </el-col>
                   </el-row>
@@ -297,7 +297,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         return this.isExtended == id ? this.$tc("message.showLess") : this.$tc("message.showMore");
       },
       getDescription(id, desc) {
-        return this.isExtended == id ? desc : (desc.length > 150 ? desc.substring(0,150)+' ...' : desc);
+        return this.isExtended == id ? desc : (desc.length > 140 ? desc.substring(0,140)+' ...' : desc);
       }
     }
   }
@@ -476,7 +476,6 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
 
   .campaign-nameBlock {
     padding: 25px 20px 15px 20px;
-    border-bottom: 1px solid #f0f0f0;
     min-height: 170px;
   }
 
