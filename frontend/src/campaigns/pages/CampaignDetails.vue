@@ -362,7 +362,6 @@
         this.token = !!this.campaign.token ? this.campaign.token : {}
         this.campaign.incomes.sort((x, y) => x.year - y.year)
         this.campaign.revenues.sort((x, y) => x.year - y.year)
-        this.twitter_url = this.campaign.links.filter(network => network.network === "twitter")[0].url
       })
       .catch(() => {
         router.push({
