@@ -288,7 +288,7 @@
           </v-tab>
           <v-tab title="Feeds">
             <twitter>
-              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitter_url"></a> 
+              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitter_url + '?ref_src=twsrc%5Etfw'"></a> 
             </twitter>
           </v-tab>
         </vue-tabs>
@@ -321,7 +321,7 @@
         token: {},
         pictures: [],
         redirecting: false,
-        twitter_url: ''
+        twitter_url: 'rubfergor'
       }
     },
     computed: {
