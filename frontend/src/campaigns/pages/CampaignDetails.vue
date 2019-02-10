@@ -289,7 +289,7 @@
           <v-tab title="Feeds">
             <div class="campaignDetails-infoContainer-data">
             <twitter>
-              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitter_url + '?ref_src=twsrc%5Etfw'"></a> 
+              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="4" :href="this.twitter_url + '?ref_src=twsrc%5Etfw'"></a> 
             </twitter>
             </div>
           </v-tab>
