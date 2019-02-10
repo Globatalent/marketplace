@@ -403,12 +403,9 @@
         // })
       },
       getSocialUrl(links, network) {
-        console.log(links)
-        console.log(network)
-        console.log(links.filter(site => site.network == network))
-        console.log(links.filter(site => site.network == network)[0].url)
-        console.log(links.filter(site => site.network == network)[0].url.split('?'))
-        return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
+        if (links !== undefined) {
+          return links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
+        }
       }
     }
   }

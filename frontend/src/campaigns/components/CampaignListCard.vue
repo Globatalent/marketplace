@@ -67,7 +67,7 @@
             <i class="far fa-heart likeIcon" v-else></i>
           </el-tooltip>
         </div>
-        </d
+        </div>
       </div>
     </div>
   </el-card>

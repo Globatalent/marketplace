@@ -24,7 +24,7 @@
         </el-form-item>
         <el-form-item required :label="$tc('message.CampaignCardImage')">
           <p class="formSteps-inputText">Upload a square image that represents your campaign.<br />
-            640 x 640 recommended resolution, 220 x 220 minimum resolution.</p>
+            1000px x 480px recommended resolution, 220 x 220 minimum resolution.</p>
           <gb-image-upload field-name="image" :campaign-id="campaign.id" v-if="campaign" :image-url="form.image" @image-changed="updateImage('image', $event)">
           </gb-image-upload>
         </el-form-item>
