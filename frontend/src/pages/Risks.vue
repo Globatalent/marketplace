@@ -40,19 +40,25 @@ commitment whatsoever.
 
       </el-col>
     </el-row>
-
-    <div class="campaignList-startBlock">
-      <div class="campaignList-startBlock-container">
-        <div class="campaignList-startBlock-sentence">
-          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
-            <el-button type="primary" class="startFreeButton" size="big" v-html="$tc('message.StartCampaignNow')"></el-button>
-          </router-link>
-        </div>
-        <!-- <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button> -->
-      </div>
-    </div>
   </gb-base-layout>
 </template>
+
+<script>
+import BaseLayout from '@/layout/BaseLayout.vue'
+
+export default {
+  name: 'risks',
+  components: {
+    'gb-base-layout': BaseLayout
+  },
+  data() {
+    return {}
+  },
+
+  created() {},
+  methods: {}
+}
+</script>
 
 
 <style lang="scss" scoped>

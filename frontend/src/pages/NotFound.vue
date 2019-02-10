@@ -15,17 +15,21 @@
   </gb-base-layout>
 </template>
 
-
 <script>
-  import MinimalLayout from '@/layout/MinimalLayout.vue'
+import BaseLayout from '@/layout/BaseLayout.vue'
 
-  export default {
-    name: 'not-found',
+export default {
+  name: 'not-found',
+  components: {
+    'gb-base-layout': BaseLayout
+  },
+  data() {
+    return {}
+  },
 
-    components: {
-      'gb-minimal-layout': MinimalLayout,
-    },
-  }
+  created() {},
+  methods: {}
+}
 </script>
 
 <style lang="scss" scoped>

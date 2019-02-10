@@ -133,19 +133,25 @@ If these Terms or any part of them should be determined to be illegal, invalid o
 These Terms shall be governed by, and construed in accordance with, the laws of the Cayman Islands. Each party irrevocably agrees to submit to the exclusive jurisdiction of the courts of the Cayman Islands over any claim or matter arising under or in connection with these Terms or the legal relationship established by them.
       </el-col>
     </el-row>
-
-    <div class="campaignList-startBlock">
-      <div class="campaignList-startBlock-container">
-        <div class="campaignList-startBlock-sentence">
-          <router-link :to="{ name: 'campaign.create'}" class="is-main-color">
-            <el-button type="primary" class="startFreeButton" size="big" v-html="$tc('message.StartCampaignNow')"></el-button>
-          </router-link>
-        </div>
-        <!-- <el-button type="primary" class="startFreeButton" size="big">{{$tc('message.StartFreeTrial')}}</el-button> -->
-      </div>
-    </div>
   </gb-base-layout>
 </template>
+
+<script>
+import BaseLayout from '@/layout/BaseLayout.vue'
+
+export default {
+  name: 'terms',
+  components: {
+    'gb-base-layout': BaseLayout
+  },
+  data() {
+    return {}
+  },
+
+  created() {},
+  methods: {}
+}
+</script>
 
 <style lang="scss" scoped>
   @import '../scss/variables.scss';

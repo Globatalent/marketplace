@@ -123,6 +123,23 @@ If you have any questions or complaints about this Privacy Policy or Globatalent
   </gb-base-layout>
 </template>
 
+<script>
+import BaseLayout from '@/layout/BaseLayout.vue'
+
+export default {
+  name: 'privacy',
+  components: {
+    'gb-base-layout': BaseLayout
+  },
+  data() {
+    return {}
+  },
+
+  created() {},
+  methods: {}
+}
+</script>
+
 
 <style lang="scss" scoped>
   @import '../scss/variables.scss';

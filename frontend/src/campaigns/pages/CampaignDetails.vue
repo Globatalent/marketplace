@@ -409,7 +409,12 @@
         // })
       },
       getSocialUrl(campaign, network) {
+        if (campaign.links !== undefined) {
           return campaign.links.filter(site => site.network === network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
+        }
+        else {
+          return ''
+        }
       }
     }
   }
