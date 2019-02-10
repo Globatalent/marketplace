@@ -323,7 +323,7 @@
         token: {},
         pictures: [],
         redirecting: false,
-        twitter_url: 'rubfergor'
+        twitter_url: 'https://twitter.com/rubfergor'
       }
     },
     computed: {
