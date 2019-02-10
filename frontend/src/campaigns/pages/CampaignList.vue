@@ -251,7 +251,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
             }
           })
           .then(() => {
-            console.log(this.campaigns.sort((a,b) => a.rating - b.rating))
+            console.log(this.campaigns.sort((a,b) => b.rating - a.rating))
           })
         }
       },
