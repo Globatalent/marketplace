@@ -54,22 +54,6 @@ commitment whatsoever.
   </gb-base-layout>
 </template>
 
-<script>
-import BaseLayout from '@/layout/BaseLayout.vue'
-
-export default {
-  name: 'FaqPage',
-  components: {
-    'gb-base-layout': BaseLayout
-  },
-  data() {
-    return {}
-  },
-
-  created() {},
-  methods: {}
-}
-</script>
 
 <style lang="scss" scoped>
   @import '../scss/variables.scss';
@@ -121,16 +105,5 @@ export default {
 
   strong {
     font-weight: bold;
-  }
-
-  .startFreeButton {
-    display: inline-block;
-    vertical-align: top;
-    width: auto;
-    font-size: 14px;
-    font-family: 'Aller';
-    font-weight: bold;
-    position: relative;
-    top: 6px;
   }
 </style>

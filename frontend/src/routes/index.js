@@ -154,6 +154,11 @@ export default [
     name: 'manteninance',
     component: resolve => require(['@/pages/Manteinance.vue'], resolve)
   },
+  {
+    path: '/privacy',
+    name: 'privacy',
+    component: resolve => require(['@/pages/Privacy.vue'], resolve)
+  },
   // Redirects
   {
     path: '/',

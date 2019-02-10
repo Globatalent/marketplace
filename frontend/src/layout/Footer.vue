@@ -90,7 +90,7 @@
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
         <el-row>
-        <a class="copy"> {{ $t("message.privacy") }}</a>
+        <a class="copy" href="/privacy"> {{ $t("message.privacy") }}</a>
         <a class="copy" href="/terms"> {{ $t("message.terms") }}</a>
         <a class="copy" href="/risks"> {{ $t("message.risk") }}</a>
         <div class="copy">Ⓒ {{ $t("message.AllRightsReserved") }}</div>
