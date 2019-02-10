@@ -173,8 +173,6 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   export default {
     name: 'CampaignList',
     components: {
-             VueTabs,
-       VTab,
       'gb-base-layout': BaseLayout,
       'gb-campaign-list-card': CampaignListCard,
        Carousel,
