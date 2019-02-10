@@ -37,18 +37,22 @@
             <div class="contact-form">
               <div>
                 <label>Fist Name<span>*</span></label>
+                <br>
                 <input type='text' maxlength='40' name='First Name' />
               </div>
               <div>
                 <label>Last Name<span>*</span></label>
+                <br>
                 <input type='text' maxlength='80' name='Last Name' />
               </div>
               <div>
                 <label>Email<span>*</span></label>
+                <br>
                 <input type='text' maxlength='100' name='Email' />
               </div>
               <div>
                 <label>Comments<span>*</span></label>
+                <br>
                 <textarea name='Description' maxlength='32000'>&nbsp;</textarea>
               </div>
               <div>
