@@ -408,7 +408,7 @@
         //   params: {campaignId: campaign.id}
         // })
       },
-      getSocialUrl(links, network) {
+      getSocialUrl(campaign, network) {
           return campaign.links.filter(site => site.network === network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
       }
     }

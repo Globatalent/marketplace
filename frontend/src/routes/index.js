@@ -134,11 +134,6 @@ export default [
     component: resolve => require(['@/pages/Contact.vue'], resolve)
   },
   {
-    path: '/press',
-    name: 'press',
-    component: resolve => require(['@/pages/Press.vue'], resolve)
-  },
-  {
     path: '/deck',
     name: 'deck',
     component: resolve => require(['@/pages/Deck.vue'], resolve)
