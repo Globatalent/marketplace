@@ -217,7 +217,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
       this.initial()
     },
     mounted () {
-      this.checkScroll()
+      // this.checkScroll()
       Vue.axios
       .get('https://web.globatalent.com/wp-json/wp/v2/posts?_embed')
       .then(response => (
@@ -275,26 +275,26 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         if (!!this.kind && this.kind !== '') filters.kind = this.kind
         this.$store.dispatch('campaigns/list', {filters: filters})
       },
-      checkScroll () {
-        window.onscroll = () => {
-          let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 500
+      // checkScroll () {
+      //   window.onscroll = () => {
+      //     let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 500
 
-          if (bottomOfWindow && !this.loadingCampaigns) {
-          // if (!this.loadingCampaigns) {
-            this.loadingCampaigns = true
-            // Gets a new page of campaigns and push them to the current list
-            if (!!this.pagination.next) {
-              this.$store.dispatch('campaigns/list', {
-                filters: {active: 'True'},
-                url: this.pagination.next,
-                push: true
-              }).then(() => {this.loadingCampaigns = false})
-            } else {
-              this.loadingCampaigns = false
-            }
-          }
-        }
-      },
+      //     if (bottomOfWindow && !this.loadingCampaigns) {
+      //     // if (!this.loadingCampaigns) {
+      //       this.loadingCampaigns = true
+      //       // Gets a new page of campaigns and push them to the current list
+      //       if (!!this.pagination.next) {
+      //         this.$store.dispatch('campaigns/list', {
+      //           filters: {active: 'True'},
+      //           url: this.pagination.next,
+      //           push: true
+      //         }).then(() => {this.loadingCampaigns = false})
+      //       } else {
+      //         this.loadingCampaigns = false
+      //       }
+      //     }
+      //   }
+      // },
       showMore(id) {
         this.isExtended == id ? this.isExtended = '' : this.isExtended = id
       },
