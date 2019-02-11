@@ -300,11 +300,6 @@
                 <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" href="https://twitter.com/gloriaperitore?ref_src=twsrc%5Etfw"></a>
                 
               </twitter>
-              <twitter v-if="twitterUrl">
-                <!--<a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitterUrl"></a> -->
-                <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" href="https://twitter.com/gloriaperitore?lang=es&ref_src=twsrc%5Etfw"></a>
-                
-              </twitter>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
