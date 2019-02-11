@@ -13,6 +13,9 @@
             <a href="https://twitter.com/globatalent" target="_blank" class="socialList-item-link"><img src="~@/assets/img/twitter-icon.png" alt="" class="socialList-item-link-icon"></a>
           </li>
           <li class="socialList-item">
+            <a href="https://instagram.com/globatalent" class="socialList-item-link" target="_blank" style="width:14px"><img src="~@/assets/img/icon-instagram.png" style="width:14px" alt="" class="socialList-item-link-icon"></a>
+          </li>
+          <li class="socialList-item">
             <a href="https://t.me/globatalent" class="socialList-item-link" target="_blank" style="width:14px"><img src="~@/assets/img/icon-telegram.png" style="width:14px" alt="" class="socialList-item-link-icon"></a>
           </li>
         </ul>

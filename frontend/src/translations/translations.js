@@ -178,7 +178,7 @@ export const messages = {
       Chinese: 'Chinese',
       Russian: 'Russian',
       Portuguese: 'Portuguese',
-      cancel: 'Cancel',
+      Cancel: 'Cancel',
       showMore: 'Show more',
       showLess: 'Show less',
       cookiesAd: 'This website uses cookies to ensure you get the best experience on our website.',

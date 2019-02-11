@@ -199,7 +199,7 @@
             {{campaign.height}} cm
           </gb-campaign-info-row>
           <gb-campaign-info-row v-if="campaign.weight" :title="$tc('message.Weight')">
-            {{campaign.weight}} cm
+            {{campaign.weight}} kg
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.club" :title="$tc('message.CurrentClub')">
@@ -287,17 +287,10 @@
         </div>
           </v-tab>
           <v-tab title="Feeds">
-            <!-- <div class="campaignDetails-infoContainer-data" v-if="campaign.links !== undefined"> -->
-                            <!-- <div class="socialLinksDetail">
-                  <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url"
-                    target="_blank">
-                    <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
-                  </a>
-                </div> -->
-            <div v-if="twitterUrl != '' || instagramUrl != ''">
-              <twitter v-if="twitterUrl">
+            <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != '' || instagramUrl != ''">
+              <!-- <twitter v-if="twitterUrl">
                 <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitterUrl"></a>
-              </twitter>
+              </twitter> -->
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
