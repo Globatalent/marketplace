@@ -6,8 +6,7 @@
       <el-breadcrumb-item><a href="/campaigns/create">Content</a></el-breadcrumb-item>
     </el-breadcrumb>
     <div class="formSteps-actions">
-      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="$emit('discard')">{{
-        $tc('message.DiscardCampaign') }}
+      <el-button v-if="campaign.isDraft" type="danger" class="" @click.prevent="$emit('discard')">{{$tc('message.DiscardCampaign') }}
       </el-button>
       <!-- <el-button type="secondary" class="" @click.prevent="onSaveAndContinue()">{{ $tc('message.ReviewLaunch') }}</el-button> -->
     </div>
@@ -164,6 +163,7 @@
           }
           return {id: null, campaign: campaign.id, network: network, url: null}
         })
+        console.log(socialLinks)
         return socialLinks
       },
       updateImage (fieldName, newURL) {

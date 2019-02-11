@@ -34,6 +34,9 @@
         </a>
       </el-col>
     </el-row>
+    <el-row>
+    <div class="campaignProfile-box-linkText-subTitle">{{ $tc("message.AllSportsText") }}</div>
+    </el-row>
     <!-- <div>
       <el-button-group v-if="allow">
         <el-button type="primary" @click="create('athlete')">{{ $tc("message.Athlete",1) }}</el-button>
