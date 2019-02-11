@@ -294,16 +294,13 @@
                     <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                   </a>
                 </div> -->
-            <twitter>
-              <!-- <a class="twitter-timeline" data-width="320" data-height="480" data-dnt="true" data-theme="light" href="https://twitter.com/rubfergor?ref_src=twsrc%5Etfw">Tweets by rubfergor</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  -->
-              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="getTwitterUrl"></a> 
-               
-            </twitter>
-            <!-- </div> -->
-            <div class="campaignDetails-infoContainer-data" v-if="campaign.links === undefined">
+            <div v-if="twitterUrl != '' || instagramUrl != ''">
+              <twitter v-if="twitterUrl">
+                <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitterUrl"></a> 
+              </twitter>
+            </div>
+            <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
-
-
             </div>
           </v-tab>
         </vue-tabs>
@@ -352,13 +349,21 @@
       hasStarted () {
         return this.campaign.started < new Date()
       },
-      getTwitterUrl () {
+      twitterUrl () {
         return (
           this.campaign.links != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter') != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0] != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0].url != undefined
-          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url + '?ref_src=twsrc%5Etfw' : '';
+          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw' : '';
+      },
+      instagramUrl () {
+        return (
+          this.campaign.links != undefined && 
+          this.campaign.links.filter(site => site.network == 'instagram') != undefined && 
+          this.campaign.links.filter(site => site.network == 'instagram')[0] != undefined && 
+          this.campaign.links.filter(site => site.network == 'instagram')[0].url != undefined
+          ) ? this.campaign.links.filter(site => site.network == 'instagram')[0].url : '';
       },
       countryFlag () {
         try {
