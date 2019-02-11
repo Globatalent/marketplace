@@ -199,7 +199,7 @@
             {{campaign.height}} cm
           </gb-campaign-info-row>
           <gb-campaign-info-row v-if="campaign.weight" :title="$tc('message.Weight')">
-            {{campaign.weight}} cm
+            {{campaign.weight}} kg
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.club" :title="$tc('message.CurrentClub')">
