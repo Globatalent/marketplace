@@ -24,25 +24,19 @@
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="campaignProfile-boxCol">
         <a @click="create('athlete')" class="campaignProfile-box-linkText">
           <div class="campaignProfile-box-linkText-title">{{ $tc("message.AnAthlete") }}</div>
-          <div class="campaignProfile-box-linkText-subTitle">{{ $tc("message.AllSportsText") }}</div>
         </a>
       </el-col>
       <el-col :xs="12" :sm="12" :md="12" :lg="12" :xl="12" class="campaignProfile-boxCol">
         <a @click="create('club')" class="campaignProfile-box-linkText">
           <div class="campaignProfile-box-linkText-title">{{ $tc("message.AClubOrganization") }}</div>
-          <div class="campaignProfile-box-linkText-subTitle">{{ $tc("message.AllSportsText") }}</div>
         </a>
       </el-col>
     </el-row>
-    <el-row>
-    <div class="campaignProfile-box-linkText-subTitle">{{ $tc("message.AllSportsText") }}</div>
+    <el-row type="flex" justify="center">
+      <el-col :xs="24" class="text-center footerBottom">
+        <div class="campaignProfile-box-linkText-subTitle">{{$t("message.AllSportsText")}}</div>
+      </el-col>
     </el-row>
-    <!-- <div>
-      <el-button-group v-if="allow">
-        <el-button type="primary" @click="create('athlete')">{{ $tc("message.Athlete",1) }}</el-button>
-        <el-button type="primary" @click="create('club')">{{ $tc("message.Club") }}</el-button>
-      </el-button-group>
-    </div> -->
   </gb-base-layout>
 </template>
 
