@@ -358,7 +358,7 @@
           this.campaign.links.filter(site => site.network == 'twitter') != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0] != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0].url != undefined
-          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url : '';
+          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url + '?ref_src=twsrc%5Etfw' : '';
       },
       countryFlag () {
         try {
