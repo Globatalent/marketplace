@@ -151,7 +151,7 @@
 
   .el-card {
     border-radius: 8px;
-    height: 470px;
+    //height: 470px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     margin-bottom: 35px;
 
