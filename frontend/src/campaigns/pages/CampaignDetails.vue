@@ -689,7 +689,7 @@
 
   .campaignDetails-infoContainer {
     position: relative;
-    top: -100px;
+    top: -44px;
   }
 
   .campaignDetails-infoContainer-data {
@@ -700,6 +700,7 @@
     background-image: url('~@/assets/img/logo-translucent.png');
     background-repeat: no-repeat;
     background-position: right 50px bottom 50px;
+    border-top: none;
   }
 
   .campaignDetails-infoContainer-data-text-title {
