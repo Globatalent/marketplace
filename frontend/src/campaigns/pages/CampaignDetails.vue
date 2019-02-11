@@ -296,7 +296,7 @@
                 </div> -->
             <twitter>
               <!-- <a class="twitter-timeline" data-width="320" data-height="480" data-dnt="true" data-theme="light" href="https://twitter.com/rubfergor?ref_src=twsrc%5Etfw">Tweets by rubfergor</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>  -->
-              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="getSocialUrl(campaign.links, 'twitter')"></a> 
+              <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="getTwitterUrl"></a> 
                
             </twitter>
             <!-- </div> -->
@@ -351,6 +351,14 @@
       },
       hasStarted () {
         return this.campaign.started < new Date()
+      },
+      getTwitterUrl () {
+        return (
+          this.campaign.links != undefined && 
+          this.campaign.links.filter(site => site.network == 'twitter') != undefined && 
+          this.campaign.links.filter(site => site.network == 'twitter')[0] != undefined && 
+          this.campaign.links.filter(site => site.network == 'twitter')[0].url != undefined
+          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url : '';
       },
       countryFlag () {
         try {
@@ -416,27 +424,11 @@
         // })
       },
       getSocialUrl(links, network) {
-        console.log(links)
-        console.log(network)
-        console.log(links.filter(site => site.network == network))
-        console.log(links.filter(site => site.network == network)[0].url)
-        //console.log(links.filter(site => site.network == network)[0].get('url'))
-        
-
         let socialUrl = '';
-        if(links.filter(site => site.network == network)[0] != undefined && links.filter(site => site.network == network)[0].url != undefined) {
-
+        if(links != undefined && links.filter(site => site.network == network)[0] != undefined && links.filter(site => site.network == network)[0].url != undefined) {
           socialUrl = links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw';
-
         }
         return socialUrl;
-
-      //   if (campaign.links[0] !== undefined) {
-      //     return campaign.links.filter(site => site.network === network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw'
-      //   }
-      //   else {
-      //     return ''
-      //   }
       }
     }
   }
