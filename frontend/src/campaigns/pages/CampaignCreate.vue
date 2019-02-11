@@ -34,15 +34,9 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
-        <div class="copy">{{$t("message.AllSportsText")}}</div>
+        <div class="campaignProfile-box-linkText-subTitle">{{$t("message.AllSportsText")}}</div>
       </el-col>
     </el-row>
-    <!-- <div>
-      <el-button-group v-if="allow">
-        <el-button type="primary" @click="create('athlete')">{{ $tc("message.Athlete",1) }}</el-button>
-        <el-button type="primary" @click="create('club')">{{ $tc("message.Club") }}</el-button>
-      </el-button-group>
-    </div> -->
   </gb-base-layout>
 </template>
 
