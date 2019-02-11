@@ -34,7 +34,7 @@
     </el-row>
     <el-row type="flex" justify="center">
       <el-col :xs="24" class="text-center footerBottom">
-        <div class="copy">{{$t("message.incorporation")}}</div>
+        <div class="copy">{{$t("message.AllSportsText")}}</div>
       </el-col>
     </el-row>
     <!-- <div>
