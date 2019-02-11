@@ -272,7 +272,8 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         window.onscroll = () => {
           let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight >= document.documentElement.offsetHeight - 500
 
-          if (bottomOfWindow && !this.loadingCampaigns) {
+          // if (bottomOfWindow && !this.loadingCampaigns) {
+          if (!this.loadingCampaigns) {
             this.loadingCampaigns = true
             // Gets a new page of campaigns and push them to the current list
             if (!!this.pagination.next) {
