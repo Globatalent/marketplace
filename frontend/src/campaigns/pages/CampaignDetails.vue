@@ -320,6 +320,7 @@
   import CampaignInfoRow from '@/campaigns/components/CampaignInfoRow.vue'
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
+  import { twitter } from 'vue-twitter'
 
   export default {
     name: 'CampaignDetails',
@@ -328,7 +329,8 @@
        VTab,
       'gb-base-layout': BaseLayout,
       'gb-campaign-info-row': CampaignInfoRow,
-      StarRating
+      StarRating,
+      twitter
     },
     data () {
       return {
