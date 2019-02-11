@@ -168,6 +168,7 @@ export const messages = {
       AboutTxt: 'Globatalent is the the first blockchain sports exchange where you can tokenize, trade and support your favorite clubs and sports idols.',
       Location: 'Location',
       London: 'London',
+      LondonAdd: 'GLOBATALENT, Berkeley Suite, 35 Berkeley Square, Mayfair, London, W1J 5BF,UK',
       BuenosAires: 'Buenos aires',
       HongKong: 'Hong Kong',
       HongKongAdd: '1/F Knowles Building, HKU, Pokfulam Road',
