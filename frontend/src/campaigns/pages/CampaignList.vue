@@ -274,7 +274,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
 
           // if (bottomOfWindow && !this.loadingCampaigns) {
           if (!this.loadingCampaigns) {
-            this.loadingCampaigns = true
+            // this.loadingCampaigns = true
             // Gets a new page of campaigns and push them to the current list
             if (!!this.pagination.next) {
               this.$store.dispatch('campaigns/list', {
