@@ -31,6 +31,15 @@ class TemplateEmailMessage(object):
         self.attaches = [] if attaches is None else attaches
         self.default_context = {} if context is None else context
 
+        send_mail(
+            'Subject here',
+            'Doing my part',
+            'accounts@globatalent.com',
+            ['ruben@globatalent.com'],
+            fail_silently=False,
+        )
+
+
     def get_context(self):
         """Hook to customize context."""
         # Add default context
@@ -61,13 +70,6 @@ class TemplateEmailMessage(object):
         message_txt = message_txt.replace("</p>", "\n")
         message_txt = message_txt.replace("</h1>", "\n\n")
         message_txt = bleach.clean(message_txt, strip=True)
-        send_mail(
-            'Subject here',
-            'Doing my part',
-            'accounts@globatalent.com',
-            ['ruben@globatalent.com'],
-            fail_silently=False,
-        )
 
         if async and not self.fake:
             send_email_asynchronously.delay(
