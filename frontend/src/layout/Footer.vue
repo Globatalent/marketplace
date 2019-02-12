@@ -25,53 +25,20 @@
         <p>{{ $t("message.AboutTxt") }}</p>
       </el-col>
       <el-col>
-        <h4>Contact us</h4>
-        <div id='crmWebToEntityForm'>
-          <META HTTP-EQUIV ='content-type' CONTENT='text/html;charset=UTF-8'/>
-          <form action='https://crm.zoho.com/crm/WebToLeadForm' name=WebToLeads3718183000000307001 method='POST' onSubmit='javascript:document.charset="UTF-8";' accept-charset='UTF-8'>
-            <!-- Do not remove this code. -->
-            <input type='text' style='display:none;' name='xnQsjsdp' value='26ded01eee3cbb74693abaeee34e2f8acbb50ca314ea68813ba8b57665b4dc48'/>
-            <input type='hidden' name='zc_gad' id='zc_gad' value=''/>
-            <input type='text' style='display:none;' name='xmIwtLD' value='902ae1508809b664f4a8880feb722643fe2db5ba1a2f62a32a61306421cf8410'/>
-            <input type='text' style='display:none;'  name='actionType' value='TGVhZHM='/>
-            <input type='text' style='display:none;' name='returnURL' value='https://market.globatalent.com' /> 
-            <!-- Do not remove this code. -->
-
-            <div class="contact-form">
-              <div>
-                <label>Fist Name<span>*</span></label>
-                <br>
-                <input type='text' maxlength='40' name='First Name' />
-              </div>
-              <div>
-                <label>Last Name<span>*</span></label>
-                <br>
-                <input type='text' maxlength='80' name='Last Name' />
-              </div>
-              <div>
-                <label>Email<span>*</span></label>
-                <br>
-                <input type='text' maxlength='100' name='Email' />
-              </div>
-              <div>
-                <label>Comments<span>*</span></label>
-                <br>
-                <textarea name='Description' maxlength='32000'>&nbsp;</textarea>
-              </div>
-              <div>
-                <input style='font-size:12px;color:black'  type='submit' value='Submit' />
-                <input  type='reset' style='font-size:12px;color:black' value='Reset' />
-              </div>
-            </div>
-            <p>
-              You can also reach us at <a href="tel:+44 (0)20 7504 1304">+44 (0)20 7504 1304</a> and <a href="mailto:contact@globatalent.com">contact@globatalent.com</a>
-            </p>
-          </form>
-        </div>
+      <h4>Contact us</h4>
+      <p>
+        You can contact us <a href="https://web.globatalent.com/contact/">here</a>.You can also reach us at <a href="tel:+44 (0)20 7504 1304">+44 (0)20 7504 1304</a> and <a href="mailto:contact@globatalent.com">contact@globatalent.com</a>
+      </p>
       </el-col>
       <el-col>
         <h4>{{ $t("message.Location") }}</h4>
-        <p>{{ $t("message.London") }}</p>
+        <address>
+        <p>
+          {{ $t("message.London") }}
+          <br>
+          <small>{{ $t("message.LondonAdd") }}</small>
+        </p>
+        </address>
         <p>{{ $t("message.BuenosAires") }}</p>
         <address>
         <p>
