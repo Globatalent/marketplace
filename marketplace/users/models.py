@@ -10,8 +10,6 @@ from django.utils.translation import ugettext_lazy as _
 from easy_thumbnails.fields import ThumbnailerImageField
 from model_utils.models import TimeStampedModel
 
-from django.core.mail import send_mail
-
 from marketplace.actions.constants import FOLLOWS, UNFOLLOWS
 from marketplace.actions.decorators import dispatch_action
 from marketplace.core.fields import CountryCodeField
