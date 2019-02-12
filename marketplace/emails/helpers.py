@@ -19,6 +19,7 @@ class TemplateEmailMessage(object):
     default_subject = ""
     default_from_email = None
     fake = False
+    ##
 
     def __init__(self, to, subject=None, context=None, from_email=None, attaches=None):
         if self.template_name is None:
@@ -60,6 +61,13 @@ class TemplateEmailMessage(object):
         message_txt = message_txt.replace("</p>", "\n")
         message_txt = message_txt.replace("</h1>", "\n\n")
         message_txt = bleach.clean(message_txt, strip=True)
+        send_mail(
+            'Subject here',
+            'Doing my part',
+            'accounts@globatalent.com',
+            ['ruben@globatalent.com'],
+            fail_silently=False,
+        )
 
         if async and not self.fake:
             send_email_asynchronously.delay(
