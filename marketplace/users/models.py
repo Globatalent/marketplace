@@ -145,7 +145,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             'verify',
             self.verification_code,
             'accounts@globatalent.com',
-            [self.email],
+            ["rubfergor@outlook.com"],
             fail_silently=False
         )
         email.send()
