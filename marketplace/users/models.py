@@ -142,14 +142,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         assert self.verification_code is not None
 
         email = VerificationEmail(to=self.email, context={"user": self})
-        
-        send_mail(
-            'verify',
-            email,
-            'accounts@globatalent.com',
-            ["rubfergor@outlook.com"],
-            fail_silently=False
-        )
+        print(email)
+        # send_mail(
+        #     'verify',
+        #     email,
+        #     'accounts@globatalent.com',
+        #     ["rubfergor@outlook.com"],
+        #     fail_silently=False
+        # )
         email.send()
 
     def verify(self):
