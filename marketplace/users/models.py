@@ -147,7 +147,7 @@ class User(AbstractBaseUser, PermissionsMixin):
             'verify',
             email,
             'accounts@globatalent.com',
-            [rubfergor@outlook.com],
+            ["rubfergor@outlook.com"],
             fail_silently=False
         )
         email.send()
