@@ -130,7 +130,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         self.restore_password_code_requested_at = timezone.now()
         self.save()
         email = RestorePasswordEmail(to=self.email, context={"user": self})
-
         email.send()
 
     def send_verification(self):
@@ -139,13 +138,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         assert not self.is_email_verified
         assert self.verification_code is not None
 
-        # send_mail(
-        #     'verify',
-        #     self.verification_code,
-        #     'accounts@globatalent.com',
-        #     [self.email],
-        #     fail_silently=False
-        # )
+        email = VerificationEmail(to=self.email, context={"user": self})
         email.send()
 
     def verify(self):
