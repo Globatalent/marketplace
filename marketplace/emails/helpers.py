@@ -64,13 +64,7 @@ class TemplateEmailMessage(object):
         message_txt = message_txt.replace("</p>", "\n")
         message_txt = message_txt.replace("</h1>", "\n\n")
         message_txt = bleach.clean(message_txt, strip=True)
-        send_mail(
-            'Subject here',
-            'Here is the message.',
-            'accounts@globatalent.com',
-            ['rubfergor@outlook.com'],
-            fail_silently=False,
-        )
+
 
         if async and not self.fake:
             send_email_asynchronously.delay(
@@ -86,6 +80,13 @@ class TemplateEmailMessage(object):
                 body=message_txt,
                 from_email=self.from_email,
                 to=self.to,
+            )
+            send_mail(
+                self.subject,
+                message_txt,
+                self.from_email,
+                [self.to],
+                fail_silently=False,
             )
             email.attach_alternative(message, "text/html")
             for attach in self.attaches:
