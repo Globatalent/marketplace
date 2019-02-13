@@ -313,8 +313,8 @@
   import CampaignInfoRow from '@/campaigns/components/CampaignInfoRow.vue'
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
-  import {Timeline} from 'vue-tweet-embed'
-
+  import { Tweet, Moment, Timeline } from 'vue-tweet-embed'
+  
   export default {
     name: 'CampaignDetails',
     components: {
