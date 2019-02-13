@@ -137,7 +137,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         assert self.pk is not None
         assert not self.is_email_verified
         assert self.verification_code is not None
-
+        
         email = VerificationEmail(to=self.email, context={"user": self})
         email.send()
 

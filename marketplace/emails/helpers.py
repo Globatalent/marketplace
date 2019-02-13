@@ -9,6 +9,8 @@ from options.models import Option
 
 from marketplace.emails.tasks import send_email_asynchronously
 
+from django.core.mail import send_mail
+
 
 class TemplateEmailMessage(object):
     """An object to handle emails based on templates, with automatic plain
@@ -24,20 +26,19 @@ class TemplateEmailMessage(object):
     def __init__(self, to, subject=None, context=None, from_email=None, attaches=None):
         if self.template_name is None:
             warnings.warn("You have to specify the template_name")
+            send_mail(
+                'Subject here',
+                'Here is the message.',
+                'accounts@globatalent.com',
+                ['rubfergor@outlook.com'],
+                fail_silently=False,
+            )
         if not isinstance(to, list) and not isinstance(to, tuple):
             self.to = [to]
         self.subject = "%s" % self.default_subject if subject is None else subject
         self.from_email = self.default_from_email if from_email is None else from_email
         self.attaches = [] if attaches is None else attaches
         self.default_context = {} if context is None else context
-
-        send_mail(
-            'Subject here',
-            'Doing my part',
-            'accounts@globatalent.com',
-            ['ruben@globatalent.com'],
-            fail_silently=False,
-        )
 
 
     def get_context(self):
