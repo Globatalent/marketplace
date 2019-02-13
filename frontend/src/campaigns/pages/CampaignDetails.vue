@@ -291,6 +291,8 @@
               <!-- <twitter v-if="twitterUrl">
                 <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitterUrl"></a>
               </twitter> -->
+              <Timeline :id="'twitterUrl'" :sourceType="'profile'" :options="{ tweetLimit: '3' }"/>
+              <Timeline :id="'twitterUrl'" :sourceType="'likes'" :options="{ theme: 'dark' }"/>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
@@ -311,7 +313,7 @@
   import CampaignInfoRow from '@/campaigns/components/CampaignInfoRow.vue'
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
-  import { twitter } from 'vue-twitter'
+  import Timeline from 'vue-tweet-embed/timeline'
 
   export default {
     name: 'CampaignDetails',
@@ -321,7 +323,6 @@
       'gb-base-layout': BaseLayout,
       'gb-campaign-info-row': CampaignInfoRow,
       StarRating,
-      twitter
     },
     data () {
       return {
