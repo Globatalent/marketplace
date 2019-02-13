@@ -323,6 +323,7 @@
       'gb-base-layout': BaseLayout,
       'gb-campaign-info-row': CampaignInfoRow,
       StarRating,
+      Timeline
     },
     data () {
       return {
