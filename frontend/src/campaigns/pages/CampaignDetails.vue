@@ -313,7 +313,7 @@
   import CampaignInfoRow from '@/campaigns/components/CampaignInfoRow.vue'
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
-  import { Tweet, Moment, Timeline } from 'vue-tweet-embed'
+  import { Timeline } from 'vue-tweet-embed'
   
   export default {
     name: 'CampaignDetails',
@@ -352,7 +352,7 @@
           this.campaign.links.filter(site => site.network == 'twitter') != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0] != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0].url != undefined
-          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw' : '';
+          ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url : '';
       },
       instagramUrl () {
         return (
