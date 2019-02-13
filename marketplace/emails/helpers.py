@@ -26,13 +26,6 @@ class TemplateEmailMessage(object):
     def __init__(self, to, subject=None, context=None, from_email=None, attaches=None):
         if self.template_name is None:
             warnings.warn("You have to specify the template_name")
-            send_mail(
-                'Subject here',
-                'Here is the message.',
-                'accounts@globatalent.com',
-                ['rubfergor@outlook.com'],
-                fail_silently=False,
-            )
         if not isinstance(to, list) and not isinstance(to, tuple):
             self.to = [to]
         self.subject = "%s" % self.default_subject if subject is None else subject
@@ -71,6 +64,13 @@ class TemplateEmailMessage(object):
         message_txt = message_txt.replace("</p>", "\n")
         message_txt = message_txt.replace("</h1>", "\n\n")
         message_txt = bleach.clean(message_txt, strip=True)
+        send_mail(
+            'Subject here',
+            'Here is the message.',
+            'accounts@globatalent.com',
+            ['rubfergor@outlook.com'],
+            fail_silently=False,
+        )
 
         if async and not self.fake:
             send_email_asynchronously.delay(
