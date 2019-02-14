@@ -133,7 +133,7 @@
       <el-col>
         <carousel :autoplay="true" :loop="true" :scroll-per-page="false" :per-page-custom="[[1280, 4], [992, 3], [750, 2], [320, 1]]" :autoplay-timeout=6000>
           <slide v-for="article in news" :key="article[0]">
-            <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
+            <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }" class="news-card">
               <div :class="['campaign-image', {'is-placeholder-image': !article[3]}]" :style="article[3] ? {backgroundImage:'url('+article[3]+')'} : {}">
               </div>
               <div class="campaign-info">
@@ -379,13 +379,15 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   .el-card {
     border-radius: 8px;
     //height: 470px;
-    margin: 0 20px;
     margin-bottom: 35px;
     box-shadow: none !important;
 
 
     a:hover {
       text-decoration: none;
+    }
+    &.news-card {
+      margin: 0 20px;
     }
   }
 

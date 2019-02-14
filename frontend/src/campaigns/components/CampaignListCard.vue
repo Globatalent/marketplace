@@ -55,7 +55,7 @@
         </div>
         </div>
         <div v-else>
-        <el-button type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
+        <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
@@ -313,5 +313,9 @@
 
 .fulltext:target .more {
 	display: none;
+}
+
+.buy-tokens {
+  margin-right: 15px;
 }
 </style>
