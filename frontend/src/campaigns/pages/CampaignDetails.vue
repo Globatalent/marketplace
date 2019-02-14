@@ -287,10 +287,10 @@
         </div>
           </v-tab>
           <v-tab title="Feeds">
-            <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != ''">
+            <!-- <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != ''">
               <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '6' }"/>
-            </div>
-            <div class="campaignDetails-infoContainer-data" v-else>
+            </div> -->
+            <div class="campaignDetails-infoContainer-data" >
               No news avaliable!!
             </div>
           </v-tab>
