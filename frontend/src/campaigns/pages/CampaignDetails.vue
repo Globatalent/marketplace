@@ -291,8 +291,8 @@
               <!-- <twitter v-if="twitterUrl">
                 <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitterUrl"></a>
               </twitter> -->
-              <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '3' }"/>
-              <Timeline :id="twitterUrl" :sourceType="'likes'" :options="{ theme: 'dark' }"/>
+              <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '9' }"/>
+              <Timeline :id="'https://twitter.com/Alvaro_Avrorian'" :sourceType="'profile'" :options="{ tweetLimit: '9' }"/>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
