@@ -287,12 +287,8 @@
         </div>
           </v-tab>
           <v-tab title="Feeds">
-            <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != '' || instagramUrl != ''">
-              <!-- <twitter v-if="twitterUrl">
-                <a class="twitter-timeline" data-link-color="#6aa5dc" data-dnt="true" data-tweet-limit="5" :href="twitterUrl"></a>
-              </twitter> -->
-              <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '9' }"/>
-              <Timeline :id="'Alvaro_Avrorian'" :sourceType="'profile'" :options="{ tweetLimit: '9' }"/>
+            <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != ''">
+              <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '6' }"/>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
@@ -354,14 +350,6 @@
           this.campaign.links.filter(site => site.network == 'twitter')[0].url != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter')[0].url.split('/')[3] != undefined
           ) ? this.campaign.links.filter(site => site.network == 'twitter')[0].url.split('/')[3].split('?')[0] : '';
-      },
-      instagramUrl () {
-        return (
-          this.campaign.links != undefined && 
-          this.campaign.links.filter(site => site.network == 'instagram') != undefined && 
-          this.campaign.links.filter(site => site.network == 'instagram')[0] != undefined && 
-          this.campaign.links.filter(site => site.network == 'instagram')[0].url != undefined
-          ) ? this.campaign.links.filter(site => site.network == 'instagram')[0].url : '';
       },
       countryFlag () {
         try {
@@ -426,13 +414,6 @@
         //   params: {campaignId: campaign.id}
         // })
       },
-      getSocialUrl(links, network) {
-        let socialUrl = '';
-        if(links != undefined && links.filter(site => site.network == network)[0] != undefined && links.filter(site => site.network == network)[0].url != undefined) {
-          socialUrl = links.filter(site => site.network == network)[0].url.split('?')[0] + '?ref_src=twsrc%5Etfw';
-        }
-        return socialUrl;
-      }
     }
   }
 </script>
