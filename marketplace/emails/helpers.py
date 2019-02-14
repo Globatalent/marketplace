@@ -65,14 +65,6 @@ class TemplateEmailMessage(object):
         message_txt = message_txt.replace("</h1>", "\n\n")
         message_txt = bleach.clean(message_txt, strip=True)
 
-        # send_mail(
-        #     self.subject,
-        #     message_txt,
-        #     self.from_email,
-        #     [self.to],
-        #     fail_silently=False,
-        # )
-
         email = EmailMultiAlternatives(
             subject=self.subject,
             body=message_txt,
@@ -87,27 +79,27 @@ class TemplateEmailMessage(object):
         email.send()
 
 
-        if async and not self.fake:
-            send_email_asynchronously.delay(
-                self.subject, message_txt, message, self.from_email, self.to
-            )
-            if self.attaches:
-                warnings.warn(
-                    "Attaches will not added to the email, use async=False to send attaches."
-                )
-        elif not self.fake:
-            email = EmailMultiAlternatives(
-                subject=self.subject,
-                body=message_txt,
-                from_email=self.from_email,
-                to=self.to,
-            )
+        # if async and not self.fake:
+        #     send_email_asynchronously.delay(
+        #         self.subject, message_txt, message, self.from_email, self.to
+        #     )
+        #     if self.attaches:
+        #         warnings.warn(
+        #             "Attaches will not added to the email, use async=False to send attaches."
+        #         )
+        # elif not self.fake:
+        #     email = EmailMultiAlternatives(
+        #         subject=self.subject,
+        #         body=message_txt,
+        #         from_email=self.from_email,
+        #         to=self.to,
+        #     )
 
-            email.attach_alternative(message, "text/html")
-            for attach in self.attaches:
-                attach_file_name, attach_content, attach_content_type = attach
-                email.attach(attach_file_name, attach_content, attach_content_type)
-            email.send()
+        #     email.attach_alternative(message, "text/html")
+        #     for attach in self.attaches:
+        #         attach_file_name, attach_content, attach_content_type = attach
+        #         email.attach(attach_file_name, attach_content, attach_content_type)
+        #     email.send()
 
 
 class AdminsTemplateEmailMessage(TemplateEmailMessage):
