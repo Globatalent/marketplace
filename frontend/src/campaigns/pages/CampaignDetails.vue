@@ -286,7 +286,7 @@
           </el-row>
         </div>
           </v-tab>
-          <v-tab title="Feeds">
+          <v-tab title="Social Feed">
             <!-- <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != ''">
               <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '6' }"/>
             </div> -->
