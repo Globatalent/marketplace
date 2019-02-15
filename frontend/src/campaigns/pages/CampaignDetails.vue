@@ -287,7 +287,7 @@
         </div>
           </v-tab>
           <v-tab title="Feeds">
-            <div class="campaignDetails-infoContainer-data" :key="campaign.id" v-if="twitterUrl != '' ">
+            <div class="campaignDetails-infoContainer-data" :key="Math.random()" v-if="twitterUrl != '' ">
               <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '5' }"/>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
