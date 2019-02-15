@@ -288,7 +288,7 @@
           </v-tab>
           <v-tab title="Feeds">
             <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != '' ">
-              <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '5' }"/>
+              <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '5', width: '300px' }"/>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
               No news avaliable!!
