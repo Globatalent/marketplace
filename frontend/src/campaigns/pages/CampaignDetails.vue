@@ -287,7 +287,7 @@
         </div>
           </v-tab>
           <v-tab title="Feeds">
-            <div class="campaignDetails-infoContainer-data" :key="Math.random()" v-if="twitterUrl != '' ">
+            <div class="campaignDetails-infoContainer-data" v-if="twitterUrl != '' ">
               <Timeline :id="twitterUrl" :sourceType="'profile'" :options="{ tweetLimit: '5' }"/>
             </div>
             <div class="campaignDetails-infoContainer-data" v-else>
@@ -343,6 +343,7 @@
         return this.campaign.started < new Date()
       },
       twitterUrl () {
+        this.$forceUpdate();
         return (
           this.campaign.links != undefined && 
           this.campaign.links.filter(site => site.network == 'twitter') != undefined && 
