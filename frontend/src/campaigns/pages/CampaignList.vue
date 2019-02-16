@@ -247,13 +247,13 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
               active: 'True'
             }
           })
-          .then(() => {
-                this.$store.dispatch('campaigns/list', {
-                filters: {active: 'True'},
-                url: this.pagination.next,
-                push: true
-              })
-          })
+          // .then(() => {
+          //       this.$store.dispatch('campaigns/list', {
+          //       filters: {active: 'True'},
+          //       url: this.pagination.next,
+          //       push: true
+          //     })
+          // })
           .then(() => {
             console.log(this.campaigns.sort((a,b) => b.rating - a.rating))
           })
