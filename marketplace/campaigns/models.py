@@ -215,7 +215,8 @@ class Link(TimeStampedModel):
     network = models.CharField(
         max_length=32, choices=SOCIAL_NETWORKS, null=True, blank=True
     )
-    url = models.URLField(null=True, blank=True, verbose_name=_("url"))
+    # url = models.URLField(null=True, blank=True, verbose_name=_("url"))
+    url = models.TextField(null=True, blank=True, verbose_name=_("url"))
 
     def __str__(self):
         return self.url or str(self.id)
