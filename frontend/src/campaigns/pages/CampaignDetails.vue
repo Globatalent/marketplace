@@ -352,7 +352,7 @@
           return true
         }
 
-      }
+      },
       twitterUrl () {
         this.$forceUpdate();
         return (
