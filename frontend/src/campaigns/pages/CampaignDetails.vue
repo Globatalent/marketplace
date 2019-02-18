@@ -284,7 +284,7 @@
                 <img src="~@/assets/img/logo-only.png" alt=""
                     class="campaignDetails-infoContainer-campaignCopyright-img">
                 <div class="campaignDetails-infoContainer-campaignCopyright-text">{{ $tc('message.PlayerPoweredBy') }}
-                  <span class="campaignDetails-infoContainer-campaignCopyright-text-name">GlobaTalent</span></div>
+                  <span class="campaignDetails-infoContainer-campaignCopyright-text-name">Globatalent</span></div>
               </div>
             </el-col>
           </el-row>
