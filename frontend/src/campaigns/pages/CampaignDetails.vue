@@ -269,8 +269,12 @@
             <el-col :xs="24" :md="16" id="buyTokenSection"
                     class="campaignDetails-infoContainer-data-text is-last-block">
               <template v-if="hasStarted">
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)">
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-if="isVerified" @click="goToInvest(campaign)">
                 {{$tc('message.BuyTokens')}}
+              </el-button>
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
+                <!-- {{$tc('message.BuyTokens')}} -->
+                Verify your account
               </el-button>
               </template>
               <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" v-else>
