@@ -114,7 +114,7 @@ class Campaign(TimeStampedModel):
     weight = models.FloatField(null=True, blank=True)
     club = models.CharField(max_length=128, null=True, blank=True)
     coach = models.CharField(max_length=128, null=True, blank=True)
-    pitch_url = models.URLField(null=True, blank=True)
+    pitch_url = models.TextField(null=True, blank=True)
     pitch_image = ThumbnailerImageField(
         max_length=250,
         upload_to=UploadToDir("campaigns", random_name=True),
@@ -215,7 +215,6 @@ class Link(TimeStampedModel):
     network = models.CharField(
         max_length=32, choices=SOCIAL_NETWORKS, null=True, blank=True
     )
-    # url = models.URLField(null=True, blank=True, verbose_name=_("url"))
     url = models.TextField(null=True, blank=True, verbose_name=_("url"))
 
     def __str__(self):
