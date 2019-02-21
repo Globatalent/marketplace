@@ -17,6 +17,7 @@ import VueMasonry from 'vue-masonry-css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueScrollTo from 'vue-scrollto'
+import SocialSharing from 'vue-social-sharing'
 
 Vue.config.productionTip = false
 
@@ -27,6 +28,7 @@ Vue.use(ElementUI, { locale })
 Vue.use(VueMasonry)
 Vue.use(VueAxios, axios)
 Vue.use(VueScrollTo)
+Vue.use(SocialSharing)
 
 // csrf settings
 Vue.axios.defaults.baseURL = process.env.BASE_URL
