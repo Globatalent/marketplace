@@ -137,7 +137,7 @@ export default {
     }
   },
   created() {
-    console.log(countries)
+    // console.log(countries)
   },
   methods: {
     validatePass(rule, value, callback) {
@@ -177,6 +177,10 @@ export default {
           const request = new XMLHttpRequest();
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
           request.send(formToSend);
+
+          if (this.$route.query.utm_source === "Biggico") {
+            this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
+          }
 
           this.$store
             .dispatch('auth/register', dataForm)
