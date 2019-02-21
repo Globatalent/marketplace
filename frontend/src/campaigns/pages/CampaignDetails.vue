@@ -206,6 +206,10 @@
             {{campaign.club}}
           </gb-campaign-info-row>
 
+          <gb-campaign-info-row v-if="campaign.coach" :title="$tc('message.CurrentCoach')">
+            {{campaign.coach}}
+          </gb-campaign-info-row>
+
           <gb-campaign-info-row v-if="campaign.funds" id="fundsSection" :title="$tc('message.FundsRequierement')">
             <div class="fundsQty"><span class="fundsQty-currency">$</span>{{ $n(campaign.funds) }}</div>
             {{ $tc('message.LookingToRaise') }}
