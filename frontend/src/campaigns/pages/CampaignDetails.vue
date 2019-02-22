@@ -126,27 +126,27 @@
                       inline-template>
                     <div>
                         <network network="email">
-                            <i class="fab fa-envelope"></i> Email
+                            <i class="fab fa-envelope"></i>
                         </network>
                         <network network="facebook">
-                          <i class="fab fa-facebook"></i> Facebook
+                          <i class="fab fa-facebook"></i>
                         </network>
-                        <network network="googleplus">
+                        <!-- <network network="googleplus">
                           <i class="fab fa-google-plus"></i> Google +
                         </network>
                         <network network="line">
                           <i class="fab fa-line"></i> Line
-                        </network>
+                        </network> -->
                         <network network="linkedin">
-                          <i class="fab fa-linkedin"></i> LinkedIn
+                          <i class="fab fa-linkedin"></i>
                         </network>
-                        <network network="odnoklassniki">
+                        <!-- <network network="odnoklassniki">
                           <i class="fab fa-odnoklassniki"></i> Odnoklassniki
-                        </network>
+                        </network> -->
                         <network network="pinterest">
-                          <i class="fab fa-pinterest"></i> Pinterest
+                          <i class="fab fa-pinterest"></i>
                         </network>
-                        <network network="reddit">
+                        <!-- <network network="reddit">
                           <i class="fab fa-reddit"></i> Reddit
                         </network>
                         <network network="skype">
@@ -154,14 +154,14 @@
                         </network>
                         <network network="sms">
                           <i class="fab fa-commenting-o"></i> SMS
-                        </network>
+                        </network> -->
                         <network network="telegram">
-                          <i class="fab fa-telegram"></i> Telegram
+                          <i class="fab fa-telegram"></i>
                         </network>
                         <network network="twitter">
-                          <i class="fab fa-twitter"></i> Twitter
+                          <i class="fab fa-twitter"></i>
                         </network>
-                        <network network="vk">
+                        <!-- <network network="vk">
                           <i class="fab fa-vk"></i> VKontakte
                         </network>
                         <network network="weibo">
@@ -169,12 +169,9 @@
                         </network> 
                         <network network="whatsapp">
                           <i class="fab fa-whatsapp"></i> Whatsapp
-                        </network>
+                        </network> -->
                     </div>
                   </social-sharing>
-
-
-
                 </div>
               </div>
             </el-col>
@@ -905,7 +902,7 @@
     }
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (max-width: 768px) {
 
     .campaignDetails-infoContainer-data {
         background: none;
