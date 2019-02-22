@@ -12,7 +12,7 @@
   amount="10.00"
   currency="USD"
   :client="paypal"
-  env="sandbox">
+  >
 </PayPal>
         <div class="campaignList-startBlock" style="padding-top:0px;border-top:hidden;">
       <div class="campaignList-startBlock-container">
@@ -199,7 +199,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         isExtended: '',
         paypal: {
         sandbox: 'Ab9mGZ3TYxOZwI2SIWzNILBn4NMdtWpSSmG34XSUZPuTeMndT5w4TWHifhPSDsK6Sf2MfehtRsCX9CIk',
-        // production: '<production client id>'
+        production: 'access_token$production$4mkx6dzmn3kx8w8y$ba1563d8aa8affc3a522b8a53fa87758'
       }
       }
     },
