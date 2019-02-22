@@ -199,7 +199,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         isExtended: '',
         paypal: {
         sandbox: 'Ab9mGZ3TYxOZwI2SIWzNILBn4NMdtWpSSmG34XSUZPuTeMndT5w4TWHifhPSDsK6Sf2MfehtRsCX9CIk',
-        production: 'access_token$production$4mkx6dzmn3kx8w8y$ba1563d8aa8affc3a522b8a53fa87758'
+        production: 'AYE-TCZwAeo4jRqgq98yM_-MgWIit8TL3gytqrJpl6c0o9ulRE5FeBkLdDS4NDU26SyG1EQqWlqJERi3'
       }
       }
     },
