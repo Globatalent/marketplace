@@ -117,58 +117,58 @@
                     <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                   </a> -->
 
-                  <social-sharing url="https://vuejs.org/"
-                      title="The Progressive JavaScript Framework"
-                      description="Intuitive, Fast and Composable MVVM for building interactive interfaces."
-                      quote="Vue is a progressive framework for building user interfaces."
-                      hashtags="vuejs,javascript,framework"
-                      twitter-user="vuejs"
+                  <social-sharing url={{this.$route.currentRoute}}
+                      title={{campaign.title}}
+                      description={{campaign.description}}
+                      quote=""
+                      hashtags="globatalent"
+                      twitter-user="globatalent"
                       inline-template>
                     <div>
                         <network network="email">
-                            <i class="fa fa-envelope"></i> Email
+                            <i class="fab fa-envelope"></i> Email
                         </network>
                         <network network="facebook">
-                          <i class="fa fa-facebook"></i> Facebook
+                          <i class="fab fa-facebook"></i> Facebook
                         </network>
                         <network network="googleplus">
-                          <i class="fa fa-google-plus"></i> Google +
+                          <i class="fab fa-google-plus"></i> Google +
                         </network>
                         <network network="line">
-                          <i class="fa fa-line"></i> Line
+                          <i class="fab fa-line"></i> Line
                         </network>
                         <network network="linkedin">
-                          <i class="fa fa-linkedin"></i> LinkedIn
+                          <i class="fab fa-linkedin"></i> LinkedIn
                         </network>
                         <network network="odnoklassniki">
-                          <i class="fa fa-odnoklassniki"></i> Odnoklassniki
+                          <i class="fab fa-odnoklassniki"></i> Odnoklassniki
                         </network>
                         <network network="pinterest">
-                          <i class="fa fa-pinterest"></i> Pinterest
+                          <i class="fab fa-pinterest"></i> Pinterest
                         </network>
                         <network network="reddit">
-                          <i class="fa fa-reddit"></i> Reddit
+                          <i class="fab fa-reddit"></i> Reddit
                         </network>
                         <network network="skype">
-                          <i class="fa fa-skype"></i> Skype
+                          <i class="fab fa-skype"></i> Skype
                         </network>
                         <network network="sms">
-                          <i class="fa fa-commenting-o"></i> SMS
+                          <i class="fab fa-commenting-o"></i> SMS
                         </network>
                         <network network="telegram">
-                          <i class="fa fa-telegram"></i> Telegram
+                          <i class="fab fa-telegram"></i> Telegram
                         </network>
                         <network network="twitter">
-                          <i class="fa fa-twitter"></i> Twitter
+                          <i class="fab fa-twitter"></i> Twitter
                         </network>
                         <network network="vk">
-                          <i class="fa fa-vk"></i> VKontakte
+                          <i class="fab fa-vk"></i> VKontakte
                         </network>
                         <network network="weibo">
-                          <i class="fa fa-weibo"></i> Weibo
+                          <i class="fab fa-weibo"></i> Weibo
                         </network> 
                         <network network="whatsapp">
-                          <i class="fa fa-whatsapp"></i> Whatsapp
+                          <i class="fab fa-whatsapp"></i> Whatsapp
                         </network>
                     </div>
                   </social-sharing>
@@ -902,6 +902,13 @@
       box-sizing: border-box;
       border: 1px solid #eee;
       border-radius: 10px;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+
+    .campaignDetails-infoContainer-data {
+        background: none;
     }
   }
 </style>
