@@ -117,16 +117,16 @@
                     <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                   </a> -->
 
-                  <social-sharing url={{this.$route.currentRoute}}
-                      title={{campaign.title}}
-                      description={{campaign.description}}
+                  <social-sharing url="{{this.$route.currentRoute}}"
+                      title="{{campaign.title}}"
+                      description="{{campaign.description}}"
                       quote=""
                       hashtags="globatalent"
                       twitter-user="globatalent"
                       inline-template>
                     <div>
                         <network network="email">
-                            <i class="fab fa-envelope"></i>
+                            <i class="fa fa-envelope"></i>
                         </network>
                         <network network="facebook">
                           <i class="fab fa-facebook"></i>
