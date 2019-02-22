@@ -117,7 +117,7 @@
                     <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                   </a> -->
 
-                  <social-sharing url="{{this.$route.currentRoute}}"
+                  <!-- <social-sharing url="{{this.$route.currentRoute}}"
                       title="{{campaign.title}}"
                       description="{{campaign.description}}"
                       quote=""
@@ -130,22 +130,22 @@
                         </network>
                         <network network="facebook">
                           <i class="fab fa-facebook"></i>
-                        </network>
+                        </network> -->
                         <!-- <network network="googleplus">
                           <i class="fab fa-google-plus"></i> Google +
                         </network>
                         <network network="line">
                           <i class="fab fa-line"></i> Line
                         </network> -->
-                        <network network="linkedin">
+                        <!-- <network network="linkedin">
                           <i class="fab fa-linkedin"></i>
-                        </network>
+                        </network> -->
                         <!-- <network network="odnoklassniki">
                           <i class="fab fa-odnoklassniki"></i> Odnoklassniki
                         </network> -->
-                        <network network="pinterest">
+                        <!-- <network network="pinterest">
                           <i class="fab fa-pinterest"></i>
-                        </network>
+                        </network> -->
                         <!-- <network network="reddit">
                           <i class="fab fa-reddit"></i> Reddit
                         </network>
@@ -155,12 +155,12 @@
                         <network network="sms">
                           <i class="fab fa-commenting-o"></i> SMS
                         </network> -->
-                        <network network="telegram">
+                        <!-- <network network="telegram">
                           <i class="fab fa-telegram"></i>
                         </network>
                         <network network="twitter">
                           <i class="fab fa-twitter"></i>
-                        </network>
+                        </network> -->
                         <!-- <network network="vk">
                           <i class="fab fa-vk"></i> VKontakte
                         </network>
@@ -170,8 +170,8 @@
                         <network network="whatsapp">
                           <i class="fab fa-whatsapp"></i> Whatsapp
                         </network> -->
-                    </div>
-                  </social-sharing>
+                    <!-- </div>
+                  </social-sharing> -->
                 </div>
               </div>
             </el-col>
@@ -179,20 +179,6 @@
         </div>
       </div>
       <div class="campaignDetails-infoContainer is-padding-boxed">
-        <!-- <el-row>
-          <el-col :xs="24">
-            <ul class="campaignsFilter">
-              <li class="campaignsFilter-item is-active"><span class="campaignsFilter-item-number">45</span><span
-                class="campaignsFilter-item-text">{{ $tc('message.Story') }}</span></li>
-              <li class="campaignsFilter-item"><span class="campaignsFilter-item-text">{{ $tc('message.Faq') }}</span>
-              </li>
-              <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">12</span><span
-                class="campaignsFilter-item-text">{{ $tc('message.Updates') }}</span></li>
-              <li class="campaignsFilter-item"><span class="campaignsFilter-item-number">11</span><span
-                class="campaignsFilter-item-text">{{ $tc('message.Ratings') }}</span></li>
-            </ul>
-          </el-col>
-        </el-row> -->
         <vue-tabs>
           <v-tab title="Campaign insights">
         <div class="campaignDetails-infoContainer-data">

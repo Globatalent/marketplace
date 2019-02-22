@@ -8,6 +8,12 @@
         </div>
       </el-col>
     </el-row>
+     <PayPal
+  amount="10.00"
+  currency="USD"
+  :client="paypal"
+  env="sandbox">
+</PayPal>
         <div class="campaignList-startBlock" style="padding-top:0px;border-top:hidden;">
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
@@ -169,6 +175,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   import countries from '@/base/helpers/countries'
   import VueI18n from 'vue-i18n'
   import { Carousel, Slide } from 'vue-carousel';
+  import PayPal from 'vue-paypal-checkout';
 
   export default {
     name: 'CampaignList',
@@ -176,7 +183,8 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
       'gb-base-layout': BaseLayout,
       'gb-campaign-list-card': CampaignListCard,
        Carousel,
-        Slide
+        Slide,
+        PayPal
     },
     data () {
       return {
@@ -188,7 +196,11 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         errorMessage: '',
         loadingCampaigns: false,
         news: null,
-        isExtended: ''
+        isExtended: '',
+        paypal: {
+        sandbox: 'Ab9mGZ3TYxOZwI2SIWzNILBn4NMdtWpSSmG34XSUZPuTeMndT5w4TWHifhPSDsK6Sf2MfehtRsCX9CIk',
+        // production: '<production client id>'
+      }
       }
     },
     computed: {
