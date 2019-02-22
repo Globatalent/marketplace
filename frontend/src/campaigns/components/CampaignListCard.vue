@@ -20,8 +20,8 @@
         <el-row>
           <el-col>
             <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
-              <span v-if="campaign.giveBack">{{getDescription()}}</span>
-              <a class="show-more-msg" @click="showMore()" v-if="campaign.giveBack && this.campaign.giveBack.length > 50"> {{showMoreMsg()}}</a>
+              <span v-if="campaign.description">{{getDescription()}}</span>
+              <a class="show-more-msg" @click="showMore()" v-if="campaign.description && this.campaign.description.length > 50"> {{showMoreMsg()}}</a>
             </div>
           </el-col>
         </el-row>
@@ -140,7 +140,7 @@
         return this.isExtended ? this.$tc("message.showLess") : this.$tc("message.showMore");
       },
       getDescription() {
-        return this.isExtended ? this.campaign.giveBack : (this.campaign.giveBack.length > 50 ? this.campaign.giveBack.substring(0,50)+' ...' : this.campaign.giveBack);
+        return this.isExtended ? this.campaign.description : (this.campaign.description.length > 50 ? this.campaign.description.substring(0,50)+' ...' : this.campaign.description);
       }
     }
   }

@@ -328,19 +328,23 @@
             <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">&nbsp;</el-col>
             <el-col :xs="24" :md="16" id="buyTokenSection"
                     class="campaignDetails-infoContainer-data-text is-last-block">
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)"
-                        v-if="hasStarted">
+              <template v-if="hasStarted">
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-if="isVerified" @click="goToInvest(campaign)">
                 {{$tc('message.BuyTokens')}}
               </el-button>
-              <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big"
-                        @click="goToInvest(campaign)" v-else>
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
+                <!-- {{$tc('message.BuyTokens')}} -->
+                Verify your account
+              </el-button>
+              </template>
+              <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" v-else>
                 {{$tc('message.ComingSoon')}}
               </el-button>
               <div class="campaignDetails-infoContainer-campaignCopyright">
                 <img src="~@/assets/img/logo-only.png" alt=""
                     class="campaignDetails-infoContainer-campaignCopyright-img">
                 <div class="campaignDetails-infoContainer-campaignCopyright-text">{{ $tc('message.PlayerPoweredBy') }}
-                  <span class="campaignDetails-infoContainer-campaignCopyright-text-name">GlobaTalent</span></div>
+                  <span class="campaignDetails-infoContainer-campaignCopyright-text-name">Globatalent</span></div>
               </div>
             </el-col>
           </el-row>
@@ -405,6 +409,15 @@
       },
       hasStarted () {
         return this.campaign.started < new Date()
+      },
+      isVerified () {
+        if (!!this.user) {
+          return false
+        }
+        else {
+          return true
+        }
+
       },
       twitterUrl () {
         this.$forceUpdate();
