@@ -6,14 +6,11 @@
           <h3 class="beginBlock-title">{{ $tc('message.WeBringTheTalent') }}</h3>
           <h4 class="beginBlock-subTitle" v-html="$t('message.TheFirstSportsCryptoExchange')"></h4>
         </div>
+        <div class="beginBlock text-center" id="paypal-button-container">
+
+        </div>
       </el-col>
     </el-row>
-     <PayPal
-  amount="10.00"
-  currency="USD"
-  :client="paypal"
-  >
-</PayPal>
         <div class="campaignList-startBlock" style="padding-top:0px;border-top:hidden;">
       <div class="campaignList-startBlock-container">
         <div class="campaignList-startBlock-sentence">
@@ -175,7 +172,6 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   import countries from '@/base/helpers/countries'
   import VueI18n from 'vue-i18n'
   import { Carousel, Slide } from 'vue-carousel';
-  import PayPal from 'vue-paypal-checkout';
 
   export default {
     name: 'CampaignList',
@@ -183,8 +179,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
       'gb-base-layout': BaseLayout,
       'gb-campaign-list-card': CampaignListCard,
        Carousel,
-        Slide,
-        PayPal
+        Slide
     },
     data () {
       return {
@@ -196,11 +191,7 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         errorMessage: '',
         loadingCampaigns: false,
         news: null,
-        isExtended: '',
-        paypal: {
-        sandbox: 'Ab9mGZ3TYxOZwI2SIWzNILBn4NMdtWpSSmG34XSUZPuTeMndT5w4TWHifhPSDsK6Sf2MfehtRsCX9CIk',
-        production: 'AYE-TCZwAeo4jRqgq98yM_-MgWIit8TL3gytqrJpl6c0o9ulRE5FeBkLdDS4NDU26SyG1EQqWlqJERi3'
-      }
+        isExtended: ''
       }
     },
     computed: {
@@ -227,6 +218,20 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
       this.$store.dispatch('campaigns/sports')
       this.$store.dispatch('campaigns/countries')
       this.initial()
+      paypal.Buttons(
+        {
+    createOrder: function(data, actions) {
+      // Set up the transaction
+      return actions.order.create({
+        purchase_units: [{
+          amount: {
+            value: Math.floor(Math.random() * 95) + 5
+          }
+        }]
+      });
+    }
+  }
+      ).render('#paypal-button-container');
     },
     mounted () {
       // this.checkScroll()
