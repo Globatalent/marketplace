@@ -61,7 +61,7 @@
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
           <span class="timeLeft-text is-uppercase" v-else>{{ $tc('message.ComingSoon') }}</span>
         </div>
-        <div class="likeButton" v-if="isLogged" @click="setFollowingCampaign">
+        <div class="likeButton" v-if="isLogged" @click="setFollowingCampaign()">
           <el-tooltip class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom">
             <i class="fas fa-heart likeIcon is-following" v-if="campaign.following"></i>
             <i class="far fa-heart likeIcon" v-else></i>
