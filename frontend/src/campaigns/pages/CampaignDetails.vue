@@ -117,8 +117,8 @@
                     <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                   </a> -->
 
-                  <!-- <social-sharing url="{{this.$route.currentRoute}}"
-                      title="{{campaign.title}}"
+                  <social-sharing url=this.$route.currentRoute
+                      title={{campaign.title}}
                       description="{{campaign.description}}"
                       quote=""
                       hashtags="globatalent"
@@ -130,16 +130,16 @@
                         </network>
                         <network network="facebook">
                           <i class="fab fa-facebook"></i>
-                        </network> -->
+                        </network>
                         <!-- <network network="googleplus">
                           <i class="fab fa-google-plus"></i> Google +
                         </network>
                         <network network="line">
                           <i class="fab fa-line"></i> Line
                         </network> -->
-                        <!-- <network network="linkedin">
+                        <network network="linkedin">
                           <i class="fab fa-linkedin"></i>
-                        </network> -->
+                        </network>
                         <!-- <network network="odnoklassniki">
                           <i class="fab fa-odnoklassniki"></i> Odnoklassniki
                         </network> -->
@@ -157,10 +157,10 @@
                         </network> -->
                         <!-- <network network="telegram">
                           <i class="fab fa-telegram"></i>
-                        </network>
+                        </network> -->
                         <network network="twitter">
                           <i class="fab fa-twitter"></i>
-                        </network> -->
+                        </network>
                         <!-- <network network="vk">
                           <i class="fab fa-vk"></i> VKontakte
                         </network>
@@ -170,8 +170,8 @@
                         <network network="whatsapp">
                           <i class="fab fa-whatsapp"></i> Whatsapp
                         </network> -->
-                    <!-- </div>
-                  </social-sharing> -->
+                    </div>
+                  </social-sharing>
                 </div>
               </div>
             </el-col>
