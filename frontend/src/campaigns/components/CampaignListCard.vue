@@ -62,20 +62,12 @@
           <span class="timeLeft-text is-uppercase" v-else>{{ $tc('message.ComingSoon') }}</span>
         </div>
         <div class="likeButton" v-if="isLogged">
-          <!-- <el-tooltip v-if="campaign.following" class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom" @click="setFollowingCampaign()">
+          <el-tooltip v-if="campaign.following" class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom" @click="setFollowingCampaign()">
             <i class="fas fa-heart likeIcon is-following"></i>
           </el-tooltip>
           <el-tooltip v-else class="item" effect="dark" :content="$tc('message.AddFavorites')" placement="bottom" @click="setFollowingCampaign()">
             <i class="far fa-heart likeIcon"></i>
-          </el-tooltip> -->
-
-
-          <div class="favoriteLink" v-if="campaign.following" type="primary" @click="setFollowingCampaign()">
-            <i class="fas fa-heart"></i>
-          </div>
-          <div class="favoriteLink" v-else @click="setFollowingCampaign()">
-            <i class="far fa-heart"></i>
-          </div>
+          </el-tooltip>
         </div>
         </div>
       </div>
@@ -126,6 +118,7 @@
     },
     methods: {
       setFollowingCampaign() {
+        this.campaign.following = !this.campaign.following
         this.$store.dispatch('campaigns/follow', this.campaign.id).catch(error => {
           console.log(error)
         })
