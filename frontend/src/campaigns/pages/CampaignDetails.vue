@@ -1,41 +1,5 @@
 <template>
   <gb-base-layout>
-    <modal name="payment" adaptive="true">
-      <header>
-        <h2 class="text-center">
-          Select how much you want to pledge
-        </h2>
-      </header>
-      <div class="payInfo">
-      <input v-model="pledged" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
-      <ul>
-        <li>
-          Token price: {{tokenPrice}}$
-        </li>
-        <li>
-          Your pledged amount: {{pledged}}
-        </li>
-        <li>
-          Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}} ({{paymentFee}}%)
-        </li>
-        <li>
-          You will receive: {{pledged * (1 - (paymentFee / 100)) / tokenPrice}} {{tokenTicker}}
-        </li>
-      </ul>
-      </div>
-      <div class="payFooter">
-      <button v-if="readyToPay === false" v-on:click="payment('hola','hola', pledged, paymentFee, tokenPrice)">Pledge</button>
-      <button v-else disabled>Pledge</button>
-      </div>
-      <div v-show="readyToPay" class="payment__parent">
-        <div class="payment__container">
-          <div id="paypal-button-container"></div>
-          <div>
-            <a :href="coinbaseCheckoutURL" target="_blank"> Pay with cryptocurrencies</a>
-          </div>
-        </div>
-      </div>
-    </modal>
     <div v-if="redirecting === true">
       <el-row>
       <el-col :xs="24" :sm="{span: 12, offset: 6}">
@@ -69,6 +33,42 @@
         </el-row>
       </div>
       <div class="campaignDetails-detailBox" v-if="campaign">
+            <modal name="payment" adaptive="true">
+      <header>
+        <h2 class="text-center">
+          Select how much you want to pledge
+        </h2>
+      </header>
+      <div class="payInfo">
+      <input v-model="pledged" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
+      <ul>
+        <li>
+          {{campaign.token.code}} price: {{campaign.token.price}}$
+        </li>
+        <li>
+          Your pledged amount: {{pledged}}
+        </li>
+        <li>
+          Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}} ({{paymentFee}}%)
+        </li>
+        <li>
+          You will receive: {{pledged * (1 - (paymentFee / 100)) / campaign.token.price}} {{campaign.token.code}}
+        </li>
+      </ul>
+      </div>
+      <div class="payFooter">
+      <button v-if="readyToPay === false" v-on:click="payment('hola','hola', pledged, paymentFee, campaign.token.price)">Pledge</button>
+      <button v-else disabled>Pledge</button>
+      </div>
+      <div v-show="readyToPay" class="payment__parent">
+        <div class="payment__container">
+          <div id="paypal-button-container"></div>
+          <div>
+            <a :href="coinbaseCheckoutURL" target="_blank"> Pay with cryptocurrencies</a>
+          </div>
+        </div>
+      </div>
+    </modal>
         <div class="is-padding-boxed">
           <el-row :gutter="40">
             <el-col :xs="24" :md="16" class="campaignDetails-col">
