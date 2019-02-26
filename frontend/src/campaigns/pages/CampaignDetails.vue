@@ -370,6 +370,7 @@
     components: {
        VueTabs,
        VTab,
+       VModal,
       'gb-base-layout': BaseLayout,
       'gb-campaign-info-row': CampaignInfoRow,
       StarRating,
