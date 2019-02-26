@@ -361,9 +361,8 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
-  import VModal from 'vue-js-modal'
 
-  Vue.use(VModal)
+  Vue.use(window["vue-js-modal"].default); 
   
   export default {
     name: 'CampaignDetails',
