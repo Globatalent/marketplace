@@ -118,8 +118,8 @@
                   </a> -->
 
                   <social-sharing url=this.$route.currentRoute
-                      title={{campaign.title}}
-                      description="{{campaign.description}}"
+                      title={{titleCampaign}}
+                      description="{{this.titleCampaign}}"
                       quote=""
                       hashtags="globatalent"
                       twitter-user="globatalent"
@@ -379,7 +379,8 @@
       return {
         token: {},
         pictures: [],
-        redirecting: false
+        redirecting: false,
+        titleCampaign: 'my tilte'
       }
     },
     computed: {
@@ -429,6 +430,7 @@
         }
         return initialImages.concat(this.pictures)
       }
+      
     },
     created () {
       const id = this.$route.params.campaignId
