@@ -354,6 +354,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
   import router from '@/router.js'
