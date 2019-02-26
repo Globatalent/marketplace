@@ -117,9 +117,9 @@
                     <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
                   </a> -->
 
-                  <social-sharing url=this.$route.currentRoute
-                      title={{titleCampaign}}
-                      description="{{this.titleCampaign}}"
+                  <social-sharing url={{this.$route.currentRoute}}
+                      title={{campaign.title}}
+                      description="{{campaign.description}}"
                       quote=""
                       hashtags="globatalent"
                       twitter-user="globatalent"
@@ -362,6 +362,9 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
+  var SocialSharing = require('vue-social-sharing');
+
+  Vue.use(SocialSharing);
 
 
   
@@ -379,8 +382,7 @@
       return {
         token: {},
         pictures: [],
-        redirecting: false,
-        titleCampaign: 'my tilte'
+        redirecting: false
       }
     },
     computed: {
@@ -430,7 +432,6 @@
         }
         return initialImages.concat(this.pictures)
       }
-      
     },
     created () {
       const id = this.$route.params.campaignId
