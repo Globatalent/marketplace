@@ -52,7 +52,7 @@
           Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}} ({{paymentFee}}%)
         </li>
         <li>
-          You will receive: {{pledged * (1 - (paymentFee / 100)) / token.unitPrice}} {{token.code}}
+          You will receive: {{(pledged * (1 - (paymentFee / 100)) / token.unitPrice).toFixed(2)}} {{token.code}}
         </li>
       </ul>
       </div>
@@ -970,6 +970,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    align-items: center;
   }
   
   .payFooter {
@@ -977,18 +978,19 @@
     justify-content: space-around
   }
 
-    .payment__parent {
-      display: flex;
-  flex-direction: column;
-  justify-content: center;
+  .payment__parent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .payment__container {
+    padding: 1rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-content: space-around;
-    align-items: center;
+    align-items: top;
   }
 
   @media screen and (max-width: 768px) {
