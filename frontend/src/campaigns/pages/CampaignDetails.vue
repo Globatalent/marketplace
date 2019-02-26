@@ -57,7 +57,7 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button v-if="readyToPay === false" v-on:click="payment('hola','hola', pledged)">Pledge</button>
+      <button v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, pledged)">Pledge</button>
       <button v-else disabled>Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
