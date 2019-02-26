@@ -518,17 +518,7 @@
         return 0
       },
       goToInvest (campaign) {
-        this.redirecting = true;
-        let urls = {
-          5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
-        };
-        setTimeout(() => {
-          window.location.href = urls[campaign.id.toString()]
-        }, 5000);
-        // router.push({
-        //   name: 'campaign.invest',
-        //   params: {campaignId: campaign.id}
-        // })
+        console.log(this.token)
       },
     }
   }
