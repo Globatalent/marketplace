@@ -465,10 +465,9 @@
             })
         }
       },
-            payment (name, description, amountToPay, paymentFee, tokenPrice) {
 
+      payment (name, description, amountToPay) {
       if (amountToPay.match(/^[0-9]+$/)) {
-      let amount = amountToPay * (1 - (paymentFee / 100)) / tokenPrice;
       this.warning = false;
 
       Vue.axios({
@@ -483,7 +482,7 @@
           "name": name,
           "description": description,
           "local_price": {
-            "amount": amount,
+            "amount": amountToPay,
             "currency": "USD"
           },
           "pricing_type": "fixed_price"
@@ -499,7 +498,7 @@
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: amount
+                value: amountToPay
               }
             }]
           });
