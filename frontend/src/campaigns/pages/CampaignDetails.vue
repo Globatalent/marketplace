@@ -43,7 +43,7 @@
       <input v-model="pledged" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
       <ul>
         <li>
-          {{token.code}} price: {{token.price}}$
+          {{token.code}} price: {{token.unitPrice}}$
         </li>
         <li>
           Your pledged amount: {{pledged}}
@@ -52,12 +52,12 @@
           Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}} ({{paymentFee}}%)
         </li>
         <li>
-          You will receive: {{pledged * (1 - (paymentFee / 100)) / token.price}} {{token.code}}
+          You will receive: {{pledged * (1 - (paymentFee / 100)) / token.unitPrice}} {{token.code}}
         </li>
       </ul>
       </div>
       <div class="payFooter">
-      <button v-if="readyToPay === false" v-on:click="payment('hola','hola', pledged, paymentFee, token.price)">Pledge</button>
+      <button v-if="readyToPay === false" v-on:click="payment('hola','hola', pledged, paymentFee, token.unitPrice)">Pledge</button>
       <button v-else disabled>Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
@@ -381,7 +381,8 @@
         redirecting: false,
         paymentFee: 3.5,
         pledged: '',
-        readyToPay: false
+        readyToPay: false,
+        coinbaseCheckoutURL: ''
       }
     },
     computed: {
