@@ -40,7 +40,7 @@
         </h2>
       </header>
       <div class="payInfo">
-      <input v-model="pledged" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
+      <input v-model="pledged" min="0" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
       <ul>
         <li>
           {{token.code}} price: {{token.unitPrice}}$
