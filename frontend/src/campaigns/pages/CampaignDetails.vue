@@ -33,7 +33,7 @@
         </el-row>
       </div>
       <div class="campaignDetails-detailBox" v-if="campaign">
-      <modal name="payment" adaptive="true">
+      <modal name="payment" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
           Select how much you want to pledge
@@ -43,16 +43,16 @@
         <vue-numeric currency="$" separator="," max="token.unitPrice" v-model="price" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
-          {{token.code}} price: {{token.unitPrice}}$
+          <span class="is-bold">{{token.code}} price:</span> {{token.unitPrice}}$
         </li>
         <li>
-          Your pledged amount: {{pledged}}$
+          <span class="is-bold">Your pledged amount:</span> {{pledged}}$
         </li>
         <li>
-          Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}}$ ({{paymentFee}}%)
+          <span class="is-bold">Fees:</span> {{(pledged * (paymentFee / 100)).toFixed(2)}}$ ({{paymentFee}}%)
         </li>
         <li>
-          You will receive: {{(pledged * (1 - (paymentFee / 100)) / token.unitPrice).toFixed(2)}} {{token.code}}
+          <span class="is-bold">You will receive:</span> {{(pledged * (1 - (paymentFee / 100)) / token.unitPrice).toFixed(2)}} {{token.code}}
         </li>
       </ul>
       </div>
