@@ -112,13 +112,8 @@
                   <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
                 </div>
                 <div class="socialLinksDetail">
-                  <!-- <a v-for="(link, index) in campaign.links" :key="index" :href="link.url" v-if="link.url"
-                    target="_blank">
-                    <span :class="'fab fa-'+link.network+' socialLinks-icon'"></span>
-                  </a> -->
-
-                  <social-sharing url={{this.$route.currentRoute}}
-                      title={{campaign.title}}
+                  <!-- <social-sharing url="{{this.$route.currentRoute}}"
+                      title="{{campaign.title}}"
                       description="{{campaign.description}}"
                       quote=""
                       hashtags="globatalent"
@@ -131,47 +126,14 @@
                         <network network="facebook">
                           <i class="fab fa-facebook"></i>
                         </network>
-                        <!-- <network network="googleplus">
-                          <i class="fab fa-google-plus"></i> Google +
-                        </network>
-                        <network network="line">
-                          <i class="fab fa-line"></i> Line
-                        </network> -->
                         <network network="linkedin">
                           <i class="fab fa-linkedin"></i>
                         </network>
-                        <!-- <network network="odnoklassniki">
-                          <i class="fab fa-odnoklassniki"></i> Odnoklassniki
-                        </network> -->
-                        <!-- <network network="pinterest">
-                          <i class="fab fa-pinterest"></i>
-                        </network> -->
-                        <!-- <network network="reddit">
-                          <i class="fab fa-reddit"></i> Reddit
-                        </network>
-                        <network network="skype">
-                          <i class="fab fa-skype"></i> Skype
-                        </network>
-                        <network network="sms">
-                          <i class="fab fa-commenting-o"></i> SMS
-                        </network> -->
-                        <!-- <network network="telegram">
-                          <i class="fab fa-telegram"></i>
-                        </network> -->
                         <network network="twitter">
                           <i class="fab fa-twitter"></i>
                         </network>
-                        <!-- <network network="vk">
-                          <i class="fab fa-vk"></i> VKontakte
-                        </network>
-                        <network network="weibo">
-                          <i class="fab fa-weibo"></i> Weibo
-                        </network> 
-                        <network network="whatsapp">
-                          <i class="fab fa-whatsapp"></i> Whatsapp
-                        </network> -->
                     </div>
-                  </social-sharing>
+                  </social-sharing> -->
                 </div>
               </div>
             </el-col>
@@ -354,7 +316,6 @@
 </template>
 
 <script>
-  import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
   import router from '@/router.js'
@@ -363,9 +324,6 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
-  var SocialSharing = require('vue-social-sharing');
-
-  Vue.use(SocialSharing);
 
 
   
