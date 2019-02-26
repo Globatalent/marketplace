@@ -380,8 +380,7 @@
         pictures: [],
         redirecting: false,
         paymentFee: 3.5,
-                tokenPrice: 25,
-        tokenTicker: 'TST'
+        pledged: ''
       }
     },
     computed: {
