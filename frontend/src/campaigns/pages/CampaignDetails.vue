@@ -470,6 +470,7 @@
       },
 
       payment (name, description, amountToPay) {
+        console.log(name, description.amountToPay)
       if (amountToPay.match(/^[0-9]+$/)) {
       this.warning = false;
 
