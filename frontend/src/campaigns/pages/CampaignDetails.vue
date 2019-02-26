@@ -360,7 +360,7 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
-  import VModal from 'vue-js-modal';
+  import VModal from 'vue-js-modal'
 
   Vue.use(VModal)
   
