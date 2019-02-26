@@ -384,8 +384,8 @@
         readyToPay: false,
         coinbaseCheckoutURL: '',
         urlCampaing: 'www.mycampaing.url',
-        titleCampaing: campagin.title,
-        descriptionCampaing: campagin.description,
+        titleCampaing: 'titu',
+        descriptionCampaing: 'adsasa dsa dsa da dsa ds dsadsa dsad sadsa dddd',
       }
     },
     computed: {
