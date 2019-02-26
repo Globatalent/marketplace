@@ -148,9 +148,9 @@
                   <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
                 </div>
                 <div class="socialLinksDetail">
-                  <!-- <social-sharing url="{{this.$route.currentRoute}}"
-                      title="{{campaign.title}}"
-                      description="{{campaign.description}}"
+                  <social-sharing url={{urlCampaing}}
+                      title="{{titleCampaing}}"
+                      description=descriptionCampaign
                       quote=""
                       hashtags="globatalent"
                       twitter-user="globatalent"
@@ -169,7 +169,7 @@
                           <i class="fab fa-twitter"></i>
                         </network>
                     </div>
-                  </social-sharing> -->
+                  </social-sharing>
                 </div>
               </div>
             </el-col>
@@ -382,7 +382,10 @@
         paymentFee: 3.5,
         pledged: '',
         readyToPay: false,
-        coinbaseCheckoutURL: ''
+        coinbaseCheckoutURL: '',
+        urlCampaing: 'www.mycampaing.url',
+        titleCampaing: campagin.title,
+        descriptionCampaing: campagin.description,
       }
     },
     computed: {
