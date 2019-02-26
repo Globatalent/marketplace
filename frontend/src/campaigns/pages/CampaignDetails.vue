@@ -40,7 +40,7 @@
         </h2>
       </header>
       <div class="payInfo">
-        <vue-numeric currency="$" separator="," max="token.unitPrice" v-model="price" v-bind:minus="false"></vue-numeric>
+        <vue-numeric currency="$" separator="," max="token.unitPrice" v-model="pledged" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price:</span> {{token.unitPrice}}$
