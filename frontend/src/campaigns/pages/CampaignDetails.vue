@@ -352,6 +352,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
   import router from '@/router.js'
@@ -360,8 +361,10 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
+  import VModal from 'vue-js-modal'
 
-Vue.use(window["vue-js-modal"].default);  
+  Vue.use(VModal)
+  
   export default {
     name: 'CampaignDetails',
     components: {
