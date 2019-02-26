@@ -380,7 +380,8 @@
         pictures: [],
         redirecting: false,
         paymentFee: 3.5,
-        pledged: ''
+        pledged: '',
+        readyToPay: false
       }
     },
     computed: {
