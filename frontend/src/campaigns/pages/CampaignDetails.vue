@@ -40,16 +40,16 @@
         </h2>
       </header>
       <div class="payInfo">
-      <input v-model="pledged" min="0" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
+        <vue-numeric currency="$" separator="," max="token.unitPrice" v-model="price" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
           {{token.code}} price: {{token.unitPrice}}$
         </li>
         <li>
-          Your pledged amount: {{pledged}}
+          Your pledged amount: {{pledged}}$
         </li>
         <li>
-          Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}} ({{paymentFee}}%)
+          Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}}$ ({{paymentFee}}%)
         </li>
         <li>
           You will receive: {{(pledged * (1 - (paymentFee / 100)) / token.unitPrice).toFixed(2)}} {{token.code}}
@@ -361,8 +361,10 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
+  import VueNumeric from 'vue-numeric'
 
   Vue.use(window["vue-js-modal"].default); 
+  Vue.use(VueNumeric);
   
   export default {
     name: 'CampaignDetails',
@@ -470,7 +472,6 @@
       },
 
       payment (name, description, amountToPay) {
-        console.log(name, description.amountToPay)
       if (amountToPay.match(/^[0-9]+$/)) {
       this.warning = false;
 
