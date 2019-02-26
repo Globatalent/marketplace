@@ -1,5 +1,41 @@
 <template>
   <gb-base-layout>
+    <modal name="payment" adaptive="true">
+      <header>
+        <h2 class="text-center">
+          Select how much you want to pledge
+        </h2>
+      </header>
+      <div class="payInfo">
+      <input v-model="pledged" class="autonumeric" style="width=auto" type="number" placeholder="How much do you want to pledge?">
+      <ul>
+        <li>
+          Token price: {{tokenPrice}}$
+        </li>
+        <li>
+          Your pledged amount: {{pledged}}
+        </li>
+        <li>
+          Fees: {{(pledged * (paymentFee / 100)).toFixed(2)}} ({{paymentFee}}%)
+        </li>
+        <li>
+          You will receive: {{pledged * (1 - (paymentFee / 100)) / tokenPrice}} {{tokenTicker}}
+        </li>
+      </ul>
+      </div>
+      <div class="payFooter">
+      <button v-if="readyToPay === false" v-on:click="payment('hola','hola', pledged, paymentFee, tokenPrice)">Pledge</button>
+      <button v-else disabled>Pledge</button>
+      </div>
+      <div v-show="readyToPay" class="payment__parent">
+        <div class="payment__container">
+          <div id="paypal-button-container"></div>
+          <div>
+            <a :href="coinbaseCheckoutURL" target="_blank"> Pay with cryptocurrencies</a>
+          </div>
+        </div>
+      </div>
+    </modal>
     <div v-if="redirecting === true">
       <el-row>
       <el-col :xs="24" :sm="{span: 12, offset: 6}">
@@ -96,7 +132,7 @@
                               :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
                 </div>
               </div>
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="goToInvest(campaign)"
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')"
                         v-if="hasStarted">
                 {{$tc('message.BuyTokens')}}
               </el-button>
@@ -324,6 +360,8 @@
   import {VueTabs, VTab} from 'vue-nav-tabs'
   import 'vue-nav-tabs/themes/vue-tabs.css'
   import { Timeline } from 'vue-tweet-embed'
+  import VModal from 'vue-js-modal';
+  Vue.use(VModal)
 
 
   
@@ -341,7 +379,10 @@
       return {
         token: {},
         pictures: [],
-        redirecting: false
+        redirecting: false,
+        paymentFee: 3.5,
+                tokenPrice: 25,
+        tokenTicker: 'TST'
       }
     },
     computed: {
@@ -411,6 +452,9 @@
       })
     },
     methods: {
+      show (id) {
+        this.$modal.show('id')
+      },
       setFollowingCampaign () {
         if (!!this.user) {
           this.campaign.following = !this.campaign.following
@@ -420,6 +464,53 @@
               console.log(error)
             })
         }
+      },
+            payment (name, description, amountToPay, paymentFee, tokenPrice) {
+
+      if (amountToPay.match(/^[0-9]+$/)) {
+      let amount = amountToPay * (1 - (paymentFee / 100)) / tokenPrice;
+      this.warning = false;
+
+      Vue.axios({
+        method: 'post',
+        url:'https://api.commerce.coinbase.com/charges',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CC-Api-Key': '74038429-1376-4218-86b5-94c88c1f454f',
+          'X-CC-Version': '2018-03-22'
+        },
+        data: {
+          "name": name,
+          "description": description,
+          "local_price": {
+            "amount": amount,
+            "currency": "USD"
+          },
+          "pricing_type": "fixed_price"
+        }
+      })
+      .then(response => {
+        this.coinbaseCheckoutURL = response.data.data.hosted_url
+      })
+      .then(this.readyToPay = true)
+      paypal.Buttons({
+          createOrder: function(data, actions) {
+          // Set up the transaction
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: amount
+              }
+            }]
+          });
+          }
+        })
+      .render('#paypal-button-container');
+      }
+      else {
+        this.warning = true;
+      }
+      
       },
       collected () {
         if (!!this.token) {
@@ -861,6 +952,51 @@
       border: 1px solid #eee;
       border-radius: 10px;
     }
+  }
+
+    .autonumeric {
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #dcdfe6;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 40px;
+    line-height: 40px;
+    outline: none;
+    padding: 0 15px;
+    -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+    max-width: 210px;
+  }
+
+  .payInfo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  
+  .payFooter {
+    display: flex;
+    justify-content: space-around
+  }
+
+    .payment__parent {
+      display: flex;
+  flex-direction: column;
+  justify-content: center;
+  }
+
+  .payment__container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: space-around;
+    align-items: center;
   }
 
   @media screen and (max-width: 768px) {

@@ -6,9 +6,6 @@
           <h3 class="beginBlock-title">{{ $tc('message.WeBringTheTalent') }}</h3>
           <h4 class="beginBlock-subTitle" v-html="$t('message.TheFirstSportsCryptoExchange')"></h4>
         </div>
-        <div class="beginBlock text-center" id="paypal-button-container">
-
-        </div>
       </el-col>
     </el-row>
         <div class="campaignList-startBlock" style="padding-top:0px;border-top:hidden;">
@@ -191,7 +188,13 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         errorMessage: '',
         loadingCampaigns: false,
         news: null,
-        isExtended: ''
+        isExtended: '',
+        coinbaseCheckoutURL: '',
+        pledged: null,
+        readyToPay: false,
+        warning: false,
+
+
       }
     },
     computed: {
@@ -218,20 +221,6 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
       this.$store.dispatch('campaigns/sports')
       this.$store.dispatch('campaigns/countries')
       this.initial()
-      paypal.Buttons(
-        {
-    createOrder: function(data, actions) {
-      // Set up the transaction
-      return actions.order.create({
-        purchase_units: [{
-          amount: {
-            value: Math.floor(Math.random() * 95) + 5
-          }
-        }]
-      });
-    }
-  }
-      ).render('#paypal-button-container');
     },
     mounted () {
       // this.checkScroll()
@@ -536,4 +525,5 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
 .news-content {
   min-height: 120px;
 }
+
 </style>
