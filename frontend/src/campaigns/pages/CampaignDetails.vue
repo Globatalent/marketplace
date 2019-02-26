@@ -452,7 +452,7 @@
     },
     methods: {
       show (id) {
-        this.$modal.show('id')
+        this.$modal.show(id)
       },
       setFollowingCampaign () {
         if (!!this.user) {
