@@ -42,7 +42,6 @@
       <div class="payInfo">
         <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" :currency="token.code" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         <vue-numeric class="autonumeric" v-else :currency="token.code" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price per unit:</span> {{token.unitPrice}}$
@@ -59,8 +58,8 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, (pledged * token.unitPrice / (1 - paymentFee )).toFixed(2))">Pledge</button>
-      <button v-else disabled>Pledge</button>
+      <button class="crypto-link" v-if="readyToPay" disabled>Pledge</button>
+      <button class="crypto-link" v-else v-on:click="payment(campaign.title,campaign.description, (pledged * token.unitPrice / (1 - paymentFee )).toFixed(2))">Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
@@ -1001,9 +1000,11 @@
   }
   
   .crypto-link {
-    color: #0a58a3;
+    color: white;
 
-    border: 1px solid #0a58a3;
+    border: 1px solid #88b7e3;
+
+    background-color: #88b7e3;
 
     padding: 1rem;
 
