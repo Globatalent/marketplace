@@ -399,6 +399,7 @@
         return this.campaign.started < new Date()
       },
       isVerified () {
+        console.log(this.user)
         if (!!this.user) {
           return false
         }
