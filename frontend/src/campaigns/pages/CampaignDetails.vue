@@ -40,7 +40,7 @@
         </h2>
       </header>
       <div class="payInfo">
-        <vue-numeric currency="$" separator="," max="token.unitPrice" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" currency="$" separator="," max="token.unitPrice" v-model.number="price" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price:</span> {{token.unitPrice}}$
@@ -148,7 +148,7 @@
                   <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
                 </div>
                 <div class="socialLinksDetail">
-                  <social-sharing url={{urlCampaing}}
+                  <social-sharing url='{{urlCampaing}}'
                       title="{{titleCampaing}}"
                       description=descriptionCampaign
                       quote=""
@@ -387,6 +387,7 @@
         coinbaseCheckoutURL: '',
         urlCampaing: 'www.mycampaing.url',
         titleCampaing: 'titu',
+        price: '',
         descriptionCampaing: 'adsasa dsa dsa da dsa ds dsadsa dsad sadsa dddd',
       }
     },
