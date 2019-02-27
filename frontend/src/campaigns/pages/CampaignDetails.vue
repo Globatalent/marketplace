@@ -125,12 +125,14 @@
                               :padding="1" :round-start-rating="false" active-color="#419ce1"></star-rating>
                 </div>
               </div>
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')"
-                        v-if="hasStarted">
+              <template v-if="hasStarted">
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')" v-if="isVerified">
                 {{$tc('message.BuyTokens')}}
               </el-button>
-              <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big"
-                        @click="goToInvest(campaign)" v-else>
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
+                Verify your account
+              </el-button>              </template>
+              <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" @click="goToInvest(campaign)" v-else>
                 {{$tc('message.ComingSoon')}}
               </el-button>
               <div class="campaignDetails-favoriteSocial">
