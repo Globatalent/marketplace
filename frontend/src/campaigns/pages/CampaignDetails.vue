@@ -382,7 +382,7 @@
         pictures: [],
         redirecting: false,
         paymentFee: 3.5,
-        pledged: '',
+        pledged: 0,
         readyToPay: false,
         coinbaseCheckoutURL: '',
         urlCampaing: 'www.mycampaing.url',
