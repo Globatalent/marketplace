@@ -486,7 +486,9 @@
             "amount": amountToPay,
             "currency": "USD"
           },
-          "pricing_type": "fixed_price"
+          "pricing_type": "fixed_price",
+          "redirect_url": "https://market.globatalent.com",
+          "cancel_url": "https://market.globatalent.com"
         }
       })
       .then(response => {
