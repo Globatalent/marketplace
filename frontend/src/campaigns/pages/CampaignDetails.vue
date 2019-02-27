@@ -399,13 +399,13 @@
         return this.campaign.started < new Date()
       },
       isVerified () {
+        console.log(this.user)
         if (!!this.user || null) {
           return false
         }
         else {
           return true
         }
-
       },
       twitterUrl () {
         this.$forceUpdate();
