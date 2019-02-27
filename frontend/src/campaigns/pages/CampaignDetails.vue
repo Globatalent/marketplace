@@ -399,12 +399,11 @@
         return this.campaign.started < new Date()
       },
       isVerified () {
-        console.log(this.user)
-        if (!!this.user || null) {
-          return false
+        if (!!this.user) {
+          return true
         }
         else {
-          return true
+          return false
         }
       },
       twitterUrl () {
