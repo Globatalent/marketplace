@@ -40,7 +40,7 @@
         </h2>
       </header>
       <div class="payInfo">
-        <vue-numeric class="autonumeric" :currency="token.code" separator="," :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" :currency="token.code" separator="," min="1" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price:</span> {{token.unitPrice}}$
@@ -49,7 +49,7 @@
           <span class="is-bold">Your pledged amount:</span> {{pledged}}$
         </li> -->
         <li>
-          <span class="is-bold">Fees:</span> {{((pledged * token.unitPrice / (1 - paymentFee)) * paymentFee).toFixed(2)}}$ ({{paymentFee}}%)
+          <span class="is-bold">Fees:</span> {{((pledged * token.unitPrice / (1 - paymentFee)) * paymentFee).toFixed(2)}}$ ({{paymentFee * 100}}%)
         </li>
         <li>
           <span class="is-bold">Total:</span> {{(pledged * token.unitPrice / (1 - paymentFee )).toFixed(2)}}$
