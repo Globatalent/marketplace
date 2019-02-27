@@ -402,7 +402,7 @@
         return this.campaign.started < new Date()
       },
       addSharingUrl() {
-        return this.$route.fullPath
+        return 'https://market.globatalent.com' + this.$route.fullPath
       },
       addSharingTitle() {
         return this.campaign.title
