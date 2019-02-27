@@ -40,7 +40,7 @@
         </h2>
       </header>
       <div class="payInfo">
-        <vue-numeric class="autonumeric" currency="$" separator="," max="token.unitPrice" v-model.number="price" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" currency="$" separator="," :max="100" v-model.number="price" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price:</span> {{token.unitPrice}}$
@@ -148,9 +148,9 @@
                   <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
                 </div>
                 <div class="socialLinksDetail">
-                  <social-sharing url='{{urlCampaing}}'
-                      title="{{titleCampaing}}"
-                      description=descriptionCampaign
+                  <social-sharing url='adadsa'
+                      title="hiuahdia"
+                      description="descriptionCampaign"
                       quote=""
                       hashtags="globatalent"
                       twitter-user="globatalent"
@@ -364,7 +364,7 @@
   import VueNumeric from 'vue-numeric'
 
   Vue.use(window["vue-js-modal"].default); 
-  Vue.use(VueNumeric);
+  // Vue.use(VueNumeric);
   
   export default {
     name: 'CampaignDetails',
@@ -374,7 +374,8 @@
       'gb-base-layout': BaseLayout,
       'gb-campaign-info-row': CampaignInfoRow,
       StarRating,
-      Timeline
+      Timeline,
+      VueNumeric
     },
     data () {
       return {
