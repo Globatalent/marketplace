@@ -23,7 +23,7 @@
         </el-row>
       </div>
       <div class="campaignDetails-detailBox" v-if="campaign">
-      <modal name="payment" adaptive="true" scrollable="true">
+      <modal name="payment" height="auto" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
           Select how much you want to pledge
@@ -399,8 +399,7 @@
         return this.campaign.started < new Date()
       },
       isVerified () {
-        console.log(this.user)
-        if (!!this.user) {
+        if (!!this.user || null) {
           return false
         }
         else {
