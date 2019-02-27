@@ -308,18 +308,17 @@
             <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title text-right">&nbsp;</el-col>
             <el-col :xs="24" :md="16" id="buyTokenSection"
                     class="campaignDetails-infoContainer-data-text is-last-block">
-              <template v-if="hasStarted">
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-if="isVerified" @click="goToInvest(campaign)">
+            <template v-if="hasStarted">
+              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')" v-if="isVerified">
                 {{$tc('message.BuyTokens')}}
               </el-button>
               <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
-                <!-- {{$tc('message.BuyTokens')}} -->
                 Verify your account
               </el-button>
-              </template>
-              <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" v-else>
-                {{$tc('message.ComingSoon')}}
-              </el-button>
+            </template>
+            <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" @click="goToInvest(campaign)" v-else>
+              {{$tc('message.ComingSoon')}}
+            </el-button>
               <div class="campaignDetails-infoContainer-campaignCopyright">
                 <img src="~@/assets/img/logo-only.png" alt=""
                     class="campaignDetails-infoContainer-campaignCopyright-img">
