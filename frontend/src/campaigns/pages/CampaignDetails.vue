@@ -40,7 +40,7 @@
         </h2>
       </header>
       <div class="payInfo">
-        <vue-numeric class="autonumeric" currency="$" separator="," :max="100" v-model.number="price" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" currency="$" separator="," :max="token.remaining / (1 - (paymentFee / 100)) / token.unitPrice).toFixed(2)" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price:</span> {{token.unitPrice}}$
@@ -388,7 +388,6 @@
         coinbaseCheckoutURL: '',
         urlCampaing: 'www.mycampaing.url',
         titleCampaing: 'titu',
-        price: '',
         descriptionCampaing: 'adsasa dsa dsa da dsa ds dsadsa dsad sadsa dddd',
       }
     },
