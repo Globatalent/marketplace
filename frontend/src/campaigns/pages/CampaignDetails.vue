@@ -1,15 +1,5 @@
 <template>
   <gb-base-layout>
-    <div v-if="redirecting === true">
-      <el-row>
-      <el-col :xs="24" :sm="{span: 12, offset: 6}">
-        <div class="beginBlock text-center">
-          <h3 class="beginBlock-subTitle">We are redirecting you towards our payment processor to complete payment. Please wait...</h3>
-        </div>
-      </el-col>
-    </el-row>
-    </div>
-    <div v-else>
     <div v-if="!!campaign.isDraft">
       <div class="is-padding-boxed">
         <el-row>
@@ -61,7 +51,7 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, (pledged * token.unitPrice / (1 - paymentFee )).toFixed(2))">Pledge</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, (pledged * token.unitPrice / (1 - paymentFee )).toFixed(2))">Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
@@ -349,7 +339,6 @@
           </v-tab>
         </vue-tabs>
       </div>
-    </div>
     </div>
   </gb-base-layout>
 </template>
