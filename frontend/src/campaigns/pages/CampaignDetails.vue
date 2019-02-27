@@ -126,12 +126,13 @@
                 </div>
               </div>
               <template v-if="hasStarted">
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')" v-if="isVerified">
-                {{$tc('message.BuyTokens')}}
-              </el-button>
-              <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
-                Verify your account
-              </el-button>              </template>
+                <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')" v-if="isVerified">
+                  {{$tc('message.BuyTokens')}}
+                </el-button>
+                <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
+                  Verify your account
+                </el-button>
+              </template>
               <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" @click="goToInvest(campaign)" v-else>
                 {{$tc('message.ComingSoon')}}
               </el-button>
@@ -492,6 +493,7 @@
       .then(response => {
         this.coinbaseCheckoutURL = response.data.data.hosted_url
       })
+
       .then(this.readyToPay = true)
       paypal.Buttons({
           createOrder: function(data, actions) {
@@ -503,6 +505,15 @@
               }
             }]
           });
+          },
+          onApprove: function(data, actions) {
+            return actions.order
+            .capture()
+            .then(details => {
+              router.push({
+                name: 'campaign.list'
+              })
+            });
           }
         })
       .render('#paypal-button-container');
