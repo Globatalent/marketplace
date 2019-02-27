@@ -144,9 +144,9 @@
                   <i class="far fa-heart"></i> {{$tc('message.Favorite')}}
                 </div>
                 <div class="socialLinksDetail">
-                  <social-sharing url='adadsa'
-                      title="hiuahdia"
-                      description="descriptionCampaign"
+                  <social-sharing :url="addSharingUrl"
+                      :title="addSharingTitle"
+                      :description="addSharingDescription"
                       quote=""
                       hashtags="globatalent"
                       twitter-user="globatalent"
@@ -382,7 +382,7 @@
         minimumPledge: 1,
         readyToPay: false,
         coinbaseCheckoutURL: '',
-        urlCampaing: 'www.mycampaing.url',
+        urlCampaing: '',
         titleCampaing: 'titu',
         descriptionCampaing: 'adsasa dsa dsa da dsa ds dsadsa dsad sadsa dddd',
       }
@@ -400,6 +400,15 @@
       },
       hasStarted () {
         return this.campaign.started < new Date()
+      },
+      addSharingUrl() {
+        return this.$route.currentRoute
+      },
+      addSharingTitle() {
+        return this.$route.currentRoute
+      },
+      addSharingDescription() {
+        return this.$route.currentRoute
       },
       isVerified () {
         if (!!this.user) {
