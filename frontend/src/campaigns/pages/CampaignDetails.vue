@@ -383,8 +383,8 @@
         readyToPay: false,
         coinbaseCheckoutURL: '',
         urlCampaing: '',
-        titleCampaing: 'titu',
-        descriptionCampaing: 'adsasa dsa dsa da dsa ds dsadsa dsad sadsa dddd',
+        titleCampaing: '',
+        descriptionCampaing: '',
       }
     },
     computed: {
@@ -402,13 +402,13 @@
         return this.campaign.started < new Date()
       },
       addSharingUrl() {
-        return this.$route.currentRoute
+        return this.$route.fullPath
       },
       addSharingTitle() {
-        return this.$route.currentRoute
+        return this.campaign.title
       },
       addSharingDescription() {
-        return this.$route.currentRoute
+        return this.campaign.description
       },
       isVerified () {
         if (!!this.user) {
