@@ -183,6 +183,9 @@ export default {
           if (this.$route.query.utm_source === "Biggico") {
             this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
           }
+          else if (this.$route.query.utm_source === "futmondo") {
+            this.axios.get('https://beta.futmondo.com/mondos/globatalent/grant?clickd_id=' + this.$route.query.click_id )
+          }
 
           this.$store
             .dispatch('auth/register', dataForm)
