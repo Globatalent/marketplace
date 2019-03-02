@@ -61,6 +61,9 @@
               </li>
             </ul>
         </li>
+        <li>
+          <span class="is-bold">Estimated date of release:</span> {{campaign.finished}}
+        </li>
       </ul>
       </div>
       <div class="payFooter">
