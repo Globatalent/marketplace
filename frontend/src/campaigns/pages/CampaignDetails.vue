@@ -31,7 +31,7 @@
       </header>
       <div class="payInfo">
         <div>
-        <span v-if="readyToPay" class="is-bold">Amount to pledge</span>
+        <span v-if="readyToPay" class="is-bold">Amount to pay</span>
         <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" currency="$" separator="," v-bind:precision="2" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="token.unitPrice" v-bind:precision="2" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
@@ -67,7 +67,7 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, parseFloat(pledged.toFixed(2)),parseFloat(((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)), parseFloat((pledged / token.unitPrice).toFixed(2)))">Buy</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, parseFloat(pledged.toFixed(2)),parseFloat(((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)), parseFloat((pledged / token.unitPrice).toFixed(2)))">Buy {{token.code}}</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
