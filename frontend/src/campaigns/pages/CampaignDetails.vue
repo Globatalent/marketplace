@@ -67,7 +67,7 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, pledged.toFixed(2),((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2), (pledged / token.unitPrice).toFixed(2))">Pledge</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, parseFloat(pledged.toFixed(2)),parseFloat(((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)), parseFloat((pledged / token.unitPrice).toFixed(2)))">Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
@@ -566,7 +566,7 @@
       },
       collected () {
         if (!!this.token) {
-          return (this.token.amount - this.token.remaining) * this.token.unit_price
+          return parseFloat(((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2))
         }
         return 0
       },
