@@ -26,7 +26,7 @@
       <modal name="payment" height="auto" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
-          Select how many tokens you want to buy
+          How many tokens you want to buy
         </h2>
       </header>
       <div class="payInfo">
@@ -46,7 +46,7 @@
                 With Credit Card or Paypal: {{((pledged * token.unitPrice * paymentFee) + 0.3).toFixed(2)}}$
               </li>
               <li style="margin-left: 1rem">
-                With Cryptocurrencies: 0$
+                With BTC/ETH: 0$
               </li>
             </ul>
         </li>
@@ -57,7 +57,7 @@
                 With Credit Card or Paypal: ${{ ((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2) }} USD
               </li>
               <li style="margin-left: 1rem">
-                With Cryptocurrency: ${{(pledged * token.unitPrice).toFixed(2)}} USD
+                With BTC/ETH: ${{(pledged * token.unitPrice).toFixed(2)}} USD
               </li>
             </ul>
         </li>
@@ -73,7 +73,7 @@
         <div class="payment__container">
           <div id="paypal-button-container"></div>
           <div style="margin-top: 0.3rem">
-            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Pay with Coinbase Commerce</a>
+            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Pay with Coinbase Commerce (BTC/ETH)</a>
           </div>
         </div>
       </div>
