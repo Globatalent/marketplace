@@ -73,8 +73,11 @@
         <div class="payment__container">
           <div id="paypal-button-container"></div>
           <div style="margin-top: 0.3rem">
-            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Pay with Coinbase Commerce</a>
+            <a class="crypto-link" :href="coinbaseCheckoutURL" v-on:click="waitingConfirmation()" target="_blank"> Pay with Coinbase Commerce</a>
           </div>
+        </div>
+        <div v-if="waiting">
+        We are waiting for your payment confirmation. It may take a few hours for it to be processed. If you haven't received confirmation in 3 hours, contact us indicating your wallet address and email address.
         </div>
       </div>
     </modal>
@@ -400,6 +403,7 @@
         urlCampaing: '',
         titleCampaing: '',
         descriptionCampaing: '',
+        waiting: false
       }
     },
     computed: {
@@ -477,6 +481,9 @@
       })
     },
     methods: {
+      waitingConfirmation() {
+        this.waiting = true;
+      }
       show (id) {
         this.$modal.show(id)
       },
