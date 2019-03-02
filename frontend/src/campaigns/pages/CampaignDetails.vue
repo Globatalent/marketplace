@@ -506,7 +506,6 @@
         .catch(error => {})
     },
       payment (name, description, amountToPay, tokensPaypal, tokensCrypto) {
-      this.onSubmit(tokensPaypal)
       if (amountToPay > 0) {
       this.warning = false;
 
