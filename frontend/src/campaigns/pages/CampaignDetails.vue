@@ -73,7 +73,7 @@
         <div class="payment__container">
           <div id="paypal-button-container"></div>
           <div style="margin-top: 0.3rem">
-            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Pay with Coinbase Commerce (BTC/ETH)</a>
+            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Coinbase Commerce (BTC/ETH)</a>
           </div>
         </div>
       </div>
