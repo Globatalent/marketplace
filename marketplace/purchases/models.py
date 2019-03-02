@@ -19,7 +19,8 @@ class Purchase(TimeStampedModel):
     token = models.ForeignKey(
         "tokens.Token", related_name="purchases", on_delete=models.CASCADE
     )
-    amount = models.PositiveIntegerField(
+    # amount = models.PositiveIntegerField(
+    amount = models.FloatField(
         help_text=_("amount of tokens purchased by the user")
     )
     total = models.FloatField(
