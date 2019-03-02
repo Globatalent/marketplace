@@ -6,7 +6,7 @@ from model_utils.models import TimeStampedModel
 
 from marketplace.actions.constants import PURCHASE
 from marketplace.actions.decorators import dispatch_action
-from marketplace.purchases.constants import STATUS_CHOICES, PENDING
+from marketplace.purchases.constants import STATUS_CHOICES, PENDING, PAID
 from marketplace.purchases.emails import PurchaseEmail
 
 
@@ -26,7 +26,7 @@ class Purchase(TimeStampedModel):
         blank=True, help_text=_("total paid for the amount of tokens")
     )
     status = models.CharField(
-        max_length=8, choices=STATUS_CHOICES, default=PENDING, blank=True
+        max_length=8, choices=STATUS_CHOICES, default=PAID, blank=True
     )
 
     class Meta:
