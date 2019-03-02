@@ -33,7 +33,7 @@
         <div>
         <span v-if="readyToPay" class="is-bold">Amount pledged</span>
         <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" :currency="token.code" separator="," v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-        <vue-numeric class="autonumeric" v-else :currency="$" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
       <ul>
         <li>
@@ -487,7 +487,6 @@
         .catch(error => {})
     },
       payment (name, description, amountToPay) {
-        this.onSubmit()
       // if (amountToPay.match(/^[0-9]+$/)) {
       if (amountToPay > 0) {
       this.warning = false;
