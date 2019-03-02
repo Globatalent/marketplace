@@ -465,8 +465,23 @@
             })
         }
       },
-
+      onSuccess() {
+      const dataForm = {
+        token: this.campaign.token.id,
+        ...this.pledged,
+      }
+      this.saveInvest(dataForm)
+    },
+    saveInvest(data) {
+      this.$store
+        .dispatch('tokens/purchase', data)
+        .then( purchase => {
+          console.log(purchase)
+        })
+        .catch(error => {})
+    },
       payment (name, description, amountToPay) {
+      onSuccess()
       // if (amountToPay.match(/^[0-9]+$/)) {
       if (amountToPay > 0) {
       this.warning = false;
