@@ -32,8 +32,8 @@
       <div class="payInfo">
         <div>
         <span v-if="readyToPay" class="is-bold">Amount pledged</span>
-        <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" currency="$" separator="," v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-        <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" currency="$" separator="," v-bind:precision="2" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="minimumPledge" v-bind:precision="2" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
       <ul>
         <li>
