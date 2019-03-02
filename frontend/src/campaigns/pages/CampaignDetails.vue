@@ -40,10 +40,26 @@
           <span class="is-bold">{{token.code}} price per unit:</span> {{token.unitPrice}}$
         </li>
         <li>
-          <span class="is-bold">Fees (with Credit Card or Paypal):</span> {{((pledged * paymentFee) + 0.3).toFixed(2)}}$ | <span class="is-bold">Fees (with Cryptocurrencies):</span> 0$
+          <span class="is-bold">Fees:
+            <ul>
+              <li>
+                With Credit Card or Paypal: {{((pledged * paymentFee) + 0.3).toFixed(2)}}$
+              </li>
+              <li>
+                With Cryptocurrencies: 0$
+              </li>
+            </ul>
         </li>
         <li>
-          <span class="is-bold">Amount of tokens you will receive:</span> {{((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)}} {{token.code}} (with Credit Card) | {{(pledged / token.unitPrice).toFixed(2)}} {{token.code}} (with Cryptocurrency)
+          <span class="is-bold">Amount of tokens you will receive:</span>
+            <ul>
+              <li>
+                With Credit Card or Paypal: {{((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)}} {{token.code}}
+              </li>
+              <li>
+                With Cryptocurrency: {{(pledged / token.unitPrice).toFixed(2)}} {{token.code}}
+              </li>
+            </ul>
         </li>
       </ul>
       </div>
