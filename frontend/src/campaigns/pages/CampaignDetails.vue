@@ -565,6 +565,7 @@
       
       },
       collected () {
+        console.log(parseFloat(((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2)))
         if (!!this.token) {
           return parseFloat(((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2))
         }
