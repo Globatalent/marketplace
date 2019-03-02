@@ -31,9 +31,9 @@
       </header>
       <div class="payInfo">
         <div>
-        <span v-if="readyToPay" class="is-bold">Amount to pay</span>
-        <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" currency="$" separator="," v-bind:precision="2" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-        <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="token.unitPrice" v-bind:precision="2" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <span v-if="readyToPay" class="is-bold">Amount to buy</span>
+        <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" :currency="token.code" separator="," v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else :currency="token.code" separator="," min="1" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
       <ul>
         <li>
@@ -43,7 +43,7 @@
           <span class="is-bold">Fees:</span>
             <ul>
               <li style="margin-left: 1rem">
-                With Credit Card or Paypal: {{((pledged * paymentFee) + 0.3).toFixed(2)}}$
+                With Credit Card or Paypal: {{((pledged * token.unitPrice * paymentFee) + 0.3).toFixed(2)}}$
               </li>
               <li style="margin-left: 1rem">
                 With Cryptocurrencies: 0$
@@ -51,13 +51,13 @@
             </ul>
         </li>
         <li>
-          <span class="is-bold">Amount of tokens you will receive:</span>
+          <span class="is-bold">Total to pay:</span>
             <ul>
               <li style="margin-left: 1rem">
-                With Credit Card or Paypal: {{((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)}} {{token.code}}
+                With Credit Card or Paypal: ${{ ((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2) }} USD
               </li>
               <li style="margin-left: 1rem">
-                With Cryptocurrency: {{(pledged / token.unitPrice).toFixed(2)}} {{token.code}}
+                With Cryptocurrency: ${{(pledged * token.unitPrice).toFixed(2)}} USD
               </li>
             </ul>
         </li>
@@ -67,13 +67,13 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, parseFloat(pledged.toFixed(2)),parseFloat(((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)), parseFloat((pledged / token.unitPrice).toFixed(2)))">Buy {{token.code}}</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, ((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2), pledged * token.unitPrice )">Buy {{token.code}}</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
           <div id="paypal-button-container"></div>
           <div style="margin-top: 0.3rem">
-            <a class="crypto-link" :href="coinbaseCheckoutURL" v-on:click="waitingConfirmation()" target="_blank"> Pay with Coinbase Commerce</a>
+            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Pay with Coinbase Commerce</a>
           </div>
         </div>
       </div>
@@ -511,9 +511,7 @@
         })
         .catch(error => {})
     },
-      payment (name, description, amountToPay, tokensPaypal, tokensCrypto) {
-      if (amountToPay > 0) {
-      this.warning = false;
+      payment (name, description, amountCredit, amountCrypto) {
 
       Vue.axios({
         method: 'post',
@@ -527,7 +525,7 @@
           "name": name,
           "description": description,
           "local_price": {
-            "amount": amountToPay,
+            "amount": amountCrypto,
             "currency": "USD"
           },
           "pricing_type": "fixed_price",
@@ -546,7 +544,7 @@
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: amountToPay
+                value: amountCredit
               }
             }]
           });
@@ -555,7 +553,7 @@
             return actions.order
             .capture()
             .then(details => {
-              this.onSubmit(tokensPaypal)
+              this.onSubmit(this.pledged)
               router.push({
                 name: 'campaign.list'
               })
@@ -563,10 +561,6 @@
           }
         })
       .render('#paypal-button-container');
-      }
-      else {
-        this.warning = true;
-      }
       
       },
       collected () {

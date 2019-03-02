@@ -19,8 +19,7 @@ class Purchase(TimeStampedModel):
     token = models.ForeignKey(
         "tokens.Token", related_name="purchases", on_delete=models.CASCADE
     )
-    # amount = models.PositiveIntegerField(
-    amount = models.FloatField(
+    amount = models.PositiveIntegerField(
         help_text=_("amount of tokens purchased by the user")
     )
     total = models.FloatField(
@@ -34,7 +33,7 @@ class Purchase(TimeStampedModel):
         ordering = ("created",)
 
     def __str__(self):
-        return "${}USD to {}".format(format(self.total, '.2f'),self.token)
+        return "${}USD to {}".format(format(self.total, '.2f'), self.token)
 
     def send_confirmation_email(self):
         email = PurchaseEmail(to=self.user.email, context={"purchase": self})
