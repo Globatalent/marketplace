@@ -477,7 +477,7 @@
       onSubmit() {
       const dataForm = {
         token: this.campaign.token.id,
-        ...this.pledged,
+        amount: this.pledged,
       }
       this.saveInvest(dataForm)
     },
