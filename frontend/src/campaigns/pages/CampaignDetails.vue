@@ -566,7 +566,7 @@
       },
       collected () {
         if (!!this.token) {
-          return (this.token.amount - this.token.remaining) * this.token.unit_price
+          return ((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2)
         }
         return 0
       },
