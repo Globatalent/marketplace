@@ -1022,7 +1022,8 @@
   
   .payFooter {
     display: flex;
-    justify-content: space-around
+    justify-content: space-around;
+    padding: 1rem;
   }
 
   .payment__parent {
@@ -1032,7 +1033,7 @@
   }
 
   .payment__container {
-    padding: 1.5rem;
+    padding: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -1043,11 +1044,11 @@
   .crypto-link {
     color: white;
 
-    border: 1px solid #88b7e3;
+    border: 1px solid #5584b0;
 
-    background-color: #88b7e3;
+    background-color: #5584b0;
 
-    padding: 1rem;
+    padding: 0.6rem;
 
     border-radius: 4px;
 
