@@ -474,7 +474,7 @@
             })
         }
       },
-      onSuccess() {
+      onSubmit() {
       const dataForm = {
         token: this.campaign.token.id,
         ...this.pledged,
@@ -490,7 +490,7 @@
         .catch(error => {})
     },
       payment (name, description, amountToPay) {
-      onSuccess()
+      this.onSubmit()
       // if (amountToPay.match(/^[0-9]+$/)) {
       if (amountToPay > 0) {
       this.warning = false;
