@@ -148,7 +148,7 @@
                 <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')" v-if="isVerified">
                   {{$tc('message.BuyTokens')}}
                 </el-button>
-                <el-button type="primary" class="is-full-width buyTokensButton" size="big" v-else>
+                <el-button type="primary" class="is-full-width buyTokensButton" @click="goToLogin(campaign)" size="big" v-else>
                   Verify your account
                 </el-button>
               </template>
@@ -500,6 +500,11 @@
         amount: amount,
       }
       this.saveInvest(dataForm)
+    },
+    goToLogin() {
+      router.push({
+        name: 'login'
+      })
     },
     saveInvest(data) {
       this.$store
