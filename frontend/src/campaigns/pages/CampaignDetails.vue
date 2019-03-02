@@ -67,7 +67,7 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, pledged.toFixed(2))">Pledge</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, pledged.toFixed(2),((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2), (pledged / token.unitPrice).toFixed(2))">Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
@@ -490,10 +490,10 @@
             })
         }
       },
-      onSubmit() {
+      onSubmit(amount) {
       const dataForm = {
         token: this.campaign.token.id,
-        amount: this.pledged,
+        amount: amount,
       }
       this.saveInvest(dataForm)
     },
@@ -505,8 +505,9 @@
         })
         .catch(error => {})
     },
-      payment (name, description, amountToPay) {
-      // if (amountToPay.match(/^[0-9]+$/)) {
+      payment (name, description, amountToPay, tokensPaypal, tokensCrypto) {
+                      this.onSubmit(tokensPaypal)
+
       if (amountToPay > 0) {
       this.warning = false;
 
@@ -550,7 +551,7 @@
             return actions.order
             .capture()
             .then(details => {
-              this.onSubmit()
+              this.onSubmit(tokensPaypal)
               router.push({
                 name: 'campaign.list'
               })
