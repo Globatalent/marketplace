@@ -33,7 +33,7 @@
         <div>
         <span v-if="readyToPay" class="is-bold">Amount to buy</span>
         <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" :currency="token.code" separator="," v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-        <vue-numeric class="autonumeric" v-else :currency="token.code" separator="," min="1" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else :currency="token.code" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
       <ul>
         <li>
@@ -564,7 +564,6 @@
       
       },
       collected () {
-        console.log((this.token.amount - this.token.remaining) * this.token.unit_price)
         if (!!this.token) {
           return parseFloat(((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2))
         }
