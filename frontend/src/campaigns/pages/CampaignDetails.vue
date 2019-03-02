@@ -72,7 +72,7 @@
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
           <div id="paypal-button-container"></div>
-          <div>
+          <div style="margin-top: 0.3rem">
             <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Pay with Coinbase Commerce</a>
           </div>
         </div>
