@@ -104,7 +104,7 @@
             </el-col>
             <el-col :xs="24" :md="8" class="campaignDetails-col">
               <div class="campaignDetails-collected"><span
-                class="campaignDetails-collected-currency">$</span> {{((campaign.token.amount - campaign.token.remaining) * campaign.token.unit_price).toFixed(2)}} <span
+                class="campaignDetails-collected-currency">$</span> {{((token.amount - token.remaining) * token.unitPrice).toFixed(2)}} <span
                 class="campaignDetails-collected-text">{{$tc('message.Raised')}}</span>
               </div>
               <div class="progress m-b-15 clearfix">
