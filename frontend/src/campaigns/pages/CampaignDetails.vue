@@ -26,14 +26,14 @@
       <modal name="payment" height="auto" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
-          Select how much you want to pledge
+          Select how many tokens you want to buy
         </h2>
       </header>
       <div class="payInfo">
         <div>
-        <span v-if="readyToPay" class="is-bold">Amount pledged</span>
+        <span v-if="readyToPay" class="is-bold">Amount to pledge</span>
         <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" currency="$" separator="," v-bind:precision="2" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-        <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="minimumPledge" v-bind:precision="2" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else currency="$" separator="," :min="token.unitPrice" v-bind:precision="2" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
       <ul>
         <li>
@@ -75,9 +75,6 @@
           <div style="margin-top: 0.3rem">
             <a class="crypto-link" :href="coinbaseCheckoutURL" v-on:click="waitingConfirmation()" target="_blank"> Pay with Coinbase Commerce</a>
           </div>
-        </div>
-        <div v-if="waiting">
-        We are waiting for your payment confirmation. It may take a few hours for it to be processed. If you haven't received confirmation in 3 hours, contact us indicating your wallet address and email address.
         </div>
       </div>
     </modal>
