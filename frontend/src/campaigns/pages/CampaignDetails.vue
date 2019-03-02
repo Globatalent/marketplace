@@ -33,25 +33,22 @@
         <div>
         <span v-if="readyToPay" class="is-bold">Amount pledged</span>
         <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" :currency="token.code" separator="," v-model.number="pledged" v-bind:minus="false"></vue-numeric>
-        <vue-numeric class="autonumeric" v-else :currency="token.code" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else :currency="$" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
         </div>
       <ul>
         <li>
           <span class="is-bold">{{token.code}} price per unit:</span> {{token.unitPrice}}$
         </li>
-        <!-- <li>
-          <span class="is-bold">Your pledged amount:</span> {{pledged}}$
-        </li> -->
         <li>
           <span class="is-bold">Fees (with Credit Card or Paypal):</span> {{((pledged * paymentFee) + 0.3).toFixed(2)}}$ | <span class="is-bold">Fees (with Cryptocurrencies): 0$</span>
         </li>
         <li>
-          <span class="is-bold">Amount of tokens you will receive:</span> {{((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)}}$
+          <span class="is-bold">Amount of tokens you will receive:</span> {{((pledged * (1 - paymentFee) - 0.3) / token.unitPrice).toFixed(2)}} {{token.code}}
         </li>
       </ul>
       </div>
       <div class="payFooter">
-      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, (pledged * token.unitPrice / (1 - paymentFee )).toFixed(2))">Pledge</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, pledged.toFixed(2))">Pledge</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
@@ -490,6 +487,7 @@
         .catch(error => {})
     },
       payment (name, description, amountToPay) {
+        this.onSubmit()
       // if (amountToPay.match(/^[0-9]+$/)) {
       if (amountToPay > 0) {
       this.warning = false;
