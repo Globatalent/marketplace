@@ -481,9 +481,6 @@
       })
     },
     methods: {
-      waitingConfirmation() {
-        this.waiting = true;
-      }
       show (id) {
         this.$modal.show(id)
       },
