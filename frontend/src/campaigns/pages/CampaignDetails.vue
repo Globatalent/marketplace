@@ -566,7 +566,7 @@
       },
       collected () {
         if (!!this.token) {
-          return this.token.amount - this.token.remaining
+          return (this.token.amount - this.token.remaining) * this.token.unit_price
         }
         return 0
       },
