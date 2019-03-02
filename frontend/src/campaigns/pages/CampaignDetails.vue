@@ -26,7 +26,7 @@
       <modal name="payment" height="auto" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
-          How many tokens you want to buy
+          How many tokens do you want to buy?
         </h2>
       </header>
       <div class="payInfo">
