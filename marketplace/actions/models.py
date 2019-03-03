@@ -89,11 +89,11 @@ class Action(TimeStampedModel):
         self.sent = True
         self.save()
 
-    def save(self, *args, **kwargs):
-        result = super().save(*args, **kwargs)
-        if not self.sent:
-            self.send()
-        return result
+    # def save(self, *args, **kwargs):
+    #     result = super().save(*args, **kwargs)
+    #     if not self.sent:
+    #         self.send()
+    #     return result
 
 
 class Notification(TimeStampedModel):
