@@ -313,7 +313,7 @@
                                 :title="$tc('message.Recommendations')">
             <el-row v-for="recommendation in campaign.recommendations" :key="recommendation.id">
               <el-col>
-                <video v-if="recommendation.file.includes('mp4')" width="100%">
+                <video v-if="recommendation.file.includes('mp4')" width="100%" controls>
                   <source :src="recommendation.file" type="video/mp4">
                 </video>
                 <a v-else :href="recommendation.file" target="_blank"><i class="el-icon-document"></i> {{ $tc('message.Download')
