@@ -68,8 +68,8 @@ class Action(TimeStampedModel):
     def audience(self):
         """Gets the audience of this action."""
         # Specific verbs cases
-        if self.verb in (ADD_REVIEW, PURCHASE):
-            return User.objects.filter(pk=self.target.user.pk)
+        # if self.verb in (ADD_REVIEW, PURCHASE):
+        #     return User.objects.filter(pk=self.target.user.pk)
         # If the actor is an athlete
         if self.actor_content_type == ContentType.objects.get_for_model(Campaign):
             followers = self.actor.followers.all()
@@ -89,11 +89,11 @@ class Action(TimeStampedModel):
         self.sent = True
         self.save()
 
-    # def save(self, *args, **kwargs):
-    #     result = super().save(*args, **kwargs)
-    #     if not self.sent:
-    #         self.send()
-    #     return result
+    def save(self, *args, **kwargs):
+        result = super().save(*args, **kwargs)
+        if not self.sent:
+            self.send()
+        return result
 
 
 class Notification(TimeStampedModel):
