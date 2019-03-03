@@ -258,7 +258,7 @@ class Recommendation(TimeStampedModel):
         "campaigns.Campaign", related_name="recommendations", on_delete=models.CASCADE
     )
     file = models.FileField(
-        max_length=250, upload_to=UploadToDir("recommendations", random_name=True)
+        max_length=500, upload_to=UploadToDir("recommendations", random_name=True)
     )
 
 
