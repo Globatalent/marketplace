@@ -43,7 +43,7 @@
           <span class="is-bold">Fees:</span>
             <ul>
               <li style="margin-left: 1rem">
-                With Credit Card or Paypal: {{((pledged * token.unitPrice * paymentFee) + 0.3).toFixed(2)}}$
+                With Credit Card or Paypal: {{(((pledged * token.unitPrice * paymentFee) + 0.3)/ (1-paymentFee)).toFixed(2)}}$
               </li>
               <li style="margin-left: 1rem">
                 With BTC/ETH: 0$
