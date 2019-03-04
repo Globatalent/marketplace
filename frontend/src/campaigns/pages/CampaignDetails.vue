@@ -499,22 +499,22 @@
         token: this.campaign.token.id,
         amount: amount,
       }
-      this.saveInvest(dataForm)
+      this.$store
+        .dispatch('tokens/purchase', dataForm)
+        .then( purchase => {
+          console.log(purchase)
+          router.push({
+            name: 'campaign.list'
+          })
+        })
+        .catch(error => {})
     },
     goToLogin() {
       router.push({
         name: 'login'
       })
     },
-    saveInvest(data) {
-      this.$store
-        .dispatch('tokens/purchase', data)
-        .then( purchase => {
-          console.log(purchase)
-        })
-        .catch(error => {})
-    },
-      payment (name, description, amountCredit, amountCrypto) {
+    payment (name, description, amountCredit, amountCrypto) {
 
       Vue.axios({
         method: 'post',
@@ -556,10 +556,19 @@
             return actions.order
             .capture()
             .then(details => {
-              this.onSubmit(this.pledged)
-              router.push({
-                name: 'campaign.list'
-              })
+                    const dataForm = {
+        token: this.campaign.token.id,
+        amount: amount,
+      }
+      this.$store
+        .dispatch('tokens/purchase', dataForm)
+        .then( purchase => {
+          console.log(purchase)
+          router.push({
+            name: 'campaign.list'
+          })
+        })
+        .catch(error => {})
             });
           }
         })
