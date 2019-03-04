@@ -48,15 +48,8 @@
         </div>
       </div>
       <div class="clearfix campaign-footer">
-        <!-- <div v-if="redirecting">
-          <div class="timeLeft">
-          <i class="far fa-clock"></i>
-          <span class="timeLeft-text" >Redirecting you towards our payment processor. Please wait...</span>
-        </div>
-        </div> -->
-        <!-- <div v-else> -->
-          <div>
-        <!-- <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button> -->
+        <div>
+        <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
