@@ -193,69 +193,7 @@
         this.$store.dispatch('campaigns/follow', this.campaign.id).catch(error => {
           console.log(error)
         })
-      },
-   payment (name, description,token, amount, amountCredit, amountCrypto) {
-      let sender = this.$store
-
-      Vue.axios({
-        method: 'post',
-        url:'https://api.commerce.coinbase.com/charges',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CC-Api-Key': '74038429-1376-4218-86b5-94c88c1f454f',
-          'X-CC-Version': '2018-03-22'
-        },
-        data: {
-          "name": name,
-          "description": description,
-          "local_price": {
-            "amount": amountCrypto,
-            "currency": "USD"
-          },
-          "pricing_type": "fixed_price",
-          "redirect_url": "https://market.globatalent.com",
-          "cancel_url": "https://market.globatalent.com"
-        }
-      })
-      .then(response => {
-        this.coinbaseCheckoutURL = response.data.data.hosted_url
-      })
-
-      .then(this.readyToPay = true)
-      paypal.Buttons({
-          createOrder: function(data, actions) {
-          // Set up the transaction
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: amountCredit
-              }
-            }]
-          });
-          },
-          onApprove: function(data, actions) {
-            return actions.order
-            .capture()
-            .then(details => {
-            const dataForm = {
-              token: token,
-              amount: amount,
-            }
-          sender
-          .dispatch('tokens/purchase', dataForm)
-          .then( purchase => {
-          console.log(purchase)
-          router.push({
-            name: 'campaign.list'
-          })
-        })
-        .catch(error => {})
-            });
-          }
-        })
-      .render('#paypal-button-container');
-      
-      },
+      },   
       collected () {
         if (!!this.token) {
           return parseFloat(((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2))
