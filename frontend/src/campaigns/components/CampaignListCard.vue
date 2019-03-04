@@ -104,7 +104,7 @@
       </div>
       <div class="clearfix campaign-footer">
         <div>
-        <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
+        <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
@@ -262,10 +262,6 @@
         }
         return 0
       },
-      goToInvest (campaign) {
-        console.log(this.token)
-      }
-    },
       showMore() {
         this.isExtended = !this.isExtended;
       },
