@@ -129,6 +129,7 @@
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
+  Vue.use(window["vue-js-modal"].default); 
 
   export default {
     name: 'CampaignListCard',
