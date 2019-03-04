@@ -515,6 +515,7 @@
       })
     },
     payment (name, description,token, amount, amountCredit, amountCrypto) {
+      let sender = this.$store
 
       Vue.axios({
         method: 'post',
@@ -560,9 +561,9 @@
               token: token,
               amount: amount,
             }
-      this.$store
-        .dispatch('tokens/purchase', dataForm)
-        .then( purchase => {
+          sender
+          .dispatch('tokens/purchase', dataForm)
+          .then( purchase => {
           console.log(purchase)
           router.push({
             name: 'campaign.list'
