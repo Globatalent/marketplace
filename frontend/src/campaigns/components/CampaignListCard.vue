@@ -1,8 +1,5 @@
 <template>
   <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
-          <modal name="payment" height="auto" adaptive="true" scrollable="true">
-hola
-    </modal>
     <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
       <div :class="['campaign-image', {'is-placeholder-image': !campaign.image}]" :style="campaign.image ? {backgroundImage:'url('+campaign.image+')'} : {}">
         <div class="campaign-sport" v-if="campaign.sport"
@@ -59,7 +56,7 @@ hola
         </div> -->
         <!-- <div v-else> -->
           <div>
-        <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="go('payment')"></el-button>
+        <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
           <span class="timeLeft-text" v-if="campaign.started < new Date()">{{campaign.remaining}} days left</span>
@@ -84,7 +81,6 @@ hola
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
-  Vue.use(window["vue-js-modal"].default); 
 
   export default {
     name: 'CampaignListCard',
@@ -134,9 +130,6 @@ hola
       },
       showMore() {
         this.isExtended = !this.isExtended;
-      },
-      show (id) {
-        this.$modal.show(id)
       },
       showMoreMsg() {
         return this.isExtended ? this.$tc("message.showLess") : this.$tc("message.showMore");
