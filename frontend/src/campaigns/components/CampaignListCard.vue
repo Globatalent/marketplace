@@ -1,5 +1,6 @@
 <template>
-<modal name="payment" height="auto" adaptive="true" scrollable="true">
+  <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
+    <modal name="payment" height="auto" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
           How many tokens do you want to buy?
@@ -54,7 +55,6 @@
         </div>
       </div>
     </modal>
-  <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
     <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
       <div :class="['campaign-image', {'is-placeholder-image': !campaign.image}]" :style="campaign.image ? {backgroundImage:'url('+campaign.image+')'} : {}">
         <div class="campaign-sport" v-if="campaign.sport"
@@ -245,8 +245,8 @@
       },
       goToInvest (campaign) {
         console.log(this.token)
-      },
-    }
+      }
+    },
       showMore() {
         this.isExtended = !this.isExtended;
       },
@@ -257,7 +257,6 @@
         return this.isExtended ? this.campaign.description : (this.campaign.description.length > 50 ? this.campaign.description.substring(0,50)+' ...' : this.campaign.description);
       }
     }
-  }
 </script>
 
 <style lang="scss" scoped>
