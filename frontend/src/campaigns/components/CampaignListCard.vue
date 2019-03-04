@@ -124,7 +124,7 @@
       },
       goToInvest (campaign) {
         router.push({
-          name: 'campaign.invest',
+          name: 'campaign.details',
           params: {campaignId: campaign.id}
         })
       },
