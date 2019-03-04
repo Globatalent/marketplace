@@ -145,6 +145,7 @@
         minimumPledge: 1,
         readyToPay: false,
         coinbaseCheckoutURL: '',
+        token: {}
       }
     },
     computed: {
@@ -167,6 +168,21 @@
           return null
         }
       },
+    },
+    created() {
+      const id = this.$route.params.campaignId
+
+      this.$store.dispatch('campaigns/fetch', id).then(() => {
+        this.token = !!this.campaign.token ? this.campaign.token : {}
+        this.campaign.incomes.sort((x, y) => x.year - y.year)
+        this.campaign.revenues.sort((x, y) => x.year - y.year)
+      })
+      .catch(() => {
+        router.push({
+           name: 'not-found',
+           params: {}
+         })
+      })
     },
     methods: {
       setFollowingCampaign() {
