@@ -1,6 +1,6 @@
 <template>
   <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
-    <modal name="payment" height="auto" adaptive="true" scrollable="true">
+    <!-- <modal name="payment" height="auto" adaptive="true" scrollable="true">
       <header>
         <h2 class="text-center">
           How many tokens do you want to buy?
@@ -38,9 +38,6 @@
               </li>
             </ul>
         </li>
-        <!-- <li>
-          <span class="is-bold">Estimated date of release:</span> {{campaign.finished}}
-        </li> -->
       </ul>
       </div>
       <div class="payFooter">
@@ -54,7 +51,7 @@
           </div>
         </div>
       </div>
-    </modal>
+    </modal> -->
     <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
       <div :class="['campaign-image', {'is-placeholder-image': !campaign.image}]" :style="campaign.image ? {backgroundImage:'url('+campaign.image+')'} : {}">
         <div class="campaign-sport" v-if="campaign.sport"
