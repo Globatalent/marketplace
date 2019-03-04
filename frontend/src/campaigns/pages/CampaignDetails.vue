@@ -67,7 +67,7 @@
       </ul>
       </div>
       <div class="payFooter">
-      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, ((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2), pledged * token.unitPrice )">Buy {{token.code}}</button>
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, token.id, pledged,((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2), pledged * token.unitPrice )">Buy {{token.code}}</button>
       </div>
       <div v-show="readyToPay" class="payment__parent">
         <div class="payment__container">
@@ -514,7 +514,7 @@
         name: 'login'
       })
     },
-    payment (name, description, amountCredit, amountCrypto) {
+    payment (name, description,token, amount, amountCredit, amountCrypto) {
 
       Vue.axios({
         method: 'post',
@@ -557,8 +557,8 @@
             .capture()
             .then(details => {
             const dataForm = {
-              token: this.token.id,
-              amount: this.pledged,
+              token: token,
+              amount: amount,
             }
       this.$store
         .dispatch('tokens/purchase', dataForm)
