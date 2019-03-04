@@ -556,10 +556,10 @@
             return actions.order
             .capture()
             .then(details => {
-                    const dataForm = {
-        token: this.campaign.token.id,
-        amount: amount,
-      }
+            const dataForm = {
+              token: this.token.id,
+              amount: this.pledged,
+            }
       this.$store
         .dispatch('tokens/purchase', dataForm)
         .then( purchase => {
