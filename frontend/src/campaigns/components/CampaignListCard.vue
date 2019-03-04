@@ -272,6 +272,7 @@
         return this.isExtended ? this.campaign.description : (this.campaign.description.length > 50 ? this.campaign.description.substring(0,50)+' ...' : this.campaign.description);
       }
     }
+  }
 </script>
 
 <style lang="scss" scoped>
