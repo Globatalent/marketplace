@@ -51,7 +51,7 @@
           <div>
         <template v-if="campaign.started < new Date()">
         <el-button class="buy-tokens" type="primary" size="big" v-if="isLogged" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
-        <el-button class="buy-tokens" type="primary" size="big" v-else v-html="$tc('message.BuyTokens')" @click="goToLogin()"></el-button>
+        <el-button class="buy-tokens" type="primary" size="big" v-else @click="goToLogin()">Verify your account</el-button>
         </template>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
