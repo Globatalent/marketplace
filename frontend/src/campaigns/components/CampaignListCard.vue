@@ -1,4 +1,59 @@
 <template>
+<modal name="payment" height="auto" adaptive="true" scrollable="true">
+      <header>
+        <h2 class="text-center">
+          How many tokens do you want to buy?
+        </h2>
+      </header>
+      <div class="payInfo">
+        <div>
+        <span v-if="readyToPay" class="is-bold">Amount to buy</span>
+        <vue-numeric class="autonumeric" v-if="readyToPay" read-only="true" :currency="token.code" separator="," v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        <vue-numeric class="autonumeric" v-else :currency="token.code" separator="," :min="minimumPledge" :max="token.remaining" v-model.number="pledged" v-bind:minus="false"></vue-numeric>
+        </div>
+      <ul>
+        <li>
+          <span class="is-bold">{{token.code}} price per unit:</span> {{token.unitPrice}}$
+        </li>
+        <li>
+          <span class="is-bold">Fees:</span>
+            <ul>
+              <li style="margin-left: 1rem">
+                With Credit Card or Paypal: {{(((pledged * token.unitPrice * paymentFee) + 0.3)/ (1-paymentFee)).toFixed(2)}}$
+              </li>
+              <li style="margin-left: 1rem">
+                With BTC/ETH: 0$
+              </li>
+            </ul>
+        </li>
+        <li>
+          <span class="is-bold">Total to pay:</span>
+            <ul>
+              <li style="margin-left: 1rem">
+                With Credit Card or Paypal: ${{ ((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2) }} USD
+              </li>
+              <li style="margin-left: 1rem">
+                With BTC/ETH: ${{(pledged * token.unitPrice).toFixed(2)}} USD
+              </li>
+            </ul>
+        </li>
+        <!-- <li>
+          <span class="is-bold">Estimated date of release:</span> {{campaign.finished}}
+        </li> -->
+      </ul>
+      </div>
+      <div class="payFooter">
+      <button class="crypto-link" v-if="readyToPay === false" v-on:click="payment(campaign.title,campaign.description, token.id, pledged,((pledged * token.unitPrice + 0.3) / (1 - paymentFee)).toFixed(2), pledged * token.unitPrice )">Buy {{token.code}}</button>
+      </div>
+      <div v-show="readyToPay" class="payment__parent">
+        <div class="payment__container">
+          <div id="paypal-button-container"></div>
+          <div style="margin-top: 0.3rem">
+            <a class="crypto-link" :href="coinbaseCheckoutURL" target="_blank"> Coinbase Commerce (BTC/ETH)</a>
+          </div>
+        </div>
+      </div>
+    </modal>
   <el-card :body-style="{ padding: '0px', display: 'flex', 'flex-direction': 'column' }">
     <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
       <div :class="['campaign-image', {'is-placeholder-image': !campaign.image}]" :style="campaign.image ? {backgroundImage:'url('+campaign.image+')'} : {}">
@@ -84,7 +139,12 @@
     data () {
       return {
         isExtended: false,
-        redirecting: false
+        redirecting: false,
+        paymentFee: 0.054,
+        pledged: 0,
+        minimumPledge: 1,
+        readyToPay: false,
+        coinbaseCheckoutURL: '',
       }
     },
     computed: {
@@ -115,19 +175,78 @@
           console.log(error)
         })
       },
-      goToInvest (campaign) {
-        this.redirecting = true;
-        let urls = {
-          5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
-        };
-        setTimeout(() => {
-          window.location.href = urls[campaign.id.toString()]
-        }, 5000);
-        // router.push({
-        //   name: 'campaign.invest',
-        //   params: {campaignId: campaign.id}
-        // })
+   payment (name, description,token, amount, amountCredit, amountCrypto) {
+      let sender = this.$store
+
+      Vue.axios({
+        method: 'post',
+        url:'https://api.commerce.coinbase.com/charges',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CC-Api-Key': '74038429-1376-4218-86b5-94c88c1f454f',
+          'X-CC-Version': '2018-03-22'
+        },
+        data: {
+          "name": name,
+          "description": description,
+          "local_price": {
+            "amount": amountCrypto,
+            "currency": "USD"
+          },
+          "pricing_type": "fixed_price",
+          "redirect_url": "https://market.globatalent.com",
+          "cancel_url": "https://market.globatalent.com"
+        }
+      })
+      .then(response => {
+        this.coinbaseCheckoutURL = response.data.data.hosted_url
+      })
+
+      .then(this.readyToPay = true)
+      paypal.Buttons({
+          createOrder: function(data, actions) {
+          // Set up the transaction
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: amountCredit
+              }
+            }]
+          });
+          },
+          onApprove: function(data, actions) {
+            return actions.order
+            .capture()
+            .then(details => {
+            const dataForm = {
+              token: token,
+              amount: amount,
+            }
+          sender
+          .dispatch('tokens/purchase', dataForm)
+          .then( purchase => {
+          console.log(purchase)
+          router.push({
+            name: 'campaign.list'
+          })
+        })
+        .catch(error => {})
+            });
+          }
+        })
+      .render('#paypal-button-container');
+      
       },
+      collected () {
+        if (!!this.token) {
+          return parseFloat(((this.token.amount - this.token.remaining) * this.token.unit_price).toFixed(2))
+        }
+        return 0
+      },
+      goToInvest (campaign) {
+        console.log(this.token)
+      },
+    }
       showMore() {
         this.isExtended = !this.isExtended;
       },

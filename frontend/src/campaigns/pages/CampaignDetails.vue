@@ -494,21 +494,6 @@
             })
         }
       },
-      onSubmit(amount) {
-      const dataForm = {
-        token: this.campaign.token.id,
-        amount: amount,
-      }
-      this.$store
-        .dispatch('tokens/purchase', dataForm)
-        .then( purchase => {
-          console.log(purchase)
-          router.push({
-            name: 'campaign.list'
-          })
-        })
-        .catch(error => {})
-    },
     goToLogin() {
       router.push({
         name: 'login'
