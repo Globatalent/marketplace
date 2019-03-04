@@ -124,11 +124,13 @@
 
 
 <script>
+  import Vue from 'vue'
   import { mapGetters } from 'vuex'
   import Vuex from 'vuex'
   import router from '@/router.js'
   import StarRating from 'vue-star-rating'
   import VueI18n from 'vue-i18n'
+    import VueNumeric from 'vue-numeric'
   Vue.use(window["vue-js-modal"].default); 
 
   export default {
