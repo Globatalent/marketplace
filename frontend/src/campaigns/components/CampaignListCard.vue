@@ -48,7 +48,14 @@
         </div>
       </div>
       <div class="clearfix campaign-footer">
-        <div>
+        <!-- <div v-if="redirecting">
+          <div class="timeLeft">
+          <i class="far fa-clock"></i>
+          <span class="timeLeft-text" >Redirecting you towards our payment processor. Please wait...</span>
+        </div>
+        </div> -->
+        <!-- <div v-else> -->
+          <div>
         <el-button class="buy-tokens" type="primary" size="big" v-if="campaign.started < new Date()" v-html="$tc('message.BuyTokens')" @click="goToInvest(campaign)"></el-button>
         <div class="timeLeft">
           <i class="far fa-clock"></i>
@@ -116,17 +123,10 @@
         })
       },
       goToInvest (campaign) {
-        this.redirecting = true;
-        let urls = {
-          5: 'https://bestrate.org/payout/44d7f1bf33b7f33f1494708d62793693'
-        };
-        setTimeout(() => {
-          window.location.href = urls[campaign.id.toString()]
-        }, 5000);
-        // router.push({
-        //   name: 'campaign.invest',
-        //   params: {campaignId: campaign.id}
-        // })
+        router.push({
+          name: 'campaign.invest',
+          params: {campaignId: campaign.id}
+        })
       },
       showMore() {
         this.isExtended = !this.isExtended;
