@@ -235,11 +235,11 @@
           <gb-campaign-info-row v-if="campaign.biography" id="biographySection" :title="$tc('message.Biography')">
             <pre>{{campaign.biography}}</pre>
           </gb-campaign-info-row>
-          <template v-if="campaig.kind === club">
+          <!-- <template v-if="campaig.kind === club"> -->
           <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
-            <pre>{{campaign.history}}</pre>
+            <pre>{{campaign.kind}}</pre>
           </gb-campaign-info-row>
-          </template>
+          <!-- </template> -->
           <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" :title="$tc('message.Video')">
             <div v-if="campaign.pitchUrl.includes('youtube')" class="videoWrapper">
               <iframe width="560" height="315" v-bind:src="'https://www.youtube.com/embed/' + campaign.pitchUrl.split('?').slice(-1)[0].split('&').filter(param => param.includes('v=')).slice(-1)[0].split('v=').slice(-1)[0]" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
