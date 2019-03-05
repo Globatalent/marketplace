@@ -180,10 +180,13 @@ export default {
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
           request.send(formToSend);
 
-          if (this.$route.query.utm_source === "Biggico") {
+          console.log(this.$route.query.utm_source)
+          console.log(this.$route.query.utm_campaign)
+
+          if (this.$route.query.utm_source.toLowerCase() === "biggico") {
             this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
           }
-          else if (this.$route.query.utm_source === "futmondo") {
+          else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
             this.axios.get('https://beta.futmondo.com/mondos/globatalent/grant?clickd_id=' + this.$route.query.click_id + '&utm_campaign=' + this.$route.query.utm_campaign)
           }
 
