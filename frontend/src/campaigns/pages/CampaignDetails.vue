@@ -465,7 +465,7 @@
     created () {
       const id = this.$route.params.campaignId
 
-      console.log(campaign)
+      console.log(this.campaign)
 
       this.$store.dispatch('campaigns/fetch', id).then(() => {
         this.token = !!this.campaign.token ? this.campaign.token : {}
