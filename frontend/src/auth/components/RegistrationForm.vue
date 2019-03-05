@@ -162,6 +162,9 @@ export default {
           const dataForm = Object.assign({}, this.form);
           const formToSend = new FormData();
 
+          this.$store
+            .dispatch('auth/register', dataForm)
+            .then(data => {
           formToSend.append('xnQsjsdp','26ded01eee3cbb74693abaeee34e2f8acbb50ca314ea68813ba8b57665b4dc48');  
           formToSend.append('zc_gad','');
           formToSend.append('xmIwtLD','902ae1508809b664f4a8880feb72264315a8f92dcadde00bd65c96b2b9cbbafb');
@@ -180,19 +183,12 @@ export default {
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
           request.send(formToSend);
 
-          console.log(this.$route.query.utm_source)
-          console.log(this.$route.query.utm_campaign)
-
           if (this.$route.query.utm_source.toLowerCase() === "biggico") {
             this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
           }
           else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
             this.axios.get('https://beta.futmondo.com/mondos/globatalent/grant?clickd_id=' + this.$route.query.click_id + '&utm_campaign=' + this.$route.query.utm_campaign)
           }
-
-          this.$store
-            .dispatch('auth/register', dataForm)
-            .then(data => {
               router.push({ name: 'campaign.list' })
             })
             .catch(error => {
