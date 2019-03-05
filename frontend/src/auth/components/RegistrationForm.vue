@@ -183,13 +183,15 @@ export default {
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
           request.send(formToSend);
 
+          if (this.$route.query.utm_source !== undefined) {
           if (this.$route.query.utm_source.toLowerCase() === "biggico") {
             this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
           }
           else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
             this.axios.get('https://beta.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&utm_campaign=' + this.$route.query.utm_campaign)
           }
-              router.push({ name: 'campaign.list' })
+          }
+          router.push({ name: 'campaign.list' })
             })
             .catch(error => {
               if (!!error.response) {
