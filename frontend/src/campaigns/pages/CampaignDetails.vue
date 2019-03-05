@@ -235,7 +235,7 @@
           <gb-campaign-info-row v-if="campaign.biography" id="biographySection" :title="$tc('message.Biography')">
             <pre>{{campaign.biography}}</pre>
           </gb-campaign-info-row>
-          <template v-if="campaig.kind !== 'athlete'">
+          <template v-if="campaig.kind === club">
           <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
             <pre>{{campaign.history}}</pre>
           </gb-campaign-info-row>
