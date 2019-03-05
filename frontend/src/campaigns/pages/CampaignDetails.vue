@@ -465,8 +465,6 @@
     created () {
       const id = this.$route.params.campaignId
 
-      console.log(this.campaign.kind)
-
       this.$store.dispatch('campaigns/fetch', id).then(() => {
         this.token = !!this.campaign.token ? this.campaign.token : {}
         this.campaign.incomes.sort((x, y) => x.year - y.year)
