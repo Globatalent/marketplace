@@ -6,4 +6,4 @@ from marketplace.emails.helpers import TemplateEmailMessage
 class PurchaseEmail(TemplateEmailMessage):
 
     template_name = "emails/purchase.html"
-    default_subject = _("Thanks for your invest!")
+    default_subject = _("Thanks for your purchase!")
