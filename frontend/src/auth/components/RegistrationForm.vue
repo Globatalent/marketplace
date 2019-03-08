@@ -170,14 +170,18 @@ export default {
           formToSend.append('xmIwtLD','902ae1508809b664f4a8880feb72264315a8f92dcadde00bd65c96b2b9cbbafb');
           formToSend.append('actionType', 'Q29udGFjdHM=');
           formToSend.append('returnURL','https&#x3a;&#x2f;&#x2f;market.globatalent.com');
-          formToSend.append('CONTACTCF1', this.$route.query.utm_campaign ); //CAMPAIGN
-          formToSend.append('CONTACTCF2', this.$route.query.utm_source ); //AFFILIATE NETWORK
           formToSend.append('First Name', dataForm.firstName);
           formToSend.append('Last Name', dataForm.lastName);
           formToSend.append('Date of Birth', (dataForm.birthDate.getMonth() + 1).toString().padStart(2, 0) + '/' + dataForm.birthDate.getDate().toString().padStart(2, 0) + '/' + dataForm.birthDate.getFullYear().toString());
           formToSend.append('Email', dataForm.email);
           formToSend.append('Mailing Country', dataForm.country); 
           formToSend.append('Other Country', dataForm.citizenship);
+          formToSend.append('CONTACTCF6', 'B2C');
+          if (this.$route.query.utm_source !== undefined) {
+            formToSend.append('Lead Source', 'Affiliate&#x20;Network');
+            formToSend.append('CONTACTCF10', this.$route.query.utm_source ); //AFFILIATE NETWORK
+            formToSend.append('CONTACTCF1', this.$route.query.utm_campaign ); //CAMPAIGN
+          }
 
           const request = new XMLHttpRequest();
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
