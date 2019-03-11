@@ -194,6 +194,9 @@ export default {
           else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
             this.axios.get('https://beta.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&utm_campaign=' + this.$route.query.utm_campaign)
           }
+          else if (this.$route.query.utm_source.toLowerCase() === "basketmondo") {
+            this.axios.get('https://beta.basketmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&utm_campaign=' + this.$route.query.utm_campaign)
+          }
           }
           router.push({ name: 'campaign.list' })
             })
