@@ -517,6 +517,9 @@
             "amount": amountCrypto,
             "currency": "USD"
           },
+        "metadata": {
+         "customer_id": this.user.id,
+       },
           "pricing_type": "fixed_price",
           "redirect_url": "https://market.globatalent.com",
           "cancel_url": "https://market.globatalent.com"
