@@ -55,7 +55,7 @@ const numberFormats = {
   },
 }
 const i18n = new VueI18n({
-  locale: 'en-US', // set locale
+  locale: navigator.language,
   fallbackLocale: 'en-US',
   numberFormats,
   messages // set locale messages
