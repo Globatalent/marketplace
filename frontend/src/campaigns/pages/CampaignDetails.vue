@@ -145,8 +145,7 @@
                 <el-button type="primary" class="is-full-width buyTokensButton" size="big" @click="show('payment')" v-if="isVerified">
                   {{$tc('message.BuyTokens')}}
                 </el-button>
-                <el-button type="primary" class="is-full-width buyTokensButton" @click="goToLogin(campaign)" size="big" v-else>
-                  Verify your account
+                <el-button type="primary" class="is-full-width buyTokensButton" v-html="$tc('message.BuyTokens')" @click="goToLogin(campaign)" size="big" v-else>
                 </el-button>
               </template>
               <el-button type="primary" class="is-full-width buyTokensButton" disabled size="big" @click="goToInvest(campaign)" v-else>
