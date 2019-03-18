@@ -224,18 +224,30 @@
           </el-row>
 
           <gb-campaign-info-row v-if="campaign.biography" id="storySection" :title="$tc('message.Story')">
-            <pre>{{campaign.description}}</pre>
+            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.description}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.description}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.description}}</pre>
+            <pre v-else>{{campaign.description}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.ranking" :title="$tc('message.Ranking')">
-            {{campaign.ranking}}
+            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.ranking}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.ranking}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.ranking}}</pre>
+            <pre v-else>{{campaign.ranking}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.biography" id="biographySection" :title="$tc('message.Biography')">
-            <pre>{{campaign.biography}}</pre>
+            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.biography}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.biography}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.biography}}</pre>
+            <pre v-else>{{campaign.biography}}</pre>
           </gb-campaign-info-row>
           <gb-campaign-info-row v-if="campaign.history" id="storySection" :title="$tc('message.History')">
-            <pre>{{campaign.history}}</pre>
+            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.history}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.history}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.history}}</pre>
+            <pre v-else>{{campaign.history}}</pre>
           </gb-campaign-info-row>
           <gb-campaign-info-row v-if="campaign.pitchUrl" id="pitchUrlSection" :title="$tc('message.Video')">
             <div v-if="campaign.pitchUrl.includes('youtube')" class="videoWrapper">
@@ -267,7 +279,10 @@
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.achievements" :title="$tc('message.Achievements')">
-            <pre>{{campaign.achievements}}</pre>
+                        <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.achievements}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.achievements}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.achievements}}</pre>
+            <pre v-else>{{campaign.achievements}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
@@ -280,15 +295,24 @@
 
           <gb-campaign-info-row v-if="campaign.players" id="playersSection"
                                 :title="$tc('message.Players')">
-            <pre>{{campaign.players}}</pre>
+                        <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.players}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.players}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.players}}</pre>
+            <pre v-else>{{campaign.players}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.use" id="useSection" :title="$tc('message.HowYouWillUse')">
-            <pre>{{campaign.use}}</pre>
+                        <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.use}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.use}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.use}}</pre>
+            <pre v-else>{{campaign.use}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.giveBack" id="giveBackSection" :title="$tc('message.WhatWillYou')">
-            <pre>{{campaign.giveBack}}</pre>
+                        <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.giveBack}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.giveBack}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.giveBack}}</pre>
+            <pre v-else>{{campaign.giveBack}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="!!campaign.revenues && campaign.revenues.length > 0" id="revenueSection"
