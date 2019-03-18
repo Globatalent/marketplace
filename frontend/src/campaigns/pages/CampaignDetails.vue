@@ -82,7 +82,10 @@
           <el-row :gutter="40">
             <el-col :xs="24" :md="16" class="campaignDetails-col">
               <div class="campaignDetails-title">
-                <h1 class="campaign-name">{{campaign.title}}</h1>
+            <h1 class="campaign-name" v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.title}}</h1>
+            <h1 class="campaign-name" v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.title}}</h1>
+            <h1 class="campaign-name" v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.title}}</h1>
+            <h1 class="campaign-name" v-else>{{campaign.title}}</h1>
                 <img :src="countryFlag" alt="" class="image campaign-flag" v-if="campaign.country">
                 <div class="campaign-sport" :style="`background-color:#${campaign.sport.color}`" v-if="campaign.sport">
                   {{!!campaign.sport ? campaign.sport.name : ''}}
@@ -113,8 +116,14 @@
                 <el-progress :text-inside="false" :show-text="false" :stroke-width="7" color="#32c694"
                             :percentage="progress" status="success" v-if="progress >= 100"></el-progress>
               </div>
-              <div class="campaignDetails-invest"> {{campaign.title}}</div>
-              <p class="campaignDetails-description">{{campaign.description}}</p>
+            <div class="campaignDetails-invest" v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.title}}</div>
+            <div class="campaignDetails-invest" v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.title}}</div>
+            <div class="campaignDetails-invest" v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.title}}</div>
+            <div class="campaignDetails-invest" v-else>{{campaign.title}}</div>
+            <p class="campaignDetails-description" v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.description}}</p>
+            <p class="campaignDetails-description" v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.description}}</p>
+            <p class="campaignDetails-description" v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.description}}</p>
+            <p class="campaignDetails-description" v-else>{{campaign.description}}</p>
               <div class="campaignDetails-fundingDetails">
                 <div class="campaignDetails-fundingDetails-numbers">
                   <div class="campaignDetails-fundingDetails-numbers-row">
@@ -219,8 +228,12 @@
           </ul>
           <el-row :gutter="50">
             <el-col :xs="24" :md="8" class="campaignDetails-infoContainer-data-title">&nbsp;</el-col>
-            <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text"><span
-              class="campaignDetails-infoContainer-data-text-title">{{campaign.title}}</span></el-col>
+            <el-col :xs="24" :md="16" class="campaignDetails-infoContainer-data-text">
+            <span class="campaignDetails-infoContainer-data-text-title" v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.title}}</span>
+            <span class="campaignDetails-infoContainer-data-text-title" v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.title}}</span>
+            <span class="campaignDetails-infoContainer-data-text-title" v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.title}}</span>
+            <span class="campaignDetails-infoContainer-data-text-title" v-else>{{campaign.title}}</span>
+              </el-col>
           </el-row>
 
           <gb-campaign-info-row v-if="campaign.biography" id="storySection" :title="$tc('message.Story')">
