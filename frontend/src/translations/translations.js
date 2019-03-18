@@ -302,7 +302,7 @@ export const messages = {
       Close: 'Close',
       News: 'Noticias',
       Faq: 'Preguntas frecuentes',
-      Corporate: 'Web coporativa',
+      Corporate: 'Web corporativa',
       RegisterNewUser: 'Registrar nuevo usuario',
       Club: 'Club',
       SubscribeToUs: 'Suscríbete',

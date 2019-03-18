@@ -272,7 +272,9 @@
 
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
                                 :title="$tc('message.ExpectedSportAchievements')">
-            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.description}}</pre>
+            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.expected}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.expected}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.expected}}</pre>
             <pre v-else>{{campaign.expected}}</pre>
           </gb-campaign-info-row>
 
@@ -407,6 +409,12 @@
         locale: '',
         epfc: {
           description: 'test'
+        },
+        zentro: {
+
+        },
+        vega: {
+
         }
       }
     },
