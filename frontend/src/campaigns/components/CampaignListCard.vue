@@ -23,7 +23,10 @@
         <el-row>
           <el-col>
             <div class="campaign-subtitle show-more-container" :class="{ extended: isExtended }">
-              <span v-if="campaign.description">{{getDescription()}}</span>
+            <span class="campaign-name" v-if="campaign.id == 5 && locale == 'es-ES'">{{getDescription(epfc.description)}}</span>
+            <span class="campaign-name" v-else-if="campaign.id == 4 && locale == 'es-ES'">{{getDescription(zentro.description)}}</span>
+            <span class="campaign-name" v-else-if="campaign.id == 126 && locale == 'es-ES'">{{getDescription(vega.description)}}</span>
+            <span class="campaign-name" v-else>{{getDescription(campaign.description)}}</span>
               <a class="show-more-msg" @click="showMore()" v-if="campaign.description && this.campaign.description.length > 50"> {{showMoreMsg()}}</a>
             </div>
           </el-col>
@@ -154,8 +157,8 @@
       showMoreMsg() {
         return this.isExtended ? this.$tc("message.showLess") : this.$tc("message.showMore");
       },
-      getDescription() {
-        return this.isExtended ? this.campaign.description : (this.campaign.description.length > 50 ? this.campaign.description.substring(0,50)+' ...' : this.campaign.description);
+      getDescription(description) {
+        return this.isExtended ? description : (description.length > 50 ? description.substring(0,50)+' ...' : description);
       }
     }
   }

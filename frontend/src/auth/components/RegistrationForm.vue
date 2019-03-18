@@ -607,7 +607,7 @@ export default {
           formToSend.append('Other Country', dataForm.citizenship);
           formToSend.append('CONTACTCF6', 'B2C');
           if (this.$route.query.utm_source !== undefined) {
-            formToSend.append('Lead Source', 'Affiliate&#x20;Network');
+            formToSend.append('Lead Source', 'Affiliate');
             formToSend.append('CONTACTCF10', this.$route.query.utm_source ); //AFFILIATE NETWORK
             formToSend.append('CONTACTCF1', this.$route.query.utm_campaign ); //CAMPAIGN
           }
