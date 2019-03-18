@@ -272,7 +272,7 @@
 
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
                                 :title="$tc('message.ExpectedSportAchievements')">
-            <pre>{{(campaign.id === 5) ? epfc.description : campaign.expected}}</pre>
+            <pre>{{(campaign.id == 5) ? epfc.description : campaign.expected}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.players" id="playersSection"
