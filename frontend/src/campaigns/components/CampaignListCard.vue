@@ -13,7 +13,10 @@
         <el-row>
           <el-col :span="24">
             <router-link :to="{ name: 'campaign.details', params: { campaignId: campaign.id }}">
-              <span class="campaign-name">{{campaign.title}}</span>
+            <span class="campaign-name" v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.title}}</span>
+            <span class="campaign-name" v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.title}}</span>
+            <span class="campaign-name" v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.title}}</span>
+            <span class="campaign-name" v-else>{{campaign.title}}</span>
             </router-link>
           </el-col>
         </el-row>
@@ -87,8 +90,24 @@
     data () {
       return {
         isExtended: false,
-        redirecting: false
+        redirecting: false,
+        locale: this.$i18n.locale,
+        zentro: {
+          title: 'Zentro Basket Madrid',
+          description: 'Accede 6% de la facturación de la academia desde el año 3 hasta el 10\n💰 * 24% de los beneficios de la academia desde el año 3 hasta el 10\n* Previsión de retorno al fan : 225% -275% (10 años)\n* ¡¡Las futuras estrellas del baloncesto están aquí !!'
+        },
+        epfc: {
+          title: 'Llevemos al Europa Point a la UEFA!!!!',
+          description: 'Accede al 20% del dinero de los premios de Liga de Campeones o Europa league y al 20%  de los derechos de traspasos de jugadores. ¡Grandes posibilidades de clasificarse para la UEFA! ⚽'
+        },
+        vega: {
+          title: 'David Vega, Futuro campeón de tenis',
+          description: 'Accede al 18 % de los premios ATP  desde Enero de 2021 a Diciembre de 2030. ¡¡Multiplica tu apoyo por 5!!'
+        }
       }
+    },
+    created () {
+      this.locale = this.$i18n.locale;
     },
     computed: {
       ...mapGetters({
