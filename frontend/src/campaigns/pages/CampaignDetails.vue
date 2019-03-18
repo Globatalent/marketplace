@@ -224,7 +224,7 @@
           </el-row>
 
           <gb-campaign-info-row v-if="campaign.biography" id="storySection" :title="$tc('message.Story')">
-            <pre>{{(campaign.id === 5) ? epfc.description : campaign.description}}</pre>
+            <pre>{{campaign.description}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.ranking" :title="$tc('message.Ranking')">
@@ -272,7 +272,7 @@
 
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
                                 :title="$tc('message.ExpectedSportAchievements')">
-            <pre>{{campaign.expected}}</pre>
+            <pre>{{(campaign.id === 5) ? epfc.description : campaign.expected}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.players" id="playersSection"
