@@ -224,7 +224,7 @@
           </el-row>
 
           <gb-campaign-info-row v-if="campaign.biography" id="storySection" :title="$tc('message.Story')">
-            <pre>{{campaign.description}}</pre>
+            <pre>{{(campaign.id === 5) ? epfc.description : campaign.description}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.ranking" :title="$tc('message.Ranking')">
@@ -402,7 +402,11 @@
         urlCampaing: '',
         titleCampaing: '',
         descriptionCampaing: '',
-        waiting: false
+        waiting: false,
+        locale: '',
+        epfc: {
+          description: 'test'
+        }
       }
     },
     computed: {
@@ -463,6 +467,9 @@
     },
     created () {
       const id = this.$route.params.campaignId
+      this.locale = this.$i18n.locale;
+      console.log(this.locale)
+
 
       this.$store.dispatch('campaigns/fetch', id).then(() => {
         this.token = !!this.campaign.token ? this.campaign.token : {}
