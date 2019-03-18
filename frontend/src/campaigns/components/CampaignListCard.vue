@@ -27,7 +27,7 @@
             <span v-else-if="campaign.id == 4 && locale == 'es-ES'">{{getDescription(zentro.description)}}</span>
             <span v-else-if="campaign.id == 126 && locale == 'es-ES'">{{getDescription(vega.description)}}</span>
             <span v-else>{{getDescription(campaign.description)}}</span>
-              <a class="show-more-msg" @click="showMore()" v-if="campaign.description && campaign.description.length > 50"> {{showMoreMsg()}}</a>
+              <a class="show-more-msg" @click="showMore()" v-if="campaign.description && campaign.description.length > 75"> {{showMoreMsg()}}</a>
             </div>
           </el-col>
         </el-row>
