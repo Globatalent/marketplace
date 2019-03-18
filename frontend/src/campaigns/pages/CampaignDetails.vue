@@ -272,7 +272,7 @@
 
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
                                 :title="$tc('message.ExpectedSportAchievements')">
-            <pre v-if="campaign.id == 5">{{epfc.description}}</pre>
+            <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.description}}</pre>
             <pre v-else>{{campaign.expected}}</pre>
           </gb-campaign-info-row>
 
