@@ -104,7 +104,7 @@
         },
         epfc: {
           title: 'Llevemos al Europa Point a la UEFA!!!!',
-          description: 'Accede al 20% del dinero de los premios de Liga de Campeones o Europa league y al 20%  de los derechos de traspasos de jugadores. ¡Grandes posibilidades de clasificarse para la UEFA! ⚽'
+          description: 'Accede al 20% del dinero de los premios de Liga de Campeones o Europa league y al 20% de los ingresos por derechos de traspasos de jugadores. ¡Grandes posibilidades de clasificarse para la UEFA! ⚽'
         },
         vega: {
           title: 'David Vega, Futuro campeón de tenis',
