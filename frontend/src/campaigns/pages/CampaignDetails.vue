@@ -441,7 +441,11 @@
 
         },
         vega: {
-          examples: "Estos son los diferentes  niveles de ingresos que un jugador  de dobles de tenis puede obtener en función de su ranking 💰 $100,000 in top 50 💰 $150,000  in top 40 💰 $300,000 in top 30 💰 $500,000 in top 20 💰 $1,000,000 in top 10"
+          description: "Accede al 18 % de los premios ATP  desde Enero de 2021 a Diciembre de 2030. ¡¡Multiplica tu apoyo por 5!!",
+          ranking: "116 ATP Dobles",
+          achievements: "David ha alcanzado en el pasado los siguientes logros:\n🏆 -2018 doubles champion Challenger Blois, Marburg, Biella y Barcelona. 111 ATP dobles.\n🏆 -2017 Finalista dobles Challenger Segovia and Sevilla. Campeóndobles 6 Futures ITF. 175 ATP dobles\n🏆 -2016 Campeón dobles 7 Futures ITF. 255 ATP dobles\n🏆 -2015 Campeón dobles 2 Futures ITF, 510 ATP dobles",
+          biography: "David es un tenista de 24 años que tiene una gran proyección en la modalidad de dobles. Necesita continuar con su dedicación y entrenamiento en un 150% para lograr sus objetivos a medio plazo (en 2 años) para alcanzar el top 50 en el mundo en dobles ATP y a largo plazo para situarse en  el top 10 en el mundo en dobles ATP.\nPara lograr sus objetivos, necesita continuar con el trabajo integral que ha estado desarrollando durante los últimos 6 años junto con su Entrenador de tenis, Toni Colom y su equipo de profesionales a través de Passion Talent Group",
+          examples: "Estos son los diferentes  niveles de ingresos que un jugador  de dobles de tenis puede obtener en función de su ranking:\n💰 $100,000 en top 50\n💰 $150,000 en top 40\n💰 $300,000 en top 30\n💰 $500,000 en top 20\n💰 $1,000,000 en top 10"
         }
       }
     },
