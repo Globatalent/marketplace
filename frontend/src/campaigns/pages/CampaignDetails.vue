@@ -414,7 +414,7 @@
 
         },
         vega: {
-
+          examples: "Estos son los diferentes  niveles de ingresos que un jugador  de dobles de tenis puede obtener en función de su ranking 💰 $100,000 in top 50 💰 $150,000  in top 40 💰 $300,000 in top 30 💰 $500,000 in top 20 💰 $1,000,000 in top 10"
         }
       }
     },
