@@ -422,6 +422,7 @@
         return 0
       },
       hasStarted () {
+        console.log(this.campaign)
         return this.campaign.started < new Date()
       },
       addSharingUrl() {
