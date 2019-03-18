@@ -26,11 +26,11 @@
             <span v-if="campaign.id == 5 && locale == 'es-ES'">{{getDescription(epfc.description)}}</span>
             <span v-else-if="campaign.id == 4 && locale == 'es-ES'">{{getDescription(zentro.description)}}</span>
             <span v-else-if="campaign.id == 126 && locale == 'es-ES'">{{getDescription(vega.description)}}</span>
-            <span v-else>{{getDescription(campaign.description)}}</a>
+            <span v-else>{{getDescription(campaign.description)}}</span>
             <a class="show-more-msg" @click="showMore()" v-if="campaign.id == 5 && locale == 'es-ES' && epfc.description.length > 50">{{showMoreMsg()}}</a>
             <a class="show-more-msg" @click="showMore()" v-else-if="campaign.id == 4 && locale == 'es-ES' && zentro.description.length > 50">{{showMoreMsg()}}</a>
             <a class="show-more-msg" @click="showMore()" v-else-if="campaign.id == 126 && locale == 'es-ES' && vega.description.length > 50">{{showMoreMsg()}}</a>
-            <a class="show-more-msg" @click="showMore()" v-else>{{showMoreMsg()}}</a>
+            <a class="show-more-msg" @click="showMore()" v-else-if="campaign.description && campaign.description.length > 50">{{showMoreMsg()}}</a>
             </div>
           </el-col>
         </el-row>
