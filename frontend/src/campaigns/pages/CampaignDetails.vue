@@ -273,7 +273,7 @@
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
                                 :title="$tc('message.ExpectedSportAchievements')">
             <pre v-if="campaign.id == 5">{{epfc.description}}</pre>
-            <pre>{{campaign.expected}}</pre>
+            <pre v-else>{{campaign.expected}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.players" id="playersSection"
@@ -422,7 +422,6 @@
         return 0
       },
       hasStarted () {
-        console.log(this.campaign)
         return this.campaign.started < new Date()
       },
       addSharingUrl() {
