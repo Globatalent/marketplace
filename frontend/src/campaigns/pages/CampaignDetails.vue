@@ -307,7 +307,10 @@
 
           <gb-campaign-info-row v-if="!!campaign.examples && campaign.examples.length > 0" id="examplesSection"
                                 :title="$tc('message.ExamplesIncomeSimilar')">
-            <pre>{{campaign.examples}}</pre>
+                        <pre v-if="campaign.id == 5 && locale == 'es-ES'">{{epfc.examples}}</pre>
+            <pre v-else-if="campaign.id == 4 && locale == 'es-ES'">{{zentro.examples}}</pre>
+            <pre v-else-if="campaign.id == 126 && locale == 'es-ES'">{{vega.examples}}</pre>
+            <pre v-else>{{campaign.examples}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="!!campaign.recommendations && campaign.recommendations.length > 0"
