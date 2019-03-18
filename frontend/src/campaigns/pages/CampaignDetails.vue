@@ -272,7 +272,8 @@
 
           <gb-campaign-info-row v-if="campaign.expected" id="expectedSection"
                                 :title="$tc('message.ExpectedSportAchievements')">
-            <pre>{{(campaign.id == 5) ? epfc.description : campaign.expected}}</pre>
+            <pre v-if="campaign.id == 5">{{epfc.description}}</pre>
+            <pre>{{campaign.expected}}</pre>
           </gb-campaign-info-row>
 
           <gb-campaign-info-row v-if="campaign.players" id="playersSection"
@@ -468,7 +469,6 @@
     created () {
       const id = this.$route.params.campaignId
       this.locale = this.$i18n.locale;
-      console.log(this.locale)
 
 
       this.$store.dispatch('campaigns/fetch', id).then(() => {
