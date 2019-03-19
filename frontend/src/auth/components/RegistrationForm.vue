@@ -621,10 +621,10 @@ export default {
             this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
           }
           else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
-            this.axios.get('https://beta.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&utm_campaign=' + this.$route.query.utm_campaign)
+            this.axios.get('https://www.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&mail=' + dataForm.email)
           }
           else if (this.$route.query.utm_source.toLowerCase() === "basketmondo") {
-            this.axios.get('https://beta.basketmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&utm_campaign=' + this.$route.query.utm_campaign)
+            this.axios.get('https://www.basketmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&mail=' + dataForm.email)
           }
           }
           router.push({ name: 'campaign.list' })
