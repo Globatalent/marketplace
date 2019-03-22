@@ -624,7 +624,14 @@ export default {
             this.axios.get('https://www.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&mail=' + dataForm.email)
           }
           else if (this.$route.query.utm_source.toLowerCase() === "basketmondo") {
-            this.axios.get('https://www.basketmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&mail=' + dataForm.email)
+            let user_id;
+            if (this.$route.query.user_id !== undefined) {
+              user_id = '&user_id=' + this.$route.query.user_id;
+            }
+            else {
+              used_id = ''
+            }
+            this.axios.get('https://www.basketmondo.com/mondos/globatalent/grant?mail=' + dataForm.email + user_id)
           }
           }
           router.push({ name: 'campaign.list' })
