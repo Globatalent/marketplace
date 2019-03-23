@@ -50,13 +50,12 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     country = CountryCodeField(null=True, blank=True)
     citizenship = models.CharField(max_length=100, null=True, blank=True)
-    sign_up_promotion = models.BooleanField(
-        verbose_name=_("Promotion"),
-        default=True,
-        null=True,
-        blank=True
-    )
 
+    is_promotion = models.BooleanField(
+        _("promotion status"),
+        default=False,
+        help_text=_("Designates whether the user has a promotion active."),
+    )
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
