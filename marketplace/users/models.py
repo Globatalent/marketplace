@@ -50,10 +50,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     country = CountryCodeField(null=True, blank=True)
     citizenship = models.CharField(max_length=100, null=True, blank=True)
-    promotion = models.BooleanField(
-        verbose_name=_("promotion"),
-        default=True
-    )
 
     is_staff = models.BooleanField(
         _("staff status"),
