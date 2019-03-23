@@ -30,9 +30,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(
         max_length=100, verbose_name=_("first name"), default=""
     )
-    promotions = models.CharField(
-        max_length=100, verbose_name=_("promotions"), default=""
-    )
     last_name = models.CharField(
         max_length=100, verbose_name=_("last name"), default=""
     )
@@ -53,6 +50,10 @@ class User(AbstractBaseUser, PermissionsMixin):
     )
     country = CountryCodeField(null=True, blank=True)
     citizenship = models.CharField(max_length=100, null=True, blank=True)
+    promotion = models.BooleanField(
+        verbose_name=_("promotion"),
+        default=True
+    )
 
     is_staff = models.BooleanField(
         _("staff status"),
