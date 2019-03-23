@@ -65,8 +65,8 @@
           </el-tab-pane>
           <el-tab-pane :label="$tc('message.purchases',3)">
             <el-table :data="purchases" style="width: 100%">
-              <el-table-column prop="id" label="ID"></el-table-column>
-              <!-- <el-table-column prop="rule" label="Rule"></el-table-column> -->
+              <el-table-column prop="token.name" label="Name"></el-table-column>
+              <el-table-column prop="token.code" label="Symbol"></el-table-column>
               <el-table-column prop="amount" label="Amount"></el-table-column>
               <el-table-column prop="status" label="Status"></el-table-column>
             </el-table>
