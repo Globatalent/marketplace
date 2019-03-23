@@ -51,8 +51,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     country = CountryCodeField(null=True, blank=True)
     citizenship = models.CharField(max_length=100, null=True, blank=True)
     sign_up_promotion = models.BooleanField(
-        verbose_name=_("Promotion")
-        default=True
+        verbose_name=_("Promotion"),
+        default=True,
         null=True,
         blank=True
     )
