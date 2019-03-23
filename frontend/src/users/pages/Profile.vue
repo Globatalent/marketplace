@@ -68,7 +68,7 @@
               <el-table-column prop="id" label="ID"></el-table-column>
               <!-- <el-table-column prop="rule" label="Rule"></el-table-column> -->
               <el-table-column prop="amount" label="Amount"></el-table-column>
-              <el-table-column prop="status" label="status"></el-table-column>
+              <el-table-column prop="status" label="Status"></el-table-column>
             </el-table>
           </el-tab-pane>
         </el-tabs>
@@ -131,7 +131,7 @@
         Vue.axios.get('https://staging.globatalent.com/api/v1/purchases/')
           .then(response => {
             console.log(response)
-            this.purchases = response
+            this.purchases = response.data.results
         })
       },
       unfollow (scope) {

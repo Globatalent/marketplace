@@ -165,7 +165,7 @@
 import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
-import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
+  import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
   import countries from '@/base/helpers/countries'
   import VueI18n from 'vue-i18n'
   import { Carousel, Slide } from 'vue-carousel';
@@ -193,8 +193,6 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
         pledged: null,
         readyToPay: false,
         warning: false,
-
-
       }
     },
     computed: {
