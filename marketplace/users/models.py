@@ -30,6 +30,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(
         max_length=100, verbose_name=_("first name"), default=""
     )
+    promotions = models.CharField(
+        max_length=100, verbose_name=_("promotions"), default=""
+    )
     last_name = models.CharField(
         max_length=100, verbose_name=_("last name"), default=""
     )
