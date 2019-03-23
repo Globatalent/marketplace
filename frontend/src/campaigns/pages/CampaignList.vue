@@ -236,6 +236,11 @@ import CampaignListCard from '@/campaigns/components/CampaignListCard.vue'
           ]
         )
       ))
+
+      Vue.axios.get('https://staging.globatalent.com/api/v1/purchases/')
+      .then(response => {
+        console.log(response)
+      })
     },
     methods: {
       initial () {
