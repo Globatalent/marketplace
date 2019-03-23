@@ -136,7 +136,7 @@
             filters: {followed_by: user.id}
           })
         })
-        Vue.axios.get('https://staging.globatalent.com/api/v1/purchases/')
+        Vue.axios.get('https://api.globatalent.com/api/v1/purchases/')
           .then(response => {
             console.log(response)
             this.purchases = response.data.results
