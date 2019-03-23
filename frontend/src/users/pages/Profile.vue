@@ -70,6 +70,7 @@
 </template>
 
 <script>
+  import Vue from 'vue'
   import BaseLayout from '@/layout/BaseLayout.vue'
   import { mapGetters } from 'vuex'
   import countries from '@/base/helpers/countries'
@@ -85,6 +86,7 @@
     data () {
       return {
         countries: countries,
+        purchases: undefined,
         form: {
           password: '',
           repeatPassword: '',
@@ -103,8 +105,7 @@
         alerts: 'alerts/alerts',
         campaigns: 'campaigns/campaigns',
         pagination: 'campaigns/pagination',
-        user: 'users/user',
-        purchases: 'purchases/purchases'
+        user: 'users/user'
       })
     },
     created () {
@@ -114,11 +115,15 @@
       initial () {
         this.$store.commit('campaigns/campaigns', [])
         this.$store.dispatch('alerts/alerts')
-        this.$$store.dispatch('purchases/purchases')
         this.$store.dispatch('users/fetchUser').then(user => {
           this.$store.dispatch('campaigns/list', {
             filters: {followed_by: user.id}
           })
+        })
+        Vue.axios.get('https://staging.globatalent.com/api/v1/purchases/')
+          .then(response => {
+            console.log(response)
+            this.purchases = response
         })
       },
       unfollow (scope) {
