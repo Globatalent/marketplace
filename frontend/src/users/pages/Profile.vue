@@ -64,11 +64,11 @@
             </el-table>
           </el-tab-pane>
           <el-tab-pane :label="$tc('message.purchases',3)">
-            <el-table :data="alerts" style="width: 100%">
+            <el-table :data="purchases" style="width: 100%">
               <el-table-column prop="id" label="ID"></el-table-column>
-              <el-table-column prop="rule" label="Rule"></el-table-column>
+              <!-- <el-table-column prop="rule" label="Rule"></el-table-column> -->
               <el-table-column prop="amount" label="Amount"></el-table-column>
-              <el-table-column prop="athlete.firstName" label="Athlete"></el-table-column>
+              <el-table-column prop="status" label="status"></el-table-column>
             </el-table>
           </el-tab-pane>
         </el-tabs>
@@ -128,7 +128,6 @@
             filters: {followed_by: user.id}
           })
         })
-        console.log(this.alerts)
         Vue.axios.get('https://staging.globatalent.com/api/v1/purchases/')
           .then(response => {
             console.log(response)
