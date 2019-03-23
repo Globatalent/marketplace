@@ -67,7 +67,15 @@
             <el-table :data="purchases" style="width: 100%">
               <el-table-column prop="token.name" label="Name"></el-table-column>
               <el-table-column prop="token.code" label="Symbol"></el-table-column>
-              <el-table-column prop="amount" label="Amount"></el-table-column>
+              <el-table-column prop="amount" label="Amount purchased"></el-table-column>
+              <el-table-column prop="status" label="Status"></el-table-column>
+            </el-table>
+          </el-tab-pane>
+          <el-tab-pane :label="$tc('message.promotions',4)">
+            <el-table :data="purchases" style="width: 100%">
+              <el-table-column prop="token.name" label="Name"></el-table-column>
+              <el-table-column prop="token.code" label="Symbol"></el-table-column>
+              <el-table-column prop="amount" label="Amount purchased"></el-table-column>
               <el-table-column prop="status" label="Status"></el-table-column>
             </el-table>
           </el-tab-pane>

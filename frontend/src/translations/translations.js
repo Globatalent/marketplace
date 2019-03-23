@@ -3,6 +3,7 @@ export const messages = {
     message: {
       SignIn: 'Sign In',
       purchases: 'Purchases',
+      promotions: 'Promotions',
       Email: 'Email',
       DateFormat: 'yyyy-mm-dd',
       Password: 'Password',
