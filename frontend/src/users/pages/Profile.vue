@@ -103,7 +103,8 @@
         alerts: 'alerts/alerts',
         campaigns: 'campaigns/campaigns',
         pagination: 'campaigns/pagination',
-        user: 'users/user'
+        user: 'users/user',
+        purchases: 'purchases/purchases'
       })
     },
     created () {
@@ -113,6 +114,7 @@
       initial () {
         this.$store.commit('campaigns/campaigns', [])
         this.$store.dispatch('alerts/alerts')
+        this.$$store.dispatch('purchases/purchases')
         this.$store.dispatch('users/fetchUser').then(user => {
           this.$store.dispatch('campaigns/list', {
             filters: {followed_by: user.id}
