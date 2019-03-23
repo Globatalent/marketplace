@@ -74,7 +74,8 @@
           <el-tab-pane :label="$tc('message.promotions',4)">
             <el-table :data="promotions" style="width: 100%">
               <el-table-column prop="name" label="Name"></el-table-column>
-              <el-table-column prop="status" label="Active"></el-table-column>
+              <el-table-column prop="status" label="Status"></el-table-column>
+              <el-table-column prop="remaining" label="Credit Remaining"></el-table-column>
             </el-table>
           </el-tab-pane>
         </el-tabs>
@@ -100,7 +101,7 @@
     data () {
       return {
         countries: countries,
-        promotions: [{name: '5USD for transaction fees', status: 'Active'}],
+        promotions: [{name: '5USD for transaction fees', status: 'Active', remaining: 5}],
         purchases: undefined,
         form: {
           password: '',
