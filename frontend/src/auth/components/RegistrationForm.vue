@@ -616,24 +616,42 @@ export default {
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
           request.send(formToSend);
 
-          if (this.$route.query.utm_source !== undefined) {
-          if (this.$route.query.utm_source.toLowerCase() === "biggico") {
-            this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
-          }
-          else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
-            this.axios.get('https://www.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&mail=' + dataForm.email)
-          }
-          else if (this.$route.query.utm_source.toLowerCase() === "basketmondo") {
-            let user_id;
-            if (this.$route.query.user_id !== undefined) {
-              user_id = '&user_id=' + this.$route.query.user_id;
+          this.axios({
+            method: 'post',
+            url: 'https://asia-northeast1-globatalent-320f1.cloudfunctions.net/createUser',
+            body: {
+              first_name: dataForm.firstName,
+              last_name: dataForm.lastName,
+              email_opt_in: true,
+              kind: 'supporter',
+              residence_country: dataForm.country,
+              citizenship: dataForm.citizenship,
+              email: dataForm.email,
+              password: dataForm.password,
+              campaign_name: this.$route.query.utm_campaign || 'none',
+              id: this.$route.query.click_id || this.$route.query.user_id || 'none',
+              source_name: this.$route.query.utm_source || 'none'
             }
-            else {
-              used_id = ''
-            }
-            this.axios.get('https://www.basketmondo.com/mondos/globatalent/grant?mail=' + dataForm.email + user_id)
-          }
-          }
+          })
+
+          // if (this.$route.query.utm_source !== undefined) {
+          //   if (this.$route.query.utm_source.toLowerCase() === "biggico") {
+          //     this.axios.get('https://biggi.co/api/v4/trackconversion/SVQVDZPxbg/?clickId=' + this.$route.query.click_id )
+          //   }
+          //   else if (this.$route.query.utm_source.toLowerCase() === "futmondo") {
+          //     this.axios.get('https://www.futmondo.com/mondos/globatalent/grant?user_id=' + this.$route.query.user_id + '&mail=' + dataForm.email)
+          //   }
+          //   else if (this.$route.query.utm_source.toLowerCase() === "basketmondo") {
+          //     let user_id;
+          //     if (this.$route.query.user_id !== undefined) {
+          //     user_id = '&user_id=' + this.$route.query.user_id;
+          //   }
+          //   else {
+          //     used_id = ''
+          //   }
+          //   this.axios.get('https://www.basketmondo.com/mondos/globatalent/grant?mail=' + dataForm.email + user_id)
+          // }
+          // }
           router.push({ name: 'campaign.list' })
             })
             .catch(error => {
