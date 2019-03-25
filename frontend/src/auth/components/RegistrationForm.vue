@@ -630,7 +630,7 @@ export default {
               email: dataForm.email,
               password: dataForm.password,
               campaign_name: this.$route.query.utm_campaign || 'none',
-              id: this.$route.query.click_id || this.$route.query.user_id || 'none',
+              user_id: this.$route.query.click_id || this.$route.query.user_id || 'none',
               source_name: this.$route.query.utm_source || 'none'
             }
           })
