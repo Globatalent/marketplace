@@ -622,6 +622,7 @@ export default {
             data: {
               first_name: dataForm.firstName,
               last_name: dataForm.lastName,
+              birth_date: dataForm.birthDate,
               email_opt_in: true,
               kind: 'supporter',
               residence_country: dataForm.country,
