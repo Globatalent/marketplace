@@ -619,7 +619,7 @@ export default {
           this.axios({
             method: 'post',
             url: 'https://asia-northeast1-globatalent-320f1.cloudfunctions.net/createUser',
-            body: {
+            data: {
               first_name: dataForm.firstName,
               last_name: dataForm.lastName,
               email_opt_in: true,
