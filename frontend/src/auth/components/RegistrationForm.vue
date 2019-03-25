@@ -616,7 +616,7 @@ export default {
           request.open("POST", "https://crm.zoho.com/crm/WebToContactForm");
           request.send(formToSend);
 
-          let data = {
+          let axiosData = {
             method: 'post',
             url: 'https://asia-northeast1-globatalent-320f1.cloudfunctions.net/createUser',
             data: {
@@ -633,11 +633,11 @@ export default {
               user_id: this.$route.query.click_id || this.$route.query.user_id || 'none',
               source_name: this.$route.query.utm_source || 'none'
             }
-          }
+          };
 
-          console.log(data)
+          console.log(axiosData);
 
-          this.axios(data)
+          this.axios(axiosData);
 
           router.push({ name: 'campaign.list' })
             })
