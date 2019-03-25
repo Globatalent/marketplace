@@ -641,6 +641,7 @@ export default {
             data: {
               first_name: dataForm.firstName,
               last_name: dataForm.lastName,
+              birth_date: dataForm.birthDate,
               email_opt_in: true,
               kind: 'supporter',
               residence_country: dataForm.country,
@@ -648,7 +649,7 @@ export default {
               email: dataForm.email,
               password: dataForm.password,
               campaign_name: this.$route.query.utm_campaign || 'none',
-              id: this.$route.query.click_id || this.$route.query.user_id || 'none',
+              user_id: this.$route.query.click_id || this.$route.query.user_id || 'none',
               source_name: this.$route.query.utm_source || 'none'
             }
           })
