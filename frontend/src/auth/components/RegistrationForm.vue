@@ -652,6 +652,8 @@ export default {
               source_name: this.$route.query.utm_source || 'none'
             }
           })
+          .then(response => router.push({ name: 'campaign.list' })
+)
 
           // if (this.$route.query.utm_source !== undefined) {
           //   if (this.$route.query.utm_source.toLowerCase() === "biggico") {
@@ -671,7 +673,6 @@ export default {
           //   this.axios.get('https://www.basketmondo.com/mondos/globatalent/grant?mail=' + dataForm.email + user_id)
           // }
           // }
-          router.push({ name: 'campaign.list' })
             })
             .catch(error => {
               if (!!error.response) {
