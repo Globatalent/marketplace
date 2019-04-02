@@ -566,6 +566,7 @@ export default {
     }
   },
   created() {
+    console.log(this.$i18n.locale)
     if (this.$i18n.locale.includes('es')) {
       this.locale = 'es_ES'
     }
