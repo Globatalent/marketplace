@@ -566,14 +566,13 @@ export default {
     }
   },
   created() {
-    console.log(this.$i18n.locale)
+    console.log(this.$i18n.locale.includes('es'))
     if (this.$i18n.locale.includes('es')) {
-      this.locale = 'es_ES'
+      this.locale = 'es-ES'
     }
     else {
-      this.locale = 'en_US'
+      this.locale = 'en-US'
     }
-    ;
   },
   methods: {
     validatePass(rule, value, callback) {
