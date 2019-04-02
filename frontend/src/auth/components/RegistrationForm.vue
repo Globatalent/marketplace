@@ -566,7 +566,13 @@ export default {
     }
   },
   created() {
-    this.locale = this.$i18n.locale;
+    if (this.$i18n.locale.includes('es')) {
+      this.locale = 'es_ES'
+    }
+    else {
+      this.locale = 'en_US'
+    }
+    ;
   },
   methods: {
     validatePass(rule, value, callback) {
