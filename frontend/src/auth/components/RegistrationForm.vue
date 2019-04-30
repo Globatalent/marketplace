@@ -1111,8 +1111,9 @@ export default {
               email: dataForm.email,
               password: dataForm.password,
               campaign_name: this.$route.query.utm_campaign || 'none',
-              user_id: this.$route.query.click_id || this.$route.query.user_id || 'none',
-              source_name: this.$route.query.utm_source || 'none'
+              user_id: this.$route.query.click_id || this.$route.query.user_id || this.$route.query.cxd || 'none',
+              source_name: this.$route.query.utm_source || 'none',
+              source_network: this.$route.query.cxd ? 'cellexpert' : 'none'
             }
           };
 
