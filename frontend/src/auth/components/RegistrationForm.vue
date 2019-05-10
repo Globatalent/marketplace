@@ -1087,10 +1087,13 @@ export default {
           formToSend.append('Mailing Country', dataForm.country); 
           formToSend.append('Other Country', dataForm.citizenship);
           formToSend.append('CONTACTCF6', 'B2C');
-          if (this.$route.query.utm_source !== undefined) {
+          if (this.$route.query.utm_source !== undefined || this.$route.query.source !== undefined ) {
+            let campaign = this.$route.query.utm_campaign ? this.$route.query.utm_campaign : this.$route.query.campaign,
+            source = this.$route.query.utm_source ? this.$route.query.utm_source : this.$route.query.source;
+            
             formToSend.append('Lead Source', 'Affiliate');
-            formToSend.append('CONTACTCF10', this.$route.query.utm_source ); //AFFILIATE NETWORK
-            formToSend.append('CONTACTCF1', this.$route.query.utm_campaign ); //CAMPAIGN
+            formToSend.append('CONTACTCF10', source ); //AFFILIATE NETWORK
+            formToSend.append('CONTACTCF1', campaign ); //CAMPAIGN
           }
 
           const request = new XMLHttpRequest();
@@ -1110,9 +1113,9 @@ export default {
               citizenship: dataForm.citizenship,
               email: dataForm.email,
               password: dataForm.password,
-              campaign_name: this.$route.query.utm_campaign || 'none',
+              campaign_name: this.$route.query.utm_campaign || this.$route.query.campaign || 'none',
               user_id: this.$route.query.click_id || this.$route.query.user_id || this.$route.query.cxd || 'none',
-              source_name: this.$route.query.utm_source || 'none',
+              source_name: this.$route.query.utm_source || this.$route.query.source || 'none',
               source_network: this.$route.query.cxd ? 'cellexpert' : 'none'
             }
           };
