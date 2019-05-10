@@ -1113,9 +1113,9 @@ export default {
               citizenship: dataForm.citizenship,
               email: dataForm.email,
               password: dataForm.password,
-              campaign_name: this.$route.query.utm_campaign || this.$route.query.campaign || 'none',
+              campaign_name: this.$route.query.utm_campaign ? this.$route.query.utm_campaign : (this.$route.query.campaign ? this.$route.query.campaign : 'none'),
               user_id: this.$route.query.click_id || this.$route.query.user_id || this.$route.query.cxd || 'none',
-              source_name: this.$route.query.utm_source || this.$route.query.source || 'none',
+              source_name: this.$route.query.utm_source ? this.$route.query.utm_source : (this.$route.query.source ? this.$route.query.source : 'none'),
               source_network: this.$route.query.cxd ? 'cellexpert' : 'none'
             }
           };
